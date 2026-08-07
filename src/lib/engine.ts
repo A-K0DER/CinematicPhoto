@@ -11,7 +11,7 @@ export interface RenderOptions {
 	metadata: boolean;
 }
 
-export function loadImageFromFile(file: File): Promise<HTMLImageElement> {
+export function loadImageFromFile(file: Blob): Promise<HTMLImageElement> {
 	return new Promise((resolve, reject) => {
 		const url = URL.createObjectURL(file);
 		const img = new Image();

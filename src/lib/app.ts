@@ -1,5 +1,6 @@
 import { getPreset, type CinematicPreset } from './presets';
 import { computeCanvasSize, exportCanvas, loadImageFromFile, renderFrame } from './engine';
+import { extractRawPreviewBlob, isRawContainerFile } from './rawPreview';
 
 const dropzoneTarget = document.getElementById('dropzone-target') as HTMLLabelElement;
 const fileInput = document.getElementById('file-input') as HTMLInputElement;
@@ -113,13 +114,15 @@ function clearError() {
 }
 
 async function handleFile(file: File) {
-	if (!file.type.startsWith('image/')) {
-		showError('That file type is not supported. Try a JPG, PNG, or WEBP.');
+	const isRaw = isRawContainerFile(file);
+	if (!file.type.startsWith('image/') && !isRaw) {
+		showError('That file type is not supported. Try a JPG, PNG, WEBP, or Canon CR3.');
 		return;
 	}
 	clearError();
 	try {
-		const image = await loadImageFromFile(file);
+		const source = isRaw ? await extractRawPreviewBlob(file) : file;
+		const image = await loadImageFromFile(source);
 		const { width, height } = computeCanvasSize(image.naturalWidth, image.naturalHeight);
 		state.image = image;
 		state.width = width;
