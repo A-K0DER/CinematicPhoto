@@ -11,8 +11,8 @@ interface Props {
 }
 
 const {
-	title = 'Cinematic Photo Editor — Free Online Movie-Style Color Grading',
-	description = 'Cinematic Photo Editor turns ordinary photos into movie-style stills with one click. Free online photo editor with Blade Runner, Dune, Interstellar, Matrix, and Dark Knight–inspired color grades, film grain, letterbox, and more — 100% client-side, no uploads, no account.',
+	title = 'Cinematic Photo Editor | Free Online Movie-Style Color Grading',
+	description = 'Cinematic Photo Editor turns ordinary photos into movie-style stills with one click. Free online photo editor with Blade Runner, Dune, Interstellar, Matrix, and Dark Knight–inspired color grades, film grain, letterbox, and more. 100% client-side, no uploads, no account.',
 	keywords = 'cinematic photo editor, photo editor, online photo editor, photo editor free, free ai photo editor, photo editor app, cinematic filter, movie look photo filter, film grade photo editor online, cinematic color grading tool, teal and orange color grade, film grain online, cinematic letterbox, movie LUT online',
 	path = '/',
 	structuredData,
@@ -49,7 +49,7 @@ const defaultStructuredData = {
 		'Vignette and glow / halation controls',
 		'Anamorphic 2.39:1 letterbox bars',
 		'Film stock metadata stamp',
-		'Client-side processing — no uploads',
+		'Client-side processing, no uploads',
 	],
 	isAccessibleForFree: true,
 };
@@ -95,14 +95,14 @@ const jsonLd = structuredData ?? defaultStructuredData;
 		<meta property="og:image" content={ogImageUrl} />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
-		<meta property="og:image:alt" content="Cinematic Photo Editor — movie-style color grading in your browser" />
+		<meta property="og:image:alt" content="Cinematic Photo Editor: movie-style color grading in your browser" />
 
 		<!-- Twitter -->
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={ogImageUrl} />
-		<meta name="twitter:image:alt" content="Cinematic Photo Editor — movie-style color grading in your browser" />
+		<meta name="twitter:image:alt" content="Cinematic Photo Editor: movie-style color grading in your browser" />
 
 		<meta id="theme-color-meta" name="theme-color" content="#09090b" />
 
