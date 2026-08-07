@@ -1,0 +1,184 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DropZone from '../../components/DropZone.astro';
+import BeforeAfter from '../../components/BeforeAfter.astro';
+import RelatedPresets from '../../components/RelatedPresets.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+import { getPreset } from '../../lib/presets';
+
+const preset = getPreset('matrix');
+const path = '/presets/the-matrix/';
+
+const title = 'Matrix Photo Filter | Free Cinematic Photo Editor';
+const description =
+	"Apply a free photo filter inspired by The Matrix's high-gain digital green tint. Upload a photo and grade it instantly in your browser, no account or upload required.";
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com${path}`,
+	isPartOf: { '@type': 'WebSite', name: 'Cinematic Photo', url: 'https://cinematicphoto.com' },
+};
+
+const faqs = [
+	{
+		q: 'Is this an official Matrix photo filter?',
+		a: "No. This preset is inspired by the visual aesthetic of The Matrix's cinematography, it isn't an official filter licensed by or affiliated with the studio or the film's creators. It's an independent color grade built to echo the look, not a branded tie-in.",
+	},
+	{
+		q: 'Why does the Matrix preset turn the whole photo green, instead of just the shadows or highlights?',
+		a: "That's a deliberate structural difference from every other preset in this tool. Most grades here split color between shadows and highlights using a gradient overlay. The Matrix preset instead fully desaturates the photo first, then tints the entire flattened image a single uniform green using a color blend. The result is consistent regardless of what's in the frame, since there's no gradient direction to fight the original composition.",
+	},
+	{
+		q: 'How is the Matrix preset different from a generic green Instagram filter?',
+		a: "A basic green filter usually just shifts the color channels or drops a translucent green layer over the original colors. This preset first converts the image to full greyscale, then reapplies contrast and a brightness pull before tinting, closer to how the film's color timing worked: strip the color out, then reintroduce exactly one hue.",
+	},
+	{
+		q: 'Does the Matrix preset work well on bright daylight photos?',
+		a: "It applies the same grayscale-then-green treatment regardless of lighting, but it reads most convincingly on photos that already have some contrast and shadow depth, similar to the other high-contrast presets in this tool. Very flat, overexposed daylight shots will still turn green, just with less punch.",
+	},
+	{
+		q: 'Can I reduce the intensity of the green tint?',
+		a: "The preset's overlay opacity is fixed at a high default to match the film's saturated look, but you can back off the effect afterward using the editor's grain, vignette, and glow controls to change the overall mood, or start from the Original preset and manually approximate a lighter tint if you want a more subtle green cast.",
+	},
+	{
+		q: 'What kind of photos look best with a Matrix-style green tint?',
+		a: 'Urban and tech-adjacent environments, computer screens, server rooms, city streets at night, and low-light portraits tend to suit the flat digital green tone best, since they already lean toward the cold, artificial mood the grade reinforces.',
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'All Presets', href: '/presets/' },
+				{ label: 'The Matrix' },
+			]}
+		/>
+
+		<DropZone presetId={preset.id} showHeading={false} showFooterLinks={false} />
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">MOVIE-INSPIRED PRESET</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				The Matrix photo filter: high-gain digital green, one click away.
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				A free color grading preset inspired by the visual aesthetic of The Matrix, built to give
+				photos the film's iconic flat digital-green tint without touching a curves panel.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE AESTHETIC</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				One color, total commitment
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Cinematographer Bill Pope, working with the Wachowskis, made a choice that still stands
+					out decades later: strip the "real world" scenes of The Matrix down to a near-monochrome
+					base, then push a single, unmistakable green through the entire frame. It's not a subtle
+					color grade, it's a flat, deliberate tint applied uniformly, signaling "this is inside
+					the simulation" without a single line of dialogue.
+				</p>
+				<p>
+					That commitment to one hue, rather than a warm/cool split like most cinematic grades, is
+					what makes the look instantly recognizable and surprisingly hard to fake with a generic
+					color filter. Contrast stays high and shadows stay dense, echoing the film's harsh,
+					fluorescent-lit interiors and grim, sunless outdoor scenes.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEFORE / AFTER</span>
+			<h2 class="mb-6 font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				See the grade applied
+			</h2>
+			<BeforeAfter preset={preset} />
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE COLOR SCIENCE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				How the Matrix color grade actually works
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					This preset works differently from every other movie grade in this tool. Rather than
+					shifting a color photo's existing hues, it first converts the image fully to greyscale,
+					then pushes contrast hard and pulls brightness down slightly to deepen shadows, the same
+					high-gain, slightly underexposed base the film's "real world" scenes use.
+				</p>
+				<p>
+					Only after that is a single flat green tint applied across the whole frame using a color
+					blend mode, at a high, near-saturated opacity. Because the tint sits on top of a fully
+					desaturated base rather than a directional gradient, it reads consistently across any
+					photo's composition, there's no shadow-to-highlight split to fight the image's original
+					framing, unlike the teal-amber or steel-olive splits used in the other movie presets
+					here.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEST PHOTOS FOR THIS PRESET</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What to shoot it on
+			</h2>
+			<ul class="mt-6 flex flex-col gap-4 text-base leading-7 text-body">
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Urban and tech environments.</span> Server rooms, screens, and city architecture lean naturally into the cold, artificial mood of a flat green tint.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Low-light portraits.</span> Since it works on tone rather than a directional overlay, faces and portraits hold up well without an odd color split across the frame.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Night cityscapes.</span> High-contrast artificial light sources pair well with the grade's crushed shadows and single-hue tint.</span>
+				</li>
+			</ul>
+		</section>
+
+		<RelatedPresets
+			heading="More movie-inspired grades"
+			items={[
+				{ presetId: 'dark-knight', href: '/presets/the-dark-knight/' },
+				{ presetId: 'blade-runner', href: '/presets/blade-runner-2049/' },
+				{ presetId: 'dune', href: '/presets/dune/' },
+				{ presetId: 'interstellar', href: '/presets/interstellar/' },
+				{ presetId: 'v-for-vendetta', href: '/?preset=v-for-vendetta' },
+				{ presetId: 'terminator-2', href: '/?preset=terminator-2' },
+			]}
+		/>
+
+		<MovieFaq
+			eyebrow="THE MATRIX FAQ"
+			heading="Common questions about the Matrix photo filter"
+			faqs={faqs}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 text-center sm:px-6">
+			<p class="text-base leading-7 text-body">
+				Prefer a different film's look? Browse the <a href="/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">full library of 50 presets</a>,
+				or head to the <a href="/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">homepage</a> to start with a blank slate.
+			</p>
+		</section>
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

@@ -1,0 +1,184 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DropZone from '../../components/DropZone.astro';
+import BeforeAfter from '../../components/BeforeAfter.astro';
+import RelatedPresets from '../../components/RelatedPresets.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+import { getPreset } from '../../lib/presets';
+
+const preset = getPreset('dune');
+const path = '/presets/dune/';
+
+const title = 'Dune Photo Filter | Free Cinematic Photo Editor';
+const description =
+	"Apply a free photo filter inspired by Dune's sunbaked desert gold and blown highlights. Upload a photo and grade it instantly in your browser, no account or upload required.";
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com${path}`,
+	isPartOf: { '@type': 'WebSite', name: 'Cinematic Photo', url: 'https://cinematicphoto.com' },
+};
+
+const faqs = [
+	{
+		q: 'Is this an official Dune photo filter?',
+		a: "No. This preset is inspired by the visual aesthetic of Dune's cinematography, it isn't an official filter licensed by or affiliated with the studio or the film's creators. It's an independent color grade built to recreate the look, not a branded tie-in.",
+	},
+	{
+		q: 'Does the Dune preset work on photos that aren’t deserts or sand?',
+		a: "Yes. The grade is a color and contrast shift, warm sepia tone, lifted highlights, gentle vignette, so it applies to any photo. It reads most naturally on scenes that already have warm, direct light: dry landscapes, golden hour, or sunlit architecture, but it isn't limited to desert subjects.",
+	},
+	{
+		q: 'My photo’s highlights look blown out after applying the Dune preset. Is that intentional?',
+		a: "Largely, yes. The preset pushes brightness and saturation up while adding a strong warm overlay, deliberately mimicking the film's sun-bleached, slightly overexposed highlight style. If it's too aggressive for your photo, the exposure and highlight areas can be pulled back afterward using the vignette and glow sliders in the editor.",
+	},
+	{
+		q: 'How is the Dune preset different from the Gladiator preset?',
+		a: "Both lean warm and golden, but the Dune grade goes heavier on sepia and highlight bloom with a very light vignette, an open, sun-bright feel. The Gladiator preset keeps the vignette stronger and saturation lower, closer to a bleached, sandy arena tone than Dune's blown, glowing desert light.",
+	},
+	{
+		q: 'Can I use the Dune photo effect for portrait photography?',
+		a: "Yes, especially backlit or golden-hour portraits. The warm overlay and elevated glow flatter skin tones with directional sunlight, though on flat, front-lit portraits the effect will read more like a warm color cast than a dramatic desert grade.",
+	},
+	{
+		q: 'What kind of photos look best with a Dune-style color grade?',
+		a: 'Wide desert or dry-landscape shots, golden-hour scenes with strong backlighting, and sunlit architecture or ruins all pair well, since they already have the warm, high-contrast light this preset is built to amplify.',
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'All Presets', href: '/presets/' },
+				{ label: 'Dune' },
+			]}
+		/>
+
+		<DropZone presetId={preset.id} showHeading={false} showFooterLinks={false} />
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">MOVIE-INSPIRED PRESET</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				The Dune photo filter: sunbaked gold and blown desert light.
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				A free color grading preset inspired by the visual aesthetic of Denis Villeneuve's Dune,
+				built to give photos the film's warm, sun-bleached desert glow without touching a curves
+				panel.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE AESTHETIC</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Scale, sand, and blown-out light
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Cinematographer Greig Fraser shot Dune around scale and heat: tiny figures against vast,
+					sun-flattened dunes, with highlights allowed to blow out rather than being protected the
+					way a conventional exposure would. Color leans warm and desaturated at once, gold and
+					sepia tones dominate, but without the punchy saturation of a typical "warm filter,"
+					keeping the palette closer to bleached sand than postcard sunset.
+				</p>
+				<p>
+					Negative space carries as much weight as the subject. Wide compositions with a small
+					human element against an enormous, harshly lit landscape are the film's signature shot,
+					and it's a look this grade rewards directly through its combination of warm tone and
+					open, glowing highlights.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEFORE / AFTER</span>
+			<h2 class="mb-6 font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				See the grade applied
+			</h2>
+			<BeforeAfter preset={preset} />
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE COLOR SCIENCE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				How the Dune color grade actually works
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					This is the warmest base filter of the five movie grades here: a strong sepia push
+					combined with elevated saturation, contrast, and brightness sets the sand-and-gold
+					foundation before any overlay is added. A soft-light gradient then layers deep brown
+					shadows into pale, near-white gold highlights, at the highest overlay opacity of any
+					preset in this set, which is what gives the grade its distinct blown, glowing quality.
+				</p>
+				<p>
+					The default vignette is the lightest of the five, deliberately: the frame stays open and
+					sun-bright rather than closing in toward the edges, the opposite instinct from a grade
+					like Dark Knight's. A generous glow setting rounds it out, letting bright highlights
+					bloom softly at the edges.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEST PHOTOS FOR THIS PRESET</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What to shoot it on
+			</h2>
+			<ul class="mt-6 flex flex-col gap-4 text-base leading-7 text-body">
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Desert or dry landscapes.</span> Open sand, rock, and horizon lines are exactly what this grade's warmth and glow are tuned for.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Golden-hour, backlit portraits.</span> Direct low sun plays directly into the elevated glow and warm highlight bloom.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Sunlit architecture or ruins.</span> Strong directional light on stone or sand-colored surfaces amplifies the sepia base tone.</span>
+				</li>
+			</ul>
+		</section>
+
+		<RelatedPresets
+			heading="More movie-inspired grades"
+			items={[
+				{ presetId: 'dark-knight', href: '/presets/the-dark-knight/' },
+				{ presetId: 'blade-runner', href: '/presets/blade-runner-2049/' },
+				{ presetId: 'interstellar', href: '/presets/interstellar/' },
+				{ presetId: 'matrix', href: '/presets/the-matrix/' },
+				{ presetId: 'gladiator', href: '/?preset=gladiator' },
+				{ presetId: 'life-of-pi', href: '/?preset=life-of-pi' },
+			]}
+		/>
+
+		<MovieFaq
+			eyebrow="DUNE FAQ"
+			heading="Common questions about the Dune photo filter"
+			faqs={faqs}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 text-center sm:px-6">
+			<p class="text-base leading-7 text-body">
+				Prefer a different film's look? Browse the <a href="/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">full library of 50 presets</a>,
+				or head to the <a href="/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">homepage</a> to start with a blank slate.
+			</p>
+		</section>
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

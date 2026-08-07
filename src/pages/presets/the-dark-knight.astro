@@ -1,0 +1,185 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DropZone from '../../components/DropZone.astro';
+import BeforeAfter from '../../components/BeforeAfter.astro';
+import RelatedPresets from '../../components/RelatedPresets.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+import { getPreset } from '../../lib/presets';
+
+const preset = getPreset('dark-knight');
+const path = '/presets/the-dark-knight/';
+
+const title = 'The Dark Knight Photo Filter | Free Cinematic Photo Editor';
+const description =
+	"Apply a free photo filter inspired by The Dark Knight's cold steel, crushed-black cinematography. Upload a photo, grade it instantly in your browser, no account or upload required.";
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com${path}`,
+	isPartOf: { '@type': 'WebSite', name: 'Cinematic Photo', url: 'https://cinematicphoto.com' },
+};
+
+const faqs = [
+	{
+		q: 'Is this an official The Dark Knight photo filter?',
+		a: "No. This preset is inspired by the visual aesthetic of The Dark Knight's cinematography, it's not an official filter licensed by or affiliated with Warner Bros., DC, or the film's creators. It's an independent color grade built to recreate the look, not a branded product.",
+	},
+	{
+		q: 'Does the Dark Knight preset work on daytime photos, or only night shots?',
+		a: "It works on both, but it's built around the film's high-contrast, cold-toned night scenes, so it shows off best on photos with some existing shadow depth: overcast skies, indoor light, or dusk. On very bright, flat daylight photos, the contrast push and vignette are still applied but read a little less dramatically.",
+	},
+	{
+		q: 'How is the Dark Knight preset different from the The Batman preset?',
+		a: "They're both Batman-universe grades but built around different films' cinematography. The Dark Knight preset leans cold steel and olive-tinted, with crushed shadow detail and a lower saturation push. The Batman preset goes further into crimson-black noir with a heavier vignette and a lower brightness floor. Compare them side by side in the editor to see which fits your photo.",
+	},
+	{
+		q: "My photo looks too dark after applying the Dark Knight grade. How do I fix it?",
+		a: 'The preset defaults to a strong vignette (48) and a brightness pull to crush shadow detail, which is core to the look, but you can back off the vignette slider in the editor if it feels too heavy, or start from a photo with brighter ambient light so the shadows still hold detail once the grade is applied.',
+	},
+	{
+		q: 'What kind of photos look best with a Dark Knight-style color grade?',
+		a: 'Night cityscapes, wet streets, and buildings with strong architectural lines tend to work best, since the grade is built to reward hard directional light and deep shadow. Moody portraits under harsh or single-source lighting also hold up well against the cold steel tone.',
+	},
+	{
+		q: 'Can I use the Dark Knight photo effect for a movie poster or thumbnail?',
+		a: 'Yes. The preset, along with the film grain, vignette, and anamorphic letterbox controls in the editor, is designed to get a flat photo close to a poster-ready cinematic still in a few clicks, and every export is yours to use freely since nothing is watermarked or gated behind an account.',
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'All Presets', href: '/presets/' },
+				{ label: 'The Dark Knight' },
+			]}
+		/>
+
+		<DropZone presetId={preset.id} showHeading={false} showFooterLinks={false} />
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">MOVIE-INSPIRED PRESET</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				The Dark Knight photo filter: crushed blacks and cold steel, inspired by Gotham.
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				A free color grading preset inspired by the visual aesthetic of Christopher Nolan's The
+				Dark Knight, built for photographers who want that high-contrast, cold-toned Gotham look
+				without touching a curves panel.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE AESTHETIC</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Gotham's cold steel, shot for IMAX
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					The Dark Knight built its visual identity on scale and shadow. Shooting large sections
+					on IMAX film, cinematographer Wally Pfister favored hard, directional light and let
+					shadow detail crush rather than lifting it for safety, so Gotham's skyline reads as
+					dense, looming architecture instead of a lit backdrop. Color stayed restrained: steel
+					blues and desaturated olive-greys dominate, with warmth reserved for the rare interior
+					or firelit scene.
+				</p>
+				<p>
+					It's a look built on contrast and control rather than saturation. Skin tones stay
+					natural even as the surrounding frame goes cold, which is what separates this grade from
+					a simple blue color-cast filter: the color shift lives in the shadows and midtones, not
+					flattened uniformly across the whole image.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEFORE / AFTER</span>
+			<h2 class="mb-6 font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				See the grade applied
+			</h2>
+			<BeforeAfter preset={preset} />
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE COLOR SCIENCE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				How the Dark Knight color grade actually works
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					The preset pushes contrast hard, desaturates moderately, and pulls brightness down to
+					crush shadow detail before any color is added, the foundation of the film's dense,
+					underexposed feel. On top of that base, a two-tone overlay splits the frame: shadows
+					shift toward a dark teal-black, while highlights lean into a muted olive-steel. That
+					split is what gives the grade its cold, metallic read without turning the whole photo a
+					single flat blue, the way a basic tint filter would.
+				</p>
+				<p>
+					The default vignette sits at the high end of the tool's presets, drawing the eye inward
+					and reinforcing the sense of scale and shadow the film is known for. Grain is kept
+					moderate, enough to read as a film stock rather than a clean digital push.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEST PHOTOS FOR THIS PRESET</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What to shoot it on
+			</h2>
+			<ul class="mt-6 flex flex-col gap-4 text-base leading-7 text-body">
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Night city architecture.</span> Skylines, bridges, and buildings with strong vertical lines reward the crushed shadow detail and cold highlight tone.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Moody, hard-light portraits.</span> A single strong light source, window light, a streetlamp, headlights, plays well against the grade's contrast curve.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Rain-slicked streets.</span> Wet pavement picks up the cold highlight tone as reflected light, adding depth the grade alone can't create.</span>
+				</li>
+			</ul>
+		</section>
+
+		<RelatedPresets
+			heading="More movie-inspired grades"
+			items={[
+				{ presetId: 'blade-runner', href: '/presets/blade-runner-2049/' },
+				{ presetId: 'dune', href: '/presets/dune/' },
+				{ presetId: 'interstellar', href: '/presets/interstellar/' },
+				{ presetId: 'matrix', href: '/presets/the-matrix/' },
+				{ presetId: 'the-batman', href: '/?preset=the-batman' },
+				{ presetId: 'watchmen', href: '/?preset=watchmen' },
+			]}
+		/>
+
+		<MovieFaq
+			eyebrow="THE DARK KNIGHT FAQ"
+			heading="Common questions about the Dark Knight photo filter"
+			faqs={faqs}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 text-center sm:px-6">
+			<p class="text-base leading-7 text-body">
+				Prefer a different film's look? Browse the <a href="/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">full library of 50 presets</a>,
+				or head to the <a href="/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">homepage</a> to start with a blank slate.
+			</p>
+		</section>
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

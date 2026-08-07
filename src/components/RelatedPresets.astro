@@ -1,0 +1,51 @@
+---
+import { getPreset, getOverlayBackground } from '../lib/presets';
+
+interface Props {
+	items: { presetId: string; href: string }[];
+	heading?: string;
+}
+
+const { items, heading = 'Related cinematic presets' } = Astro.props;
+const presets = items.map(({ presetId, href }) => ({ preset: getPreset(presetId), href }));
+---
+
+<section class="mx-auto w-full max-w-5xl px-4 py-14 sm:px-6">
+	<span class="mb-4 block font-mono text-xs tracking-wide text-mute">EXPLORE MORE</span>
+	<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">{heading}</h2>
+
+	<div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+		{
+			presets.map(({ preset, href }) => (
+				<a
+					href={href}
+					class="group flex flex-col items-start gap-2 rounded-md border border-hairline bg-canvas p-2.5 text-left transition-colors hover:border-hairline-strong"
+				>
+					<span class="relative block h-16 w-full overflow-hidden rounded-sm">
+						<img
+							loading="lazy"
+							decoding="async"
+							alt={preset.name}
+							src={preset.image}
+							style={`filter: ${preset.filter};`}
+							class="absolute inset-0 h-full w-full object-cover"
+						/>
+						<span
+							class="absolute inset-0"
+							style={`background: ${getOverlayBackground(preset.overlay)}; opacity: ${preset.overlay.opacity}; mix-blend-mode: ${preset.overlay.blend};`}
+						/>
+					</span>
+					<span class="font-sans text-xs font-medium text-ink">{preset.name}</span>
+					<span class="font-mono text-[10px] leading-tight text-mute">{preset.tagline}</span>
+				</a>
+			))
+		}
+	</div>
+
+	<a
+		href="/presets/"
+		class="mt-5 inline-block font-mono text-xs text-mute transition-colors hover:text-ink"
+	>
+		Browse all 50 presets &rarr;
+	</a>
+</section>

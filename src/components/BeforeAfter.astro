@@ -1,0 +1,49 @@
+---
+import { getOverlayBackground, type CinematicPreset } from '../lib/presets';
+
+interface Props {
+	preset: CinematicPreset;
+}
+
+const { preset } = Astro.props;
+---
+
+<div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+	<figure class="flex flex-col gap-2">
+		<span class="relative block aspect-[4/5] w-full overflow-hidden rounded-md border border-hairline bg-canvas-soft">
+			<img
+				loading="lazy"
+				decoding="async"
+				alt={`Unedited photo before the ${preset.name} preset is applied`}
+				src={preset.image}
+				class="absolute inset-0 h-full w-full object-cover"
+			/>
+		</span>
+		<figcaption class="text-center font-mono text-xs tracking-wide text-mute">BEFORE</figcaption>
+	</figure>
+	<figure class="flex flex-col gap-2">
+		<span class="relative block aspect-[4/5] w-full overflow-hidden rounded-md border border-hairline bg-canvas-soft">
+			<img
+				loading="lazy"
+				decoding="async"
+				alt={`Photo graded with the ${preset.name} inspired preset`}
+				src={preset.image}
+				style={`filter: ${preset.filter};`}
+				class="absolute inset-0 h-full w-full object-cover"
+			/>
+			<span
+				class="absolute inset-0"
+				style={`background: ${getOverlayBackground(preset.overlay)}; opacity: ${preset.overlay.opacity}; mix-blend-mode: ${preset.overlay.blend};`}
+			/>
+			{
+				preset.haze && (
+					<span
+						class="absolute inset-0"
+						style={`background: ${preset.haze.color}; opacity: ${preset.haze.opacity};`}
+					/>
+				)
+			}
+		</span>
+		<figcaption class="text-center font-mono text-xs tracking-wide text-ink">AFTER — {preset.name.toUpperCase()}</figcaption>
+	</figure>
+</div>

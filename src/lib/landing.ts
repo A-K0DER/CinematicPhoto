@@ -2,13 +2,16 @@ import { getPreset } from './presets';
 import { extractRawPreviewBlob, isRawContainerFile } from './rawPreview';
 import { savePendingImage } from './imageHandoff';
 
+const dropzoneSection = document.getElementById('dropzone') as HTMLElement;
 const dropzoneTarget = document.getElementById('dropzone-target') as HTMLLabelElement;
 const fileInput = document.getElementById('file-input') as HTMLInputElement;
 const dropzoneError = document.getElementById('dropzone-error') as HTMLParagraphElement;
 const presetShowcase = document.getElementById('preset-showcase') as HTMLDivElement;
 const pendingPresetLabel = document.getElementById('pending-preset-label') as HTMLParagraphElement;
 
-const requestedPresetId = new URLSearchParams(location.search).get('preset');
+// Query param wins (e.g. links from /presets/); otherwise fall back to the
+// page's default preset (e.g. a movie landing page pre-selecting its grade).
+const requestedPresetId = new URLSearchParams(location.search).get('preset') ?? dropzoneSection.dataset.defaultPreset ?? null;
 let pendingPresetId = requestedPresetId && getPreset(requestedPresetId).id === requestedPresetId ? requestedPresetId : null;
 
 function showError(message: string) {

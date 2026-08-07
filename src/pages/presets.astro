@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import { GENRES, PRESETS, getPresetsByGenre, getOverlayBackground } from '../lib/presets';
+import { MOVIE_PRESET_PAGES } from '../data/moviePresetPages';
 
 const title = 'All 50 Movie Presets | Cinematic Photo Editor';
 const description = `Browse all 50 movie-inspired cinematic color grading presets across 8 genres — ${GENRES.join(', ')} — including The Shawshank Redemption, The Dark Knight, Blade Runner 2049, Pulp Fiction, Gladiator, and more.`;
@@ -41,7 +42,7 @@ const presetListStructuredData = {
 					<div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
 						{getPresetsByGenre(genre).map((preset) => (
 							<a
-								href={`/?preset=${preset.id}`}
+								href={MOVIE_PRESET_PAGES[preset.id] ? `/presets/${MOVIE_PRESET_PAGES[preset.id].slug}/` : `/?preset=${preset.id}`}
 								class="group flex flex-col items-start gap-2 rounded-md border border-hairline bg-canvas p-2.5 text-left transition-colors hover:border-hairline-strong"
 							>
 								<span class="relative block h-14 w-full overflow-hidden rounded-sm">

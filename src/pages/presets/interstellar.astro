@@ -1,0 +1,183 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DropZone from '../../components/DropZone.astro';
+import BeforeAfter from '../../components/BeforeAfter.astro';
+import RelatedPresets from '../../components/RelatedPresets.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+import { getPreset } from '../../lib/presets';
+
+const preset = getPreset('interstellar');
+const path = '/presets/interstellar/';
+
+const title = 'Interstellar Photo Filter | Free Cinematic Photo Editor';
+const description =
+	"Apply a free photo filter inspired by Interstellar's cold cosmic blue and deep, desaturated blacks. Upload a photo and grade it instantly in your browser, no account or upload required.";
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com${path}`,
+	isPartOf: { '@type': 'WebSite', name: 'Cinematic Photo', url: 'https://cinematicphoto.com' },
+};
+
+const faqs = [
+	{
+		q: 'Is this an official Interstellar photo filter?',
+		a: "No. This preset is inspired by the visual aesthetic of Interstellar's cinematography, it isn't an official filter licensed by or affiliated with the studio or the film's creators. It's an independent color grade built to echo the look, not a branded tie-in.",
+	},
+	{
+		q: 'Why does the Interstellar preset look less saturated than other presets in this tool?',
+		a: "That's intentional, not a bug. The film pulls color out of its frame more aggressively than a typical desaturation push, roughly two-fifths of the color removed here, to keep the palette cold and clinical rather than moody or warm. It's the heaviest desaturation of any of the five movie-inspired presets.",
+	},
+	{
+		q: 'Does the Interstellar preset work on photos with people, or only landscapes?',
+		a: "It works on both. The grade is a global color and contrast shift, so portraits and people-focused shots hold up fine, though the cold, desaturated tone tends to read more dramatically on wide, minimal compositions than on close, warm-toned portraits.",
+	},
+	{
+		q: 'How is Interstellar different from the Inception preset?',
+		a: "Both are cool-toned Christopher Nolan sci-fi grades, but Interstellar goes considerably further on desaturation and keeps grain very low for a clean, almost sterile finish. Inception keeps more color and a touch more grain, closer to a steel-blue dream state than deep-space cold.",
+	},
+	{
+		q: 'Why is the default grain so low on the Interstellar preset?',
+		a: 'Most of the presets in this tool default to noticeable grain to sell a film-stock texture. Interstellar is a deliberate exception, one of the lowest grain defaults of all 50 presets, because the look this preset targets is clean and minimal rather than gritty. You can always add more grain manually in the editor if you want a heavier film feel.',
+	},
+	{
+		q: 'What kind of photos look best with an Interstellar-style color grade?',
+		a: 'Night sky and astrophotography, minimalist single-subject compositions, cool interiors, and reflective water or ice all suit the cold blue palette well. Scenes that are already sparse or geometric tend to read more strikingly than busy, colorful ones.',
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'All Presets', href: '/presets/' },
+				{ label: 'Interstellar' },
+			]}
+		/>
+
+		<DropZone presetId={preset.id} showHeading={false} showFooterLinks={false} />
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">MOVIE-INSPIRED PRESET</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				The Interstellar photo filter: cold cosmic blue and deep space black.
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				A free color grading preset inspired by the visual aesthetic of Christopher Nolan's
+				Interstellar, built to give photos the film's restrained, clinical cold-blue palette
+				without touching a curves panel.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE AESTHETIC</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Clinical cold, restrained by design
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Shooting largely on 35mm and 70mm film, cinematographer Hoyte van Hoytema built
+					Interstellar's palette around restraint. Color is pulled back rather than pushed,
+					leaving cold blues and near-monochrome greys to dominate both the film's spacecraft
+					interiors and its Earth-bound farmland exteriors, a visual throughline that ties two very
+					different settings together.
+				</p>
+				<p>
+					It's a look that trusts negative space and scale over color to create mood, deep blacks,
+					sparse compositions, and a controlled, almost documentary sense of light. Where a film
+					like Dune leans into warmth and glow, Interstellar goes the opposite direction: cool,
+					clean, and quiet.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEFORE / AFTER</span>
+			<h2 class="mb-6 font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				See the grade applied
+			</h2>
+			<BeforeAfter preset={preset} />
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE COLOR SCIENCE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				How the Interstellar color grade actually works
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					This preset pulls saturation down harder than any other movie grade in this tool, past
+					the halfway point, while nudging contrast and pulling brightness down slightly to deepen
+					blacks. That base does most of the work: a near-monochrome, slightly cool starting point
+					before any overlay is added.
+				</p>
+				<p>
+					A dark navy-to-steel-blue overlay then reinforces the cold tone across shadows and
+					midtones. Vignette sits on the stronger side to keep the frame's edges dark and the
+					subject isolated, while grain is deliberately kept low, one of the lowest defaults of any
+					preset here, for a clean, minimal finish rather than a gritty film-stock look.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEST PHOTOS FOR THIS PRESET</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What to shoot it on
+			</h2>
+			<ul class="mt-6 flex flex-col gap-4 text-base leading-7 text-body">
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Night sky and astrophotography.</span> The cold, low-saturation palette is a natural match for stars, moonlight, and deep blue skies.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Minimalist, single-subject shots.</span> Sparse compositions with room to breathe suit the grade's restrained, quiet tone better than busy frames.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Water, ice, and reflective surfaces.</span> Cool reflective light reinforces the blue overlay instead of fighting it.</span>
+				</li>
+			</ul>
+		</section>
+
+		<RelatedPresets
+			heading="More movie-inspired grades"
+			items={[
+				{ presetId: 'dark-knight', href: '/presets/the-dark-knight/' },
+				{ presetId: 'blade-runner', href: '/presets/blade-runner-2049/' },
+				{ presetId: 'dune', href: '/presets/dune/' },
+				{ presetId: 'matrix', href: '/presets/the-matrix/' },
+				{ presetId: 'inception', href: '/?preset=inception' },
+				{ presetId: 'terminator-2', href: '/?preset=terminator-2' },
+			]}
+		/>
+
+		<MovieFaq
+			eyebrow="INTERSTELLAR FAQ"
+			heading="Common questions about the Interstellar photo filter"
+			faqs={faqs}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 text-center sm:px-6">
+			<p class="text-base leading-7 text-body">
+				Prefer a different film's look? Browse the <a href="/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">full library of 50 presets</a>,
+				or head to the <a href="/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">homepage</a> to start with a blank slate.
+			</p>
+		</section>
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

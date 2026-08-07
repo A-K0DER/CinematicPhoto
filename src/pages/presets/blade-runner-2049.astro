@@ -1,0 +1,185 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DropZone from '../../components/DropZone.astro';
+import BeforeAfter from '../../components/BeforeAfter.astro';
+import RelatedPresets from '../../components/RelatedPresets.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+import { getPreset } from '../../lib/presets';
+
+const preset = getPreset('blade-runner');
+const path = '/presets/blade-runner-2049/';
+
+const title = 'Blade Runner 2049 Photo Filter | Free Cinematic Photo Editor';
+const description =
+	"Apply a free photo filter inspired by Blade Runner 2049's amber neon and teal haze. Upload a photo and grade it instantly in your browser, no account or upload required.";
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com${path}`,
+	isPartOf: { '@type': 'WebSite', name: 'Cinematic Photo', url: 'https://cinematicphoto.com' },
+};
+
+const faqs = [
+	{
+		q: 'Is this an official Blade Runner 2049 photo filter?',
+		a: "No. This preset is inspired by the visual aesthetic of Blade Runner 2049's cinematography, it isn't an official filter licensed by or affiliated with the studio or the film's creators. It's an independent color grade built to echo the look, not a branded tie-in product.",
+	},
+	{
+		q: 'What does the haze setting do in the Blade Runner 2049 preset?',
+		a: "Unlike most presets in this tool, the Blade Runner 2049 grade layers in a soft amber haze on top of the usual color and contrast adjustments, simulating the atmospheric fog and diffused light the film uses constantly. It's what gives bright light sources their soft bloom instead of a hard-edged glow.",
+	},
+	{
+		q: 'How is Blade Runner 2049 different from the Matrix green tint preset?',
+		a: "They're both neon-adjacent sci-fi grades but split in opposite directions. Blade Runner 2049 splits shadows toward teal and highlights toward amber, with soft haze and heavy glow for a hazy, diffused feel. The Matrix preset desaturates the whole image first, then tints everything a single flat green, a much more uniform, less directional effect.",
+	},
+	{
+		q: 'Does the Blade Runner 2049 preset work on daytime or indoor photos?',
+		a: "It's built around neon, streetlight, and night-scene color separation, so it shows off most on shots with visible artificial light sources. Daylight photos still get the amber-teal grade and haze, but the effect reads more subtly without neon or backlighting to bloom.",
+	},
+	{
+		q: 'How do I get the most out of the neon glow effect on my photo?',
+		a: "The preset ships with an unusually high default glow, the highest of any preset in the tool, so bright points of light already bloom aggressively. If you want it lower, dial back the Glow / Halation slider in the editor after applying the preset.",
+	},
+	{
+		q: 'What kind of photos look best with a Blade Runner 2049-style grade?',
+		a: 'Night city streets, neon signage, wet reflective pavement, and backlit or silhouetted portraits are the strongest fits, since they give the amber-teal split and haze something to work with. It also holds up well on foggy or overcast outdoor scenes.',
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'All Presets', href: '/presets/' },
+				{ label: 'Blade Runner 2049' },
+			]}
+		/>
+
+		<DropZone presetId={preset.id} showHeading={false} showFooterLinks={false} />
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">MOVIE-INSPIRED PRESET</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				The Blade Runner 2049 photo filter: amber neon through a teal haze.
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				A free color grading preset inspired by the visual aesthetic of Denis Villeneuve's Blade
+				Runner 2049, built to give night photos the film's signature hazy, neon-lit split between
+				warm highlights and cool shadow.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE AESTHETIC</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				A hazy, amber-and-teal future
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Cinematographer Roger Deakins built Blade Runner 2049's world around volumetric light:
+					fog, dust, and haze that make every beam of neon or sodium-vapor light visible in the
+					air, not just where it lands. Color splits cleanly along temperature, sickly amber and
+					orange in the film's dust-choked exteriors and interrogation-room interiors, cold
+					teal-blue in its rain and snow-bound exteriors, rather than blending into a single
+					muddy tone.
+				</p>
+				<p>
+					It's an unusually symmetrical, deliberate frame style paired with an atmosphere that
+					never feels clean. Light sources bloom and scatter instead of staying crisp, which is
+					the detail this preset leans on hardest: a soft haze layer sits on top of the color
+					grade itself, something none of this tool's other presets do.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEFORE / AFTER</span>
+			<h2 class="mb-6 font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				See the grade applied
+			</h2>
+			<BeforeAfter preset={preset} />
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE COLOR SCIENCE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				How the Blade Runner 2049 color grade actually works
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					The base adjustment pushes contrast and saturation up together, then adds a touch of
+					sepia to warm the whole frame slightly before any directional color is applied. A
+					two-tone overlay then splits the image: deep teal in the shadows, bright amber-orange in
+					the highlights, the temperature contrast that reads instantly as this film's world.
+				</p>
+				<p>
+					What makes this preset structurally different from the other movie grades in this tool
+					is a dedicated haze layer stacked on top: a soft, low-opacity amber wash across the
+					whole frame that simulates atmospheric fog. Paired with the highest default glow of any
+					preset here, it's what makes light sources bloom and scatter rather than staying sharp
+					and point-like.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEST PHOTOS FOR THIS PRESET</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What to shoot it on
+			</h2>
+			<ul class="mt-6 flex flex-col gap-4 text-base leading-7 text-body">
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Night city streets and neon signage.</span> Visible light sources are exactly what the haze and glow are built to bloom around.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Wet, reflective pavement.</span> Rain and puddles double up the amber-teal split as reflected color, deepening the effect.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Backlit or silhouetted portraits.</span> A strong light source behind the subject gives the glow and haze layers something dramatic to catch.</span>
+				</li>
+			</ul>
+		</section>
+
+		<RelatedPresets
+			heading="More movie-inspired grades"
+			items={[
+				{ presetId: 'dark-knight', href: '/presets/the-dark-knight/' },
+				{ presetId: 'dune', href: '/presets/dune/' },
+				{ presetId: 'interstellar', href: '/presets/interstellar/' },
+				{ presetId: 'matrix', href: '/presets/the-matrix/' },
+				{ presetId: 'v-for-vendetta', href: '/?preset=v-for-vendetta' },
+				{ presetId: 'terminator-2', href: '/?preset=terminator-2' },
+			]}
+		/>
+
+		<MovieFaq
+			eyebrow="BLADE RUNNER 2049 FAQ"
+			heading="Common questions about the Blade Runner 2049 photo filter"
+			faqs={faqs}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 text-center sm:px-6">
+			<p class="text-base leading-7 text-body">
+				Prefer a different film's look? Browse the <a href="/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">full library of 50 presets</a>,
+				or head to the <a href="/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">homepage</a> to start with a blank slate.
+			</p>
+		</section>
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

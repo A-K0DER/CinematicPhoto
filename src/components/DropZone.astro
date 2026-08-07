@@ -1,25 +1,57 @@
 ---
-import { GENRES, getPresetsByGenre, getOverlayBackground } from '../lib/presets';
+import { GENRES, getPreset, getPresetsByGenre, getOverlayBackground } from '../lib/presets';
 
-const showcasePresets = GENRES.map((genre) => getPresetsByGenre(genre)[0]);
+interface Props {
+	presetId?: string;
+	heading?: string;
+	headingTag?: 'h1' | 'h2';
+	eyebrow?: string;
+	subheading?: string;
+	showFooterLinks?: boolean;
+	/** Skip the eyebrow/heading/subheading block, e.g. when a page's own hero already covers it. */
+	showHeading?: boolean;
+	/** Tighter, left-aligned layout with no outer max-width/padding, for placing next to other content. */
+	compact?: boolean;
+}
+
+const {
+	presetId,
+	heading = 'The free cinematic photo editor for movie-grade stills.',
+	headingTag = 'h1',
+	eyebrow = 'CINEMATIC PHOTO EDITOR',
+	subheading = 'Drop a photo to apply iconic Hollywood color grades. Processed entirely in your browser. Nothing is ever uploaded.',
+	showFooterLinks = true,
+	showHeading = true,
+	compact = false,
+} = Astro.props;
+
+const showcasePresets = presetId ? [getPreset(presetId)] : GENRES.map((genre) => getPresetsByGenre(genre)[0]);
+const Heading = headingTag;
 ---
 
-<section id="dropzone" class="mx-auto flex w-full max-w-5xl flex-col items-center px-4 py-16">
-	<span class="mb-4 font-mono text-xs tracking-wide text-mute">CINEMATIC PHOTO EDITOR</span>
-	<h1
-		class="max-w-xl text-center font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl"
-	>
-		The free cinematic photo editor for movie-grade stills.
-	</h1>
-	<p class="mt-4 max-w-md text-center text-base leading-7 text-body">
-		Drop a photo to apply iconic Hollywood color grades. Processed entirely in your browser.
-		Nothing is ever uploaded.
-	</p>
+<section
+	id="dropzone"
+	class={compact
+		? 'flex w-full flex-col items-start'
+		: 'mx-auto flex w-full max-w-5xl flex-col items-center px-4 py-16'}
+	data-default-preset={presetId}
+>
+	{
+		showHeading && (
+			<>
+				<span class="mb-4 font-mono text-xs tracking-wide text-mute">{eyebrow}</span>
+				<Heading class="max-w-xl text-center font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+					{heading}
+				</Heading>
+				<p class="mt-4 max-w-md text-center text-base leading-7 text-body">{subheading}</p>
+			</>
+		)
+	}
 
 	<label
 		id="dropzone-target"
 		for="file-input"
-		class="mt-10 flex w-full max-w-xl cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-hairline-strong bg-canvas-soft px-6 py-16 text-center transition-colors hover:border-zinc-500 hover:bg-canvas-soft-2"
+		class={`flex w-full max-w-xl cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-hairline-strong bg-canvas-soft px-6 py-16 text-center transition-colors hover:border-zinc-500 hover:bg-canvas-soft-2 ${showHeading ? 'mt-10' : ''}`}
 	>
 		<svg
 			width="28"
@@ -62,9 +94,9 @@ const showcasePresets = GENRES.map((genre) => getPresetsByGenre(genre)[0]);
 		role="status"
 	></p>
 
-	<div class="mt-14 w-full max-w-3xl">
-		<p class="mb-4 text-center font-mono text-xs tracking-wide text-mute">
-			50 MOVIE-INSPIRED GRADES &middot; PICK ONE TO START
+	<div class={compact ? 'mt-8 w-full' : 'mt-14 w-full max-w-3xl'}>
+		<p class={`mb-4 font-mono text-xs tracking-wide text-mute ${compact ? 'text-left' : 'text-center'}`}>
+			{presetId ? 'PRESET SELECTED · READY TO APPLY' : '50 MOVIE-INSPIRED GRADES · PICK ONE TO START'}
 		</p>
 		<div id="preset-showcase" class="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
 			{
@@ -96,16 +128,20 @@ const showcasePresets = GENRES.map((genre) => getPresetsByGenre(genre)[0]);
 		</div>
 		<a
 			href="/presets/"
-			class="mt-4 block text-center font-mono text-xs text-mute transition-colors hover:text-ink"
+			class={`mt-4 block font-mono text-xs text-mute transition-colors hover:text-ink ${compact ? 'text-left' : 'text-center'}`}
 		>
 			Browse all 50 presets &rarr;
 		</a>
 	</div>
 
-	<nav aria-label="About Cinematic Photo" class="mt-14 flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
-		<a href="/about-us" class="font-mono text-xs text-mute transition-colors hover:text-ink">About Us</a>
-		<a href="/contact-us" class="font-mono text-xs text-mute transition-colors hover:text-ink">Contact Us</a>
-		<a href="/privacy-policy" class="font-mono text-xs text-mute transition-colors hover:text-ink">Privacy Policy</a>
-		<a href="/terms-and-conditions" class="font-mono text-xs text-mute transition-colors hover:text-ink">Terms &amp; Conditions</a>
-	</nav>
+	{
+		showFooterLinks && (
+			<nav aria-label="About Cinematic Photo" class="mt-14 flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+				<a href="/about-us" class="font-mono text-xs text-mute transition-colors hover:text-ink">About Us</a>
+				<a href="/contact-us" class="font-mono text-xs text-mute transition-colors hover:text-ink">Contact Us</a>
+				<a href="/privacy-policy" class="font-mono text-xs text-mute transition-colors hover:text-ink">Privacy Policy</a>
+				<a href="/terms-and-conditions" class="font-mono text-xs text-mute transition-colors hover:text-ink">Terms &amp; Conditions</a>
+			</nav>
+		)
+	}
 </section>
