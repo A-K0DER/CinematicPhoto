@@ -2,11 +2,22 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
-import { GENRES, getPresetsByGenre } from '../lib/presets';
+import { GENRES, PRESETS, getPresetsByGenre } from '../lib/presets';
 
-const title = 'All Presets | Cinematic Photo Editor';
-const description =
-	'Browse all 50 movie-inspired cinematic color grading presets, organized by genre — from Thriller & Mystery to Superhero.';
+const title = 'All 50 Movie Presets | Cinematic Photo Editor';
+const description = `Browse all 50 movie-inspired cinematic color grading presets across 8 genres — ${GENRES.join(', ')} — including The Shawshank Redemption, The Dark Knight, Blade Runner 2049, Pulp Fiction, Gladiator, and more.`;
+
+const presetListStructuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'ItemList',
+	name: 'Cinematic Photo Editor movie color grading presets',
+	numberOfItems: PRESETS.length,
+	itemListElement: PRESETS.map((preset, index) => ({
+		'@type': 'ListItem',
+		position: index + 1,
+		name: `${preset.name} (${preset.genre}) — ${preset.tagline}`,
+	})),
+};
 ---
 
 <Layout title={title} description={description} path="/presets/">
@@ -18,7 +29,7 @@ const description =
 		</h1>
 		<p class="mt-4 max-w-xl text-base leading-7 text-body">
 			Pick a preset below to jump into the editor with it pre-selected. Drop or upload a photo
-			once you're there to see the grade applied.
+			once you're there to see the grade applied. Presets span eight genres: {GENRES.join(', ')}.
 		</p>
 
 		{
@@ -47,4 +58,6 @@ const description =
 		}
 	</main>
 	<Footer />
+
+	<script type="application/ld+json" set:html={JSON.stringify(presetListStructuredData)} />
 </Layout>

@@ -9,8 +9,8 @@ const faqs = [
 		a: 'No. Cinematic Photo is a client side photo editor: your image is decoded and rendered on a canvas inside your own browser tab. Nothing is transmitted to a server, so there is no upload wait and no privacy trade-off.',
 	},
 	{
-		q: 'How do I make a photo look like Blade Runner 2049 or Dune?',
-		a: 'Drop in an image, then select the Blade Runner 2049 preset for an amber-neon, teal-haze grade, or the Dune preset for a warm desert-gold look. Each preset instantly applies a movie-accurate color curve, and you can fine-tune grain, vignette, and glow afterward.',
+		q: 'How do I make a photo look like The Shawshank Redemption or Pulp Fiction?',
+		a: 'Drop in an image, then select the Shawshank Redemption preset for a warm, restrained 35mm prison-drama grade, or the Pulp Fiction preset for pulpy, high-contrast amber-red Tarantino tones. Each preset instantly applies a movie-accurate color curve, and you can fine-tune grain, vignette, and glow afterward.',
 	},
 	{
 		q: 'What image formats and aspect ratios are supported?',
@@ -33,8 +33,8 @@ const faqs = [
 		a: "Apply The Dark Knight preset, which crushes shadow detail and shifts tones toward a cold steel blue for the film's gritty, high-contrast urban look. Nudging up the vignette slightly helps draw the eye inward and deepen the edges of the frame.",
 	},
 	{
-		q: 'What is the best way to get the neon amber and teal glow of a cyberpunk movie scene on my urban night photos?',
-		a: 'Use the Blade Runner 2049 preset, which grades highlights toward amber neon and shadows toward a teal haze, the classic cyberpunk color split. On night city shots, add glow and halation to bloom light sources the way anamorphic lenses flare around neon signs and streetlights.',
+		q: 'How do I get the bleached, golden arena look of Gladiator on my travel or landscape photos?',
+		a: "Select the Gladiator preset to grade your photo with bleached sand tones and warm golden highlights, mimicking the film's sunbaked Colosseum cinematography. It pairs especially well with desert, ruins, or open-sky shots where warm directional light is already present.",
 	},
 	{
 		q: 'How do I make my vacation photos look like a vintage 35mm Hollywood film still?',
@@ -49,12 +49,28 @@ const faqs = [
 		a: "There isn't a black-and-white noir preset built in yet, so a full monochrome conversion isn't currently supported. The closest available options are Interstellar's deep, cool blacks or The Dark Knight's crushed shadows, both of which push contrast and shadow depth in a moody, high-contrast direction.",
 	},
 	{
+		q: 'What is the best way to get the neon amber and teal glow of a cyberpunk movie scene on my urban night photos?',
+		a: 'Use the Blade Runner 2049 preset, which grades highlights toward amber neon and shadows toward a teal haze, the classic cyberpunk color split. On night city shots, add glow and halation to bloom light sources the way anamorphic lenses flare around neon signs and streetlights.',
+	},
+	{
 		q: 'What color grading settings do I need to make a photo look like a cinematic sci-fi thriller?',
-		a: 'Interstellar, Blade Runner 2049, and Matrix are each built around a distinct sci-fi color signature: cold cosmic blue, amber-neon with teal haze, and high-gain green. Pick whichever tone fits your subject, then layer in grain and glow to reinforce the tense, lens-driven atmosphere of a thriller.',
+		a: 'Interstellar, Inception, Blade Runner 2049, and Matrix are each built around a distinct sci-fi color signature: cold cosmic blue, cool steel-blue dream logic, amber-neon with teal haze, and high-gain digital green. Pick whichever tone fits your subject, then layer in grain and glow to reinforce the tense, lens-driven atmosphere of a thriller.',
 	},
 	{
 		q: 'How do I replicate the warm, nostalgic, sun-faded film look of a 1970s indie movie?',
 		a: "Combine the Dune preset's warm, sun-bleached tones with a moderate amount of grain and vignette to fade the edges and roughen the texture the way an aged 35mm print looks. The film stock stamp adds a final period-accurate touch.",
+	},
+	{
+		q: 'How do I recreate the sickly yellow-green look of Fight Club or the rain-soaked grime of Se7en?',
+		a: "Select the Fight Club preset for a desaturated, sickly yellow-green grade with heavy grain, mimicking the film's grimy underground look, or the Se7en preset for an even darker, rain-soaked crushed-black grade. Both work well on gritty urban or interior shots.",
+	},
+	{
+		q: 'Is there a preset for epic fantasy or adventure movies like The Lord of the Rings?',
+		a: "Yes. Select The Lord of the Rings: The Fellowship of the Ring preset for a rich, mythic green-and-gold grade, or browse the Fantasy & Adventure genre on the all-presets page for more options including Pirates of the Caribbean and Pan's Labyrinth.",
+	},
+	{
+		q: 'How many presets does Cinematic Photo have, and are they organized by genre?',
+		a: 'Cinematic Photo has 50 movie-inspired presets organized into eight genres: Thriller & Mystery, Crime, Sci-Fi, Drama, War & History, Fantasy & Adventure, Action, and Superhero. Browse the full list on the all-presets page, or start from five featured presets right in the editor.',
 	},
 ];
 
@@ -104,16 +120,18 @@ const faqStructuredData = {
 				Movie-inspired color grading presets
 			</h3>
 			<p>
-				Each preset in this cinematic editor is modeled on a recognizable film look. Apply the
-				Blade Runner 2049 photo filter online for amber neon highlights cut with a teal haze,
-				the fastest way to make a photo look like Blade Runner 2049 without hand-grading curves.
-				Reach for the Dark Knight color grading preset for crushed blacks and a cold steel tone,
-				or the classic teal and orange color grade photo generator look for punchy, contrast-rich
-				portraits. The Interstellar movie color filter effect delivers cold cosmic blue and deep
-				shadow detail, the Dune movie color grading look online brings warm desert gold and
-				blown highlights, and the Matrix green tint photo filter recreates the film's signature
+				Each of the 50 presets in this cinematic editor is modeled on a recognizable film look,
+				organized into eight genres: Thriller & Mystery, Crime, Sci-Fi, Drama, War & History,
+				Fantasy & Adventure, Action, and Superhero. Reach for the Shawshank Redemption preset for
+				a warm, restrained 35mm drama grade, the Pulp Fiction photo filter for pulpy amber-red
+				Tarantino tones, or the Dark Knight color grading preset for crushed blacks and a cold
+				steel tone. The Inception and Interstellar movie color filter effects deliver Nolan's
+				signature cool steel-blue sci-fi palette, the Gladiator preset brings bleached golden
+				desert warmth, and the Matrix green tint photo filter recreates the film's signature
 				high-gain digital green. Every option applies a cinematic filter to a photo for free,
-				instantly, directly on the canvas.
+				instantly, directly on the canvas — browse the{' '}
+				<a href="/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">full list of all 50 presets</a>{' '}
+				to find the exact film your photo needs.
 			</p>
 
 			<h3 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">

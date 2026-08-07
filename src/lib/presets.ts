@@ -225,6 +225,16 @@ export const PRESETS: CinematicPreset[] = [
 		overlay: { type: 'linear', angle: 90, stops: ['#0c1014', '#3a2426'], blend: 'overlay', opacity: 0.4 },
 		defaults: { grain: 20, vignette: 42, glow: 8 },
 	},
+	{
+		id: 'blade-runner',
+		name: 'Blade Runner 2049',
+		tagline: 'Amber neon, teal haze',
+		genre: 'Sci-Fi',
+		filter: 'contrast(1.22) saturate(1.4) brightness(1.02) sepia(0.14)',
+		overlay: { type: 'linear', angle: 90, stops: ['#082830', '#ff8a3d'], blend: 'overlay', opacity: 0.48 },
+		haze: { color: '#ff8a3d', opacity: 0.1 },
+		defaults: { grain: 26, vignette: 30, glow: 38 },
+	},
 
 	// --- Drama ---
 	{
@@ -309,15 +319,6 @@ export const PRESETS: CinematicPreset[] = [
 		filter: 'saturate(0.35) contrast(1.4) brightness(0.9) sepia(0.06)',
 		overlay: { type: 'linear', angle: 90, stops: ['#0e120c', '#3e4636'], blend: 'overlay', opacity: 0.36 },
 		defaults: { grain: 36, vignette: 38, glow: 6 },
-	},
-	{
-		id: 'schindlers-list',
-		name: "Schindler's List",
-		tagline: 'Near-monochrome, restrained warmth',
-		genre: 'War & History',
-		filter: 'grayscale(0.75) contrast(1.25) saturate(0.4) brightness(0.96)',
-		overlay: { type: 'linear', angle: 90, stops: ['#0a0a0a', '#2e2a24'], blend: 'overlay', opacity: 0.3 },
-		defaults: { grain: 24, vignette: 34, glow: 6 },
 	},
 	{
 		id: 'braveheart',
