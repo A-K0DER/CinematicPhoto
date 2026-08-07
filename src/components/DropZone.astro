@@ -1,11 +1,10 @@
 ---
+import { GENRES, getPresetsByGenre } from '../lib/presets';
+
+const showcasePresets = GENRES.map((genre) => getPresetsByGenre(genre)[0]);
 ---
 
-<section
-	id="dropzone"
-	data-show="drop"
-	class="mx-auto flex min-h-[calc(100vh-3.5rem)] w-full max-w-3xl flex-col items-center justify-center px-4 py-16"
->
+<section id="dropzone" class="mx-auto flex w-full max-w-5xl flex-col items-center px-4 py-16">
 	<span class="mb-4 font-mono text-xs tracking-wide text-mute">CINEMATIC PHOTO EDITOR</span>
 	<h1
 		class="max-w-xl text-center font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl"
@@ -20,7 +19,7 @@
 	<label
 		id="dropzone-target"
 		for="file-input"
-		class="mt-10 flex w-full cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-hairline-strong bg-canvas-soft px-6 py-16 text-center transition-colors hover:border-zinc-500 hover:bg-canvas-soft-2"
+		class="mt-10 flex w-full max-w-xl cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-hairline-strong bg-canvas-soft px-6 py-16 text-center transition-colors hover:border-zinc-500 hover:bg-canvas-soft-2"
 	>
 		<svg
 			width="28"
@@ -57,7 +56,43 @@
 
 	<p id="dropzone-error" class="mt-4 hidden font-mono text-xs text-error" role="alert"></p>
 
-	<nav aria-label="About Cinematic Photo" class="mt-10 flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+	<p
+		id="pending-preset-label"
+		class="mt-4 hidden font-mono text-xs text-ink"
+		role="status"
+	></p>
+
+	<div class="mt-14 w-full max-w-3xl">
+		<p class="mb-4 text-center font-mono text-xs tracking-wide text-mute">
+			50 MOVIE-INSPIRED GRADES &middot; PICK ONE TO START
+		</p>
+		<div id="preset-showcase" class="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+			{
+				showcasePresets.map((preset) => (
+					<button
+						type="button"
+						data-preset-id={preset.id}
+						class="showcase-card group flex flex-col items-start gap-2 rounded-md border border-hairline bg-canvas-soft p-2.5 text-left transition-colors hover:border-hairline-strong data-[active=true]:border-ink data-[active=true]:ring-1 data-[active=true]:ring-ink"
+					>
+						<span
+							class="h-12 w-full rounded-sm"
+							style={`background: linear-gradient(135deg, ${preset.overlay.stops[0]}, ${preset.overlay.stops[1]});`}
+						/>
+						<span class="font-sans text-xs font-medium text-ink">{preset.name}</span>
+						<span class="font-mono text-[10px] text-mute">{preset.genre}</span>
+					</button>
+				))
+			}
+		</div>
+		<a
+			href="/presets/"
+			class="mt-4 block text-center font-mono text-xs text-mute transition-colors hover:text-ink"
+		>
+			Browse all 50 presets &rarr;
+		</a>
+	</div>
+
+	<nav aria-label="About Cinematic Photo" class="mt-14 flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
 		<a href="/about-us" class="font-mono text-xs text-mute transition-colors hover:text-ink">About Us</a>
 		<a href="/contact-us" class="font-mono text-xs text-mute transition-colors hover:text-ink">Contact Us</a>
 		<a href="/privacy-policy" class="font-mono text-xs text-mute transition-colors hover:text-ink">Privacy Policy</a>

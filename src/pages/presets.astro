@@ -1,0 +1,50 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { GENRES, getPresetsByGenre } from '../lib/presets';
+
+const title = 'All Presets | Cinematic Photo Editor';
+const description =
+	'Browse all 50 movie-inspired cinematic color grading presets, organized by genre — from Thriller & Mystery to Superhero.';
+---
+
+<Layout title={title} description={description} path="/presets/">
+	<Navbar />
+	<main class="mx-auto max-w-5xl px-4 py-20 sm:px-6">
+		<span class="mb-4 block font-mono text-xs tracking-wide text-mute">ALL PRESETS</span>
+		<h1 class="max-w-2xl font-sans text-3xl font-semibold tracking-[-0.03em] text-ink sm:text-4xl">
+			50 movie-inspired color grades, organized by genre
+		</h1>
+		<p class="mt-4 max-w-xl text-base leading-7 text-body">
+			Pick a preset below to jump into the editor with it pre-selected. Drop or upload a photo
+			once you're there to see the grade applied.
+		</p>
+
+		{
+			GENRES.map((genre) => (
+				<section class="mt-14 first:mt-12">
+					<h2 class="mb-4 font-mono text-[11px] font-medium tracking-wide text-mute uppercase">
+						{genre}
+					</h2>
+					<div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+						{getPresetsByGenre(genre).map((preset) => (
+							<a
+								href={`/?preset=${preset.id}`}
+								class="group flex flex-col items-start gap-2 rounded-md border border-hairline bg-canvas p-2.5 text-left transition-colors hover:border-hairline-strong"
+							>
+								<span
+									class="h-14 w-full rounded-sm"
+									style={`background: linear-gradient(135deg, ${preset.overlay.stops[0]}, ${preset.overlay.stops[1]});`}
+								/>
+								<span class="font-sans text-xs font-medium text-ink">{preset.name}</span>
+								<span class="font-mono text-[10px] leading-tight text-mute">{preset.tagline}</span>
+							</a>
+						))}
+					</div>
+				</section>
+			))
+		}
+	</main>
+	<Footer />
+</Layout>

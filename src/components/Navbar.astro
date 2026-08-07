@@ -1,4 +1,9 @@
 ---
+interface Props {
+	variant?: 'landing' | 'editor';
+}
+
+const { variant = 'landing' } = Astro.props;
 ---
 
 <header
@@ -12,29 +17,34 @@
 	</a>
 
 	<div class="flex items-center gap-2">
-		<span
-			data-show="drop"
-			class="hidden font-mono text-xs text-mute sm:inline-block"
-		>
-			no uploads &middot; processed on-device
-		</span>
+		{
+			variant === 'landing' && (
+				<span class="hidden font-mono text-xs text-mute sm:inline-block">
+					no uploads &middot; processed on-device
+				</span>
+			)
+		}
 
-		<button
-			id="nav-reset"
-			data-show="editor"
-			type="button"
-			class="rounded-md border border-hairline px-3 py-1.5 font-sans text-sm font-medium text-body transition-colors hover:border-hairline-strong hover:text-ink"
-		>
-			New image
-		</button>
-		<button
-			id="nav-export"
-			data-show="editor"
-			type="button"
-			class="rounded-md bg-primary px-3 py-1.5 font-sans text-sm font-medium text-on-primary transition-opacity hover:opacity-90"
-		>
-			Export
-		</button>
+		{
+			variant === 'editor' && (
+				<>
+					<button
+						id="nav-reset"
+						type="button"
+						class="rounded-md border border-hairline px-3 py-1.5 font-sans text-sm font-medium text-body transition-colors hover:border-hairline-strong hover:text-ink"
+					>
+						New image
+					</button>
+					<button
+						id="nav-export"
+						type="button"
+						class="rounded-md bg-primary px-3 py-1.5 font-sans text-sm font-medium text-on-primary transition-opacity hover:opacity-90"
+					>
+						Export
+					</button>
+				</>
+			)
+		}
 
 		<button
 			id="theme-toggle"

@@ -1,10 +1,11 @@
 ---
-import { ALL_PRESETS } from '../lib/presets';
+import { ORIGINAL_PRESET, getFeaturedPresets } from '../lib/presets';
+
+const featuredPresets = [ORIGINAL_PRESET, ...getFeaturedPresets()];
 ---
 
 <section
 	id="editor"
-	data-show="editor"
 	class="grid min-h-[calc(100vh-3.5rem)] grid-cols-1 lg:grid-cols-[1fr_320px]"
 >
 	<div class="flex items-center justify-center overflow-hidden bg-zinc-950 p-4 sm:p-10">
@@ -25,7 +26,7 @@ import { ALL_PRESETS } from '../lib/presets';
 			</h2>
 			<div id="preset-grid" class="grid grid-cols-2 gap-2">
 				{
-					ALL_PRESETS.map((preset) => (
+					featuredPresets.map((preset) => (
 						<button
 							type="button"
 							data-preset-id={preset.id}
@@ -45,6 +46,12 @@ import { ALL_PRESETS } from '../lib/presets';
 					))
 				}
 			</div>
+			<a
+				href="/presets/"
+				class="mt-3 inline-block font-mono text-[11px] text-mute transition-colors hover:text-ink"
+			>
+				Browse all 50 presets &rarr;
+			</a>
 		</div>
 
 		<div class="flex flex-col gap-4 border-t border-hairline pt-5">

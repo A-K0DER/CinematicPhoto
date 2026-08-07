@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import EditorCanvas from '../components/EditorCanvas.astro';
+
+const title = 'Editor | Cinematic Photo Editor';
+const description = 'Apply movie-inspired color grades to your photo, right in your browser.';
+---
+
+<Layout title={title} description={description} path="/editor/" noindex>
+	<Navbar variant="editor" />
+	<main>
+		<EditorCanvas />
+	</main>
+</Layout>
+
+<script>
+	import '../lib/editor';
+</script>

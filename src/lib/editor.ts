@@ -1,10 +1,6 @@
 import { getPreset, type CinematicPreset } from './presets';
 import { computeCanvasSize, exportCanvas, loadImageFromFile, renderFrame } from './engine';
-import { extractRawPreviewBlob, isRawContainerFile } from './rawPreview';
-
-const dropzoneTarget = document.getElementById('dropzone-target') as HTMLLabelElement;
-const fileInput = document.getElementById('file-input') as HTMLInputElement;
-const dropzoneError = document.getElementById('dropzone-error') as HTMLParagraphElement;
+import { takePendingImage } from './imageHandoff';
 
 const canvas = document.getElementById('canvas') as HTMLCanvasElement;
 const presetGrid = document.getElementById('preset-grid') as HTMLDivElement;
@@ -22,6 +18,8 @@ const metadataToggle = document.getElementById('metadata-toggle') as HTMLButtonE
 
 const navReset = document.getElementById('nav-reset') as HTMLButtonElement;
 const navExport = document.getElementById('nav-export') as HTMLButtonElement;
+
+const requestedPresetId = new URLSearchParams(location.search).get('preset');
 
 interface State {
 	image: HTMLImageElement | null;
@@ -80,10 +78,6 @@ function render() {
 	});
 }
 
-function setAppState(appState: 'drop' | 'editor') {
-	document.body.dataset.appState = appState;
-}
-
 function applyPresetDefaults(preset: CinematicPreset) {
 	state.grain = preset.defaults.grain;
 	state.vignette = preset.defaults.vignette;
@@ -103,100 +97,26 @@ function setActivePreset(presetId: string) {
 	}
 }
 
-function showError(message: string) {
-	dropzoneError.textContent = message;
-	dropzoneError.classList.remove('hidden');
-}
-
-function clearError() {
-	dropzoneError.classList.add('hidden');
-	dropzoneError.textContent = '';
-}
-
-async function handleFile(file: File) {
-	const isRaw = isRawContainerFile(file);
-	if (!file.type.startsWith('image/') && !isRaw) {
-		showError('That file type is not supported. Try a JPG, PNG, WEBP, or a camera RAW file.');
+async function init() {
+	const pending = await takePendingImage();
+	if (!pending) {
+		location.href = '/';
 		return;
 	}
-	clearError();
-	try {
-		const source = isRaw ? await extractRawPreviewBlob(file) : file;
-		const image = await loadImageFromFile(source);
-		const { width, height } = computeCanvasSize(image.naturalWidth, image.naturalHeight);
-		state.image = image;
-		state.width = width;
-		state.height = height;
-		state.fileBaseName = file.name.replace(/\.[^.]+$/, '') || 'cinematic-photo';
-		state.letterbox = false;
-		state.metadata = false;
-		letterboxToggle.setAttribute('aria-pressed', 'false');
-		metadataToggle.setAttribute('aria-pressed', 'false');
-		setActivePreset('original');
-		applyPresetDefaults(getPreset('original'));
-		setAppState('editor');
-		scheduleRender();
-	} catch (err) {
-		showError(err instanceof Error ? err.message : 'Could not read this image file.');
-	}
+	const image = await loadImageFromFile(pending.blob);
+	const { width, height } = computeCanvasSize(image.naturalWidth, image.naturalHeight);
+	state.image = image;
+	state.width = width;
+	state.height = height;
+	state.fileBaseName = pending.fileName.replace(/\.[^.]+$/, '') || 'cinematic-photo';
+
+	const initialPresetId = requestedPresetId && getPreset(requestedPresetId).id === requestedPresetId ? requestedPresetId : 'original';
+	setActivePreset(initialPresetId);
+	applyPresetDefaults(getPreset(initialPresetId));
+	scheduleRender();
 }
 
-function resetToDropzone() {
-	state.image = null;
-	fileInput.value = '';
-	clearError();
-	setAppState('drop');
-}
-
-// --- Dropzone wiring ---
-
-fileInput.addEventListener('change', () => {
-	const file = fileInput.files?.[0];
-	if (file) handleFile(file);
-});
-
-for (const evt of ['dragenter', 'dragover']) {
-	dropzoneTarget.addEventListener(evt, (e) => {
-		e.preventDefault();
-		dropzoneTarget.classList.add('border-zinc-500', 'bg-canvas-soft-2');
-	});
-}
-
-for (const evt of ['dragleave', 'dragend']) {
-	dropzoneTarget.addEventListener(evt, (e) => {
-		e.preventDefault();
-		dropzoneTarget.classList.remove('border-zinc-500', 'bg-canvas-soft-2');
-	});
-}
-
-dropzoneTarget.addEventListener('drop', (e) => {
-	e.preventDefault();
-	dropzoneTarget.classList.remove('border-zinc-500', 'bg-canvas-soft-2');
-	const file = e.dataTransfer?.files?.[0];
-	if (file) handleFile(file);
-});
-
-// Prevent the browser from navigating away if a file is dropped outside the target.
-for (const evt of ['dragover', 'drop']) {
-	window.addEventListener(evt, (e) => {
-		if (document.body.dataset.appState === 'drop' && (e.target as HTMLElement)?.closest('#dropzone-target')) {
-			return;
-		}
-		e.preventDefault();
-	});
-}
-
-window.addEventListener('paste', (e) => {
-	const items = e.clipboardData?.items;
-	if (!items) return;
-	for (const item of items) {
-		if (item.type.startsWith('image/')) {
-			const file = item.getAsFile();
-			if (file) handleFile(file);
-			break;
-		}
-	}
-});
+init();
 
 // --- Preset grid ---
 
@@ -250,7 +170,9 @@ metadataToggle.addEventListener('click', () => {
 
 // --- Nav actions ---
 
-navReset.addEventListener('click', resetToDropzone);
+navReset.addEventListener('click', () => {
+	location.href = '/';
+});
 
 navExport.addEventListener('click', async () => {
 	if (!state.image) return;

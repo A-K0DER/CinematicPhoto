@@ -66,14 +66,6 @@
 	--color-on-primary: #ffffff;
 }
 
-[data-app-state='drop'] [data-show='editor'] {
-	display: none;
-}
-
-[data-app-state='editor'] [data-show='drop'] {
-	display: none;
-}
-
 @layer base {
 	::selection {
 		background-color: var(--color-ink);
