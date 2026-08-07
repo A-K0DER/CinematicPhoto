@@ -1,0 +1,103 @@
+@import 'tailwindcss';
+
+@import '@fontsource-variable/inter/standard.css';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/500.css';
+
+/*
+ * Design tokens — dark-first polarity flip of DESIGN.md's Vercel system.
+ * DESIGN.md documents the light marketing surface (canvas white / ink black);
+ * this product is a dark-mode-first utility, so primary/canvas invert while
+ * type scale, spacing, radius, and elevation ratios stay 1:1 with the source.
+ */
+@theme {
+	--font-sans: 'Inter Variable', 'Inter', system-ui, -apple-system, sans-serif;
+	--font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+
+	/* surfaces, deepest to lightest */
+	--color-canvas: var(--color-zinc-950);
+	--color-canvas-soft: var(--color-zinc-900);
+	--color-canvas-soft-2: var(--color-zinc-800);
+	--color-hairline: var(--color-zinc-800);
+	--color-hairline-strong: var(--color-zinc-700);
+
+	/* text */
+	--color-ink: var(--color-zinc-50);
+	--color-body: var(--color-zinc-400);
+	--color-mute: var(--color-zinc-500);
+
+	/* primary CTA — inverted to white-on-black in the dark shell */
+	--color-primary: var(--color-zinc-50);
+	--color-on-primary: var(--color-zinc-950);
+
+	/* semantic, unchanged from DESIGN.md */
+	--color-link: #3291ff;
+	--color-success: #3291ff;
+	--color-error: #f5514c;
+	--color-warning: #f5a623;
+
+	/* letter-spacing scale for display type, per DESIGN.md typography.display-* */
+	--tracking-display-xl: -0.05em;
+	--tracking-display-lg: -0.04em;
+	--tracking-display-md: -0.04em;
+	--tracking-display-sm: -0.03em;
+}
+
+[data-app-state='drop'] [data-show='editor'] {
+	display: none;
+}
+
+[data-app-state='editor'] [data-show='drop'] {
+	display: none;
+}
+
+@layer base {
+	::selection {
+		background-color: var(--color-zinc-50);
+		color: var(--color-zinc-950);
+	}
+
+	body {
+		font-family: var(--font-sans);
+		font-feature-settings: 'ss01', 'ss02';
+	}
+
+	input[type='range'] {
+		-webkit-appearance: none;
+		appearance: none;
+		background: transparent;
+	}
+
+	input[type='range']::-webkit-slider-runnable-track {
+		height: 3px;
+		background: var(--color-zinc-800);
+		border-radius: 9999px;
+	}
+
+	input[type='range']::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		appearance: none;
+		width: 13px;
+		height: 13px;
+		margin-top: -5px;
+		border-radius: 9999px;
+		background: var(--color-zinc-50);
+		box-shadow: 0 0 0 3px var(--color-zinc-950);
+		cursor: pointer;
+	}
+
+	input[type='range']::-moz-range-track {
+		height: 3px;
+		background: var(--color-zinc-800);
+		border-radius: 9999px;
+	}
+
+	input[type='range']::-moz-range-thumb {
+		width: 13px;
+		height: 13px;
+		border: none;
+		border-radius: 9999px;
+		background: var(--color-zinc-50);
+		cursor: pointer;
+	}
+}

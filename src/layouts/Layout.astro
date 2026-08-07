@@ -1,14 +1,34 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const {
+	title = 'Cinematic Photo — Movie-grade photo grading, instantly',
+	description = 'Transform ordinary photos into iconic cinematic stills. One-click Hollywood color grades, processed entirely in your browser — no uploads, no accounts, no watermarks.',
+} = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta name="theme-color" content="#09090b" />
 	</head>
-	<body>
+	<body class="min-h-screen bg-canvas text-ink antialiased" data-app-state="drop">
 		<slot />
 	</body>
 </html>
@@ -18,6 +38,5 @@
 	body {
 		margin: 0;
 		width: 100%;
-		height: 100%;
 	}
 </style>

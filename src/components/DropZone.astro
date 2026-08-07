@@ -1,0 +1,54 @@
+---
+---
+
+<section
+	id="dropzone"
+	data-show="drop"
+	class="mx-auto flex min-h-[calc(100vh-3.5rem)] w-full max-w-3xl flex-col items-center justify-center px-4 py-16"
+>
+	<span class="mb-4 font-mono text-xs tracking-wide text-mute">CINEMATIC PHOTO</span>
+	<h1
+		class="max-w-xl text-center font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl"
+	>
+		Movie-grade stills, one click away.
+	</h1>
+	<p class="mt-4 max-w-md text-center text-base leading-7 text-body">
+		Drop a photo to apply iconic Hollywood color grades. Processed entirely in your browser
+		— nothing is ever uploaded.
+	</p>
+
+	<label
+		id="dropzone-target"
+		for="file-input"
+		class="mt-10 flex w-full cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-hairline-strong bg-canvas-soft px-6 py-16 text-center transition-colors hover:border-zinc-500 hover:bg-canvas-soft-2"
+	>
+		<svg
+			width="28"
+			height="28"
+			viewBox="0 0 24 24"
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+			class="mb-4 text-mute"
+		>
+			<path
+				d="M12 16V4M12 4L7 9M12 4L17 9"
+				stroke="currentColor"
+				stroke-width="1.6"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+			></path>
+			<path
+				d="M4 16V18C4 19.1046 4.89543 20 6 20H18C19.1046 20 20 19.1046 20 18V16"
+				stroke="currentColor"
+				stroke-width="1.6"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+			></path>
+		</svg>
+		<span class="font-sans text-sm font-medium text-ink">Drop an image, paste, or click to browse</span>
+		<span class="mt-1.5 font-mono text-xs text-mute">JPG, PNG, or WEBP</span>
+		<input id="file-input" type="file" accept="image/png,image/jpeg,image/webp" class="sr-only" />
+	</label>
+
+	<p id="dropzone-error" class="mt-4 hidden font-mono text-xs text-error" role="alert"></p>
+</section>

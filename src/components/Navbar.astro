@@ -1,0 +1,53 @@
+---
+---
+
+<header
+	class="sticky top-0 z-40 flex h-14 items-center justify-between border-b border-hairline bg-canvas/80 px-4 backdrop-blur-md sm:px-6"
+>
+	<a href="/" class="flex items-center gap-2" aria-label="Cinematic Photo home">
+		<svg
+			width="20"
+			height="20"
+			viewBox="0 0 24 24"
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+			class="text-ink"
+		>
+			<rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.6" />
+			<path d="M2 8H22" stroke="currentColor" stroke-width="1.6" />
+			<path d="M6 4V8" stroke="currentColor" stroke-width="1.6" />
+			<path d="M10 4V8" stroke="currentColor" stroke-width="1.6" />
+			<path d="M14 4V8" stroke="currentColor" stroke-width="1.6" />
+			<path d="M18 4V8" stroke="currentColor" stroke-width="1.6" />
+		</svg>
+		<span class="font-sans text-[15px] font-semibold tracking-[-0.02em] text-ink"
+			>Cinematic Photo</span
+		>
+	</a>
+
+	<div class="flex items-center gap-2">
+		<span
+			data-show="drop"
+			class="hidden font-mono text-xs text-mute sm:inline-block"
+		>
+			no uploads &middot; processed on-device
+		</span>
+
+		<button
+			id="nav-reset"
+			data-show="editor"
+			type="button"
+			class="rounded-md border border-hairline px-3 py-1.5 font-sans text-sm font-medium text-body transition-colors hover:border-hairline-strong hover:text-ink"
+		>
+			New image
+		</button>
+		<button
+			id="nav-export"
+			data-show="editor"
+			type="button"
+			class="rounded-md bg-primary px-3 py-1.5 font-sans text-sm font-medium text-on-primary transition-opacity hover:opacity-90"
+		>
+			Export
+		</button>
+	</div>
+</header>
