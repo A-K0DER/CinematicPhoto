@@ -1,5 +1,5 @@
 ---
-import { ORIGINAL_PRESET, getFeaturedPresets } from '../lib/presets';
+import { ORIGINAL_PRESET, getFeaturedPresets, getOverlayBackground } from '../lib/presets';
 
 const featuredPresets = [ORIGINAL_PRESET, ...getFeaturedPresets()];
 ---
@@ -32,14 +32,27 @@ const featuredPresets = [ORIGINAL_PRESET, ...getFeaturedPresets()];
 							data-preset-id={preset.id}
 							class="preset-card group flex flex-col items-start gap-2 rounded-md border border-hairline bg-canvas p-2.5 text-left transition-colors hover:border-hairline-strong data-[active=true]:border-ink data-[active=true]:ring-1 data-[active=true]:ring-ink"
 						>
-							<span
-								class="h-8 w-full rounded-sm"
-								style={
-									preset.id === 'original'
-										? 'background: repeating-linear-gradient(45deg, var(--color-zinc-800), var(--color-zinc-800) 4px, var(--color-zinc-700) 4px, var(--color-zinc-700) 8px);'
-										: `background: linear-gradient(135deg, ${preset.overlay.stops[0]}, ${preset.overlay.stops[1]});`
-								}
-							/>
+							{preset.id === 'original' ? (
+								<span
+									class="h-8 w-full rounded-sm"
+									style="background: repeating-linear-gradient(45deg, var(--color-zinc-800), var(--color-zinc-800) 4px, var(--color-zinc-700) 4px, var(--color-zinc-700) 8px);"
+								/>
+							) : (
+								<span class="relative block h-8 w-full overflow-hidden rounded-sm">
+									<img
+										loading="lazy"
+										decoding="async"
+										alt={preset.name}
+										src={preset.image}
+										style={`filter: ${preset.filter};`}
+										class="absolute inset-0 h-full w-full object-cover"
+									/>
+									<span
+										class="absolute inset-0"
+										style={`background: ${getOverlayBackground(preset.overlay)}; opacity: ${preset.overlay.opacity}; mix-blend-mode: ${preset.overlay.blend};`}
+									/>
+								</span>
+							)}
 							<span class="font-sans text-xs font-medium text-ink">{preset.name}</span>
 							<span class="font-mono text-[10px] leading-tight text-mute">{preset.tagline}</span>
 						</button>

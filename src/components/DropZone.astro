@@ -1,5 +1,5 @@
 ---
-import { GENRES, getPresetsByGenre } from '../lib/presets';
+import { GENRES, getPresetsByGenre, getOverlayBackground } from '../lib/presets';
 
 const showcasePresets = GENRES.map((genre) => getPresetsByGenre(genre)[0]);
 ---
@@ -74,10 +74,20 @@ const showcasePresets = GENRES.map((genre) => getPresetsByGenre(genre)[0]);
 						data-preset-id={preset.id}
 						class="showcase-card group flex flex-col items-start gap-2 rounded-md border border-hairline bg-canvas-soft p-2.5 text-left transition-colors hover:border-hairline-strong data-[active=true]:border-ink data-[active=true]:ring-1 data-[active=true]:ring-ink"
 					>
-						<span
-							class="h-12 w-full rounded-sm"
-							style={`background: linear-gradient(135deg, ${preset.overlay.stops[0]}, ${preset.overlay.stops[1]});`}
-						/>
+						<span class="relative block h-12 w-full overflow-hidden rounded-sm">
+							<img
+								loading="lazy"
+								decoding="async"
+								alt={preset.name}
+								src={preset.image}
+								style={`filter: ${preset.filter};`}
+								class="absolute inset-0 h-full w-full object-cover"
+							/>
+							<span
+								class="absolute inset-0"
+								style={`background: ${getOverlayBackground(preset.overlay)}; opacity: ${preset.overlay.opacity}; mix-blend-mode: ${preset.overlay.blend};`}
+							/>
+						</span>
 						<span class="font-sans text-xs font-medium text-ink">{preset.name}</span>
 						<span class="font-mono text-[10px] text-mute">{preset.genre}</span>
 					</button>

@@ -23,6 +23,8 @@ export interface CinematicPreset {
 	overlay: PresetOverlay;
 	haze?: PresetHaze;
 	defaults: { grain: number; vignette: number; glow: number };
+	/** Thumbnail photo path used to preview this preset's grade. */
+	image: string;
 }
 
 export const ORIGINAL_PRESET: CinematicPreset = {
@@ -33,6 +35,9 @@ export const ORIGINAL_PRESET: CinematicPreset = {
 	filter: 'none',
 	overlay: { type: 'solid', stops: ['#000000', '#000000'], blend: 'source-over', opacity: 0 },
 	defaults: { grain: 0, vignette: 0, glow: 0 },
+	// No thumbnail — the editor special-cases id === 'original' and renders a
+	// diagonal-stripe swatch instead of a photo, so this is never read.
+	image: '',
 };
 
 export const GENRES = [
@@ -52,6 +57,7 @@ export const PRESETS: CinematicPreset[] = [
 	// --- Thriller & Mystery ---
 	{
 		id: 'fight-club',
+		image: '/images/presets/fight-club.jpg',
 		name: 'Fight Club',
 		tagline: 'Sickly yellow-green, gritty 90s',
 		genre: 'Thriller & Mystery',
@@ -61,6 +67,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'seven',
+		image: '/images/presets/seven.jpg',
 		name: 'Se7en',
 		tagline: 'Rain-soaked grime, crushed blacks',
 		genre: 'Thriller & Mystery',
@@ -70,6 +77,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'silence-of-the-lambs',
+		image: '/images/presets/silence-of-the-lambs.jpg',
 		name: 'The Silence of the Lambs',
 		tagline: 'Clinical cold, institutional dread',
 		genre: 'Thriller & Mystery',
@@ -79,6 +87,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'shutter-island',
+		image: '/images/presets/shutter-island.jpg',
 		name: 'Shutter Island',
 		tagline: 'Stormy noir, sickly institution',
 		genre: 'Thriller & Mystery',
@@ -88,6 +97,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'the-prestige',
+		image: '/images/presets/the-prestige.jpg',
 		name: 'The Prestige',
 		tagline: 'Gaslit Victorian, cool and amber',
 		genre: 'Thriller & Mystery',
@@ -97,6 +107,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'memento',
+		image: '/images/presets/memento.jpg',
 		name: 'Memento',
 		tagline: 'Stark bleach, punchy clarity',
 		genre: 'Thriller & Mystery',
@@ -106,6 +117,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'usual-suspects',
+		image: '/images/presets/usual-suspects.jpg',
 		name: 'The Usual Suspects',
 		tagline: 'Amber interrogation, noir shadow',
 		genre: 'Thriller & Mystery',
@@ -117,6 +129,7 @@ export const PRESETS: CinematicPreset[] = [
 	// --- Crime ---
 	{
 		id: 'pulp-fiction',
+		image: '/images/presets/pulp-fiction.jpg',
 		name: 'Pulp Fiction',
 		tagline: 'Pulpy amber-red, retro diner',
 		genre: 'Crime',
@@ -126,6 +139,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'django-unchained',
+		image: '/images/presets/django-unchained.jpg',
 		name: 'Django Unchained',
 		tagline: 'Sunbaked western, blood and gold',
 		genre: 'Crime',
@@ -135,6 +149,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'joker',
+		image: '/images/presets/joker.jpg',
 		name: 'Joker',
 		tagline: 'Grimy Gotham, sickly orange-green',
 		genre: 'Crime',
@@ -144,6 +159,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'the-departed',
+		image: '/images/presets/the-departed.jpg',
 		name: 'The Departed',
 		tagline: 'Cold Boston steel, gritty blue',
 		genre: 'Crime',
@@ -153,6 +169,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'goodfellas',
+		image: '/images/presets/goodfellas.jpg',
 		name: 'GoodFellas',
 		tagline: 'Warm 70s film, nightclub gold',
 		genre: 'Crime',
@@ -162,6 +179,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'leon-the-professional',
+		image: '/images/presets/leon-the-professional.jpg',
 		name: 'Léon: The Professional',
 		tagline: 'Gritty NYC amber-green',
 		genre: 'Crime',
@@ -173,6 +191,7 @@ export const PRESETS: CinematicPreset[] = [
 	// --- Sci-Fi ---
 	{
 		id: 'inception',
+		image: '/images/presets/inception.jpg',
 		name: 'Inception',
 		tagline: 'Cool steel dream, crisp Nolan',
 		genre: 'Sci-Fi',
@@ -182,6 +201,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'matrix',
+		image: '/images/presets/matrix.jpg',
 		name: 'Matrix',
 		tagline: 'High-gain digital green',
 		genre: 'Sci-Fi',
@@ -191,6 +211,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'dune',
+		image: '/images/presets/dune.jpg',
 		name: 'Dune',
 		tagline: 'Desert gold, blown highlights',
 		genre: 'Sci-Fi',
@@ -200,6 +221,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'interstellar',
+		image: '/images/presets/interstellar.jpg',
 		name: 'Interstellar',
 		tagline: 'Cold cosmic blue, deep blacks',
 		genre: 'Sci-Fi',
@@ -209,6 +231,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'terminator-2',
+		image: '/images/presets/terminator-2.jpg',
 		name: 'Terminator 2: Judgment Day',
 		tagline: 'Industrial steel, cold 90s action',
 		genre: 'Sci-Fi',
@@ -218,6 +241,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'v-for-vendetta',
+		image: '/images/presets/v-for-vendetta.jpg',
 		name: 'V for Vendetta',
 		tagline: 'Dystopian grey, single red',
 		genre: 'Sci-Fi',
@@ -227,6 +251,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'blade-runner',
+		image: '/images/presets/blade-runner.jpg',
 		name: 'Blade Runner 2049',
 		tagline: 'Amber neon, teal haze',
 		genre: 'Sci-Fi',
@@ -239,6 +264,7 @@ export const PRESETS: CinematicPreset[] = [
 	// --- Drama ---
 	{
 		id: 'shawshank',
+		image: '/images/presets/shawshank.jpg',
 		name: 'The Shawshank Redemption',
 		tagline: 'Warm 35mm, restrained gold',
 		genre: 'Drama',
@@ -248,6 +274,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'forrest-gump',
+		image: '/images/presets/forrest-gump.jpg',
 		name: 'Forrest Gump',
 		tagline: 'Warm Americana, golden nostalgia',
 		genre: 'Drama',
@@ -257,6 +284,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'the-green-mile',
+		image: '/images/presets/the-green-mile.jpg',
 		name: 'The Green Mile',
 		tagline: 'Sepia prison, restrained gold',
 		genre: 'Drama',
@@ -266,6 +294,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'titanic',
+		image: '/images/presets/titanic.jpg',
 		name: 'Titanic',
 		tagline: 'Oceanic teal, romantic epic',
 		genre: 'Drama',
@@ -275,6 +304,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'the-truman-show',
+		image: '/images/presets/the-truman-show.jpg',
 		name: 'The Truman Show',
 		tagline: 'Bright sitcom pastel, artificial perfect',
 		genre: 'Drama',
@@ -284,6 +314,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'american-beauty',
+		image: '/images/presets/american-beauty.jpg',
 		name: 'American Beauty',
 		tagline: 'Muted suburbia, rose-petal red',
 		genre: 'Drama',
@@ -293,6 +324,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'american-history-x',
+		image: '/images/presets/american-history-x.jpg',
 		name: 'American History X',
 		tagline: 'Harsh steel-grey, stark contrast',
 		genre: 'Drama',
@@ -304,6 +336,7 @@ export const PRESETS: CinematicPreset[] = [
 	// --- War & History ---
 	{
 		id: 'inglourious-basterds',
+		image: '/images/presets/inglourious-basterds.jpg',
 		name: 'Inglourious Basterds',
 		tagline: 'Sunbleached pulp, rich reds',
 		genre: 'War & History',
@@ -313,6 +346,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'saving-private-ryan',
+		image: '/images/presets/saving-private-ryan.jpg',
 		name: 'Saving Private Ryan',
 		tagline: 'Bleach-bypass grey, war documentary',
 		genre: 'War & History',
@@ -322,6 +356,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'braveheart',
+		image: '/images/presets/braveheart.jpg',
 		name: 'Braveheart',
 		tagline: 'Muted highlands, overcast epic',
 		genre: 'War & History',
@@ -331,6 +366,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'oppenheimer',
+		image: '/images/presets/oppenheimer.jpg',
 		name: 'Oppenheimer',
 		tagline: 'Desert amber, stark Nolan contrast',
 		genre: 'War & History',
@@ -340,6 +376,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'the-imitation-game',
+		image: '/images/presets/the-imitation-game.jpg',
 		name: 'The Imitation Game',
 		tagline: 'Restrained tweed, cool period grey',
 		genre: 'War & History',
@@ -351,6 +388,7 @@ export const PRESETS: CinematicPreset[] = [
 	// --- Fantasy & Adventure ---
 	{
 		id: 'fellowship-of-the-ring',
+		image: '/images/presets/fellowship-of-the-ring.jpg',
 		name: 'The Lord of the Rings: The Fellowship of the Ring',
 		tagline: 'Mythic green-gold, epic scale',
 		genre: 'Fantasy & Adventure',
@@ -360,6 +398,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'pirates-of-the-caribbean',
+		image: '/images/presets/pirates-of-the-caribbean.jpg',
 		name: 'Pirates of the Caribbean: The Curse of the Black Pearl',
 		tagline: 'High-seas teal, sunlit gold',
 		genre: 'Fantasy & Adventure',
@@ -369,6 +408,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'spirited-away',
+		image: '/images/presets/spirited-away.jpg',
 		name: 'Spirited Away',
 		tagline: 'Dreamy jewel tones, lantern glow',
 		genre: 'Fantasy & Adventure',
@@ -378,6 +418,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'harry-potter-goblet-of-fire',
+		image: '/images/presets/harry-potter-goblet-of-fire.jpg',
 		name: 'Harry Potter and the Goblet of Fire',
 		tagline: 'Gothic blue, firelit gold',
 		genre: 'Fantasy & Adventure',
@@ -387,6 +428,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'pans-labyrinth',
+		image: '/images/presets/pans-labyrinth.jpg',
 		name: "Pan's Labyrinth",
 		tagline: 'Dark fairy-tale, amber fantasy',
 		genre: 'Fantasy & Adventure',
@@ -396,6 +438,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'life-of-pi',
+		image: '/images/presets/life-of-pi.jpg',
 		name: 'Life of Pi',
 		tagline: 'Vivid ocean blue, sunset orange',
 		genre: 'Fantasy & Adventure',
@@ -407,6 +450,7 @@ export const PRESETS: CinematicPreset[] = [
 	// --- Action ---
 	{
 		id: 'gladiator',
+		image: '/images/presets/gladiator.jpg',
 		name: 'Gladiator',
 		tagline: 'Bleached sand, golden arena',
 		genre: 'Action',
@@ -416,6 +460,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'kill-bill',
+		image: '/images/presets/kill-bill.jpg',
 		name: 'Kill Bill: Vol. 1',
 		tagline: 'Pulpy yellow pop, grindhouse punch',
 		genre: 'Action',
@@ -425,6 +470,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'mad-max-fury-road',
+		image: '/images/presets/mad-max-fury-road.jpg',
 		name: 'Mad Max: Fury Road',
 		tagline: 'Orange and teal, desert fury',
 		genre: 'Action',
@@ -434,6 +480,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'the-revenant',
+		image: '/images/presets/the-revenant.jpg',
 		name: 'The Revenant',
 		tagline: 'Cold wilderness, harsh survival',
 		genre: 'Action',
@@ -443,6 +490,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'top-gun-maverick',
+		image: '/images/presets/top-gun-maverick.jpg',
 		name: 'Top Gun: Maverick',
 		tagline: 'Glossy sky-blue, sunset amber',
 		genre: 'Action',
@@ -452,6 +500,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'baby-driver',
+		image: '/images/presets/baby-driver.jpg',
 		name: 'Baby Driver',
 		tagline: 'Punchy pop-color, sun-flared streets',
 		genre: 'Action',
@@ -463,6 +512,7 @@ export const PRESETS: CinematicPreset[] = [
 	// --- Superhero ---
 	{
 		id: 'dark-knight',
+		image: '/images/presets/dark-knight.jpg',
 		name: 'The Dark Knight',
 		tagline: 'Crushed blacks, cold steel',
 		genre: 'Superhero',
@@ -472,6 +522,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'deadpool',
+		image: '/images/presets/deadpool.jpg',
 		name: 'Deadpool',
 		tagline: 'Punchy red-black, comic irreverence',
 		genre: 'Superhero',
@@ -481,6 +532,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'spider-man',
+		image: '/images/presets/spider-man.jpg',
 		name: 'Spider-Man',
 		tagline: 'Bright primary pop, NYC daylight',
 		genre: 'Superhero',
@@ -490,6 +542,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'the-batman',
+		image: '/images/presets/the-batman.jpg',
 		name: 'The Batman',
 		tagline: 'Crimson-black noir, rain-soaked Gotham',
 		genre: 'Superhero',
@@ -499,6 +552,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'x-men-first-class',
+		image: '/images/presets/x-men-first-class.jpg',
 		name: 'X-Men: First Class',
 		tagline: 'Retro steel-blue, Cold War amber',
 		genre: 'Superhero',
@@ -508,6 +562,7 @@ export const PRESETS: CinematicPreset[] = [
 	},
 	{
 		id: 'watchmen',
+		image: '/images/presets/watchmen.jpg',
 		name: 'Watchmen',
 		tagline: 'Cold dystopia, sickly smiley yellow',
 		genre: 'Superhero',
@@ -529,4 +584,16 @@ export function getFeaturedPresets(): CinematicPreset[] {
 
 export function getPresetsByGenre(genre: string): CinematicPreset[] {
 	return PRESETS.filter((p) => p.genre === genre);
+}
+
+/** Builds the CSS `background` value for a preset's overlay layer. */
+export function getOverlayBackground(overlay: PresetOverlay): string {
+	switch (overlay.type) {
+		case 'linear':
+			return `linear-gradient(${overlay.angle ?? 0}deg, ${overlay.stops[0]}, ${overlay.stops[1]})`;
+		case 'radial':
+			return `radial-gradient(circle, ${overlay.stops[0]}, ${overlay.stops[1]})`;
+		case 'solid':
+			return overlay.stops[0];
+	}
 }
