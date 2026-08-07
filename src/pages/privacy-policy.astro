@@ -1,0 +1,80 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'Privacy Policy — Cinematic Photo Editor';
+const description = 'Cinematic Photo processes every image locally in your browser. Read our privacy policy to see exactly what data is, and is not, collected.';
+const lastUpdated = 'August 7, 2026';
+---
+
+<Layout title={title} description={description} path="/privacy-policy">
+	<Navbar />
+	<main class="mx-auto max-w-3xl px-4 py-20 sm:px-6">
+		<span class="mb-4 block font-mono text-xs tracking-wide text-mute">PRIVACY POLICY</span>
+		<h1 class="font-sans text-3xl font-semibold tracking-[-0.03em] text-ink sm:text-4xl">
+			Privacy Policy
+		</h1>
+		<p class="mt-3 font-mono text-xs text-mute">Last updated: {lastUpdated}</p>
+
+		<div class="mt-8 flex flex-col gap-6 text-base leading-7 text-body">
+			<p>
+				Cinematic Photo ("we", "us", "our") operates the website at cinematicphoto.com (the
+				"Service"). This policy explains what information is, and is not, collected when you use
+				the Service.
+			</p>
+
+			<h2 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">Your photos never leave your device</h2>
+			<p>
+				Cinematic Photo is a client-side application. When you drop, paste, or select an image,
+				it is decoded and rendered entirely inside your own browser tab using the HTML Canvas
+				API. Your photo is never uploaded, transmitted, or sent to our servers or any third
+				party, and we have no ability to access, view, or store it. Closing or refreshing the tab
+				removes the image from memory.
+			</p>
+
+			<h2 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">Information we do collect</h2>
+			<p>
+				Like most websites, our hosting infrastructure automatically logs standard technical
+				information for security and reliability purposes, such as IP address, browser type,
+				referring page, and request timestamps. We use this information only in aggregate to
+				keep the Service running and secure, and we do not combine it with any image content,
+				since none is ever sent to us.
+			</p>
+
+			<h2 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">Cookies and local storage</h2>
+			<p>
+				We do not use cookies or local storage for advertising or cross-site tracking. The
+				Service may use browser storage solely to remember your editor preferences (such as your
+				last-used preset) on your own device; this data is never transmitted to us.
+			</p>
+
+			<h2 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">Third-party services</h2>
+			<p>
+				Fonts and other static assets used by the Service are bundled and served directly from
+				our own infrastructure rather than loaded from third-party font or script providers, so
+				visiting the Service does not trigger requests to external tracking networks.
+			</p>
+
+			<h2 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">Children's privacy</h2>
+			<p>
+				The Service is not directed at children under 13, and we do not knowingly collect
+				personal information from children, consistent with the fact that no image or personal
+				content is ever transmitted to us in the first place.
+			</p>
+
+			<h2 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">Changes to this policy</h2>
+			<p>
+				We may update this Privacy Policy from time to time. Changes will be posted on this page
+				with an updated "Last updated" date. Continued use of the Service after changes are
+				posted constitutes acceptance of the revised policy.
+			</p>
+
+			<h2 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">Contact us</h2>
+			<p>
+				If you have questions about this Privacy Policy, visit our <a href="/contact-us" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Contact Us</a> page.
+			</p>
+		</div>
+	</main>
+	<Footer />
+</Layout>

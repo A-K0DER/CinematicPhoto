@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'About Us — Cinematic Photo Editor';
+const description = 'Learn about Cinematic Photo, a free, client-side online photo editor that applies movie-inspired color grades, film grain, and letterboxing entirely in your browser.';
+---
+
+<Layout title={title} description={description} path="/about-us">
+	<Navbar />
+	<main class="mx-auto max-w-3xl px-4 py-20 sm:px-6">
+		<span class="mb-4 block font-mono text-xs tracking-wide text-mute">ABOUT US</span>
+		<h1 class="font-sans text-3xl font-semibold tracking-[-0.03em] text-ink sm:text-4xl">
+			A cinematic photo editor built by people who love film color
+		</h1>
+
+		<div class="mt-8 flex flex-col gap-6 text-base leading-7 text-body">
+			<p>
+				Cinematic Photo started from a simple frustration: getting a photo to look like a still
+				from a favorite movie usually meant hand-tuning curves in a desktop editor, hunting down
+				presets of unclear origin, or paying for a subscription just to try a handful of color
+				grades. We wanted something faster — a tool that goes straight from a flat photo to a
+				movie-grade look in one click, without a learning curve in the way.
+			</p>
+			<p>
+				So we built a focused, browser-based editor around a small set of color grades modeled on
+				recognizable film looks — teal-and-orange neo-noir, cold cosmic blue, warm desert gold,
+				high-gain digital green, and crushed-shadow steel — plus the texture details that sell a
+				cinematic still: film grain, vignette, glow and halation, anamorphic letterboxing, and a
+				film-stock stamp.
+			</p>
+			<h2 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">Why it's private by default</h2>
+			<p>
+				Every filter, grade, and export in Cinematic Photo runs locally on an HTML canvas inside
+				your own browser tab. We made this choice deliberately: your photos are yours, and a
+				color-grading tool has no real reason to see them. There are no uploads, no accounts, and
+				no server-side storage — the editing happens entirely on your device.
+			</p>
+			<h2 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">Who we build for</h2>
+			<p>
+				Photographers, filmmakers, and social creators use Cinematic Photo for thumbnails,
+				posters, and portfolio stills. If that sounds like you and you run into a rough edge or
+				want to see a new preset, we'd like to hear about it — reach out on our <a href="/contact-us" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Contact Us</a> page.
+			</p>
+		</div>
+	</main>
+	<Footer />
+</Layout>

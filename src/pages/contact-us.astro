@@ -1,0 +1,89 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'Contact Us — Cinematic Photo Editor';
+const description = 'Get in touch with the Cinematic Photo team for support, feedback, preset requests, or press inquiries about our free online cinematic photo editor.';
+---
+
+<Layout title={title} description={description} path="/contact-us">
+	<Navbar />
+	<main class="mx-auto max-w-3xl px-4 py-20 sm:px-6">
+		<span class="mb-4 block font-mono text-xs tracking-wide text-mute">CONTACT US</span>
+		<h1 class="font-sans text-3xl font-semibold tracking-[-0.03em] text-ink sm:text-4xl">
+			We'd like to hear from you
+		</h1>
+
+		<div class="mt-8 flex flex-col gap-6 text-base leading-7 text-body">
+			<p>
+				Whether you've found a bug, want to request a new color grade preset, or have a press or
+				partnership inquiry, send us a message below and we'll get back to you.
+			</p>
+
+			<form
+				action="https://formspree.io/f/YOUR_FORM_ID"
+				method="POST"
+				class="flex flex-col gap-4 rounded-xl border border-hairline bg-canvas-soft p-6"
+			>
+				<div class="flex flex-col gap-1.5">
+					<label for="name" class="font-mono text-xs tracking-wide text-mute">NAME</label>
+					<input
+						id="name"
+						name="name"
+						type="text"
+						required
+						class="rounded-md border border-hairline bg-canvas px-3 py-2 font-sans text-sm text-ink outline-none placeholder:text-mute focus:border-hairline-strong"
+						placeholder="Your name"
+					/>
+				</div>
+
+				<div class="flex flex-col gap-1.5">
+					<label for="email" class="font-mono text-xs tracking-wide text-mute">EMAIL</label>
+					<input
+						id="email"
+						name="email"
+						type="email"
+						required
+						class="rounded-md border border-hairline bg-canvas px-3 py-2 font-sans text-sm text-ink outline-none placeholder:text-mute focus:border-hairline-strong"
+						placeholder="you@example.com"
+					/>
+				</div>
+
+				<div class="flex flex-col gap-1.5">
+					<label for="message" class="font-mono text-xs tracking-wide text-mute">MESSAGE</label>
+					<textarea
+						id="message"
+						name="message"
+						rows="5"
+						required
+						class="resize-none rounded-md border border-hairline bg-canvas px-3 py-2 font-sans text-sm text-ink outline-none placeholder:text-mute focus:border-hairline-strong"
+						placeholder="How can we help?"
+					></textarea>
+				</div>
+
+				<button
+					type="submit"
+					class="mt-2 self-start rounded-md bg-primary px-4 py-2 font-sans text-sm font-medium text-on-primary transition-opacity hover:opacity-90"
+				>
+					Send message
+				</button>
+			</form>
+
+			<h2 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">Support</h2>
+			<p>
+				Since Cinematic Photo processes every image locally in your browser, most issues are
+				related to a specific browser, file type, or device. When reporting a problem, it helps
+				to include your browser and version, the image format you were using, and a description
+				of what you expected versus what happened.
+			</p>
+
+			<h2 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">Feedback and preset requests</h2>
+			<p>
+				If there's a movie color grade you'd like to see added, tell us the film and, if
+				possible, a reference image or scene. Preset requests directly shape what we build next.
+			</p>
+		</div>
+	</main>
+	<Footer />
+</Layout>

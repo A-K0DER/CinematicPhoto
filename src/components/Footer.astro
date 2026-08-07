@@ -1,0 +1,35 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-hairline px-4 py-10 sm:px-6">
+	<div class="mx-auto flex max-w-3xl flex-col items-center gap-4 text-center">
+		<nav aria-label="Footer" class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+			<a
+				href="/about-us"
+				class="font-sans text-sm text-body transition-colors hover:text-ink"
+			>
+				About Us
+			</a>
+			<a
+				href="/contact-us"
+				class="font-sans text-sm text-body transition-colors hover:text-ink"
+			>
+				Contact Us
+			</a>
+			<a
+				href="/privacy-policy"
+				class="font-sans text-sm text-body transition-colors hover:text-ink"
+			>
+				Privacy Policy
+			</a>
+			<a
+				href="/terms-and-conditions"
+				class="font-sans text-sm text-body transition-colors hover:text-ink"
+			>
+				Terms &amp; Conditions
+			</a>
+		</nav>
+		<p class="font-mono text-xs text-mute">&copy; {year} Cinematic Photo. All rights reserved.</p>
+	</div>
+</footer>
