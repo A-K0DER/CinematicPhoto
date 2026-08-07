@@ -1,8 +1,9 @@
 import { getPreset, type CinematicPreset } from './presets';
-import { computeCanvasSize, exportCanvas, loadImageFromFile, renderFrame } from './engine';
+import { computeCanvasSize, exportCanvas, loadImageFromFile, prepareGradedBase, renderFrame } from './engine';
 import { takePendingImage } from './imageHandoff';
 
 const canvas = document.getElementById('canvas') as HTMLCanvasElement;
+const previewWrap = document.getElementById('preview-wrap') as HTMLDivElement;
 const presetGrid = document.getElementById('preset-grid') as HTMLDivElement;
 
 const grainSlider = document.getElementById('grain-slider') as HTMLInputElement;
@@ -23,6 +24,7 @@ const requestedPresetId = new URLSearchParams(location.search).get('preset');
 
 interface State {
 	image: HTMLImageElement | null;
+	gradedBase: HTMLCanvasElement | null;
 	fileBaseName: string;
 	width: number;
 	height: number;
@@ -36,6 +38,7 @@ interface State {
 
 const state: State = {
 	image: null,
+	gradedBase: null,
 	fileBaseName: 'cinematic-photo',
 	width: 0,
 	height: 0,
@@ -58,12 +61,12 @@ function scheduleRender() {
 }
 
 function render() {
-	if (!state.image) return;
+	if (!state.image || !state.gradedBase) return;
 	const preset = getPreset(state.presetId);
 	const stampLabel = `CINEMATIC PHOTO · ${preset.name.toUpperCase()} · 35MM`;
 	renderFrame({
 		canvas,
-		image: state.image,
+		gradedBase: state.gradedBase,
 		width: state.width,
 		height: state.height,
 		preset,
@@ -76,6 +79,23 @@ function render() {
 		},
 		stampLabel,
 	});
+}
+
+/**
+ * Re-runs the (potentially expensive, real-LUT-backed) color grading step for
+ * the current preset and re-renders once it resolves. Slider changes never
+ * call this directly — they call scheduleRender(), which reuses whichever
+ * graded base is already cached here.
+ */
+async function updateGradedBase() {
+	if (!state.image) return;
+	const preset = getPreset(state.presetId);
+	previewWrap.classList.add('opacity-60');
+	const graded = await prepareGradedBase(state.image, preset, state.width, state.height);
+	previewWrap.classList.remove('opacity-60');
+	if (state.presetId !== preset.id) return; // a newer preset was selected meanwhile
+	state.gradedBase = graded;
+	scheduleRender();
 }
 
 function applyPresetDefaults(preset: CinematicPreset) {
@@ -113,7 +133,7 @@ async function init() {
 	const initialPresetId = requestedPresetId && getPreset(requestedPresetId).id === requestedPresetId ? requestedPresetId : 'original';
 	setActivePreset(initialPresetId);
 	applyPresetDefaults(getPreset(initialPresetId));
-	scheduleRender();
+	updateGradedBase();
 }
 
 init();
@@ -126,7 +146,7 @@ presetGrid.addEventListener('click', (e) => {
 	const preset = getPreset(card.dataset.presetId);
 	setActivePreset(preset.id);
 	applyPresetDefaults(preset);
-	scheduleRender();
+	updateGradedBase();
 });
 
 // --- Sliders ---

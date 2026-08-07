@@ -1,4 +1,5 @@
 import type { CinematicPreset } from './presets';
+import { applyLutToImageData, loadLut } from './lut';
 
 export const LETTERBOX_RATIO = 2.39;
 const MAX_DIMENSION = 2400;
@@ -190,9 +191,68 @@ function drawMetadataStamp(ctx: CanvasRenderingContext2D, w: number, h: number, 
 	ctx.restore();
 }
 
+/**
+ * The color-grading step (real LUT lookup if `/luts/<preset-id>.cube` exists,
+ * else the legacy CSS filter string) is comparatively expensive and only
+ * depends on (image, preset, size), never on the grain/vignette/glow sliders.
+ * It's cached per image so slider drags stay instant after the first switch
+ * to a preset — see `prepareGradedBase`.
+ */
+const gradedBaseCache = new WeakMap<HTMLImageElement, Map<string, Promise<HTMLCanvasElement>>>();
+
+async function computeGradedBase(
+	image: HTMLImageElement,
+	preset: CinematicPreset,
+	width: number,
+	height: number,
+): Promise<HTMLCanvasElement> {
+	const canvas = document.createElement('canvas');
+	canvas.width = width;
+	canvas.height = height;
+	const ctx = canvas.getContext('2d')!;
+
+	const cube = await loadLut(`/luts/${preset.id}.cube`);
+
+	if (cube) {
+		ctx.drawImage(image, 0, 0, width, height);
+		const imageData = ctx.getImageData(0, 0, width, height);
+		applyLutToImageData(imageData, cube);
+		ctx.putImageData(imageData, 0, 0);
+	} else {
+		// No real LUT authored for this preset yet — fall back to the
+		// original CSS filter approximation, unchanged from before.
+		ctx.filter = preset.filter;
+		ctx.drawImage(image, 0, 0, width, height);
+		ctx.filter = 'none';
+	}
+
+	return canvas;
+}
+
+/** Computes (or returns the cached) color-graded base image for this image+preset+size. */
+export function prepareGradedBase(
+	image: HTMLImageElement,
+	preset: CinematicPreset,
+	width: number,
+	height: number,
+): Promise<HTMLCanvasElement> {
+	let byPreset = gradedBaseCache.get(image);
+	if (!byPreset) {
+		byPreset = new Map();
+		gradedBaseCache.set(image, byPreset);
+	}
+	const key = `${preset.id}|${width}x${height}`;
+	let cached = byPreset.get(key);
+	if (!cached) {
+		cached = computeGradedBase(image, preset, width, height);
+		byPreset.set(key, cached);
+	}
+	return cached;
+}
+
 export interface RenderFrameArgs {
 	canvas: HTMLCanvasElement;
-	image: HTMLImageElement;
+	gradedBase: HTMLCanvasElement;
 	width: number;
 	height: number;
 	preset: CinematicPreset;
@@ -200,16 +260,14 @@ export interface RenderFrameArgs {
 	stampLabel?: string;
 }
 
-export function renderFrame({ canvas, image, width, height, preset, options, stampLabel }: RenderFrameArgs) {
+export function renderFrame({ canvas, gradedBase, width, height, preset, options, stampLabel }: RenderFrameArgs) {
 	if (canvas.width !== width) canvas.width = width;
 	if (canvas.height !== height) canvas.height = height;
 	const ctx = canvas.getContext('2d');
 	if (!ctx) return;
 
 	ctx.clearRect(0, 0, width, height);
-	ctx.filter = preset.filter;
-	ctx.drawImage(image, 0, 0, width, height);
-	ctx.filter = 'none';
+	ctx.drawImage(gradedBase, 0, 0, width, height);
 
 	applyOverlay(ctx, preset, width, height);
 	applyHaze(ctx, preset, width, height);
