@@ -116,7 +116,7 @@ function clearError() {
 async function handleFile(file: File) {
 	const isRaw = isRawContainerFile(file);
 	if (!file.type.startsWith('image/') && !isRaw) {
-		showError('That file type is not supported. Try a JPG, PNG, WEBP, or Canon CR3.');
+		showError('That file type is not supported. Try a JPG, PNG, WEBP, or a camera RAW file.');
 		return;
 	}
 	clearError();

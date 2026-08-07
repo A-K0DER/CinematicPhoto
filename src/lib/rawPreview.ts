@@ -1,15 +1,22 @@
 /**
- * CR3 (Canon RAW 3) is an ISO-BMFF container, not a natively decodable image
- * format. Every CR3 embeds one or more full JPEG previews generated in-camera.
- * Rather than demosaicing raw sensor data, we scan the container for JPEG
- * SOI/EOI byte markers and use the largest embedded JPEG as the edit source.
+ * Camera RAW files (Canon CR3/CR2, Nikon NEF/NRW, Sony ARW, Fujifilm RAF,
+ * Panasonic RW2, Olympus/OM System ORF, Pentax PEF, Adobe DNG) are container
+ * formats, not natively decodable images. Every one of them embeds a full
+ * JPEG preview generated in-camera, regardless of whether the container
+ * itself is ISO-BMFF, TIFF, or RIFF based. Rather than demosaicing raw
+ * sensor data, we scan the container for JPEG SOI/EOI byte markers and use
+ * the largest embedded JPEG as the edit source — this works the same way
+ * across every format above since it never has to parse the container
+ * structure itself.
  */
+
+const RAW_EXTENSION_PATTERN = /\.(cr3|cr2|nef|nrw|arw|raf|rw2|orf|dng|pef)$/i;
 
 const SOI = [0xff, 0xd8];
 const EOI = [0xff, 0xd9];
 
 export function isRawContainerFile(file: File): boolean {
-	return /\.cr3$/i.test(file.name);
+	return RAW_EXTENSION_PATTERN.test(file.name);
 }
 
 function findJpegRanges(bytes: Uint8Array): Array<{ start: number; end: number }> {
@@ -42,7 +49,7 @@ export async function extractRawPreviewBlob(file: File): Promise<Blob> {
 	const bytes = new Uint8Array(buffer);
 	const ranges = findJpegRanges(bytes);
 	if (ranges.length === 0) {
-		throw new Error('Could not find a JPEG preview inside this CR3 file.');
+		throw new Error('Could not find a JPEG preview inside this RAW file.');
 	}
 	const largest = ranges.reduce((best, r) => (r.end - r.start > best.end - best.start ? r : best));
 	return new Blob([buffer.slice(largest.start, largest.end)], { type: 'image/jpeg' });

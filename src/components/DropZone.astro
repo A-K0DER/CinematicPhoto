@@ -46,8 +46,13 @@
 			></path>
 		</svg>
 		<span class="font-sans text-sm font-medium text-ink">Drop an image, paste, or click to browse</span>
-		<span class="mt-1.5 font-mono text-xs text-mute">JPG, PNG, WEBP, or Canon CR3</span>
-		<input id="file-input" type="file" accept="image/png,image/jpeg,image/webp,.cr3" class="sr-only" />
+		<span class="mt-1.5 font-mono text-xs text-mute">JPG, PNG, WEBP, or camera RAW</span>
+		<input
+			id="file-input"
+			type="file"
+			accept="image/png,image/jpeg,image/webp,.cr3,.cr2,.nef,.nrw,.arw,.raf,.rw2,.orf,.dng,.pef"
+			class="sr-only"
+		/>
 	</label>
 
 	<p id="dropzone-error" class="mt-4 hidden font-mono text-xs text-error" role="alert"></p>
