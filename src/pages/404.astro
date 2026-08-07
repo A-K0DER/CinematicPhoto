@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'Page Not Found — Cinematic Photo Editor';
+const description = 'The page you were looking for could not be found.';
+---
+
+<Layout title={title} description={description} path="/404" noindex>
+	<Navbar />
+	<main class="mx-auto flex max-w-3xl flex-col items-center px-4 py-32 text-center sm:px-6">
+		<span class="mb-4 block font-mono text-xs tracking-wide text-mute">ERROR 404</span>
+		<h1 class="font-sans text-3xl font-semibold tracking-[-0.03em] text-ink sm:text-4xl">
+			This page doesn't exist
+		</h1>
+		<p class="mt-4 max-w-md text-base leading-7 text-body">
+			The page you're looking for may have been moved or never existed. Let's get you back to
+			editing.
+		</p>
+		<a
+			href="/"
+			class="mt-8 rounded-md bg-primary px-4 py-2 font-sans text-sm font-medium text-on-primary transition-opacity hover:opacity-90"
+		>
+			Back to home
+		</a>
+	</main>
+	<Footer />
+</Layout>

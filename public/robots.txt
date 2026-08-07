@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://cinematicphoto.com/sitemap.xml
+Sitemap: https://cinematicphoto.com/sitemap-index.xml

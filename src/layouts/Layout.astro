@@ -7,6 +7,7 @@ interface Props {
 	keywords?: string;
 	path?: string;
 	structuredData?: object;
+	noindex?: boolean;
 }
 
 const {
@@ -15,6 +16,7 @@ const {
 	keywords = 'cinematic photo editor, photo editor, online photo editor, photo editor free, free ai photo editor, photo editor app, cinematic filter, movie look photo filter, film grade photo editor online, cinematic color grading tool, teal and orange color grade, film grain online, cinematic letterbox, movie LUT online',
 	path = '/',
 	structuredData,
+	noindex = false,
 } = Astro.props;
 
 const siteUrl = 'https://cinematicphoto.com';
@@ -68,7 +70,7 @@ const jsonLd = structuredData ?? defaultStructuredData;
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		<meta name="keywords" content={keywords} />
-		<meta name="robots" content="index, follow" />
+		<meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
 		<meta name="author" content="Cinematic Photo" />
 
 		<!-- Open Graph -->
