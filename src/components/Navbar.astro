@@ -9,12 +9,46 @@ const { variant = 'landing' } = Astro.props;
 <header
 	class="sticky top-0 z-40 flex h-14 items-center justify-between border-b border-hairline bg-canvas/80 px-4 backdrop-blur-md sm:px-6"
 >
-	<a href="/" class="flex items-center gap-2" aria-label="Cinematic Photo home">
-		<img src="/logo.png" width="20" height="20" alt="" class="h-5 w-5" />
-		<span class="font-sans text-[15px] font-semibold tracking-[-0.02em] text-ink"
-			>Cinematic Photo</span
-		>
-	</a>
+	<div class="flex items-center gap-6">
+		<a href="/" class="flex items-center gap-2" aria-label="Cinematic Photo home">
+			<img src="/logo.png" width="20" height="20" alt="" class="h-5 w-5" />
+			<span class="font-sans text-[15px] font-semibold tracking-[-0.02em] text-ink"
+				>Cinematic Photo</span
+			>
+		</a>
+
+		{
+			variant !== 'editor' && (
+				<nav aria-label="Primary" class="hidden items-center gap-5 sm:flex">
+					<details class="nav-dropdown relative">
+						<summary class="cursor-pointer list-none font-mono text-xs text-body transition-colors hover:text-ink [&::-webkit-details-marker]:hidden">
+							Popular Presets
+						</summary>
+						<div class="absolute left-0 top-full z-50 mt-2 w-56 rounded-md border border-hairline bg-canvas p-1.5 shadow-lg">
+							<a href="/presets/the-dark-knight/" class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
+								The Dark Knight
+							</a>
+							<a href="/presets/blade-runner-2049/" class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
+								Blade Runner 2049
+							</a>
+							<a href="/presets/dune/" class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
+								Dune
+							</a>
+							<a href="/presets/interstellar/" class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
+								Interstellar
+							</a>
+							<a href="/presets/the-matrix/" class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
+								The Matrix
+							</a>
+						</div>
+					</details>
+					<a href="/guides/how-to-make-photos-look-cinematic/" class="font-mono text-xs text-body transition-colors hover:text-ink">
+						Guides
+					</a>
+				</nav>
+			)
+		}
+	</div>
 
 	<div class="flex items-center gap-2">
 		{
@@ -106,6 +140,13 @@ const { variant = 'landing' } = Astro.props;
 		document.documentElement.dataset.theme = next;
 		localStorage.setItem('theme', next);
 		applyThemeColor(next);
+	});
+
+	const navDropdowns = document.querySelectorAll<HTMLDetailsElement>('.nav-dropdown');
+	document.addEventListener('click', (e) => {
+		for (const details of navDropdowns) {
+			if (details.open && !details.contains(e.target as Node)) details.open = false;
+		}
 	});
 </script>
 
