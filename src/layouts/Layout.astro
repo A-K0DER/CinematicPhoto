@@ -95,6 +95,17 @@ const jsonLd = structuredData ?? defaultStructuredData;
 		<meta name="theme-color" content="#09090b" />
 
 		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+		<!-- Google tag (gtag.js) -->
+		<script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-F12RHQVPZG"></script>
+		<script is:inline>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(...args) {
+				window.dataLayer.push(args);
+			}
+			gtag('js', new Date());
+			gtag('config', 'G-F12RHQVPZG');
+		</script>
 	</head>
 	<body class="min-h-screen bg-canvas text-ink antialiased" data-app-state="drop">
 		<slot />
