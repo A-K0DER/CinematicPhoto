@@ -8,11 +8,11 @@ import { ALL_PRESETS } from '../lib/presets';
 	class="grid min-h-[calc(100vh-3.5rem)] grid-cols-1 lg:grid-cols-[1fr_320px]"
 >
 	<div class="flex items-center justify-center overflow-hidden bg-zinc-950 p-4 sm:p-10">
-		<div
-			id="preview-wrap"
-			class="flex max-h-full max-w-full items-center justify-center rounded-lg border border-hairline bg-canvas-soft p-2 shadow-[0_1px_1px_rgba(0,0,0,0.2),0_8px_24px_-8px_rgba(0,0,0,0.5)]"
-		>
-			<canvas id="canvas" class="max-h-[75vh] max-w-full rounded-sm"></canvas>
+		<div id="preview-wrap" class="flex max-h-full max-w-full items-center justify-center">
+			<canvas
+				id="canvas"
+				class="max-h-[75vh] max-w-full rounded-sm shadow-[0_1px_1px_rgba(0,0,0,0.2),0_8px_24px_-8px_rgba(0,0,0,0.5)]"
+			></canvas>
 		</div>
 	</div>
 
@@ -29,7 +29,7 @@ import { ALL_PRESETS } from '../lib/presets';
 						<button
 							type="button"
 							data-preset-id={preset.id}
-							class="preset-card group flex flex-col items-start gap-2 rounded-md border border-hairline bg-canvas p-2.5 text-left transition-colors hover:border-hairline-strong data-[active=true]:border-zinc-100 data-[active=true]:ring-1 data-[active=true]:ring-zinc-100"
+							class="preset-card group flex flex-col items-start gap-2 rounded-md border border-hairline bg-canvas p-2.5 text-left transition-colors hover:border-hairline-strong data-[active=true]:border-ink data-[active=true]:ring-1 data-[active=true]:ring-ink"
 						>
 							<span
 								class="h-8 w-full rounded-sm"
@@ -102,7 +102,7 @@ import { ALL_PRESETS } from '../lib/presets';
 					<span class="block font-sans text-sm text-ink">Anamorphic letterbox</span>
 					<span class="block font-mono text-[10px] text-mute">2.39:1 bars</span>
 				</span>
-				<span class="toggle-track relative h-5 w-9 shrink-0 rounded-full bg-zinc-700 transition-colors">
+				<span class="toggle-track relative h-5 w-9 shrink-0 rounded-full bg-hairline-strong transition-colors">
 					<span class="toggle-thumb absolute top-0.5 left-0.5 h-4 w-4 rounded-full bg-zinc-100 transition-transform"></span>
 				</span>
 			</button>
@@ -118,7 +118,7 @@ import { ALL_PRESETS } from '../lib/presets';
 					<span class="block font-sans text-sm text-ink">Film stock stamp</span>
 					<span class="block font-mono text-[10px] text-mute">corner metadata text</span>
 				</span>
-				<span class="toggle-track relative h-5 w-9 shrink-0 rounded-full bg-zinc-700 transition-colors">
+				<span class="toggle-track relative h-5 w-9 shrink-0 rounded-full bg-hairline-strong transition-colors">
 					<span class="toggle-thumb absolute top-0.5 left-0.5 h-4 w-4 rounded-full bg-zinc-100 transition-transform"></span>
 				</span>
 			</button>
@@ -132,11 +132,11 @@ import { ALL_PRESETS } from '../lib/presets';
 	}
 
 	[aria-pressed='true'].toggle-row .toggle-track {
-		background-color: var(--color-zinc-100);
+		background-color: var(--color-ink);
 	}
 
 	[aria-pressed='true'].toggle-row .toggle-thumb {
-		background-color: var(--color-zinc-950);
+		background-color: var(--color-canvas);
 		transform: translateX(16px);
 	}
 </style>

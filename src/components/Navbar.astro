@@ -35,5 +35,80 @@
 		>
 			Export
 		</button>
+
+		<button
+			id="theme-toggle"
+			type="button"
+			aria-label="Switch theme"
+			class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-hairline text-mute transition-colors hover:border-hairline-strong hover:text-ink"
+		>
+			<svg
+				id="theme-icon-sun"
+				width="16"
+				height="16"
+				viewBox="0 0 24 24"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6" />
+				<path
+					d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
+					stroke="currentColor"
+					stroke-width="1.6"
+					stroke-linecap="round"
+				/>
+			</svg>
+			<svg
+				id="theme-icon-moon"
+				width="16"
+				height="16"
+				viewBox="0 0 24 24"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<path
+					d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+					stroke="currentColor"
+					stroke-width="1.6"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				/>
+			</svg>
+		</button>
 	</div>
 </header>
+
+<script>
+	const themeToggle = document.getElementById('theme-toggle') as HTMLButtonElement;
+	const themeColorMeta = document.getElementById('theme-color-meta') as HTMLMetaElement;
+
+	const DARK_THEME_COLOR = '#09090b';
+	const LIGHT_THEME_COLOR = '#ffffff';
+
+	function applyThemeColor(theme: string) {
+		themeColorMeta.content = theme === 'light' ? LIGHT_THEME_COLOR : DARK_THEME_COLOR;
+	}
+
+	applyThemeColor(document.documentElement.dataset.theme ?? 'dark');
+
+	themeToggle.addEventListener('click', () => {
+		const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+		document.documentElement.dataset.theme = next;
+		localStorage.setItem('theme', next);
+		applyThemeColor(next);
+	});
+</script>
+
+<style>
+	:root[data-theme='light'] #theme-icon-sun {
+		display: none;
+	}
+
+	#theme-icon-moon {
+		display: none;
+	}
+
+	:root[data-theme='light'] #theme-icon-moon {
+		display: block;
+	}
+</style>
