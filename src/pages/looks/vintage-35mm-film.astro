@@ -1,0 +1,172 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DropZone from '../../components/DropZone.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+
+const path = '/looks/vintage-35mm-film/';
+const title = 'Vintage 35mm Film Photo Filter | Cinematic Photo Editor';
+const description =
+	'Get the warm, grainy, nostalgic look of vintage 35mm film. Five film-stock-inspired presets, plus how to dial in grain and texture, applied to your photo in one click.';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'CollectionPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com${path}`,
+};
+
+const faqs = [
+	{
+		q: 'What actually makes a photo look like it was shot on film instead of digital?',
+		a: "Three things together: a warm, slightly desaturated color cast (film stock rarely renders pure neutral), visible grain instead of a perfectly clean digital surface, and a soft highlight rolloff where bright areas fade gently instead of clipping hard. Any one alone reads as a filter; combined, they read as film.",
+	},
+	{
+		q: 'How much film grain is too much?',
+		a: "It depends on the photo, but a good starting range is 15-30 on Cinematic Photo's scale. Push much higher and grain starts competing with the subject instead of supporting it, especially on photos that are already soft or low-contrast. Higher-contrast photos can generally take more grain before it looks excessive.",
+	},
+	{
+		q: 'Is a "vintage film" look the same as a vintage-style Instagram filter?',
+		a: "Not quite. A lot of vintage-style app filters just fade contrast and add a uniform color cast. A film-accurate look pairs that warmth with actual grain texture and a highlight rolloff, plus, in this tool, an optional film-stock stamp, small details that separate an authentic film emulation from a flat vintage tint.",
+	},
+	{
+		q: 'What does the film stock stamp feature do?',
+		a: "It adds a small corner text stamp in the editor, styled like the metadata printed on the edge of a physical film negative, for a final printed-negative finish. It's a toggle in the export options alongside the anamorphic letterbox.",
+	},
+	{
+		q: 'Can I get a convincing 35mm film look starting from a phone photo?',
+		a: "Yes. The film look is almost entirely about color, grain, and highlight handling in post, not the capture device. A phone photo with decent light responds just as well to these presets as one shot on a dedicated camera.",
+	},
+	{
+		q: 'Which of these presets is closest to a warm, nostalgic 1970s film look?',
+		a: "GoodFellas is built specifically around that: warm 70s film tones with nightclub gold. Forrest Gump leans similarly warm and Americana. Both pair well with a slightly heavier grain setting than the others here.",
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'Looks' },
+				{ label: 'Vintage 35mm Film' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">AESTHETIC GUIDE</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				The vintage 35mm film look, and how to get it
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Warm, grainy, softly faded, five presets built around real 35mm film-stock color science,
+				not a generic sepia tint. Pick one below and apply it to your photo instantly.
+			</p>
+		</section>
+
+		<DropZone
+			presetIds={['shawshank', 'goodfellas', 'forrest-gump', 'the-green-mile', 'inglourious-basterds']}
+			showHeading={false}
+			showFooterLinks={false}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE AESTHETIC</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What gives a photo that film-stock feel
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Real film stock doesn't render neutral. Warm-leaning stocks push midtones toward gold
+					and amber, shadows sit slightly lifted rather than crushed to pure black, and highlights
+					roll off softly instead of clipping hard the way a digital sensor does. That gentleness
+					is a big part of why film photos feel nostalgic even when the subject is ordinary.
+				</p>
+				<p>
+					Texture matters as much as color. Every film stock has visible grain, an organic,
+					uneven noise pattern that digital sensors don't naturally produce. Add too little and a
+					"film" preset just looks like a warm filter; add the right amount and it reads as
+					genuinely photochemical.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">DIALING IT IN</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Grain, stock stamp, and getting the intensity right
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Each preset above ships with a grain default tuned to its film-stock reference, GoodFellas
+					and Shawshank run heavier (28-30) for a grittier, older-stock feel; Forrest Gump and The
+					Green Mile sit lighter (18-26). Nudge the grain slider in the editor if your specific
+					photo needs more or less texture than the default.
+				</p>
+				<p>
+					Turn on the film stock stamp in the export options for a small corner text label styled
+					like a negative's edge printing, and the anamorphic letterbox if you want the theatrical
+					2.39:1 frame on top of the film-stock color and grain.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEST PHOTOS FOR THIS LOOK</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What to shoot it on
+			</h2>
+			<ul class="mt-6 flex flex-col gap-4 text-base leading-7 text-body">
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Everyday, candid moments.</span> Film's warmth and softness flatter ordinary scenes, the way a home-movie still does, more than an ultra-sharp digital look.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Golden-hour and window light.</span> Warm natural light pairs directly with the sepia-leaning base of these presets.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Portraits and group shots.</span> The gentle highlight rolloff is naturally forgiving on skin tones, unlike harder, high-contrast grades.</span>
+				</li>
+			</ul>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">GO DEEPER</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				More ways to shape the look
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/guides/how-to-make-photos-look-cinematic/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">How to make photos look cinematic</span>
+					<span class="mt-1 block font-mono text-xs text-mute">The complete step-by-step guide</span>
+				</a>
+				<a href="/guides/cinematic-color-grading/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Cinematic color grading, explained</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Split-toning, LUTs, and teal-and-orange</span>
+				</a>
+				<a href="/for/portraits/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Cinematic portrait filter</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Presets that flatter skin tones</span>
+				</a>
+				<a href="/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Browse all 50 presets</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Every color grade, organized by genre</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Common questions about the vintage film look" faqs={faqs} />
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

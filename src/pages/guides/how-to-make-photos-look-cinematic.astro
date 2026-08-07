@@ -1,0 +1,204 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DropZone from '../../components/DropZone.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+
+const path = '/guides/how-to-make-photos-look-cinematic/';
+const title = 'How to Make Photos Look Cinematic (Complete Guide) | Cinematic Photo Editor';
+const description =
+	'A practical guide to making any photo look cinematic: color grading, contrast and shadow depth, film grain, and the 2.39:1 aspect ratio, plus how to apply all of it in one click.';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'Article',
+	headline: 'How to Make Your Photos Look Cinematic',
+	description,
+	url: `https://cinematicphoto.com${path}`,
+	author: { '@type': 'Organization', name: 'Cinematic Photo' },
+	publisher: { '@type': 'Organization', name: 'Cinematic Photo' },
+	mainEntityOfPage: `https://cinematicphoto.com${path}`,
+};
+
+const howToStructuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'HowTo',
+	name: 'How to make a photo look cinematic',
+	description: 'Turn a flat photo into a movie-style still using color grading, grain, and framing.',
+	step: [
+		{ '@type': 'HowToStep', name: 'Upload a photo', text: 'Drop, paste, or browse in a JPG, PNG, WEBP, or camera RAW file. It stays on your device.' },
+		{ '@type': 'HowToStep', name: 'Pick a color grade', text: 'Choose a preset built around the mood you want: cold and steely, warm and golden, or neon and moody.' },
+		{ '@type': 'HowToStep', name: 'Fine-tune grain, vignette, and glow', text: 'Adjust film grain, vignette, and glow/halation to match the intensity of the look to your photo.' },
+		{ '@type': 'HowToStep', name: 'Add a letterbox and export', text: 'Toggle the 2.39:1 anamorphic letterbox for a theatrical frame, then export the finished still.' },
+	],
+};
+
+const faqs = [
+	{
+		q: "What's the easiest way to make a photo look cinematic without Photoshop?",
+		a: 'A color grading tool built specifically for movie looks gets you there fastest. Cinematic Photo applies a full color grade, matched grain, vignette, and glow in one click, then lets you fine-tune each element, no layers, curves, or plugins required.',
+	},
+	{
+		q: 'Do I need expensive software or LUTs to get a movie color grade?',
+		a: "No. A LUT (lookup table) is just a saved color transformation, which is exactly what a preset is. Cinematic Photo's 50 presets are built-in LUT-style color grades you apply directly in the browser instead of installing and loading .cube files into desktop software.",
+	},
+	{
+		q: 'What aspect ratio do movies use, and should I crop my photos to match?',
+		a: "Most modern films are shot at 2.39:1 (called 'scope' or anamorphic widescreen), noticeably wider than a phone photo's native ratio. Cropping to 2.39:1 with letterbox bars is optional, but it's one of the fastest ways to make a still read as 'from a movie' at a glance.",
+	},
+	{
+		q: 'Does film grain actually make a photo look more cinematic, or does it just look noisy?',
+		a: "It depends on the amount. A light, even grain mimics real film stock and adds texture; too much starts to look like digital noise. Start low, 15-25 on Cinematic Photo's scale is a good range for most photos, and increase it only if the base photo already has strong contrast to support the extra texture.",
+	},
+	{
+		q: 'Can I make a phone photo look cinematic, or do I need a specific camera?',
+		a: "A cinematic look is almost entirely about post-processing and light, not the camera. A well-lit phone photo with a strong color grade, some grain, and correct framing will read as cinematic; a flat, evenly-lit photo from an expensive camera won't, without the same treatment.",
+	},
+	{
+		q: 'What\'s the actual difference between a "cinematic filter" and a normal Instagram-style filter?',
+		a: 'A normal filter usually shifts the whole image toward one hue or bumps saturation and contrast uniformly. A cinematic color grade splits shadows and highlights toward different, complementary tones (like teal shadows and amber highlights), which is what gives film its depth instead of a flat color cast.',
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'Guides' },
+				{ label: 'How to Make Photos Look Cinematic' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">COMPLETE GUIDE</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				How to make your photos look cinematic
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				A cinematic look comes down to a handful of concrete choices: color, contrast, grain, and
+				frame. Here's what each one actually does, and how to apply all of them to a photo in
+				under a minute.
+			</p>
+		</section>
+
+		<DropZone
+			presetIds={['dark-knight', 'blade-runner', 'shawshank', 'interstellar']}
+			showHeading={false}
+			showFooterLinks={false}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE FUNDAMENTALS</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What actually makes a photo look cinematic
+			</h2>
+			<div class="mt-6 flex flex-col gap-6 text-base leading-7 text-body">
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Color grading, not just a filter</h3>
+					<p class="mt-2">
+						Film color grading splits shadows and highlights toward different, often complementary
+						tones, teal shadows against amber highlights, cold steel against warm skin, rather
+						than shifting the whole image one direction. That split is what reads as intentional
+						and "graded" instead of "filtered."
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Contrast and shadow depth</h3>
+					<p class="mt-2">
+						Movies rarely protect shadow detail the way a phone camera's HDR mode does. Letting
+						blacks crush slightly and pushing contrast up gives an image weight and depth that a
+						flat, evenly-lit photo doesn't have.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Film grain and texture</h3>
+					<p class="mt-2">
+						Even digitally-shot films add grain in post to avoid a sterile, video-like look. A
+						light, even layer of grain is one of the fastest signals that separates a "photo with
+						a filter" from something that reads as a still frame.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">The 2.39:1 aspect ratio</h3>
+					<p class="mt-2">
+						Most films are shot noticeably wider than a phone photo. Cropping to a 2.39:1
+						letterbox with black bars top and bottom is a purely visual cue, it changes nothing
+						about the color, but it's an instant, unmistakable signal of "movie frame."
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">STEP BY STEP</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				How to do it in 4 steps
+			</h2>
+			<ol class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<li class="flex gap-4">
+					<span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-hairline-strong font-mono text-xs text-ink">1</span>
+					<span><span class="font-medium text-ink">Upload a photo.</span> Drop, paste, or browse in a JPG, PNG, WEBP, or camera RAW file above, it's processed on your device, never uploaded.</span>
+				</li>
+				<li class="flex gap-4">
+					<span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-hairline-strong font-mono text-xs text-ink">2</span>
+					<span><span class="font-medium text-ink">Pick a color grade.</span> Choose a preset that matches the mood: cold and steely, warm and golden, or neon and moody. All 50 are browsable by genre.</span>
+				</li>
+				<li class="flex gap-4">
+					<span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-hairline-strong font-mono text-xs text-ink">3</span>
+					<span><span class="font-medium text-ink">Fine-tune grain, vignette, and glow.</span> Each preset ships with sensible defaults; nudge the sliders to match the intensity to your specific photo.</span>
+				</li>
+				<li class="flex gap-4">
+					<span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-hairline-strong font-mono text-xs text-ink">4</span>
+					<span><span class="font-medium text-ink">Add a letterbox and export.</span> Toggle the 2.39:1 anamorphic letterbox for a theatrical frame, then export the finished still.</span>
+				</li>
+			</ol>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">GO DEEPER</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Related guides and looks
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/guides/cinematic-color-grading/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Cinematic color grading, explained</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Teal-and-orange, split-toning, and what a LUT actually is</span>
+				</a>
+				<a href="/looks/vintage-35mm-film/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Vintage 35mm film look</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Warm, grainy, nostalgic film-stock presets</span>
+				</a>
+				<a href="/looks/dark-and-moody/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Dark & moody cinematic filter</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Crushed shadows, cold tones, heavy vignettes</span>
+				</a>
+				<a href="/for/portraits/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Cinematic portrait filter</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Which presets flatter skin tones, and which to avoid</span>
+				</a>
+			</div>
+			<p class="mt-6 text-base leading-7 text-body">
+				Or skip straight to a specific film's look: browse all <a href="/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">50 movie-inspired presets</a>,
+				including dedicated pages for <a href="/presets/the-dark-knight/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">The Dark Knight</a>,
+				<a href="/presets/blade-runner-2049/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Blade Runner 2049</a>,
+				<a href="/presets/dune/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Dune</a>,
+				<a href="/presets/interstellar/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Interstellar</a>, and
+				<a href="/presets/the-matrix/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">The Matrix</a>.
+			</p>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Common questions about cinematic photo editing" faqs={faqs} />
+	</main>
+	<Footer />
+
+	<script type="application/ld+json" set:html={JSON.stringify(howToStructuredData)} />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

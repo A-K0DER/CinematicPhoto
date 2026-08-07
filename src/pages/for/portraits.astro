@@ -1,0 +1,149 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DropZone from '../../components/DropZone.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+
+const path = '/for/portraits/';
+const title = 'Cinematic Portrait Photo Filter | Cinematic Photo Editor';
+const description =
+	'Five cinematic presets chosen specifically for portraits: skin-tone-safe color grades that add mood without turning faces an unnatural color. Apply one to your photo instantly.';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'CollectionPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com${path}`,
+};
+
+const faqs = [
+	{
+		q: 'Which cinematic presets are safest for skin tones?',
+		a: "The five featured on this page, Shawshank, The Prestige, Top Gun: Maverick, Life of Pi, and Spirited Away, all use a warm-leaning or balanced color split that keeps skin looking like skin rather than shifting it toward an unnatural hue. They were picked specifically because their overlays don't dump a single flat color across the whole frame.",
+	},
+	{
+		q: 'Why do some cinematic filters make skin look sickly or unnatural on faces?',
+		a: "Presets built around a strong, flat color tint, like a heavy green or magenta wash, apply that color to everything in the frame equally, including skin. On landscapes or architecture that reads as stylish; on a face it often reads as an odd, unhealthy color cast. Presets with a shadow/highlight color split rather than a flat tint are far more forgiving on faces.",
+	},
+	{
+		q: 'Can I use a dark, moody preset for a dramatic portrait instead of these five?',
+		a: "Yes, but it needs the right lighting: a dark and moody grade works on portraits lit by one strong, directional light source, a window, a lamp, backlight, where shadows already have shape. On flat, evenly-lit portraits it tends to just darken the frame. See the dark and moody photo filter guide for that specific look.",
+	},
+	{
+		q: 'Which preset works best for wedding or family portraits?',
+		a: "Shawshank's warm, restrained 35mm grade is the most versatile for groups and mixed skin tones, it's gentle enough not to overpower a range of faces in one frame. Top Gun: Maverick's glossy sky-blue and amber pairs well with outdoor, golden-hour wedding shots specifically.",
+	},
+	{
+		q: 'How do I avoid oversaturating skin tones when applying a cinematic preset?',
+		a: "Start with one of the five presets on this page rather than a saturation-heavy grade, then use the grain, vignette, and glow sliders in the editor to add mood without pushing color intensity further. If a preset still feels too strong, applying it to a slightly brighter original photo softens the effect.",
+	},
+	{
+		q: 'Do group photos need a different preset than single portraits?',
+		a: "Not a different preset, but pay closer attention to even lighting across all subjects, an uneven-light group photo will show a heavier grade's shadow crush unevenly across faces. The gentler grades here, Shawshank and The Prestige especially, are more forgiving when lighting varies across a group.",
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'For' },
+				{ label: 'Portraits' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">USE CASE GUIDE</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Cinematic portrait photo filter
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Not every movie grade is safe for faces. These five are chosen specifically for portraits:
+				enough mood to feel cinematic, without turning skin an unnatural color.
+			</p>
+		</section>
+
+		<DropZone
+			presetIds={['shawshank', 'the-prestige', 'top-gun-maverick', 'life-of-pi', 'spirited-away']}
+			showHeading={false}
+			showFooterLinks={false}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">WHAT TO LOOK FOR</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What makes a preset portrait-safe
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Most cinematic grades split color between shadows and highlights rather than tinting
+					the whole frame one flat hue, and that split matters most on faces. A warm-leaning
+					highlight tone keeps skin looking like skin; a preset built around a single strong color
+					wash, applied evenly across the entire image, can shift skin toward green, magenta, or
+					another unnatural cast that reads fine on a landscape but poorly on a person.
+				</p>
+				<p>
+					Contrast and vignette also matter more on portraits than on wide shots: too aggressive
+					and shadow detail on a face crushes into featureless black. The five presets above lean
+					warm or balanced and keep contrast moderate, which is why they're featured here instead
+					of the tool's harder, more desaturated grades.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">USE WITH CAUTION ON FACES</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Presets to think twice about for portraits
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					The <a href="/presets/the-matrix/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Matrix preset</a>'s
+					flat green tint applies uniformly across the frame by design, striking on an urban scene,
+					but it will read as an unusual color cast on skin. Very high-vignette, crushed-shadow
+					grades like the ones on the <a href="/looks/dark-and-moody/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">dark and moody photo filter</a> page
+					can work for dramatic, hard-lit portraits specifically, but tend to flatten detail on
+					softly, evenly-lit faces.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">GO DEEPER</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				More ways to shape the look
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/looks/vintage-35mm-film/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Vintage 35mm film look</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Gentle, warm, and forgiving on skin tones</span>
+				</a>
+				<a href="/looks/dark-and-moody/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Dark &amp; moody cinematic filter</span>
+					<span class="mt-1 block font-mono text-xs text-mute">For dramatic, hard-lit portraits specifically</span>
+				</a>
+				<a href="/guides/how-to-make-photos-look-cinematic/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">How to make photos look cinematic</span>
+					<span class="mt-1 block font-mono text-xs text-mute">The complete step-by-step guide</span>
+				</a>
+				<a href="/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Browse all 50 presets</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Every color grade, organized by genre</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Common questions about cinematic portrait filters" faqs={faqs} />
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

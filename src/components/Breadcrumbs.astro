@@ -34,7 +34,7 @@ const breadcrumbStructuredData = {
 							{item.label}
 						</a>
 					) : (
-						<span class="text-ink" aria-current="page">
+						<span class="text-ink" aria-current={index === items.length - 1 ? 'page' : undefined}>
 							{item.label}
 						</span>
 					)}

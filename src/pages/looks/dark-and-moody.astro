@@ -1,0 +1,153 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DropZone from '../../components/DropZone.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+
+const path = '/looks/dark-and-moody/';
+const title = 'Dark & Moody Cinematic Photo Filter | Cinematic Photo Editor';
+const description =
+	'Crushed shadows, cold tones, and heavy vignettes: six dark and moody cinematic presets pulled from thrillers and superhero films, applied to your photo in one click.';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'CollectionPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com${path}`,
+};
+
+const faqs = [
+	{
+		q: '"Dark" and "moody" sound like the same thing, is there a real difference?',
+		a: "Dark usually just means low brightness. Moody adds intent: crushed but controlled shadows, a cooler or desaturated color cast, and a vignette that pulls focus inward, rather than a photo that's simply underexposed. All six presets here are built for that combination, not just a brightness cut.",
+	},
+	{
+		q: 'Will a dark preset ruin a photo that was already underexposed?',
+		a: "It can push it too far. These presets pull brightness down and crush shadow detail on top of whatever your original exposure already has, so a photo that's already dark can lose too much detail. They work best on correctly-exposed or slightly bright originals.",
+	},
+	{
+		q: 'Does a dark and moody look work on daytime photos, or only night shots?',
+		a: "It works on both, but shows off most on photos with some existing contrast and shadow, overcast light, indoor scenes, or dusk. Flat, bright midday photos will still get the color shift and vignette, but the effect reads less dramatically without shadow detail to crush.",
+	},
+	{
+		q: 'Which of these six presets is the most versatile for everyday moody shots?',
+		a: "The Batman and Se7en both push furthest into crushed shadow and heavy vignette for maximum drama. Watchmen and V for Vendetta sit a step more restrained, better if you want moody without losing too much midtone detail on faces or subjects.",
+	},
+	{
+		q: 'How do I avoid losing too much detail in the shadows?',
+		a: "Back off the vignette slider slightly, or start from a photo with brighter ambient light so there's more shadow detail to work with before the grade crushes it. You can also compare presets directly in the editor, some crush harder than others.",
+	},
+	{
+		q: 'Can a dark and moody preset flatter a portrait, or is it only for landscapes and architecture?',
+		a: "It works on portraits under hard, directional light, a window, a single lamp, streetlight, where the shadow already has shape. On flat, evenly-lit portraits it tends to just darken the frame without adding the intended mood; for portrait-specific presets see the cinematic portrait filter guide.",
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'Looks' },
+				{ label: 'Dark & Moody' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">AESTHETIC GUIDE</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Dark &amp; moody cinematic photo filter
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Crushed shadows, cold or muted tones, and a vignette that pulls the eye inward, six
+				presets pulled from thrillers and superhero films, built for mood rather than a simple
+				brightness cut.
+			</p>
+		</section>
+
+		<DropZone
+			presetIds={['seven', 'dark-knight', 'the-batman', 'shutter-island', 'watchmen', 'v-for-vendetta']}
+			showHeading={false}
+			showFooterLinks={false}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE AESTHETIC</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What makes a photo read as dark and moody
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Four things working together, not just turning down brightness. Contrast is pushed up
+					so blacks crush rather than sitting muddy and grey. Saturation is pulled back, often
+					with a cool or muted color cast rather than a warm one. A stronger vignette than usual
+					darkens the frame's edges, pulling attention toward the center. And grain stays present
+					enough to keep the image textured rather than flat and digital.
+				</p>
+				<p>
+					The difference between "moody" and "just dark" is mostly about control: a moody grade
+					still has visible shape in the shadows, hard-edged and deliberate, where an
+					under-exposed photo just loses information.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEST PHOTOS FOR THIS LOOK</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What to shoot it on
+			</h2>
+			<ul class="mt-6 flex flex-col gap-4 text-base leading-7 text-body">
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Night architecture and city streets.</span> Strong shapes and artificial light sources give the contrast push and vignette something to work with.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Overcast or stormy weather.</span> Existing flat grey light takes the desaturated, cool base tone especially well.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Hard-light portraits.</span> A single strong light source, not flat, even lighting, gives shadows the shape these presets are built to crush.</span>
+				</li>
+			</ul>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">GO DEEPER</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				More ways to shape the look
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/presets/the-dark-knight/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">The Dark Knight photo filter</span>
+					<span class="mt-1 block font-mono text-xs text-mute">A deep dive into one of the six grades above</span>
+				</a>
+				<a href="/guides/cinematic-color-grading/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Cinematic color grading, explained</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Why shadows and highlights split toward different colors</span>
+				</a>
+				<a href="/guides/how-to-make-photos-look-cinematic/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">How to make photos look cinematic</span>
+					<span class="mt-1 block font-mono text-xs text-mute">The complete step-by-step guide</span>
+				</a>
+				<a href="/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Browse all 50 presets</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Every color grade, organized by genre</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Common questions about the dark and moody look" faqs={faqs} />
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

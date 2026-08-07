@@ -1,0 +1,169 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DropZone from '../../components/DropZone.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+
+const path = '/guides/cinematic-color-grading/';
+const title = 'Cinematic Color Grading, Explained | Cinematic Photo Editor';
+const description =
+	'What cinematic color grading actually is: teal-and-orange, shadow/highlight split-toning, and what a LUT does, plus how to apply real movie-style grades to your photos in one click.';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'Article',
+	headline: 'Cinematic Color Grading, Explained',
+	description,
+	url: `https://cinematicphoto.com${path}`,
+	author: { '@type': 'Organization', name: 'Cinematic Photo' },
+	publisher: { '@type': 'Organization', name: 'Cinematic Photo' },
+	mainEntityOfPage: `https://cinematicphoto.com${path}`,
+};
+
+const faqs = [
+	{
+		q: "What's the difference between color correction and color grading?",
+		a: 'Color correction fixes a photo, neutral white balance, accurate exposure, natural skin tones. Color grading is a stylistic choice made after that: pushing shadows and highlights toward specific, often complementary colors to set a mood. Every one of this tool\'s presets is a grade, not a correction.',
+	},
+	{
+		q: 'What is teal-and-orange color grading, and why do so many movies use it?',
+		a: "It's the practice of pushing shadows and midtones toward teal/cyan while pushing highlights and skin tones toward orange/amber. It works because teal and orange sit opposite each other on the color wheel, so the two colors visually separate the subject (usually warm-toned skin) from the background (often cooler shadow and sky), and because skin tones naturally read as orange, they stay flattering even under a heavy grade.",
+	},
+	{
+		q: 'What is a LUT, and how is it different from a preset or filter?',
+		a: "A LUT (lookup table) is a saved mathematical color transformation, load it into editing software and it remaps every color in your photo the same way, every time. A preset in Cinematic Photo does the same job, a saved, repeatable color transform, just applied instantly in the browser instead of requiring you to install a .cube file into desktop software first.",
+	},
+	{
+		q: 'How do I create a split-tone effect, different colors in shadows vs. highlights, without software?',
+		a: "This is exactly what Cinematic Photo's presets do under the hood: each one layers a gradient over your photo that shifts shadows toward one color and highlights toward another, rather than tinting the whole image one flat hue. Pick any preset and you're applying a split-tone; the visible difference between presets is which two colors are split and how strongly.",
+	},
+	{
+		q: 'Why do my photos still look flat even after I boost saturation and contrast?',
+		a: "Saturation and contrast alone push existing colors harder, they don't introduce the color relationships a grade does. A flat photo usually needs its shadows and highlights pushed toward different hues, not just more intense versions of the same ones. That directional color shift is what a grade adds and a simple saturation boost can't.",
+	},
+	{
+		q: "Can I apply a specific movie's exact color grade to my photo?",
+		a: 'Not pixel-for-pixel, since a true grade also depends on the original lighting and lens, but Cinematic Photo\'s movie-inspired presets recreate the visual aesthetic closely: color split, contrast curve, and grain built to match. Browse the dedicated pages for The Dark Knight, Blade Runner 2049, Dune, Interstellar, and The Matrix, or the full 50-preset library, to find the closest match.',
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'Guides' },
+				{ label: 'Cinematic Color Grading' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">COLOR GRADING GUIDE</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Cinematic color grading, explained
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Teal-and-orange, split-toning, LUTs: the vocabulary of movie color grading sounds
+				technical, but the underlying idea is simple. Here's what's actually happening, and how
+				to apply it without color-science software.
+			</p>
+		</section>
+
+		<DropZone
+			presetIds={['blade-runner', 'mad-max-fury-road', 'baby-driver', 'dark-knight']}
+			showHeading={false}
+			showFooterLinks={false}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE BASICS</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What color grading actually is
+			</h2>
+			<div class="mt-6 flex flex-col gap-6 text-base leading-7 text-body">
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Correction vs. grading</h3>
+					<p class="mt-2">
+						Color correction is the neutral, technical pass: fixing white balance, exposure, and
+						skin tone so the image looks natural. Color grading happens after that, it's a
+						deliberate stylistic push toward a specific mood. A film's cinematographer corrects
+						first, then grades to set the tone.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Split-toning: different colors in shadows and highlights</h3>
+					<p class="mt-2">
+						Instead of tinting an entire photo one flat hue, a real grade pushes shadows toward
+						one color and highlights toward another. That's what separates a "graded" image from
+						a "filtered" one, and it's exactly what every preset in this tool does under the
+						hood: a gradient overlay that shifts tone by brightness, not a single flat wash.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Teal and orange: the classic split</h3>
+					<p class="mt-2">
+						The most recognizable split in modern film: shadows and backgrounds pushed cool
+						toward teal, skin tones and highlights pushed warm toward orange. It works because
+						teal and orange sit opposite each other on the color wheel, separating subject from
+						background, and because skin naturally reads as orange, so it stays flattering even
+						under a strong grade.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">What a LUT actually does</h3>
+					<p class="mt-2">
+						A LUT, lookup table, is a saved color transformation: for any input color, it defines
+						exactly what output color to produce. Loading a LUT into editing software applies
+						that transform consistently across every photo. A preset here does the identical job,
+						just built in and applied instantly, no file to download or import.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Contrast and shadow depth</h3>
+					<p class="mt-2">
+						Grading usually comes with a contrast push, letting shadows crush rather than
+						protecting every bit of detail. That's a deliberate trade: less recoverable shadow
+						detail, but more visual weight and separation, which is why a graded still often
+						looks more "solid" than a flat, evenly-exposed original.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">GO DEEPER</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Put it into practice
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/guides/how-to-make-photos-look-cinematic/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">How to make photos look cinematic</span>
+					<span class="mt-1 block font-mono text-xs text-mute">The complete step-by-step guide</span>
+				</a>
+				<a href="/looks/vintage-35mm-film/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Vintage 35mm film look</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Grain, warmth, and nostalgic film-stock tones</span>
+				</a>
+				<a href="/presets/blade-runner-2049/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Blade Runner 2049 photo filter</span>
+					<span class="mt-1 block font-mono text-xs text-mute">A textbook amber-and-teal split, with haze</span>
+				</a>
+				<a href="/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Browse all 50 presets</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Every color grade, organized by genre</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Common questions about color grading" faqs={faqs} />
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

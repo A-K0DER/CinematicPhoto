@@ -33,6 +33,26 @@ const presetListStructuredData = {
 			once you're there to see the grade applied. Presets span eight genres: {GENRES.join(', ')}.
 		</p>
 
+		<section class="mt-10 rounded-lg border border-hairline bg-canvas-soft p-5">
+			<span class="mb-3 block font-mono text-[11px] font-medium tracking-wide text-mute uppercase">
+				Or browse by look
+			</span>
+			<div class="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
+				<a href="/looks/dark-and-moody/" class="rounded-md border border-hairline bg-canvas p-3 text-sm font-medium text-ink transition-colors hover:border-hairline-strong">
+					Dark &amp; Moody
+				</a>
+				<a href="/looks/vintage-35mm-film/" class="rounded-md border border-hairline bg-canvas p-3 text-sm font-medium text-ink transition-colors hover:border-hairline-strong">
+					Vintage 35mm Film
+				</a>
+				<a href="/for/portraits/" class="rounded-md border border-hairline bg-canvas p-3 text-sm font-medium text-ink transition-colors hover:border-hairline-strong">
+					For Portraits
+				</a>
+				<a href="/guides/how-to-make-photos-look-cinematic/" class="rounded-md border border-hairline bg-canvas p-3 text-sm font-medium text-ink transition-colors hover:border-hairline-strong">
+					How-To Guides
+				</a>
+			</div>
+		</section>
+
 		{
 			GENRES.map((genre) => (
 				<section class="mt-14 first:mt-12">

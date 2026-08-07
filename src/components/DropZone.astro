@@ -3,6 +3,8 @@ import { GENRES, getPreset, getPresetsByGenre, getOverlayBackground } from '../l
 
 interface Props {
 	presetId?: string;
+	/** A curated set of presets to feature instead of a single preset or the default genre showcase. */
+	presetIds?: string[];
 	heading?: string;
 	headingTag?: 'h1' | 'h2';
 	eyebrow?: string;
@@ -16,6 +18,7 @@ interface Props {
 
 const {
 	presetId,
+	presetIds,
 	heading = 'The free cinematic photo editor for movie-grade stills.',
 	headingTag = 'h1',
 	eyebrow = 'CINEMATIC PHOTO EDITOR',
@@ -25,7 +28,12 @@ const {
 	compact = false,
 } = Astro.props;
 
-const showcasePresets = presetId ? [getPreset(presetId)] : GENRES.map((genre) => getPresetsByGenre(genre)[0]);
+const showcasePresets = presetId
+	? [getPreset(presetId)]
+	: presetIds
+		? presetIds.map((id) => getPreset(id))
+		: GENRES.map((genre) => getPresetsByGenre(genre)[0]);
+const defaultPresetId = presetId ?? presetIds?.[0];
 const Heading = headingTag;
 ---
 
@@ -34,7 +42,7 @@ const Heading = headingTag;
 	class={compact
 		? 'flex w-full flex-col items-start'
 		: 'mx-auto flex w-full max-w-5xl flex-col items-center px-4 py-16'}
-	data-default-preset={presetId}
+	data-default-preset={defaultPresetId}
 >
 	{
 		showHeading && (
@@ -96,7 +104,11 @@ const Heading = headingTag;
 
 	<div class={compact ? 'mt-8 w-full' : 'mt-14 w-full max-w-3xl'}>
 		<p class={`mb-4 font-mono text-xs tracking-wide text-mute ${compact ? 'text-left' : 'text-center'}`}>
-			{presetId ? 'PRESET SELECTED · READY TO APPLY' : '50 MOVIE-INSPIRED GRADES · PICK ONE TO START'}
+			{presetId
+				? 'PRESET SELECTED · READY TO APPLY'
+				: presetIds
+					? 'CURATED PRESETS · PICK ONE TO START'
+					: '50 MOVIE-INSPIRED GRADES · PICK ONE TO START'}
 		</p>
 		<div id="preset-showcase" class="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
 			{
