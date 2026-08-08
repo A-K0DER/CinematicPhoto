@@ -1,7 +1,12 @@
 ---
-import { ORIGINAL_PRESET, getFeaturedPresets, getOverlayBackground } from '../lib/presets';
+import { ORIGINAL_PRESET, GENRES, getFeaturedPresets, getOverlayBackground, getPresetsByGenre } from '../lib/presets';
 
 const featuredPresets = [ORIGINAL_PRESET, ...getFeaturedPresets()];
+const featuredIds = new Set(featuredPresets.map((preset) => preset.id));
+const remainingByGenre = GENRES.map((genre) => ({
+	genre,
+	presets: getPresetsByGenre(genre).filter((preset) => !featuredIds.has(preset.id)),
+})).filter((group) => group.presets.length > 0);
 ---
 
 <section
@@ -59,12 +64,22 @@ const featuredPresets = [ORIGINAL_PRESET, ...getFeaturedPresets()];
 					))
 				}
 			</div>
-			<a
-				href="/presets/"
-				class="mt-3 inline-block font-mono text-[11px] text-mute transition-colors hover:text-ink"
+			<select
+				id="preset-dropdown"
+				aria-label="Browse all presets"
+				class="mt-3 w-full rounded-md border border-hairline bg-canvas px-2.5 py-2 font-mono text-[11px] text-mute transition-colors hover:border-hairline-strong hover:text-ink focus:border-hairline-strong focus:outline-none"
 			>
-				Browse all 50 presets &rarr;
-			</a>
+				<option value="" selected>Browse all 50 presets &rarr;</option>
+				{
+					remainingByGenre.map(({ genre, presets }) => (
+						<optgroup label={genre}>
+							{presets.map((preset) => (
+								<option value={preset.id}>{preset.name}</option>
+							))}
+						</optgroup>
+					))
+				}
+			</select>
 		</div>
 
 		<div class="flex flex-col gap-4 border-t border-hairline pt-5">

@@ -1,10 +1,11 @@
-import { getPreset, type CinematicPreset } from './presets';
+import { getOverlayBackground, getPreset, type CinematicPreset } from './presets';
 import { computeCanvasSize, exportCanvas, loadImageFromFile, prepareGradedBase, renderFrame } from './engine';
 import { takePendingImage } from './imageHandoff';
 
 const canvas = document.getElementById('canvas') as HTMLCanvasElement;
 const previewWrap = document.getElementById('preview-wrap') as HTMLDivElement;
 const presetGrid = document.getElementById('preset-grid') as HTMLDivElement;
+const presetDropdown = document.getElementById('preset-dropdown') as HTMLSelectElement;
 
 const grainSlider = document.getElementById('grain-slider') as HTMLInputElement;
 const vignetteSlider = document.getElementById('vignette-slider') as HTMLInputElement;
@@ -110,11 +111,43 @@ function applyPresetDefaults(preset: CinematicPreset) {
 	glowValue.textContent = String(state.glow);
 }
 
+/**
+ * The sidebar grid is statically rendered with only Original + the 5 featured
+ * presets. If the editor was opened with a different preset (e.g. via a
+ * movie landing page), that preset has no card to highlight — so one is
+ * created on the fly and pinned to the front of the grid.
+ */
+function ensurePresetCard(preset: CinematicPreset) {
+	if (presetGrid.querySelector(`[data-preset-id="${preset.id}"]`)) return;
+	const card = document.createElement('button');
+	card.type = 'button';
+	card.dataset.presetId = preset.id;
+	card.className =
+		'preset-card group flex flex-col items-start gap-2 rounded-md border border-hairline bg-canvas p-2.5 text-left transition-colors hover:border-hairline-strong data-[active=true]:border-ink data-[active=true]:ring-1 data-[active=true]:ring-ink';
+	card.innerHTML = `
+		<span class="relative block h-8 w-full overflow-hidden rounded-sm">
+			<img loading="lazy" decoding="async" alt="${preset.name}" src="${preset.image}" style="filter: ${preset.filter};" class="absolute inset-0 h-full w-full object-cover" />
+			<span class="absolute inset-0" style="background: ${getOverlayBackground(preset.overlay)}; opacity: ${preset.overlay.opacity}; mix-blend-mode: ${preset.overlay.blend};"></span>
+		</span>
+		<span class="font-sans text-xs font-medium text-ink">${preset.name}</span>
+		<span class="font-mono text-[10px] leading-tight text-mute">${preset.tagline}</span>
+	`;
+	presetGrid.prepend(card);
+}
+
 function setActivePreset(presetId: string) {
 	state.presetId = presetId;
 	for (const card of presetGrid.querySelectorAll<HTMLButtonElement>('[data-preset-id]')) {
 		card.dataset.active = String(card.dataset.presetId === presetId);
 	}
+}
+
+/** Shared by the preset grid, the "browse all" dropdown, and initial load from a `?preset=` link. */
+function selectPreset(preset: CinematicPreset) {
+	ensurePresetCard(preset);
+	setActivePreset(preset.id);
+	applyPresetDefaults(preset);
+	updateGradedBase();
 }
 
 async function init() {
@@ -131,9 +164,7 @@ async function init() {
 	state.fileBaseName = pending.fileName.replace(/\.[^.]+$/, '') || 'cinematic-photo';
 
 	const initialPresetId = requestedPresetId && getPreset(requestedPresetId).id === requestedPresetId ? requestedPresetId : 'original';
-	setActivePreset(initialPresetId);
-	applyPresetDefaults(getPreset(initialPresetId));
-	updateGradedBase();
+	selectPreset(getPreset(initialPresetId));
 }
 
 init();
@@ -143,10 +174,14 @@ init();
 presetGrid.addEventListener('click', (e) => {
 	const card = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-preset-id]');
 	if (!card?.dataset.presetId) return;
-	const preset = getPreset(card.dataset.presetId);
-	setActivePreset(preset.id);
-	applyPresetDefaults(preset);
-	updateGradedBase();
+	selectPreset(getPreset(card.dataset.presetId));
+});
+
+// --- "Browse all presets" dropdown ---
+
+presetDropdown.addEventListener('change', () => {
+	if (!presetDropdown.value) return;
+	selectPreset(getPreset(presetDropdown.value));
 });
 
 // --- Sliders ---
