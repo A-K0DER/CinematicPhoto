@@ -5,9 +5,8 @@ import Footer from '../components/Footer.astro';
 import { GENRES, PRESETS, getPresetsByGenre, getOverlayBackground } from '../lib/presets';
 import { MOVIE_PRESET_PAGES } from '../data/moviePresetPages';
 
-const title = 'All 50 Movie Presets | Cinematic Photo Editor';
-const description =
-	'Browse all 50 movie-inspired cinematic color grading presets across 8 genres, from Thriller to Superhero. Pick one and apply it in the free online editor.';
+const title = `All ${PRESETS.length} Movie & TV Presets | Cinematic Photo Editor`;
+const description = `Browse all ${PRESETS.length} movie- and TV-inspired cinematic color grading presets across ${GENRES.length} genres, from Thriller to TV Shows. Pick one and apply it in the free online editor.`;
 
 const presetListStructuredData = {
 	'@context': 'https://schema.org',
@@ -27,11 +26,11 @@ const presetListStructuredData = {
 	<main class="mx-auto max-w-5xl px-4 py-20 sm:px-6">
 		<span class="mb-4 block font-mono text-xs tracking-wide text-mute">ALL PRESETS</span>
 		<h1 class="max-w-2xl font-sans text-3xl font-semibold tracking-[-0.03em] text-ink sm:text-4xl">
-			50 movie-inspired color grades, organized by genre
+			{PRESETS.length} movie- and TV-inspired color grades, organized by genre
 		</h1>
 		<p class="mt-4 max-w-xl text-base leading-7 text-body">
 			Pick a preset below to jump into the editor with it pre-selected. Drop or upload a photo
-			once you're there to see the grade applied. Presets span eight genres: {GENRES.join(', ')}.
+			once you're there to see the grade applied. Presets span {GENRES.length} genres: {GENRES.join(', ')}.
 		</p>
 
 		<section class="mt-10 rounded-lg border border-hairline bg-canvas-soft p-5">
