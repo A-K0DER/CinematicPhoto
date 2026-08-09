@@ -1,0 +1,183 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DropZone from '../../components/DropZone.astro';
+import BeforeAfter from '../../components/BeforeAfter.astro';
+import RelatedPresets from '../../components/RelatedPresets.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+import { getPreset } from '../../lib/presets';
+
+const preset = getPreset('game-of-thrones');
+const path = '/presets/game-of-thrones/';
+
+const title = 'Game of Thrones Photo Filter | Free Cinematic Photo Editor';
+const description =
+	"Apply a free photo filter inspired by Game of Thrones' cold, muted epic-fantasy palette. Grade your photo instantly in your browser — no account needed.";
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com${path}`,
+	isPartOf: { '@type': 'WebSite', name: 'Cinematic Photo', url: 'https://cinematicphoto.com' },
+};
+
+const faqs = [
+	{
+		q: 'Is this an official Game of Thrones photo filter?',
+		a: "No. This preset is inspired by the visual aesthetic of Game of Thrones' cinematography, it isn't an official filter licensed by or affiliated with HBO or the show's creators. It's an independent color grade built to echo the look, not a branded tie-in product.",
+	},
+	{
+		q: 'Why does the Game of Thrones preset desaturate the image so much?',
+		a: "The show pulls saturation down hard across nearly every location, King's Landing, the North, Dragonstone, favoring cold steel-grey and muted earth tones over vibrant color. This preset cuts saturation to roughly 60% of normal and adds a cool blue-grey overlay to chase that same desaturated, weathered look rather than a colorful fantasy palette.",
+	},
+	{
+		q: 'How is Game of Thrones different from the House of the Dragon preset?',
+		a: "They share a cold, muted foundation but split in warmth and weight. Game of Thrones stays closer to a neutral steel-grey cast for a wind-swept, epic-scale feel. House of the Dragon pushes contrast and shadow depth further with a cooler, heavier overlay, matching its more claustrophobic, candlelit court-intrigue visual style.",
+	},
+	{
+		q: 'Does the Game of Thrones preset work on bright, sunny photos?',
+		a: "It will still desaturate and cool down a bright photo, but the effect reads more naturally on overcast, dim, or moody source images. The show itself rarely shoots in flat, even sunlight, so photos with some directional light or cloud cover translate more convincingly.",
+	},
+	{
+		q: 'Why is the vignette default fairly strong on this preset?',
+		a: "Game of Thrones frequently frames its biggest moments, the Iron Throne, battle aftermaths, closeups in candlelit halls, with heavy edge darkening that pulls focus to the center. A stronger-than-average vignette default helps recreate that same enclosed, weighty framing.",
+	},
+	{
+		q: 'What kind of photos look best with a Game of Thrones-style grade?',
+		a: 'Landscapes with dramatic sky or weather, stone architecture, forests, and overcast portraits work best, since the cool desaturated palette reads as epic rather than flat. It also holds up well on low-light or candlelit indoor shots.',
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'All Presets', href: '/presets/' },
+				{ label: 'Game of Thrones' },
+			]}
+		/>
+
+		<DropZone presetId={preset.id} showHeading={false} showFooterLinks={false} />
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">TV-INSPIRED PRESET</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				The Game of Thrones photo filter: cold, muted epic fantasy.
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				A free color grading preset inspired by the visual aesthetic of Game of Thrones, built to
+				give landscape and portrait photos the show's signature desaturated, steel-grey epic-scale
+				look.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE AESTHETIC</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Weathered stone and cold sky
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Game of Thrones builds its world out of stone, steel, and overcast sky, a palette kept
+					deliberately cold and desaturated so that the rare warm moment, firelight, a sigil's
+					color, a burst of green wildfire, actually stands out. Skin tones and fabric read
+					slightly grey rather than richly colored, which is what makes the show feel weathered
+					and lived-in instead of polished.
+				</p>
+				<p>
+					That restraint is paired with heavy, deliberate framing: wide shots of armies or
+					landscapes dwarfed by scale, tight shots pulled inward with a strong vignette. This
+					preset leans on a cool blue-grey overlay and a stronger-than-usual vignette default to
+					chase that same epic, slightly oppressive weight.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEFORE / AFTER</span>
+			<h2 class="mb-6 font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				See the grade applied
+			</h2>
+			<BeforeAfter preset={preset} />
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE COLOR SCIENCE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				How the Game of Thrones color grade actually works
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					The base adjustment cuts saturation down to roughly 60% of normal and pulls brightness
+					down slightly, flattening color without crushing detail. A cool blue-grey overlay in
+					overlay blend mode then sits across the full frame, nudging both shadows and highlights
+					toward steel rather than splitting them in different directions the way a teal-and-orange
+					grade would.
+				</p>
+				<p>
+					Grain stays moderate and vignette runs stronger than most presets in this tool, drawing
+					the eye inward the way the show's heaviest, most consequential shots tend to frame their
+					subject: small against stone, sky, or crowd.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEST PHOTOS FOR THIS PRESET</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What to shoot it on
+			</h2>
+			<ul class="mt-6 flex flex-col gap-4 text-base leading-7 text-body">
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Landscapes with dramatic sky or weather.</span> Overcast light and cloud texture are exactly what the cool, desaturated palette is built to enhance.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Stone architecture and castles.</span> Grey, weathered textures read as intentional rather than dull under this grade.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Low-light or candlelit portraits.</span> The strong vignette and cool cast recreate the show's enclosed, firelit interior scenes.</span>
+				</li>
+			</ul>
+		</section>
+
+		<RelatedPresets
+			heading="More movie- and TV-inspired grades"
+			items={[
+				{ presetId: 'house-of-the-dragon', href: '/?preset=house-of-the-dragon' },
+				{ presetId: 'the-last-of-us', href: '/?preset=the-last-of-us' },
+				{ presetId: 'dark-knight', href: '/presets/the-dark-knight/' },
+				{ presetId: 'fellowship-of-the-ring', href: '/?preset=fellowship-of-the-ring' },
+				{ presetId: 'braveheart', href: '/?preset=braveheart' },
+			]}
+		/>
+
+		<MovieFaq
+			eyebrow="GAME OF THRONES FAQ"
+			heading="Common questions about the Game of Thrones photo filter"
+			faqs={faqs}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 text-center sm:px-6">
+			<p class="text-base leading-7 text-body">
+				Prefer a different show or film's look? Browse the <a href="/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">full library of 60 presets</a>,
+				learn more about <a href="/guides/cinematic-color-grading/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">cinematic color grading</a>,
+				or head to the <a href="/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">homepage</a> to start with a blank slate.
+			</p>
+		</section>
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

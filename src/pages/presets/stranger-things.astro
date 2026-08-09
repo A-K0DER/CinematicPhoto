@@ -1,0 +1,184 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DropZone from '../../components/DropZone.astro';
+import BeforeAfter from '../../components/BeforeAfter.astro';
+import RelatedPresets from '../../components/RelatedPresets.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+import { getPreset } from '../../lib/presets';
+
+const preset = getPreset('stranger-things');
+const path = '/presets/stranger-things/';
+
+const title = 'Stranger Things Photo Filter | Free Cinematic Photo Editor';
+const description =
+	"Apply a free photo filter inspired by Stranger Things' 80s neon glow and deep shadows. Grade your photo instantly in your browser — no account needed.";
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com${path}`,
+	isPartOf: { '@type': 'WebSite', name: 'Cinematic Photo', url: 'https://cinematicphoto.com' },
+};
+
+const faqs = [
+	{
+		q: 'Is this an official Stranger Things photo filter?',
+		a: "No. This preset is inspired by the visual aesthetic of Stranger Things' cinematography, it isn't an official filter licensed by or affiliated with Netflix or the show's creators. It's an independent color grade built to echo the look, not a branded tie-in product.",
+	},
+	{
+		q: 'Why does the Stranger Things preset add a pink-red haze?',
+		a: "The show leans heavily on practical neon and sodium-vapor lighting, arcade marquees, Christmas lights, the Upside Down's red-tinted atmosphere, that bleeds color into the air around it rather than staying contained to the light source. This preset adds a low-opacity haze layer on top of the color grade specifically to recreate that bleed.",
+	},
+	{
+		q: 'How is Stranger Things different from the Euphoria preset?',
+		a: "Both lean into neon, but in different directions. Stranger Things splits toward magenta-red highlights over near-black shadows for an 80s-horror, practical-lighting feel, with a strong glow default. Euphoria pushes a cooler purple-blue cast with a dreamier, more washed-out overall look rather than deep, contained shadows.",
+	},
+	{
+		q: "Does the Stranger Things preset work on daytime photos, or does it need to be dark to start with?",
+		a: "It's built around neon and low-light color separation, so it shows off most on night shots, string lights, or anything with a visible artificial light source. Daylight photos still pick up the contrast and saturation push, just without as much of the signature glow and haze to bloom around.",
+	},
+	{
+		q: 'Why is the default glow so high on this preset?',
+		a: "Stranger Things' 80s-inspired look leans on practical lights (neon signs, flashlights, string lights) blooming softly rather than staying crisp. The preset ships with one of the highest glow defaults in the tool so those light sources scatter and halo the way they do on screen.",
+	},
+	{
+		q: 'What kind of photos look best with a Stranger Things-style grade?',
+		a: 'Night shots with visible light sources work best: string lights, neon signs, arcade or diner interiors, flashlight-lit scenes, or anything with mixed warm-and-cool lighting. It also holds up well on moody overcast or dusk shots where the shadows can go deep.',
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'All Presets', href: '/presets/' },
+				{ label: 'Stranger Things' },
+			]}
+		/>
+
+		<DropZone presetId={preset.id} showHeading={false} showFooterLinks={false} />
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">TV-INSPIRED PRESET</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				The Stranger Things photo filter: 80s neon through deep shadow.
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				A free color grading preset inspired by the visual aesthetic of Stranger Things, built to
+				give night and low-light photos the show's signature neon glow, warm highlights, and
+				near-black shadow.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE AESTHETIC</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Practical neon and 80s horror shadow
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Stranger Things builds its look around visible, practical light sources, string lights,
+					arcade marquees, flashlights, the Upside Down's red haze, set against shadows that go
+					almost fully black. It's a deliberate homage to 80s genre filmmaking: warm, saturated
+					highlights doing most of the color work while everything outside them drops into near
+					silhouette.
+				</p>
+				<p>
+					That contrast is what sells the era and the horror-adjacent mood at once. Rather than an
+					even, filled-in exposure, light sources bloom and scatter into the surrounding dark,
+					which is why this preset pairs a strong glow default with a magenta-red haze layer, the
+					same trick used for the Blade Runner 2049 grade, to let highlights spill outward instead
+					of staying crisp.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEFORE / AFTER</span>
+			<h2 class="mb-6 font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				See the grade applied
+			</h2>
+			<BeforeAfter preset={preset} />
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE COLOR SCIENCE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				How the Stranger Things color grade actually works
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					The base adjustment pushes contrast and saturation up together while pulling brightness
+					down slightly, driving shadows toward black without crushing the whole frame flat. A
+					magenta-red overlay then splits the image in overlay blend mode, warming highlights and
+					midtones while keeping the deepest shadows relatively untouched.
+				</p>
+				<p>
+					A dedicated haze layer, a low-opacity magenta wash across the frame, sits on top of that
+					color grade to simulate the glow bleeding off neon and practical lights. Combined with
+					one of the highest glow defaults in the tool, it's what makes bright points of light
+					bloom outward into the surrounding dark instead of staying sharp and contained.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEST PHOTOS FOR THIS PRESET</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What to shoot it on
+			</h2>
+			<ul class="mt-6 flex flex-col gap-4 text-base leading-7 text-body">
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Night shots with visible light sources.</span> String lights, neon signage, and flashlights are exactly what the glow and haze layers are built to bloom around.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Arcade, diner, or retro interiors.</span> Mixed warm-and-cool practical lighting plays directly into the preset's magenta-red split.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Dusk or overcast scenes.</span> Enough ambient light to hold detail, but dim enough for the deep-shadow contrast to read clearly.</span>
+				</li>
+			</ul>
+		</section>
+
+		<RelatedPresets
+			heading="More movie- and TV-inspired grades"
+			items={[
+				{ presetId: 'euphoria', href: '/?preset=euphoria' },
+				{ presetId: 'dark', href: '/?preset=dark' },
+				{ presetId: 'blade-runner', href: '/presets/blade-runner-2049/' },
+				{ presetId: 'matrix', href: '/presets/the-matrix/' },
+				{ presetId: 'spirited-away', href: '/?preset=spirited-away' },
+			]}
+		/>
+
+		<MovieFaq
+			eyebrow="STRANGER THINGS FAQ"
+			heading="Common questions about the Stranger Things photo filter"
+			faqs={faqs}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 text-center sm:px-6">
+			<p class="text-base leading-7 text-body">
+				Prefer a different show or film's look? Browse the <a href="/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">full library of 60 presets</a>,
+				learn more about <a href="/guides/cinematic-color-grading/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">cinematic color grading</a>,
+				or head to the <a href="/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">homepage</a> to start with a blank slate.
+			</p>
+		</section>
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

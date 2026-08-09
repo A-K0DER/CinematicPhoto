@@ -1,0 +1,184 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DropZone from '../../components/DropZone.astro';
+import BeforeAfter from '../../components/BeforeAfter.astro';
+import RelatedPresets from '../../components/RelatedPresets.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+import { getPreset } from '../../lib/presets';
+
+const preset = getPreset('breaking-bad');
+const path = '/presets/breaking-bad/';
+
+const title = 'Breaking Bad Photo Filter | Free Cinematic Photo Editor';
+const description =
+	"Apply a free photo filter inspired by Breaking Bad's yellow-green desert palette and gritty high contrast. Grade your photo instantly in your browser — no account needed.";
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com${path}`,
+	isPartOf: { '@type': 'WebSite', name: 'Cinematic Photo', url: 'https://cinematicphoto.com' },
+};
+
+const faqs = [
+	{
+		q: 'Is this an official Breaking Bad photo filter?',
+		a: "No. This preset is inspired by the visual aesthetic of Breaking Bad's cinematography, it isn't an official filter licensed by or affiliated with AMC, Sony, or the show's creators. It's an independent color grade built to echo the look, not a branded tie-in product.",
+	},
+	{
+		q: 'Why does the Breaking Bad preset push toward yellow-green instead of a straight desert tan?',
+		a: "The show's New Mexico exteriors lean toward a sickly yellow-green rather than a warm, postcard desert tone, especially in scenes tied to the meth-cooking plotline. This preset shifts hue slightly ahead of the sepia warmth to chase that same slightly toxic cast instead of a clean golden-hour look.",
+	},
+	{
+		q: 'How is Breaking Bad different from the Better Call Saul preset?',
+		a: "They share the same Albuquerque setting but split in mood. Breaking Bad pushes harder contrast and a yellow-green tint for a grittier, higher-stakes feel. Better Call Saul stays closer to a warm, even desert tone with less hue-shifting, matching its slightly softer, more procedural visual style.",
+	},
+	{
+		q: 'Does the Breaking Bad preset work on photos that aren\'t desert or outdoor shots?',
+		a: 'Yes, though it shows off most on high-contrast daylight scenes with some warmth already in them; sunlit streets, dry landscapes, or anything with strong directional light. Indoor or overcast photos still get the contrast push and color grade, just with less of the signature desert glare to work with.',
+	},
+	{
+		q: 'Why is the grain and vignette fairly restrained on this preset?',
+		a: "Breaking Bad's cinematography favors clean, sharp digital photography over a heavy film-grain look, especially in its wide desert shots. The preset keeps grain and vignette moderate so the color grade reads clearly without dragging the image toward a grungier, more degraded texture than the show actually has.",
+	},
+	{
+		q: 'What kind of photos look best with a Breaking Bad-style grade?',
+		a: 'Bright, high-contrast outdoor shots work best: desert or arid landscapes, sunlit streets, cars, or anything already carrying a bit of natural warmth. Portraits taken in strong daylight also pick up the gritty, slightly toxic cast well.',
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'All Presets', href: '/presets/' },
+				{ label: 'Breaking Bad' },
+			]}
+		/>
+
+		<DropZone presetId={preset.id} showHeading={false} showFooterLinks={false} />
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">TV-INSPIRED PRESET</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				The Breaking Bad photo filter: yellow-green desert, gritty high contrast.
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				A free color grading preset inspired by the visual aesthetic of Breaking Bad, built to give
+				sunlit and desert photos the show's signature sickly yellow-green cast and hard-edged
+				contrast.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE AESTHETIC</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				A toxic desert palette
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Breaking Bad's cinematography uses Albuquerque's harsh desert light against a color
+					palette that keeps drifting away from a clean, postcard tan toward something slightly
+					sick, yellow-greens in the sky and land, muted skin tones, and a contrast level that
+					makes shadows go hard rather than soft. It's a look built to feel exposed: wide-open
+					desert under an unforgiving sun, with nowhere to hide.
+				</p>
+				<p>
+					That same harshness carries into interiors, RVs, motel rooms, superlab fluorescents,
+					where the yellow-green cast reads as sterile and clinical instead of warm. This preset
+					leans on a hue-shifted sepia base and a yellow-green overlay to chase that same
+					off-kilter warmth rather than a straightforward golden-hour desert grade.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEFORE / AFTER</span>
+			<h2 class="mb-6 font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				See the grade applied
+			</h2>
+			<BeforeAfter preset={preset} />
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE COLOR SCIENCE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				How the Breaking Bad color grade actually works
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					The base adjustment pushes contrast up hard while pulling saturation down slightly,
+					then layers in sepia warmth shifted a few degrees toward green rather than the usual
+					straight amber. That hue rotation is what keeps the result from reading as a generic
+					desert or vintage filter, it's specifically tuned toward the show's sickly, sun-bleached
+					cast.
+				</p>
+				<p>
+					A yellow-green overlay in overlay blend mode then ties the shadows and highlights
+					together under that same tint, while grain and vignette stay deliberately restrained to
+					match the show's clean, sharp digital photography instead of dragging the image toward a
+					grungier film-grain look it doesn't actually have.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEST PHOTOS FOR THIS PRESET</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What to shoot it on
+			</h2>
+			<ul class="mt-6 flex flex-col gap-4 text-base leading-7 text-body">
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Desert or arid landscapes.</span> Hard sun and open sky are exactly what the contrast push and yellow-green tint are built to exaggerate.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Bright, high-contrast daylight shots.</span> Strong directional light gives the grade's hard shadows and blown highlights something to work with.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Cars, roads, and roadside scenes.</span> The show's road-trip visual language translates directly, especially with a bit of dust or heat haze in frame.</span>
+				</li>
+			</ul>
+		</section>
+
+		<RelatedPresets
+			heading="More movie- and TV-inspired grades"
+			items={[
+				{ presetId: 'better-call-saul', href: '/?preset=better-call-saul' },
+				{ presetId: 'the-walking-dead', href: '/?preset=the-walking-dead' },
+				{ presetId: 'peaky-blinders', href: '/?preset=peaky-blinders' },
+				{ presetId: 'dune', href: '/presets/dune/' },
+				{ presetId: 'django-unchained', href: '/?preset=django-unchained' },
+			]}
+		/>
+
+		<MovieFaq
+			eyebrow="BREAKING BAD FAQ"
+			heading="Common questions about the Breaking Bad photo filter"
+			faqs={faqs}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 text-center sm:px-6">
+			<p class="text-base leading-7 text-body">
+				Prefer a different show or film's look? Browse the <a href="/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">full library of 60 presets</a>,
+				learn more about <a href="/guides/cinematic-color-grading/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">cinematic color grading</a>,
+				or head to the <a href="/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">homepage</a> to start with a blank slate.
+			</p>
+		</section>
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

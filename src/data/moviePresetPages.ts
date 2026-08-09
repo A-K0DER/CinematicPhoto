@@ -9,4 +9,7 @@ export const MOVIE_PRESET_PAGES: Record<string, { slug: string; label: string }>
 	dune: { slug: 'dune', label: 'Dune' },
 	interstellar: { slug: 'interstellar', label: 'Interstellar' },
 	matrix: { slug: 'the-matrix', label: 'The Matrix' },
+	'breaking-bad': { slug: 'breaking-bad', label: 'Breaking Bad' },
+	'stranger-things': { slug: 'stranger-things', label: 'Stranger Things' },
+	'game-of-thrones': { slug: 'game-of-thrones', label: 'Game of Thrones' },
 };
