@@ -1,6 +1,6 @@
 import { getPreset } from './presets';
 import { extractRawPreviewBlob, isRawContainerFile } from './rawPreview';
-import { savePendingImage } from './imageHandoff';
+import { saveCurrentImage } from './imageHandoff';
 
 const dropzoneSection = document.getElementById('dropzone') as HTMLElement;
 const dropzoneTarget = document.getElementById('dropzone-target') as HTMLLabelElement;
@@ -33,7 +33,7 @@ async function handleFile(file: File) {
 	clearError();
 	try {
 		const source = isRaw ? await extractRawPreviewBlob(file) : file;
-		await savePendingImage(source, file.name);
+		await saveCurrentImage(source, file.name);
 		location.href = pendingPresetId ? `/editor?preset=${pendingPresetId}` : '/editor';
 	} catch (err) {
 		showError(err instanceof Error ? err.message : 'Could not read this image file.');

@@ -63,6 +63,13 @@ const { variant = 'landing' } = Astro.props;
 			variant === 'editor' && (
 				<>
 					<button
+						id="nav-remove"
+						type="button"
+						class="rounded-md border border-hairline px-3 py-1.5 font-sans text-sm font-medium text-body transition-colors hover:border-hairline-strong hover:text-ink"
+					>
+						Remove image
+					</button>
+					<button
 						id="nav-reset"
 						type="button"
 						class="rounded-md border border-hairline px-3 py-1.5 font-sans text-sm font-medium text-body transition-colors hover:border-hairline-strong hover:text-ink"

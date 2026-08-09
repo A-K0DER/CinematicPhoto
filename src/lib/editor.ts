@@ -1,9 +1,13 @@
 import { getOverlayBackground, getPreset, type CinematicPreset } from './presets';
 import { computeCanvasSize, exportCanvas, loadImageFromFile, prepareGradedBase, renderFrame } from './engine';
-import { takePendingImage } from './imageHandoff';
+import { clearCurrentImage, loadCurrentImage, saveCurrentImage } from './imageHandoff';
+import { extractRawPreviewBlob, isRawContainerFile } from './rawPreview';
 
 const canvas = document.getElementById('canvas') as HTMLCanvasElement;
 const previewWrap = document.getElementById('preview-wrap') as HTMLDivElement;
+const editorDropzone = document.getElementById('editor-dropzone') as HTMLLabelElement;
+const editorFileInput = document.getElementById('editor-file-input') as HTMLInputElement;
+const editorDropzoneError = document.getElementById('editor-dropzone-error') as HTMLParagraphElement;
 const presetGrid = document.getElementById('preset-grid') as HTMLDivElement;
 const presetDropdown = document.getElementById('preset-dropdown') as HTMLSelectElement;
 
@@ -19,6 +23,7 @@ const letterboxToggle = document.getElementById('letterbox-toggle') as HTMLButto
 const metadataToggle = document.getElementById('metadata-toggle') as HTMLButtonElement;
 
 const navReset = document.getElementById('nav-reset') as HTMLButtonElement;
+const navRemove = document.getElementById('nav-remove') as HTMLButtonElement;
 const navExport = document.getElementById('nav-export') as HTMLButtonElement;
 
 const requestedPresetId = new URLSearchParams(location.search).get('preset');
@@ -51,6 +56,43 @@ const state: State = {
 	metadata: false,
 };
 
+const STATE_STORAGE_KEY = 'cinematic-photo:editor-state';
+
+interface PersistedState {
+	presetId: string;
+	grain: number;
+	vignette: number;
+	glow: number;
+	letterbox: boolean;
+	metadata: boolean;
+}
+
+/** Written on every render so a page reload can resume the same edit, not just the same photo. */
+function persistState() {
+	const persisted: PersistedState = {
+		presetId: state.presetId,
+		grain: state.grain,
+		vignette: state.vignette,
+		glow: state.glow,
+		letterbox: state.letterbox,
+		metadata: state.metadata,
+	};
+	localStorage.setItem(STATE_STORAGE_KEY, JSON.stringify(persisted));
+}
+
+function readPersistedState(): PersistedState | null {
+	try {
+		const raw = localStorage.getItem(STATE_STORAGE_KEY);
+		return raw ? (JSON.parse(raw) as PersistedState) : null;
+	} catch {
+		return null;
+	}
+}
+
+function clearPersistedState() {
+	localStorage.removeItem(STATE_STORAGE_KEY);
+}
+
 let rafId: number | null = null;
 
 function scheduleRender() {
@@ -63,6 +105,7 @@ function scheduleRender() {
 
 function render() {
 	if (!state.image || !state.gradedBase) return;
+	persistState();
 	const preset = getPreset(state.presetId);
 	const stampLabel = `CINEMATIC PHOTO · ${preset.name.toUpperCase()} · 35MM`;
 	renderFrame({
@@ -150,8 +193,85 @@ function selectPreset(preset: CinematicPreset) {
 	updateGradedBase();
 }
 
+function showDropzoneError(message: string) {
+	editorDropzoneError.textContent = message;
+	editorDropzoneError.classList.remove('hidden');
+}
+
+function clearDropzoneError() {
+	editorDropzoneError.classList.add('hidden');
+	editorDropzoneError.textContent = '';
+}
+
+function applyPersistedAdjustments(saved: PersistedState) {
+	state.grain = saved.grain;
+	state.vignette = saved.vignette;
+	state.glow = saved.glow;
+	state.letterbox = saved.letterbox;
+	state.metadata = saved.metadata;
+	grainSlider.value = String(state.grain);
+	vignetteSlider.value = String(state.vignette);
+	glowSlider.value = String(state.glow);
+	grainValue.textContent = String(state.grain);
+	vignetteValue.textContent = String(state.vignette);
+	glowValue.textContent = String(state.glow);
+	letterboxToggle.setAttribute('aria-pressed', String(state.letterbox));
+	metadataToggle.setAttribute('aria-pressed', String(state.metadata));
+	scheduleRender();
+}
+
+function showEmptyState() {
+	canvas.classList.add('hidden');
+	editorDropzone.classList.remove('hidden');
+	editorDropzone.classList.add('flex');
+	navExport.disabled = true;
+}
+
+function showCanvas() {
+	editorDropzone.classList.add('hidden');
+	editorDropzone.classList.remove('flex');
+	canvas.classList.remove('hidden');
+	navExport.disabled = false;
+}
+
+/**
+ * Shared by the "New image" button, the empty-state dropzone (after
+ * "Remove image"), drag & drop, and paste. If a photo is already loaded
+ * (the "New image" case), the currently selected preset and slider values
+ * are kept and the new photo is just re-graded; otherwise this is a fresh
+ * editing session, so it resets to the "Original" preset and its defaults,
+ * matching the initial landing-page handoff.
+ */
+async function loadFile(file: File) {
+	const isRaw = isRawContainerFile(file);
+	if (!file.type.startsWith('image/') && !isRaw) {
+		showDropzoneError('That file type is not supported. Try a JPG, PNG, WEBP, or a camera RAW file.');
+		return;
+	}
+	clearDropzoneError();
+	const replace = state.image !== null;
+	try {
+		const source = isRaw ? await extractRawPreviewBlob(file) : file;
+		const image = await loadImageFromFile(source);
+		const { width, height } = computeCanvasSize(image.naturalWidth, image.naturalHeight);
+		await saveCurrentImage(source, file.name);
+		state.image = image;
+		state.width = width;
+		state.height = height;
+		state.fileBaseName = file.name.replace(/\.[^.]+$/, '') || 'cinematic-photo';
+		showCanvas();
+		if (replace) {
+			updateGradedBase();
+		} else {
+			selectPreset(getPreset('original'));
+		}
+	} catch (err) {
+		showDropzoneError(err instanceof Error ? err.message : 'Could not read this image file.');
+	}
+}
+
 async function init() {
-	const pending = await takePendingImage();
+	const pending = await loadCurrentImage();
 	if (!pending) {
 		location.href = '/';
 		return;
@@ -163,11 +283,70 @@ async function init() {
 	state.height = height;
 	state.fileBaseName = pending.fileName.replace(/\.[^.]+$/, '') || 'cinematic-photo';
 
-	const initialPresetId = requestedPresetId && getPreset(requestedPresetId).id === requestedPresetId ? requestedPresetId : 'original';
+	const savedState = readPersistedState();
+	const initialPresetId =
+		requestedPresetId && getPreset(requestedPresetId).id === requestedPresetId
+			? requestedPresetId
+			: (savedState?.presetId ?? 'original');
 	selectPreset(getPreset(initialPresetId));
+	// Only reuse the saved grain/vignette/glow/toggle values if they belong to
+	// the preset we just selected — otherwise keep that preset's own defaults.
+	if (savedState && savedState.presetId === initialPresetId) {
+		applyPersistedAdjustments(savedState);
+	}
 }
 
 init();
+
+// --- Image upload (New image / Remove image / empty-state dropzone) ---
+
+editorFileInput.addEventListener('change', () => {
+	const file = editorFileInput.files?.[0];
+	editorFileInput.value = '';
+	if (file) loadFile(file);
+});
+
+for (const evt of ['dragenter', 'dragover']) {
+	editorDropzone.addEventListener(evt, (e) => {
+		e.preventDefault();
+		editorDropzone.classList.add('border-zinc-500', 'bg-canvas-soft-2');
+	});
+}
+
+for (const evt of ['dragleave', 'dragend']) {
+	editorDropzone.addEventListener(evt, (e) => {
+		e.preventDefault();
+		editorDropzone.classList.remove('border-zinc-500', 'bg-canvas-soft-2');
+	});
+}
+
+editorDropzone.addEventListener('drop', (e) => {
+	e.preventDefault();
+	editorDropzone.classList.remove('border-zinc-500', 'bg-canvas-soft-2');
+	const file = e.dataTransfer?.files?.[0];
+	if (file) loadFile(file);
+});
+
+// Prevent the browser from navigating away if a file is dropped outside the target.
+for (const evt of ['dragover', 'drop']) {
+	window.addEventListener(evt, (e) => {
+		if ((e.target as HTMLElement)?.closest('#editor-dropzone')) return;
+		e.preventDefault();
+	});
+}
+
+window.addEventListener('paste', (e) => {
+	if (state.image) return; // "New image" is the explicit way to replace an existing photo
+	const items = e.clipboardData?.items;
+	if (!items) return;
+	for (const item of items) {
+		if (item.type.startsWith('image/')) {
+			const file = item.getAsFile();
+			if (file) loadFile(file);
+			break;
+		}
+	}
+});
 
 // --- Preset grid ---
 
@@ -226,7 +405,15 @@ metadataToggle.addEventListener('click', () => {
 // --- Nav actions ---
 
 navReset.addEventListener('click', () => {
-	location.href = '/';
+	editorFileInput.click();
+});
+
+navRemove.addEventListener('click', () => {
+	state.image = null;
+	state.gradedBase = null;
+	showEmptyState();
+	clearCurrentImage();
+	clearPersistedState();
 });
 
 navExport.addEventListener('click', async () => {
