@@ -11,15 +11,18 @@ interface Props {
 const { items } = Astro.props;
 const siteUrl = 'https://cinematicphoto.com';
 
+const lastIndex = items.length - 1;
 const breadcrumbStructuredData = {
 	'@context': 'https://schema.org',
 	'@type': 'BreadcrumbList',
-	itemListElement: items.map((item, index) => ({
-		'@type': 'ListItem',
-		position: index + 1,
-		name: item.label,
-		...(item.href ? { item: new URL(item.href, siteUrl).toString() } : {}),
-	})),
+	itemListElement: items
+		.filter((item, index) => item.href || index === lastIndex)
+		.map((item, index) => ({
+			'@type': 'ListItem',
+			position: index + 1,
+			name: item.label,
+			...(item.href ? { item: new URL(item.href, siteUrl).toString() } : {}),
+		})),
 };
 ---
 
