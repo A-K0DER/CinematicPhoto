@@ -1,0 +1,183 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DropZone from '../../components/DropZone.astro';
+import ComparisonTable from '../../components/ComparisonTable.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+
+const path = '/alternatives/photoshop-actions/';
+const title = 'Free Cinematic Photoshop Actions Alternative | Cinematic Photo Editor';
+const description =
+	'Cinematic Photo is a free, instant alternative to cinematic Photoshop action packs: 60 movie-inspired grades applied in the browser, no .atn files or layer stacks.';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'CollectionPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com${path}`,
+};
+
+const rows = [
+	{
+		feature: 'Price',
+		ours: 'Free, every preset and control',
+		theirs: 'Photoshop subscription, plus most cinematic .atn action packs are sold separately',
+	},
+	{
+		feature: 'Platform',
+		ours: 'Runs in any browser, nothing to install',
+		theirs: 'Desktop app, requires installation',
+	},
+	{
+		feature: 'Setup',
+		ours: 'Drop a photo and pick a preset',
+		theirs: 'Download and install the action pack, then run it inside Photoshop',
+	},
+	{
+		feature: 'Account required',
+		ours: 'No account, no signup',
+		theirs: 'Adobe account required',
+	},
+	{
+		feature: 'Cinematic grades',
+		ours: '60 presets modeled on specific films and shows',
+		theirs: 'Depends on the action pack; quality and film-accuracy vary by creator',
+	},
+	{
+		feature: 'Speed',
+		ours: 'One click, seconds',
+		theirs: 'Action runs through multiple layers/adjustment steps, slower on large files',
+	},
+];
+
+const faqs = [
+	{
+		q: 'Do I need Photoshop to get a cinematic movie color grade?',
+		a: "No. Cinematic color grades in Photoshop usually come from third-party action packs (.atn files) that run a sequence of adjustment layers, and they require an active Photoshop subscription just to run. Cinematic Photo applies the same kind of movie-accurate grade directly in the browser, no software or action pack required.",
+	},
+	{
+		q: 'Are cinematic Photoshop actions free?',
+		a: "Some free packs exist, but most well-made, film-accurate action packs are sold individually, on top of the Photoshop subscription needed to open and run them. Every preset in Cinematic Photo is free, with no premium action pack to buy.",
+	},
+	{
+		q: 'How do Photoshop actions compare to Cinematic Photo presets?',
+		a: "A Photoshop action replays a recorded sequence of adjustment layers and steps, quality depends heavily on who built it. Cinematic Photo's presets are pre-tuned color curves, overlays, grain, and vignette settings built specifically to match a film's actual grade, applied instantly without running a multi-step action.",
+	},
+	{
+		q: 'Can I still use Photoshop for detailed retouching after grading?',
+		a: 'Yes. Export your graded photo from Cinematic Photo as a PNG or JPG, then bring it into Photoshop for retouching, compositing, or other edits that need layers and masks, Cinematic Photo intentionally stays narrow and hands off cleanly to a full editor when you need one.',
+	},
+	{
+		q: 'Is Cinematic Photo a full replacement for Photoshop?',
+		a: "No. Photoshop supports layers, masking, compositing, RAW editing, and far more than color grading. Cinematic Photo is built for one specific job: turning a flat photo into a movie-style still fast. For deep retouching or compositing work, Photoshop is still the right tool.",
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'Alternatives', href: '/alternatives/' },
+				{ label: 'Photoshop Actions' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">ALTERNATIVE</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				A free alternative to cinematic Photoshop actions
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				No .atn files to download, no subscription to run them in. Cinematic Photo applies 60
+				movie-inspired grades instantly, right in the browser.
+			</p>
+		</section>
+
+		<DropZone
+			presetIds={['dark-knight', 'joker', 'the-batman', 'inception', 'gladiator']}
+			showHeading={false}
+			showFooterLinks={false}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">COMPARISON</span>
+			<h2 class="mb-6 font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Cinematic Photo vs. Photoshop actions
+			</h2>
+			<ComparisonTable competitorName="Photoshop Actions" rows={rows} />
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">WHY PEOPLE LOOK ELSEWHERE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Why people search for a Photoshop actions alternative
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Cinematic Photoshop actions are usually third-party .atn files: download a pack, install
+					it into Photoshop, then run it, on top of an active Creative Cloud subscription just to
+					open the app. Quality varies a lot from creator to creator, and heavier actions can be
+					slow to run on large files.
+				</p>
+				<p>
+					Cinematic Photo skips the download-install-run cycle entirely. Sixty presets, each tuned
+					to match a specific film or show's actual color grade, apply instantly in the browser with
+					no subscription and no action pack to track down.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BE HONEST</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What Cinematic Photo doesn't do
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Cinematic Photo has no layers, no masking, no compositing, and no RAW support, it isn't
+					trying to replace Photoshop's editing depth. There's also no way to record or share a
+					custom action of your own. It's built for one job: apply a movie-accurate grade to a
+					photo fast, then hand off to a full editor if you need deeper retouching.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">GO DEEPER</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				More ways to shape the look
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Browse all 60 presets</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Every color grade, organized by genre</span>
+				</a>
+				<a href="/guides/how-to-make-photos-look-cinematic/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">How to make photos look cinematic</span>
+					<span class="mt-1 block font-mono text-xs text-mute">The complete step-by-step guide</span>
+				</a>
+				<a href="/alternatives/canva/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Canva alternative</span>
+					<span class="mt-1 block font-mono text-xs text-mute">For a purpose-built cinematic tool over general design effects</span>
+				</a>
+				<a href="/alternatives/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">All alternatives</span>
+					<span class="mt-1 block font-mono text-xs text-mute">See how Cinematic Photo compares elsewhere</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Common questions about Photoshop actions vs. Cinematic Photo" faqs={faqs} />
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

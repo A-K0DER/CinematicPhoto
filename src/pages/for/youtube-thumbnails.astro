@@ -1,0 +1,130 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DropZone from '../../components/DropZone.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+
+const path = '/for/youtube-thumbnails/';
+const title = 'Cinematic YouTube Thumbnail Filter | Cinematic Photo Editor';
+const description =
+	'Five cinematic presets picked for YouTube thumbnails: bold, high-contrast movie grades built to stand out at a small size next to other videos.';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'CollectionPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com${path}`,
+};
+
+const faqs = [
+	{
+		q: 'What makes a cinematic preset good for a YouTube thumbnail?',
+		a: 'Thumbnails compete for attention at a tiny size in a crowded feed, so high contrast and a strong, legible color identity matter more than subtlety. The five presets here, Joker, The Batman, Mad Max: Fury Road, Deadpool, and Kill Bill, all push contrast and saturation hard enough to read at a glance.',
+	},
+	{
+		q: 'Should thumbnail text still be readable after applying a cinematic grade?',
+		a: "Yes, add your text and graphics after exporting the graded photo, in your thumbnail or design tool. Presets with a strong vignette, like Joker or The Batman, naturally darken the edges of the frame, which is often exactly where thumbnail text sits, giving it more contrast against the background.",
+	},
+	{
+		q: 'Which preset works best for high-energy action or gaming thumbnails?',
+		a: "Mad Max: Fury Road's aggressive orange-and-teal split and Kill Bill's pulpy yellow pop are both built for high-energy, high-contrast content. Deadpool's punchy red-black grade also reads well for irreverent or comedic gaming content.",
+	},
+	{
+		q: 'What preset works for darker, more serious thumbnail content?',
+		a: "The Batman's crimson-black noir grade and Joker's sickly orange-green both suit darker, more dramatic or true-crime style content. For an even colder, more clinical mood, see the dark and moody photo filter guide.",
+	},
+	{
+		q: 'Do I need to crop or resize my photo differently for a thumbnail?',
+		a: 'Apply the color grade first at full resolution, then crop to a 16:9 frame in your thumbnail editor afterward. Cropping before grading can throw off how a preset’s vignette and overlay sit relative to your subject.',
+	},
+	{
+		q: 'Can I use these same presets for a video cover or channel art too?',
+		a: 'Yes, since channel art and video covers face the same small-size, high-competition legibility problem as thumbnails, the same bold, high-contrast presets tend to work well there too.',
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'For' },
+				{ label: 'YouTube Thumbnails' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">USE CASE GUIDE</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Cinematic YouTube thumbnail filter
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Five cinematic presets built to stand out: bold, high-contrast movie grades that hold up
+				next to a dozen other thumbnails in a feed.
+			</p>
+		</section>
+
+		<DropZone
+			presetIds={['joker', 'the-batman', 'mad-max-fury-road', 'deadpool', 'kill-bill']}
+			showHeading={false}
+			showFooterLinks={false}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">WHAT TO LOOK FOR</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What makes a preset thumbnail-ready
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					A thumbnail has to win attention at a small size, sitting next to a grid of competing
+					videos, so subtlety is the enemy. The presets featured here push contrast and color hard:
+					Mad Max: Fury Road's orange-and-teal split, Joker's sickly orange-green, and Kill Bill's
+					pulpy yellow pop all read clearly even scaled down to a fraction of their original size.
+				</p>
+				<p>
+					Strong vignettes also help here in a way they don't always for other uses: darkened edges
+					give thumbnail text and graphics, added afterward in a thumbnail tool, more contrast to
+					sit on top of.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">GO DEEPER</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				More ways to shape the look
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/for/instagram/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Cinematic Instagram filter</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Punchy grades built for the feed</span>
+				</a>
+				<a href="/for/travel-photography/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Cinematic travel photography</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Landscape- and outdoor-friendly grades</span>
+				</a>
+				<a href="/looks/dark-and-moody/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Dark &amp; moody cinematic filter</span>
+					<span class="mt-1 block font-mono text-xs text-mute">For darker, more serious thumbnails</span>
+				</a>
+				<a href="/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Browse all 60 presets</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Every color grade, organized by genre</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Common questions about cinematic YouTube thumbnail filters" faqs={faqs} />
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

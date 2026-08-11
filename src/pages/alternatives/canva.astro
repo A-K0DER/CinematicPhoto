@@ -1,0 +1,183 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DropZone from '../../components/DropZone.astro';
+import ComparisonTable from '../../components/ComparisonTable.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+
+const path = '/alternatives/canva/';
+const title = 'Free Canva Alternative for Cinematic Photo Filters | Cinematic Photo Editor';
+const description =
+	"Cinematic Photo is a free, purpose-built alternative to Canva's photo effects for movie-style color grading: 60 film-inspired presets, no design account or template needed.";
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'CollectionPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com${path}`,
+};
+
+const rows = [
+	{
+		feature: 'Price',
+		ours: 'Free, every preset and control',
+		theirs: 'Free tier available; many effects, filters, and templates require Canva Pro',
+	},
+	{
+		feature: 'Focus',
+		ours: 'Built specifically for cinematic movie color grading',
+		theirs: 'General-purpose design tool: templates, graphics, video, presentations',
+	},
+	{
+		feature: 'Cinematic presets',
+		ours: '60 grades modeled on specific films and shows',
+		theirs: 'General photo filters/effects, not modeled on specific movies',
+	},
+	{
+		feature: 'Account required',
+		ours: 'No account, no signup',
+		theirs: 'Canva account required to edit and export',
+	},
+	{
+		feature: 'Framing tools',
+		ours: 'Built-in anamorphic 2.39:1 letterbox and film stock stamp',
+		theirs: 'No dedicated cinematic letterbox or film-stock tools',
+	},
+	{
+		feature: 'Interface',
+		ours: 'One drop zone, a preset grid, and a few sliders',
+		theirs: 'Full design canvas with templates, layers, and a large tool panel',
+	},
+];
+
+const faqs = [
+	{
+		q: 'Can Canva give my photos a movie-style color grade?',
+		a: "Canva has general photo effects and filters, but nothing modeled on specific films or shows, and its stronger effects are often gated behind Canva Pro. Cinematic Photo is built specifically for this one job: 60 presets tuned to match real movie and TV color grades, free with no account.",
+	},
+	{
+		q: 'Do I need a Canva account to add a cinematic filter to a photo?',
+		a: 'Yes, Canva requires an account to edit and export designs. Cinematic Photo needs no account or signup: open the page, drop a photo, and export directly, nothing is uploaded to a server in the first place.',
+	},
+	{
+		q: 'Is Canva good for adding film grain or a cinematic letterbox?',
+		a: "Canva doesn't have dedicated film grain, vignette, or anamorphic letterbox tools built for a cinematic look, achieving that usually means stacking generic elements and effects manually. Cinematic Photo has grain, vignette, glow, and a one-toggle 2.39:1 letterbox built in specifically for this.",
+	},
+	{
+		q: "What's the difference between Canva's photo effects and Cinematic Photo's presets?",
+		a: "Canva's photo effects are general-purpose filters meant to work across any design context, posters, social posts, presentations. Cinematic Photo's presets are narrower and more specific: each one is built to reproduce a particular film or show's actual color grade, not a generic mood filter.",
+	},
+	{
+		q: 'Is Cinematic Photo a full replacement for Canva?',
+		a: "No. Canva is a broad design tool for templates, graphics, video, and layout work that Cinematic Photo doesn't attempt. Cinematic Photo stays narrow: it only turns a photo into a movie-style graded still. Many people export from Cinematic Photo first, then bring that image into Canva for a poster or social template.",
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'Alternatives', href: '/alternatives/' },
+				{ label: 'Canva' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">ALTERNATIVE</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				A free, purpose-built alternative to Canva's photo effects
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Canva's photo filters are general-purpose and often gated behind Pro. Cinematic Photo is
+				built for one job, movie-accurate color grading, with 60 free presets and no account.
+			</p>
+		</section>
+
+		<DropZone
+			presetIds={['spider-man', 'top-gun-maverick', 'baby-driver', 'fellowship-of-the-ring', 'stranger-things']}
+			showHeading={false}
+			showFooterLinks={false}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">COMPARISON</span>
+			<h2 class="mb-6 font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Cinematic Photo vs. Canva
+			</h2>
+			<ComparisonTable competitorName="Canva" rows={rows} />
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">WHY PEOPLE LOOK ELSEWHERE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Why people search for a Canva alternative for movie filters
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Canva is a broad design tool, its photo effects are general filters meant to work across
+					any template or layout, not grades modeled on a specific film's cinematography. Getting a
+					recognizable Blade Runner or Dune look means stacking generic adjustments and guessing,
+					and the stronger effects often sit behind Canva Pro.
+				</p>
+				<p>
+					Cinematic Photo does one thing instead of everything: 60 presets, each built to match a
+					specific movie or show's actual color grade, free with no account, no template, and no
+					design canvas to navigate first.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BE HONEST</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What Cinematic Photo doesn't do
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Cinematic Photo has no templates, no text or graphic layers, no video editing, and no
+					layout tools, it isn't a design tool. If you need to build a poster, social carousel, or
+					presentation around your graded photo, Canva is still the better choice for that step.
+					Many people use both: grade the photo here first, then drop it into a Canva template.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">GO DEEPER</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				More ways to shape the look
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Browse all 60 presets</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Every color grade, organized by genre</span>
+				</a>
+				<a href="/for/youtube-thumbnails/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Cinematic YouTube thumbnails</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Bold, high-contrast presets for creators</span>
+				</a>
+				<a href="/alternatives/lightroom-presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Lightroom presets alternative</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Skip the subscription and preset packs</span>
+				</a>
+				<a href="/alternatives/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">All alternatives</span>
+					<span class="mt-1 block font-mono text-xs text-mute">See how Cinematic Photo compares elsewhere</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Common questions about Canva vs. Cinematic Photo" faqs={faqs} />
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import MovieFaq from '../components/MovieFaq.astro';
+import { ALL_FAQS } from '../data/faqs';
+
+const path = '/faq/';
+const title = `Frequently Asked Questions | Cinematic Photo Editor`;
+const description =
+	'Every question about Cinematic Photo answered in one place: pricing, privacy, supported formats, and how to get specific movie and TV color grades.';
+---
+
+<Layout {title} {description} {path}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'FAQ' }]} />
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">HELP</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Frequently asked questions
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Every question about pricing, privacy, supported formats, and specific movie or TV color
+				grades, all in one place.
+			</p>
+		</section>
+
+		<MovieFaq eyebrow={`ALL ${ALL_FAQS.length} QUESTIONS`} heading="Everything you might want to know" faqs={ALL_FAQS} />
+	</main>
+	<Footer />
+</Layout>

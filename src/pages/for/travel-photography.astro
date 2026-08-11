@@ -1,0 +1,130 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DropZone from '../../components/DropZone.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+
+const path = '/for/travel-photography/';
+const title = 'Cinematic Travel Photography Filter | Cinematic Photo Editor';
+const description =
+	'Five cinematic presets picked for travel and landscape photography: warm, wide-frame movie grades built for deserts, coastlines, and open sky.';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'CollectionPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com${path}`,
+};
+
+const faqs = [
+	{
+		q: 'What makes a cinematic preset good for travel and landscape photos?',
+		a: "A preset built around natural light and open space rather than a heavy, uniform tint. The five featured here, Dune, Gladiator, Life of Pi, Pirates of the Caribbean, and The Fellowship of the Ring, all grade toward warm sun and sky tones that suit wide, light-filled frames instead of tight, artificially lit ones.",
+	},
+	{
+		q: 'Which preset works best for desert or arid landscape photos?',
+		a: "Dune's warm desert-gold grade and Gladiator's bleached sand and golden-arena tones are both built specifically around sun-bleached, dusty environments, they're the strongest match for desert, canyon, or dry open-plain shots.",
+	},
+	{
+		q: 'What preset suits ocean, coastline, or tropical travel photos?',
+		a: "Life of Pi's vivid ocean blue and sunset orange grade is tuned for open water and sky, and Pirates of the Caribbean's high-seas teal and sunlit gold works well for coastal or harbor shots with visible water.",
+	},
+	{
+		q: 'Is there a cinematic preset for forests, mountains, or green landscapes?',
+		a: "The Fellowship of the Ring's mythic green-and-gold grade is built around lush, natural greenery and epic scale, making it a strong match for forest, valley, or mountain landscape shots.",
+	},
+	{
+		q: 'Should I use a different preset for golden hour versus midday travel photos?',
+		a: "The warm presets here, Dune and Gladiator especially, are naturally more forgiving on golden-hour shots that already have warm directional light. On flat midday light, a lighter hand with the vignette and grain sliders keeps the grade from feeling too heavy over an already-bright frame.",
+	},
+	{
+		q: 'Do these cinematic presets work on travel portraits, not just landscapes?',
+		a: "They can, but check the dedicated portrait filter guide first, some of these grades apply warm tones broadly across the frame, which reads fine on wide landscape shots but needs a lighter touch on close-up faces.",
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'For' },
+				{ label: 'Travel Photography' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">USE CASE GUIDE</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Cinematic travel photography filter
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Five cinematic presets chosen for open landscapes: warm, wide-frame movie grades built for
+				deserts, coastlines, and epic natural light.
+			</p>
+		</section>
+
+		<DropZone
+			presetIds={['dune', 'gladiator', 'life-of-pi', 'pirates-of-the-caribbean', 'fellowship-of-the-ring']}
+			showHeading={false}
+			showFooterLinks={false}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">WHAT TO LOOK FOR</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What makes a preset landscape-ready
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Travel and landscape shots are usually wide, light-filled frames with a lot of natural
+					color already in them, sky, sand, water, foliage, so the strongest presets work with that
+					existing light rather than fighting it. Dune's warm desert-gold and Life of Pi's vivid
+					ocean blue and sunset orange both lean into natural light instead of flattening it.
+				</p>
+				<p>
+					Scale matters too: these grades are built to hold up across a wide frame with a lot of
+					visual information, unlike some tighter, portrait-oriented grades that concentrate their
+					effect on a single subject.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">GO DEEPER</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				More ways to shape the look
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/for/portraits/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Cinematic portrait filter</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Skin-tone-safe grades for people in the frame</span>
+				</a>
+				<a href="/for/instagram/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Cinematic Instagram filter</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Punchy grades built for the feed</span>
+				</a>
+				<a href="/guides/how-to-make-photos-look-cinematic/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">How to make photos look cinematic</span>
+					<span class="mt-1 block font-mono text-xs text-mute">The complete step-by-step guide</span>
+				</a>
+				<a href="/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Browse all 60 presets</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Every color grade, organized by genre</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Common questions about cinematic travel photo filters" faqs={faqs} />
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

@@ -1,0 +1,185 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DropZone from '../../components/DropZone.astro';
+import ComparisonTable from '../../components/ComparisonTable.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+
+const path = '/alternatives/lightroom-presets/';
+const title = 'Free Lightroom Presets Alternative | Cinematic Photo Editor';
+const description =
+	'Cinematic Photo is a free, browser-based alternative to buying cinematic Lightroom presets: 60 movie-inspired grades built in, no subscription or install required.';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'CollectionPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com${path}`,
+};
+
+const rows = [
+	{
+		feature: 'Price',
+		ours: 'Free, every preset and control',
+		theirs: 'Lightroom subscription required, cinematic presets usually sold separately',
+	},
+	{
+		feature: 'Platform',
+		ours: 'Runs in any browser, nothing to install',
+		theirs: 'Desktop app (with a mobile companion), requires installation',
+	},
+	{
+		feature: 'Upload required',
+		ours: 'No — image is decoded and rendered on your device',
+		theirs: 'Photos are imported into a local or cloud catalog',
+	},
+	{
+		feature: 'Account required',
+		ours: 'No account, no signup',
+		theirs: 'Adobe account required',
+	},
+	{
+		feature: 'Cinematic presets',
+		ours: '60 movie- and TV-inspired grades built in',
+		theirs: 'None out of the box — cinematic LUTs/presets are third-party add-ons',
+	},
+	{
+		feature: 'Learning curve',
+		ours: 'Pick a preset, nudge grain/vignette/glow',
+		theirs: 'Full masking, curve, and catalog panel — powerful but has a learning curve',
+	},
+];
+
+const faqs = [
+	{
+		q: 'Do I need Lightroom to get a movie-style color grade?',
+		a: "No. Lightroom itself doesn't ship with cinematic presets, most people buy third-party preset packs to get that look. Cinematic Photo builds 60 movie- and TV-inspired grades directly into a free browser tool, so there's nothing to buy or import.",
+	},
+	{
+		q: 'Are cinematic Lightroom presets free?',
+		a: "Some free packs exist, but most well-made cinematic preset packs, especially ones modeled on specific films, are sold individually or bundled behind a paywall, on top of the Lightroom subscription itself. Every preset in Cinematic Photo is free with no premium tier.",
+	},
+	{
+		q: 'Can I use Lightroom presets without a subscription?',
+		a: 'Lightroom now requires an active Creative Cloud subscription to use, including applying presets you already own. Cinematic Photo needs no subscription, account, or install: open the page and start grading.',
+	},
+	{
+		q: 'Does Cinematic Photo support RAW files like Lightroom?',
+		a: "No. Cinematic Photo works with JPG, PNG, and WEBP files rendered on an HTML canvas, it isn't a RAW processor. For RAW development, white balance recovery, or highlight/shadow recovery from a RAW file, Lightroom's catalog-based workflow is still the right tool.",
+	},
+	{
+		q: 'Is Cinematic Photo a full replacement for Lightroom?',
+		a: "Not for every workflow. Cinematic Photo doesn't do local masking, layered non-destructive history, batch catalog management, or RAW editing. It's built narrowly for one job: turning a photo into a movie-style still in seconds. For a full photography editing workflow, Lightroom still does more.",
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'Alternatives', href: '/alternatives/' },
+				{ label: 'Lightroom Presets' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">ALTERNATIVE</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				A free Lightroom presets alternative
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Cinematic Lightroom presets are usually a paid add-on on top of a subscription. Cinematic
+				Photo builds 60 movie-inspired grades into a free browser tool, no install or import
+				required.
+			</p>
+		</section>
+
+		<DropZone
+			presetIds={['shawshank', 'dark-knight', 'blade-runner', 'interstellar', 'dune']}
+			showHeading={false}
+			showFooterLinks={false}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">COMPARISON</span>
+			<h2 class="mb-6 font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Cinematic Photo vs. Lightroom presets
+			</h2>
+			<ComparisonTable competitorName="Lightroom" rows={rows} />
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">WHY PEOPLE LOOK ELSEWHERE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Why people search for a Lightroom presets alternative
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Lightroom doesn't include cinematic, film-inspired presets out of the box. Getting a
+					specific movie's color grade usually means buying a third-party preset pack, on top of
+					an active Creative Cloud subscription just to open the app and apply it. That's a lot of
+					friction for someone who wants one graded photo for a thumbnail, poster, or social post.
+				</p>
+				<p>
+					Cinematic Photo skips that entirely: 60 presets modeled on specific films and shows are
+					built into a free tool that opens straight in the browser. Drop a photo, pick a preset,
+					export, no subscription, no preset pack to track down and import.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BE HONEST</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What Cinematic Photo doesn't do
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Cinematic Photo isn't a Lightroom replacement for every workflow. There's no RAW file
+					support, no local masking or brush adjustments, no layered non-destructive edit history,
+					and no batch catalog management across thousands of photos. It's built narrowly to do one
+					thing fast: apply a movie-accurate color grade to a JPG, PNG, or WEBP in seconds. For a
+					full RAW development workflow, Lightroom is still the better tool.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">GO DEEPER</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				More ways to shape the look
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Browse all 60 presets</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Every color grade, organized by genre</span>
+				</a>
+				<a href="/guides/cinematic-color-grading/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Cinematic color grading guide</span>
+					<span class="mt-1 block font-mono text-xs text-mute">The closest thing to a movie LUT, explained</span>
+				</a>
+				<a href="/alternatives/vsco/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">VSCO alternative</span>
+					<span class="mt-1 block font-mono text-xs text-mute">A free option for mobile-first film looks</span>
+				</a>
+				<a href="/alternatives/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">All alternatives</span>
+					<span class="mt-1 block font-mono text-xs text-mute">See how Cinematic Photo compares elsewhere</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Common questions about Lightroom presets vs. Cinematic Photo" faqs={faqs} />
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

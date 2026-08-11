@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DropZone from '../../components/DropZone.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+
+const path = '/for/instagram/';
+const title = 'Cinematic Instagram Photo Filter | Cinematic Photo Editor';
+const description =
+	'Five cinematic presets picked for Instagram: punchy, colorful movie grades that hold up at feed and story size.';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'CollectionPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com${path}`,
+};
+
+const faqs = [
+	{
+		q: 'What makes a cinematic preset good for Instagram?',
+		a: 'A preset that reads clearly at small sizes: enough color contrast and saturation to stand out in a scrolling feed, without shadow detail so crushed it turns muddy in a thumbnail. The five featured here, Baby Driver, Stranger Things, Blade Runner 2049, Top Gun: Maverick, and Euphoria, all lean punchy rather than subtle.',
+	},
+	{
+		q: 'Should I use the same preset for my whole Instagram grid?',
+		a: "Many creators do, using one consistent preset across a grid gives a cohesive, recognizable feed aesthetic. Stranger Things' neon 80s tones or Euphoria's purple-blue haze both work well as a signature look repeated across posts.",
+	},
+	{
+		q: 'Do these presets work for Instagram Stories and Reels covers, not just feed posts?',
+		a: "Yes. Since Stories and Reel covers display at a similar or smaller size than feed posts, the same feed-friendly criteria apply, punchy color and clear contrast that reads at a glance. Blade Runner 2049's amber-teal split and Top Gun: Maverick's glossy sky-blue are especially effective on video thumbnails.",
+	},
+	{
+		q: 'Will a cinematic filter hurt Instagram engagement compared to a natural photo?',
+		a: "It depends on your niche, but a distinct, consistent visual style is generally associated with stronger feed recognition, not weaker engagement. Test one preset against a natural post to see what your specific audience responds to.",
+	},
+	{
+		q: 'How do I keep a cinematic Instagram look consistent across different lighting conditions?',
+		a: "Pick one preset as your signature grade, then use the grain and vignette sliders (not the color itself) to compensate for lighting differences between shots, a touch more grain on flatly lit photos, a touch less vignette on already-dark shots keeps the core color identity consistent across a mixed set of source photos.",
+	},
+	{
+		q: 'Which preset works best for aesthetic, moody Instagram feeds?',
+		a: "Euphoria's neon purple-blue haze and Blade Runner 2049's amber-teal split both lean into a moody, atmospheric aesthetic popular on Instagram. For a warmer, softer moody look instead, see the dark and moody photo filter guide.",
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'For' },
+				{ label: 'Instagram' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">USE CASE GUIDE</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Cinematic Instagram photo filter
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Five cinematic presets chosen for the feed: punchy, color-forward movie grades that still
+				read clearly at thumbnail size.
+			</p>
+		</section>
+
+		<DropZone
+			presetIds={['baby-driver', 'stranger-things', 'blade-runner', 'top-gun-maverick', 'euphoria']}
+			showHeading={false}
+			showFooterLinks={false}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">WHAT TO LOOK FOR</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What makes a preset feed-friendly
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Instagram compresses photos and shrinks them down to a grid thumbnail, so subtle grades
+					with low contrast tend to flatten out and lose their character. The presets featured here
+					lean into punchy color and clear contrast on purpose: Baby Driver's pop-color streets,
+					Stranger Things' neon 80s warmth, and Blade Runner 2049's amber-teal split all hold their
+					identity even at a small size.
+				</p>
+				<p>
+					Consistency matters too. Reusing the same preset, or the same two or three, across a
+					grid builds a recognizable aesthetic over time rather than a mismatched set of one-off
+					edits.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">USE WITH CAUTION AT SMALL SIZE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Presets to think twice about for feed posts
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Very dark, heavily desaturated grades like <a href="/presets/interstellar/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Interstellar</a> or
+					the presets on the <a href="/looks/dark-and-moody/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">dark and moody photo filter</a> page
+					can lose most of their nuance once Instagram compresses and shrinks the image, they read
+					better as a full-size post than as a scrolling thumbnail. They still work well for single
+					feature posts or carousels viewed at full size.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">GO DEEPER</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				More ways to shape the look
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/for/youtube-thumbnails/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Cinematic YouTube thumbnails</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Bold, high-contrast presets for creators</span>
+				</a>
+				<a href="/for/travel-photography/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Cinematic travel photography</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Landscape- and outdoor-friendly grades</span>
+				</a>
+				<a href="/guides/how-to-make-photos-look-cinematic/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">How to make photos look cinematic</span>
+					<span class="mt-1 block font-mono text-xs text-mute">The complete step-by-step guide</span>
+				</a>
+				<a href="/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Browse all 60 presets</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Every color grade, organized by genre</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Common questions about cinematic Instagram filters" faqs={faqs} />
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

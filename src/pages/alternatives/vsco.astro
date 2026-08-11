@@ -1,0 +1,183 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DropZone from '../../components/DropZone.astro';
+import ComparisonTable from '../../components/ComparisonTable.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+
+const path = '/alternatives/vsco/';
+const title = 'Free VSCO Alternative for Cinematic Photo Filters | Cinematic Photo Editor';
+const description =
+	'Cinematic Photo is a free, browser-based alternative to VSCO for movie-style color grading: 60 film-inspired presets, no app install or subscription filter pack.';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'CollectionPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com${path}`,
+};
+
+const rows = [
+	{
+		feature: 'Price',
+		ours: 'Free, every preset and control',
+		theirs: 'Free tier is limited; most filter packs and full editing tools require VSCO Membership',
+	},
+	{
+		feature: 'Platform',
+		ours: 'Runs in any desktop or mobile browser',
+		theirs: 'Mobile app first, with a limited web experience',
+	},
+	{
+		feature: 'Upload required',
+		ours: 'No — image is decoded and rendered on your device',
+		theirs: 'Photos are imported into the app to edit and organize',
+	},
+	{
+		feature: 'Account required',
+		ours: 'No account, no signup',
+		theirs: 'VSCO account required to save presets and sync edits',
+	},
+	{
+		feature: 'Cinematic presets',
+		ours: '60 grades modeled on specific films and shows',
+		theirs: 'General film-emulation presets (A6, C1, etc.), not tied to specific movies',
+	},
+	{
+		feature: 'Framing tools',
+		ours: 'Built-in anamorphic 2.39:1 letterbox and film stock stamp',
+		theirs: 'No letterbox or film-stock stamp tools',
+	},
+];
+
+const faqs = [
+	{
+		q: 'Is there a free cinematic filter tool like VSCO?',
+		a: "Yes. VSCO's free tier only unlocks a handful of its filter presets, most of the well-known VSCO looks and editing tools sit behind VSCO Membership. Cinematic Photo is free end to end: all 60 movie-inspired presets, grain, vignette, glow, and letterbox controls included.",
+	},
+	{
+		q: 'Does VSCO have movie-specific filters?',
+		a: "VSCO's presets are named after film stocks and general aesthetics (like A6 or C1) rather than specific movies. Cinematic Photo's presets are modeled directly on films and shows, Blade Runner 2049, Dune, The Dark Knight, so you're matching a known look rather than guessing which generic filter gets closest.",
+	},
+	{
+		q: 'Can I use VSCO on desktop without the app?',
+		a: "VSCO is built mobile-first, and its web experience is limited compared to the app. Cinematic Photo runs entirely in a browser tab on desktop or mobile, no app download needed either way.",
+	},
+	{
+		q: 'Do I need an account to edit photos like VSCO?',
+		a: 'VSCO requires an account to save edits and access your presets across devices. Cinematic Photo needs no account: open the page, drop a photo, and export, nothing is saved to a server because nothing is ever uploaded.',
+	},
+	{
+		q: 'Is Cinematic Photo a full replacement for VSCO?',
+		a: "Not for every use. VSCO has a built-in social feed, mobile capture tools, and a broader general-purpose editing suite. Cinematic Photo is narrower by design: it's built specifically for turning a photo into a movie-accurate graded still, not for shooting, journaling, or sharing inside an app.",
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'Alternatives', href: '/alternatives/' },
+				{ label: 'VSCO' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">ALTERNATIVE</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				A free VSCO alternative for cinematic looks
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				VSCO's best filters and tools sit behind a membership. Cinematic Photo puts 60 movie- and
+				TV-inspired grades in a free browser tool, no app or subscription required.
+			</p>
+		</section>
+
+		<DropZone
+			presetIds={['blade-runner', 'stranger-things', 'euphoria', 'dune', 'matrix']}
+			showHeading={false}
+			showFooterLinks={false}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">COMPARISON</span>
+			<h2 class="mb-6 font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Cinematic Photo vs. VSCO
+			</h2>
+			<ComparisonTable competitorName="VSCO" rows={rows} />
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">WHY PEOPLE LOOK ELSEWHERE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Why people search for a VSCO alternative
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					VSCO's free tier only unlocks a small slice of its presets, the filters people actually
+					want, along with most editing tools, require VSCO Membership. On top of that, VSCO's
+					presets are general film-stock emulations rather than grades tied to a specific movie or
+					show, so getting a Blade Runner or Dune look means guessing and tweaking.
+				</p>
+				<p>
+					Cinematic Photo is free with no membership tier, and every preset is modeled directly on
+					a film or show's actual color grade, so there's no guesswork between "close enough" and
+					the look you're actually after.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BE HONEST</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What Cinematic Photo doesn't do
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Cinematic Photo has no camera, no social feed, and no journaling or discovery features,
+					it's not trying to be a photography app. There's also no batch editing across a camera
+					roll and no cloud sync of your edits. It does one job: apply a movie-accurate color grade
+					to a single photo, in the browser, in seconds.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">GO DEEPER</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				More ways to shape the look
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Browse all 60 presets</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Every color grade, organized by genre</span>
+				</a>
+				<a href="/looks/vintage-35mm-film/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Vintage 35mm film look</span>
+					<span class="mt-1 block font-mono text-xs text-mute">The film-emulation look, done as a preset</span>
+				</a>
+				<a href="/alternatives/photoshop-actions/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Photoshop actions alternative</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Skip the .atn files and layer stacks</span>
+				</a>
+				<a href="/alternatives/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">All alternatives</span>
+					<span class="mt-1 block font-mono text-xs text-mute">See how Cinematic Photo compares elsewhere</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Common questions about VSCO vs. Cinematic Photo" faqs={faqs} />
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

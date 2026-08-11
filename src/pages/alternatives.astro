@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const path = '/alternatives/';
+const title = 'Cinematic Photo Editor Alternatives | Lightroom, VSCO, Photoshop, Canva';
+const description =
+	'See how the free Cinematic Photo editor compares to Lightroom presets, VSCO, Photoshop actions, and Canva for movie-style color grading.';
+
+const alternatives = [
+	{
+		slug: 'lightroom-presets',
+		name: 'Lightroom Presets',
+		blurb: 'Skip the subscription and third-party preset packs.',
+	},
+	{
+		slug: 'vsco',
+		name: 'VSCO',
+		blurb: 'Movie-specific grades instead of generic film-stock filters.',
+	},
+	{
+		slug: 'photoshop-actions',
+		name: 'Photoshop Actions',
+		blurb: 'No .atn files, no layer stacks, just a preset.',
+	},
+	{
+		slug: 'canva',
+		name: 'Canva',
+		blurb: 'A purpose-built tool instead of general design effects.',
+	},
+];
+
+const listStructuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'ItemList',
+	name: 'Cinematic Photo Editor alternatives comparison',
+	numberOfItems: alternatives.length,
+	itemListElement: alternatives.map((alt, index) => ({
+		'@type': 'ListItem',
+		position: index + 1,
+		name: `Cinematic Photo vs. ${alt.name}`,
+		url: `https://cinematicphoto.com/alternatives/${alt.slug}/`,
+	})),
+};
+---
+
+<Layout {title} {description} {path} structuredData={listStructuredData}>
+	<Navbar />
+	<main class="mx-auto max-w-3xl px-4 py-20 sm:px-6">
+		<span class="mb-4 block font-mono text-xs tracking-wide text-mute">ALTERNATIVES</span>
+		<h1 class="max-w-2xl font-sans text-3xl font-semibold tracking-[-0.03em] text-ink sm:text-4xl">
+			How Cinematic Photo compares to other cinematic editing tools
+		</h1>
+		<p class="mt-4 max-w-xl text-base leading-7 text-body">
+			Most tools for getting a movie-style color grade are either subscription desktop software, a
+			mobile app with a paid membership tier, or a general-purpose design tool with generic photo
+			effects. Cinematic Photo is a free, browser-based tool built for one job: matching a photo to
+			a specific film or show's actual color grade. Here's how it compares.
+		</p>
+
+		<div class="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
+			{
+				alternatives.map((alt) => (
+					<a
+						href={`/alternatives/${alt.slug}/`}
+						class="flex flex-col gap-2 rounded-lg border border-hairline bg-canvas-soft p-5 transition-colors hover:border-hairline-strong"
+					>
+						<span class="font-mono text-[11px] tracking-wide text-mute uppercase">vs.</span>
+						<span class="font-sans text-lg font-semibold text-ink">{alt.name}</span>
+						<span class="font-sans text-sm leading-6 text-body">{alt.blurb}</span>
+					</a>
+				))
+			}
+		</div>
+	</main>
+	<Footer />
+</Layout>

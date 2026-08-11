@@ -1,0 +1,43 @@
+---
+interface ComparisonRow {
+	feature: string;
+	ours: string;
+	theirs: string;
+}
+
+interface Props {
+	competitorName: string;
+	rows: ComparisonRow[];
+}
+
+const { competitorName, rows } = Astro.props;
+---
+
+<div class="overflow-x-auto rounded-lg border border-hairline">
+	<table class="w-full min-w-[520px] border-collapse text-left">
+		<thead>
+			<tr class="border-b border-hairline bg-canvas-soft">
+				<th class="px-4 py-3 font-mono text-[11px] font-medium tracking-wide text-mute uppercase">
+					Feature
+				</th>
+				<th class="px-4 py-3 font-mono text-[11px] font-medium tracking-wide text-ink uppercase">
+					Cinematic Photo
+				</th>
+				<th class="px-4 py-3 font-mono text-[11px] font-medium tracking-wide text-mute uppercase">
+					{competitorName}
+				</th>
+			</tr>
+		</thead>
+		<tbody class="divide-y divide-hairline">
+			{
+				rows.map((row) => (
+					<tr>
+						<td class="px-4 py-3 align-top font-sans text-sm font-medium text-ink">{row.feature}</td>
+						<td class="px-4 py-3 align-top font-sans text-sm text-body">{row.ours}</td>
+						<td class="px-4 py-3 align-top font-sans text-sm text-mute">{row.theirs}</td>
+					</tr>
+				))
+			}
+		</tbody>
+	</table>
+</div>
