@@ -22,7 +22,8 @@ const description = 'Get in touch with the Cinematic Photo team for support, fee
 			</p>
 
 			<form
-				action="https://formspree.io/f/YOUR_FORM_ID"
+				id="contact-form"
+				action="https://formspree.io/f/xoeadery"
 				method="POST"
 				class="flex flex-col gap-4 rounded-xl border border-hairline bg-canvas-soft p-6"
 			>
@@ -64,10 +65,13 @@ const description = 'Get in touch with the Cinematic Photo team for support, fee
 
 				<button
 					type="submit"
-					class="mt-2 self-start rounded-md bg-primary px-4 py-2 font-sans text-sm font-medium text-on-primary transition-opacity hover:opacity-90"
+					class="mt-2 self-start rounded-md bg-primary px-4 py-2 font-sans text-sm font-medium text-on-primary transition-opacity hover:opacity-90 disabled:opacity-60"
 				>
 					Send message
 				</button>
+				<p id="form-error" class="hidden font-sans text-sm text-red-500">
+					Something went wrong sending your message. Please try again.
+				</p>
 			</form>
 
 			<h2 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">Support</h2>
@@ -87,3 +91,34 @@ const description = 'Get in touch with the Cinematic Photo team for support, fee
 	</main>
 	<Footer />
 </Layout>
+
+<script>
+	const form = document.getElementById('contact-form') as HTMLFormElement;
+	const errorMessage = document.getElementById('form-error');
+	const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+	form.addEventListener('submit', async (event) => {
+		event.preventDefault();
+		errorMessage?.classList.add('hidden');
+		submitButton.disabled = true;
+
+		try {
+			const response = await fetch(form.action, {
+				method: form.method,
+				body: new FormData(form),
+				headers: { Accept: 'application/json' },
+			});
+
+			if (response.ok) {
+				window.location.href = '/thank-you/';
+				return;
+			}
+
+			errorMessage?.classList.remove('hidden');
+		} catch {
+			errorMessage?.classList.remove('hidden');
+		} finally {
+			submitButton.disabled = false;
+		}
+	});
+</script>

@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'Message Sent | Cinematic Photo Editor';
+const description = 'Thanks for reaching out to the Cinematic Photo team — we received your message.';
+---
+
+<Layout title={title} description={description} path="/thank-you/" noindex>
+	<Navbar />
+	<main class="mx-auto flex max-w-3xl flex-col items-center px-4 py-32 text-center sm:px-6">
+		<span class="mb-4 block font-mono text-xs tracking-wide text-mute">MESSAGE SENT</span>
+		<h1 class="font-sans text-3xl font-semibold tracking-[-0.03em] text-ink sm:text-4xl">
+			Thanks for reaching out
+		</h1>
+		<p class="mt-4 max-w-md text-base leading-7 text-body">
+			We've received your message and will get back to you as soon as we can.
+		</p>
+		<a
+			href="/"
+			class="mt-8 rounded-md bg-primary px-4 py-2 font-sans text-sm font-medium text-on-primary transition-opacity hover:opacity-90"
+		>
+			Back to home
+		</a>
+	</main>
+	<Footer />
+</Layout>
