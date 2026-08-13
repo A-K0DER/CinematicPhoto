@@ -12,9 +12,11 @@ import { getPreset } from '../../lib/presets';
 const preset = getPreset('matrix');
 const path = '/presets/the-matrix/';
 
-const title = 'Matrix Photo Filter | Free Cinematic Photo Editor';
+const title = 'The Matrix Photo Filter & Editor | Free Cinematic Tool';
 const description =
-	"Apply a free photo filter inspired by The Matrix's high-gain digital green tint. Grade your photo instantly in your browser — no account needed.";
+	"Use this free Matrix photo filter and photo editor to grade your photo with the film's high-gain digital green tint, instantly in your browser — no account needed.";
+const keywords =
+	'matrix photo filter, matrix photo editor, the matrix editor, matrix color grade, matrix green filter';
 
 const structuredData = {
 	'@context': 'https://schema.org',
@@ -29,6 +31,10 @@ const faqs = [
 	{
 		q: 'Is this an official Matrix photo filter?',
 		a: "No. This preset is inspired by the visual aesthetic of The Matrix's cinematography, it isn't an official filter licensed by or affiliated with the studio or the film's creators. It's an independent color grade built to echo the look, not a branded tie-in.",
+	},
+	{
+		q: 'Is there a dedicated Matrix photo editor?',
+		a: "This page is that dedicated editor — the Matrix grade loads pre-selected in the drop zone above, so you can drop a photo and immediately adjust its grain and vignette without hunting through the full 60-preset library first.",
 	},
 	{
 		q: 'Why does the Matrix preset turn the whole photo green, instead of just the shadows or highlights?',
@@ -53,7 +59,7 @@ const faqs = [
 ];
 ---
 
-<Layout {title} {description} {path} structuredData={structuredData}>
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
 	<Navbar variant="landing" />
 	<main>
 		<Breadcrumbs
@@ -72,8 +78,9 @@ const faqs = [
 				The Matrix photo filter: high-gain digital green, one click away.
 			</h1>
 			<p class="mt-5 max-w-xl text-base leading-7 text-body">
-				A free color grading preset inspired by the visual aesthetic of The Matrix, built to give
-				photos the film's iconic flat digital-green tint without touching a curves panel.
+				A free Matrix photo editor and color grading preset inspired by the visual aesthetic of The
+				Matrix, built to give photos the film's iconic flat digital-green tint without touching a
+				curves panel.
 			</p>
 		</section>
 

@@ -12,9 +12,11 @@ import { getPreset } from '../../lib/presets';
 const preset = getPreset('dark-knight');
 const path = '/presets/the-dark-knight/';
 
-const title = 'The Dark Knight Photo Filter | Free Cinematic Photo Editor';
+const title = 'The Dark Knight Photo Filter & Editor | Free Cinematic Tool';
 const description =
-	"Apply a free photo filter inspired by The Dark Knight's cold steel, crushed-black look. Grade your photo instantly in your browser — no account needed.";
+	"Use this free The Dark Knight photo filter and photo editor to grade your photo with the film's cold steel, crushed-black look, instantly in your browser — no account needed.";
+const keywords =
+	'the dark knight photo filter, the dark knight photo editor, the dark knight editor, the dark knight color grade, batman photo filter';
 
 const structuredData = {
 	'@context': 'https://schema.org',
@@ -29,6 +31,10 @@ const faqs = [
 	{
 		q: 'Is this an official The Dark Knight photo filter?',
 		a: "No. This preset is inspired by the visual aesthetic of The Dark Knight's cinematography, it's not an official filter licensed by or affiliated with Warner Bros., DC, or the film's creators. It's an independent color grade built to recreate the look, not a branded product.",
+	},
+	{
+		q: 'Is there a dedicated Dark Knight photo editor, or do I have to dig through a preset list?',
+		a: "This page is that dedicated editor — the Dark Knight grade loads pre-selected in the drop zone above, so you can drop a photo and immediately adjust its grain, vignette, glow, and letterbox without hunting through the full 60-preset library first.",
 	},
 	{
 		q: 'Does the Dark Knight preset work on daytime photos, or only night shots?',
@@ -53,7 +59,7 @@ const faqs = [
 ];
 ---
 
-<Layout {title} {description} {path} structuredData={structuredData}>
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
 	<Navbar variant="landing" />
 	<main>
 		<Breadcrumbs
@@ -72,9 +78,9 @@ const faqs = [
 				The Dark Knight photo filter: crushed blacks and cold steel, inspired by Gotham.
 			</h1>
 			<p class="mt-5 max-w-xl text-base leading-7 text-body">
-				A free color grading preset inspired by the visual aesthetic of Christopher Nolan's The
-				Dark Knight, built for photographers who want that high-contrast, cold-toned Gotham look
-				without touching a curves panel.
+				A free The Dark Knight photo editor and color grading preset inspired by the visual
+				aesthetic of Christopher Nolan's The Dark Knight, built for photographers who want that
+				high-contrast, cold-toned Gotham look without touching a curves panel.
 			</p>
 		</section>
 
@@ -159,7 +165,7 @@ const faqs = [
 				{ presetId: 'dune', href: '/presets/dune/' },
 				{ presetId: 'interstellar', href: '/presets/interstellar/' },
 				{ presetId: 'matrix', href: '/presets/the-matrix/' },
-				{ presetId: 'the-batman', href: '/?preset=the-batman' },
+				{ presetId: 'the-batman', href: '/presets/the-batman/' },
 				{ presetId: 'watchmen', href: '/?preset=watchmen' },
 			]}
 		/>

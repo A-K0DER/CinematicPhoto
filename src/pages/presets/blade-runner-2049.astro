@@ -12,9 +12,11 @@ import { getPreset } from '../../lib/presets';
 const preset = getPreset('blade-runner');
 const path = '/presets/blade-runner-2049/';
 
-const title = 'Blade Runner 2049 Photo Filter | Free Cinematic Photo Editor';
+const title = 'Blade Runner 2049 Photo Filter & Editor | Free Cinematic Tool';
 const description =
-	"Apply a free photo filter inspired by Blade Runner 2049's amber neon and teal haze. Grade your photo instantly in your browser — no account needed.";
+	"Use this free Blade Runner 2049 photo filter and photo editor to grade your photo with the film's amber neon and teal haze, instantly in your browser — no account needed.";
+const keywords =
+	'blade runner 2049 photo filter, blade runner 2049 photo editor, blade runner editor, blade runner 2049 color grade, sci-fi photo filter';
 
 const structuredData = {
 	'@context': 'https://schema.org',
@@ -29,6 +31,10 @@ const faqs = [
 	{
 		q: 'Is this an official Blade Runner 2049 photo filter?',
 		a: "No. This preset is inspired by the visual aesthetic of Blade Runner 2049's cinematography, it isn't an official filter licensed by or affiliated with the studio or the film's creators. It's an independent color grade built to echo the look, not a branded tie-in product.",
+	},
+	{
+		q: 'Is there a dedicated Blade Runner 2049 photo editor?',
+		a: "This page is that dedicated editor — the Blade Runner 2049 grade loads pre-selected in the drop zone above, so you can drop a photo and immediately adjust its haze, glow, and vignette without hunting through the full 60-preset library first.",
 	},
 	{
 		q: 'What does the haze setting do in the Blade Runner 2049 preset?',
@@ -53,7 +59,7 @@ const faqs = [
 ];
 ---
 
-<Layout {title} {description} {path} structuredData={structuredData}>
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
 	<Navbar variant="landing" />
 	<main>
 		<Breadcrumbs
@@ -72,9 +78,9 @@ const faqs = [
 				The Blade Runner 2049 photo filter: amber neon through a teal haze.
 			</h1>
 			<p class="mt-5 max-w-xl text-base leading-7 text-body">
-				A free color grading preset inspired by the visual aesthetic of Denis Villeneuve's Blade
-				Runner 2049, built to give night photos the film's signature hazy, neon-lit split between
-				warm highlights and cool shadow.
+				A free Blade Runner 2049 photo editor and color grading preset inspired by the visual
+				aesthetic of Denis Villeneuve's Blade Runner 2049, built to give night photos the film's
+				signature hazy, neon-lit split between warm highlights and cool shadow.
 			</p>
 		</section>
 

@@ -1,0 +1,188 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DropZone from '../../components/DropZone.astro';
+import BeforeAfter from '../../components/BeforeAfter.astro';
+import RelatedPresets from '../../components/RelatedPresets.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+import { getPreset } from '../../lib/presets';
+
+const preset = getPreset('gladiator');
+const path = '/presets/gladiator/';
+
+const title = 'Gladiator Photo Filter & Editor | Free Cinematic Tool';
+const description =
+	"Use this free Gladiator photo filter and photo editor to grade your photo with the film's bleached sand and golden arena tone, instantly in your browser — no account needed.";
+const keywords =
+	'gladiator photo filter, gladiator photo editor, gladiator editor, gladiator color grade, epic photo filter';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com${path}`,
+	isPartOf: { '@type': 'WebSite', name: 'Cinematic Photo', url: 'https://cinematicphoto.com' },
+};
+
+const faqs = [
+	{
+		q: 'Is this an official Gladiator photo filter?',
+		a: "No. This preset is inspired by the visual aesthetic of Gladiator's cinematography, it isn't an official filter licensed by or affiliated with Paramount, Universal, or the film's creators. It's an independent color grade built to echo the look, not a branded tie-in product.",
+	},
+	{
+		q: 'Is there a dedicated Gladiator photo editor?',
+		a: "This page is that dedicated editor — the Gladiator grade loads pre-selected in the drop zone above, so you can drop a photo and immediately adjust its glow, vignette, and grain without hunting through the full 60-preset library first.",
+	},
+	{
+		q: 'Why does the Gladiator preset lean sandy and bleached instead of vivid?',
+		a: "Cinematographer John Mathieson shot the Colosseum and arena scenes under harsh, overexposed sun, letting highlights bleach out rather than protecting them, a look often credited as an early example of the teal-and-orange grading style that later became a Hollywood staple. This preset chases that same bleached, sun-baked warmth rather than a rich, saturated epic-film look.",
+	},
+	{
+		q: 'How is Gladiator different from the Dune preset?',
+		a: "Both lean warm and desert-toned, but Dune pushes further into blown, glowing highlights with a very light vignette for an open, sun-bright feel. Gladiator keeps its vignette stronger and saturation lower, closer to a bleached, sandy arena tone than Dune's overexposed desert glow.",
+	},
+	{
+		q: 'Does the Gladiator preset work on photos that aren\'t desert or arena shots?',
+		a: "Yes. The grade is a color and contrast shift, warm sepia tone, gentle glow, moderate vignette, so it applies to any photo. It reads most naturally on scenes with strong, direct sunlight or warm architecture, but isn't limited to sand or stone subjects.",
+	},
+	{
+		q: 'Why is the vignette stronger on this preset than on Dune?',
+		a: "Gladiator's biggest scenes, the arena, the Colosseum crowd, the final duel, are framed with weight and enclosure rather than Dune's open desert horizon. A stronger vignette default helps recreate that same sense of being boxed in by scale and spectacle.",
+	},
+	{
+		q: 'What kind of photos look best with a Gladiator-style color grade?',
+		a: 'Sunlit stone architecture, arenas, ruins, and desert or dry landscapes suit the grade best, since they carry the harsh, direct light the palette is built to bleach. Portraits in strong midday sun also hold up well against the warm, sandy cast.',
+	},
+];
+---
+
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'All Presets', href: '/presets/' },
+				{ label: 'Gladiator' },
+			]}
+		/>
+
+		<DropZone presetId={preset.id} showHeading={false} showFooterLinks={false} />
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">MOVIE-INSPIRED PRESET</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				The Gladiator photo filter: bleached sand and a golden arena.
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				A free Gladiator photo editor and color grading preset inspired by the visual aesthetic of
+				Ridley Scott's Gladiator, built to give photos the film's sun-bleached, golden epic tone
+				without touching a curves panel.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE AESTHETIC</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Sun-bleached spectacle
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Cinematographer John Mathieson shot Gladiator's arena and desert sequences under harsh,
+					direct sun, letting highlights bloom and bleach out rather than exposing conservatively
+					for them. Sand, stone, and skin all pick up the same warm, slightly desaturated gold cast,
+					a look that helped popularize the warm-highlight, cool-shadow grading style many
+					historical epics would go on to copy.
+				</p>
+				<p>
+					That warmth is balanced by weight and scale: the Colosseum crowd, tight arena framing, and
+					dust-filled air all lean on a stronger vignette to pull focus inward, contrasted against
+					the film's colder, more desaturated battle sequences in Germania. This grade builds around
+					the arena's warmer half.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEFORE / AFTER</span>
+			<h2 class="mb-6 font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				See the grade applied
+			</h2>
+			<BeforeAfter preset={preset} />
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE COLOR SCIENCE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				How the Gladiator color grade actually works
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					The base adjustment layers sepia over a moderate contrast push while pulling saturation
+					down, the bleached, sun-baked foundation before any overlay is added. A soft-light
+					gradient then moves deep brown shadows into pale golden highlights, giving the grade its
+					warm, sandy read without turning the whole image a flat orange.
+				</p>
+				<p>
+					Vignette sits stronger than Dune's, drawing the eye inward to match the arena's tighter,
+					more enclosed framing, while glow stays generous, letting bright highlights bloom softly
+					around stone, sand, and sunlit skin.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEST PHOTOS FOR THIS PRESET</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What to shoot it on
+			</h2>
+			<ul class="mt-6 flex flex-col gap-4 text-base leading-7 text-body">
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Sunlit stone architecture and ruins.</span> Direct light on sand-colored surfaces amplifies the grade's sepia base tone.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Desert or dry landscapes.</span> Open, harshly lit terrain matches the film's arena and battlefield exteriors.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Midday portraits in strong sun.</span> Harsh overhead light plays into the bleached, golden highlight bloom rather than fighting it.</span>
+				</li>
+			</ul>
+		</section>
+
+		<RelatedPresets
+			heading="More movie-inspired grades"
+			items={[
+				{ presetId: 'dune', href: '/presets/dune/' },
+				{ presetId: 'django-unchained', href: '/?preset=django-unchained' },
+				{ presetId: 'braveheart', href: '/?preset=braveheart' },
+				{ presetId: 'the-revenant', href: '/?preset=the-revenant' },
+				{ presetId: 'oppenheimer', href: '/presets/oppenheimer/' },
+			]}
+		/>
+
+		<MovieFaq
+			eyebrow="GLADIATOR FAQ"
+			heading="Common questions about the Gladiator photo filter"
+			faqs={faqs}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 text-center sm:px-6">
+			<p class="text-base leading-7 text-body">
+				Prefer a different film's look? Browse the <a href="/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">full library of 60 presets</a>,
+				read the full guide to <a href="/guides/how-to-make-photos-look-cinematic/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">making photos look cinematic</a>,
+				or head to the <a href="/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">homepage</a> to start with a blank slate.
+			</p>
+		</section>
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

@@ -12,9 +12,11 @@ import { getPreset } from '../../lib/presets';
 const preset = getPreset('game-of-thrones');
 const path = '/presets/game-of-thrones/';
 
-const title = 'Game of Thrones Photo Filter | Free Cinematic Photo Editor';
+const title = 'Game of Thrones Photo Filter & Editor | Free Cinematic Tool';
 const description =
-	"Apply a free photo filter inspired by Game of Thrones' cold, muted epic-fantasy palette. Grade your photo instantly in your browser — no account needed.";
+	"Use this free Game of Thrones photo filter and photo editor to grade your photo with the show's cold, muted epic-fantasy palette, instantly in your browser — no account needed.";
+const keywords =
+	'game of thrones photo filter, game of thrones photo editor, game of thrones editor, game of thrones color grade, house of the dragon filter';
 
 const structuredData = {
 	'@context': 'https://schema.org',
@@ -29,6 +31,10 @@ const faqs = [
 	{
 		q: 'Is this an official Game of Thrones photo filter?',
 		a: "No. This preset is inspired by the visual aesthetic of Game of Thrones' cinematography, it isn't an official filter licensed by or affiliated with HBO or the show's creators. It's an independent color grade built to echo the look, not a branded tie-in product.",
+	},
+	{
+		q: 'Is there a dedicated Game of Thrones photo editor?',
+		a: "This page is that dedicated editor — the Game of Thrones grade loads pre-selected in the drop zone above, so you can drop a photo and immediately adjust its vignette, grain, and glow without hunting through the full 60-preset library first.",
 	},
 	{
 		q: 'Why does the Game of Thrones preset desaturate the image so much?',
@@ -53,7 +59,7 @@ const faqs = [
 ];
 ---
 
-<Layout {title} {description} {path} structuredData={structuredData}>
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
 	<Navbar variant="landing" />
 	<main>
 		<Breadcrumbs
@@ -72,9 +78,9 @@ const faqs = [
 				The Game of Thrones photo filter: cold, muted epic fantasy.
 			</h1>
 			<p class="mt-5 max-w-xl text-base leading-7 text-body">
-				A free color grading preset inspired by the visual aesthetic of Game of Thrones, built to
-				give landscape and portrait photos the show's signature desaturated, steel-grey epic-scale
-				look.
+				A free Game of Thrones photo editor and color grading preset inspired by the visual
+				aesthetic of Game of Thrones, built to give landscape and portrait photos the show's
+				signature desaturated, steel-grey epic-scale look.
 			</p>
 		</section>
 

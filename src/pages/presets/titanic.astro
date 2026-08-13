@@ -1,0 +1,189 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DropZone from '../../components/DropZone.astro';
+import BeforeAfter from '../../components/BeforeAfter.astro';
+import RelatedPresets from '../../components/RelatedPresets.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+import { getPreset } from '../../lib/presets';
+
+const preset = getPreset('titanic');
+const path = '/presets/titanic/';
+
+const title = 'Titanic Photo Filter & Editor | Free Cinematic Tool';
+const description =
+	"Use this free Titanic photo filter and photo editor to grade your photo with the film's oceanic teal and romantic epic warmth, instantly in your browser — no account needed.";
+const keywords =
+	'titanic photo filter, titanic photo editor, titanic editor, titanic color grade, romantic epic photo filter';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com${path}`,
+	isPartOf: { '@type': 'WebSite', name: 'Cinematic Photo', url: 'https://cinematicphoto.com' },
+};
+
+const faqs = [
+	{
+		q: 'Is this an official Titanic photo filter?',
+		a: "No. This preset is inspired by the visual aesthetic of Titanic's cinematography, it isn't an official filter licensed by or affiliated with Paramount, 20th Century Studios, or the film's creators. It's an independent color grade built to echo the look, not a branded tie-in product.",
+	},
+	{
+		q: 'Is there a dedicated Titanic photo editor?',
+		a: "This page is that dedicated editor — the Titanic grade loads pre-selected in the drop zone above, so you can drop a photo and immediately adjust its glow, vignette, and grain without hunting through the full 60-preset library first.",
+	},
+	{
+		q: 'Why does the Titanic preset lean teal instead of warm and golden?',
+		a: "The film's most iconic imagery, the ship at sea, the sinking, the ocean at night, runs cold and blue-teal rather than warm. This preset builds around that oceanic half of the film's palette rather than its warmer interior scenes, since it's the more distinctive, instantly recognizable half of the film's look.",
+	},
+	{
+		q: 'How is the Titanic preset different from the Shawshank Redemption preset?',
+		a: "Both are restrained, epic-scale drama grades, but they split in temperature. Titanic leans cool and oceanic with a stronger glow for soft, romantic highlight bloom. Shawshank stays warm and sepia-toned throughout, closer to nostalgic 35mm film stock than Titanic's colder, more cinematic blue.",
+	},
+	{
+		q: 'Does the Titanic preset work on portraits, or only wide shots?',
+		a: "It works well on both. The teal overlay and elevated glow flatter skin tones without overpowering them, and the grade's soft highlight bloom actually suits close, warmly-lit portraits especially well, echoing the film's romantic close-up cinematography.",
+	},
+	{
+		q: 'Why is the glow setting higher than average on this preset?',
+		a: "Titanic's cinematography, especially its nighttime and lantern-lit scenes, leans on soft, glowing highlights rather than crisp, contained light sources. The preset's glow default is elevated to recreate that same gentle bloom around lights, water reflections, and backlit subjects.",
+	},
+	{
+		q: 'What kind of photos look best with a Titanic-style color grade?',
+		a: 'Ocean, harbor, and water-adjacent shots suit the grade most directly, but any wide, romantic, or epic-scale composition, sunset silhouettes, formal portraits, grand architecture, pairs well with the teal cast and soft glow.',
+	},
+];
+---
+
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'All Presets', href: '/presets/' },
+				{ label: 'Titanic' },
+			]}
+		/>
+
+		<DropZone presetId={preset.id} showHeading={false} showFooterLinks={false} />
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">MOVIE-INSPIRED PRESET</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				The Titanic photo filter: oceanic teal for a romantic epic.
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				A free Titanic photo editor and color grading preset inspired by the visual aesthetic of
+				James Cameron's Titanic, built to give photos the film's cool, oceanic teal and soft
+				romantic glow.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE AESTHETIC</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Cold water, warm memory
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Cinematographer Russell Carpenter, who won an Academy Award for his work on the film,
+					built Titanic's look around a deliberate contrast: warm, golden interiors for the
+					courtship and grand-staircase scenes against the cold, deep teal of the open Atlantic.
+					That ocean blue becomes the film's dominant visual signature, especially once the sinking
+					begins and the palette turns almost entirely cold.
+				</p>
+				<p>
+					Even within that cold half, light stays soft rather than harsh, moonlight scattering
+					across water, lanterns glowing through fog, giving the film's most tragic imagery an
+					almost dreamlike quality instead of a clinical, documentary coldness. It's scale and
+					gentleness held together at once, which is what this grade is built to recreate.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEFORE / AFTER</span>
+			<h2 class="mb-6 font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				See the grade applied
+			</h2>
+			<BeforeAfter preset={preset} />
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE COLOR SCIENCE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				How the Titanic color grade actually works
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					The base adjustment nudges contrast and saturation up gently, without pushing the image
+					toward harshness, before a deep navy-to-teal overlay sits across the frame in overlay
+					blend mode. That gradient is what carries the grade's signature oceanic cast into both
+					shadows and highlights without flattening the image to a single flat blue.
+				</p>
+				<p>
+					Grain stays light and glow runs on the higher side, one of the more generous defaults in
+					this set, letting bright highlights, water reflections, lantern light, backlit hair,
+					bloom softly rather than staying crisp. The vignette is moderate, framing the subject
+					without the heavy, closing-in weight of a grade like Dark Knight's.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEST PHOTOS FOR THIS PRESET</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What to shoot it on
+			</h2>
+			<ul class="mt-6 flex flex-col gap-4 text-base leading-7 text-body">
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Ocean, harbor, and water scenes.</span> Open water and reflective surfaces are the most direct match for the grade's oceanic teal cast.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Romantic or formal portraits.</span> The soft glow and gentle teal tone flatter close, warmly-lit faces without overpowering skin tones.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Sunset or dusk silhouettes.</span> Backlit subjects against a cooling sky pick up the grade's glow and color split especially well.</span>
+				</li>
+			</ul>
+		</section>
+
+		<RelatedPresets
+			heading="More movie-inspired grades"
+			items={[
+				{ presetId: 'shawshank', href: '/presets/the-shawshank-redemption/' },
+				{ presetId: 'forrest-gump', href: '/?preset=forrest-gump' },
+				{ presetId: 'the-green-mile', href: '/?preset=the-green-mile' },
+				{ presetId: 'american-beauty', href: '/?preset=american-beauty' },
+				{ presetId: 'life-of-pi', href: '/?preset=life-of-pi' },
+			]}
+		/>
+
+		<MovieFaq
+			eyebrow="TITANIC FAQ"
+			heading="Common questions about the Titanic photo filter"
+			faqs={faqs}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 text-center sm:px-6">
+			<p class="text-base leading-7 text-body">
+				Prefer a different film's look? Browse the <a href="/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">full library of 60 presets</a>,
+				read the full guide to <a href="/guides/how-to-make-photos-look-cinematic/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">making photos look cinematic</a>,
+				or head to the <a href="/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">homepage</a> to start with a blank slate.
+			</p>
+		</section>
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

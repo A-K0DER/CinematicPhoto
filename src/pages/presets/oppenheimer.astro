@@ -1,0 +1,188 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DropZone from '../../components/DropZone.astro';
+import BeforeAfter from '../../components/BeforeAfter.astro';
+import RelatedPresets from '../../components/RelatedPresets.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+import { getPreset } from '../../lib/presets';
+
+const preset = getPreset('oppenheimer');
+const path = '/presets/oppenheimer/';
+
+const title = 'Oppenheimer Photo Filter & Editor | Free Cinematic Tool';
+const description =
+	"Use this free Oppenheimer photo filter and photo editor to grade your photo with the film's desert amber and stark Nolan contrast, instantly in your browser — no account needed.";
+const keywords =
+	'oppenheimer photo filter, oppenheimer photo editor, oppenheimer editor, oppenheimer color grade, desert amber photo filter';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com${path}`,
+	isPartOf: { '@type': 'WebSite', name: 'Cinematic Photo', url: 'https://cinematicphoto.com' },
+};
+
+const faqs = [
+	{
+		q: 'Is this an official Oppenheimer photo filter?',
+		a: "No. This preset is inspired by the visual aesthetic of Oppenheimer's cinematography, it isn't an official filter licensed by or affiliated with Universal or the film's creators. It's an independent color grade built to echo the look, not a branded tie-in product.",
+	},
+	{
+		q: 'Is there a dedicated Oppenheimer photo editor?',
+		a: "This page is that dedicated editor — the Oppenheimer grade loads pre-selected in the drop zone above, so you can drop a photo and immediately adjust its contrast-driven grain and vignette without hunting through the full 60-preset library first.",
+	},
+	{
+		q: 'Why does the Oppenheimer preset target amber and desert tones specifically?',
+		a: "Oppenheimer was shot on a mix of IMAX black-and-white and color 65mm film, with the color sections, largely the Los Alamos and Trinity test desert scenes, carrying a stark, sun-scorched amber tone. This preset builds around that color half of the film's cinematography rather than its stripped, monochrome sequences.",
+	},
+	{
+		q: 'How is Oppenheimer different from the Dune preset?',
+		a: "Both lean warm and desert-toned, but Oppenheimer pushes contrast considerably harder for a stark, high-tension read, closer to Christopher Nolan's other cool-toned work in structure if not in color. Dune goes further into soft, blown highlight bloom with a lighter vignette, a more open, glowing desert feel than Oppenheimer's tighter, harsher contrast.",
+	},
+	{
+		q: 'Does the Oppenheimer preset work on photos that aren\'t desert scenes?',
+		a: "Yes. The grade is a contrast and warmth shift, so it applies to any photo, though it reads most naturally on scenes with strong, direct light and some existing warmth: dry landscapes, sunlit architecture, or high-contrast indoor scenes with hard shadow lines.",
+	},
+	{
+		q: 'Why is the contrast pushed so hard on this preset?',
+		a: "Nolan's Oppenheimer favors stark, high-tension contrast throughout, especially in its IMAX-shot desert and laboratory sequences. The preset's contrast sits among the highest defaults in this tool's library to match that same harsh, unrelenting visual pressure.",
+	},
+	{
+		q: 'What kind of photos look best with an Oppenheimer-style color grade?',
+		a: 'Desert or dry landscapes, sunlit architecture, and high-contrast indoor scenes with hard shadow lines suit the grade best. Portraits under harsh, direct light also hold up well, echoing the film\'s stark, unflinching character close-ups.',
+	},
+];
+---
+
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'All Presets', href: '/presets/' },
+				{ label: 'Oppenheimer' },
+			]}
+		/>
+
+		<DropZone presetId={preset.id} showHeading={false} showFooterLinks={false} />
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">MOVIE-INSPIRED PRESET</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				The Oppenheimer photo filter: desert amber, stark Nolan contrast.
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				A free Oppenheimer photo editor and color grading preset inspired by the visual aesthetic
+				of Christopher Nolan's Oppenheimer, built to give photos the film's harsh, sun-scorched
+				desert tone without touching a curves panel.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE AESTHETIC</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Stark contrast, desert heat
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Shot largely on IMAX 65mm film by cinematographer Hoyte van Hoytema, Oppenheimer splits
+					its cinematography between black-and-white and color sequences, an approach built
+					specifically for this film, including a first-of-its-kind black-and-white IMAX stock. The
+					color half, centered on Los Alamos and the New Mexico desert, carries a stark, high-
+					contrast amber tone that reads as scorched and unrelenting rather than warm and inviting.
+				</p>
+				<p>
+					That harshness is deliberate: hard shadow lines, blown highlights held in check by strong
+					contrast rather than exposure, and skin tones pushed slightly warm under desert sun. It's
+					tension expressed through light and color rather than through movement or edit alone.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEFORE / AFTER</span>
+			<h2 class="mb-6 font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				See the grade applied
+			</h2>
+			<BeforeAfter preset={preset} />
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE COLOR SCIENCE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				How the Oppenheimer color grade actually works
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					The base adjustment pushes contrast among the hardest of any preset in this tool while
+					pulling saturation and brightness down and adding a touch of sepia, the stark, sun-baked
+					foundation before any directional color is applied. An amber-to-rust overlay then sits
+					across the frame in overlay blend mode, warming highlights and midtones without softening
+					the underlying contrast.
+				</p>
+				<p>
+					Vignette runs on the stronger side, closing the frame in around the subject, while grain
+					and glow stay moderate, textured enough to feel filmic without drifting into the softer,
+					hazier bloom of a grade like Dune's.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEST PHOTOS FOR THIS PRESET</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What to shoot it on
+			</h2>
+			<ul class="mt-6 flex flex-col gap-4 text-base leading-7 text-body">
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Desert or dry landscapes.</span> Harsh, direct light is exactly what the grade's stark contrast and amber tone are built to amplify.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Sunlit architecture with hard shadow lines.</span> Strong directional light gives the contrast push something dramatic to carve into.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Unflinching, direct-light portraits.</span> Harsh overhead or midday sun matches the film's stark, unglamorous close-up cinematography.</span>
+				</li>
+			</ul>
+		</section>
+
+		<RelatedPresets
+			heading="More movie-inspired grades"
+			items={[
+				{ presetId: 'dark-knight', href: '/presets/the-dark-knight/' },
+				{ presetId: 'inception', href: '/presets/inception/' },
+				{ presetId: 'interstellar', href: '/presets/interstellar/' },
+				{ presetId: 'saving-private-ryan', href: '/?preset=saving-private-ryan' },
+				{ presetId: 'the-imitation-game', href: '/?preset=the-imitation-game' },
+			]}
+		/>
+
+		<MovieFaq
+			eyebrow="OPPENHEIMER FAQ"
+			heading="Common questions about the Oppenheimer photo filter"
+			faqs={faqs}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 text-center sm:px-6">
+			<p class="text-base leading-7 text-body">
+				Prefer a different film's look? Browse the <a href="/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">full library of 60 presets</a>,
+				learn more about <a href="/guides/cinematic-color-grading/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">cinematic color grading</a>,
+				or head to the <a href="/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">homepage</a> to start with a blank slate.
+			</p>
+		</section>
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

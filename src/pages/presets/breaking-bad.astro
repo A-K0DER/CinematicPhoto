@@ -12,9 +12,11 @@ import { getPreset } from '../../lib/presets';
 const preset = getPreset('breaking-bad');
 const path = '/presets/breaking-bad/';
 
-const title = 'Breaking Bad Photo Filter | Free Cinematic Photo Editor';
+const title = 'Breaking Bad Photo Filter & Editor | Free Cinematic Tool';
 const description =
-	"Apply a free photo filter inspired by Breaking Bad's yellow-green desert palette and gritty high contrast. Grade your photo instantly in your browser — no account needed.";
+	"Use this free Breaking Bad photo filter and photo editor to grade your photo with the show's yellow-green desert palette and gritty high contrast, instantly in your browser — no account needed.";
+const keywords =
+	'breaking bad photo filter, breaking bad photo editor, breaking bad editor, breaking bad color grade, better call saul filter';
 
 const structuredData = {
 	'@context': 'https://schema.org',
@@ -29,6 +31,10 @@ const faqs = [
 	{
 		q: 'Is this an official Breaking Bad photo filter?',
 		a: "No. This preset is inspired by the visual aesthetic of Breaking Bad's cinematography, it isn't an official filter licensed by or affiliated with AMC, Sony, or the show's creators. It's an independent color grade built to echo the look, not a branded tie-in product.",
+	},
+	{
+		q: 'Is there a dedicated Breaking Bad photo editor?',
+		a: "This page is that dedicated editor — the Breaking Bad grade loads pre-selected in the drop zone above, so you can drop a photo and immediately adjust its grain, vignette, and glow without hunting through the full 60-preset library first.",
 	},
 	{
 		q: 'Why does the Breaking Bad preset push toward yellow-green instead of a straight desert tan?',
@@ -53,7 +59,7 @@ const faqs = [
 ];
 ---
 
-<Layout {title} {description} {path} structuredData={structuredData}>
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
 	<Navbar variant="landing" />
 	<main>
 		<Breadcrumbs
@@ -72,9 +78,9 @@ const faqs = [
 				The Breaking Bad photo filter: yellow-green desert, gritty high contrast.
 			</h1>
 			<p class="mt-5 max-w-xl text-base leading-7 text-body">
-				A free color grading preset inspired by the visual aesthetic of Breaking Bad, built to give
-				sunlit and desert photos the show's signature sickly yellow-green cast and hard-edged
-				contrast.
+				A free Breaking Bad photo editor and color grading preset inspired by the visual aesthetic
+				of Breaking Bad, built to give sunlit and desert photos the show's signature sickly
+				yellow-green cast and hard-edged contrast.
 			</p>
 		</section>
 
@@ -156,7 +162,7 @@ const faqs = [
 			items={[
 				{ presetId: 'better-call-saul', href: '/?preset=better-call-saul' },
 				{ presetId: 'the-walking-dead', href: '/?preset=the-walking-dead' },
-				{ presetId: 'peaky-blinders', href: '/?preset=peaky-blinders' },
+				{ presetId: 'peaky-blinders', href: '/presets/peaky-blinders/' },
 				{ presetId: 'dune', href: '/presets/dune/' },
 				{ presetId: 'django-unchained', href: '/?preset=django-unchained' },
 			]}

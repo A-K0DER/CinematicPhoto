@@ -1,0 +1,189 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DropZone from '../../components/DropZone.astro';
+import BeforeAfter from '../../components/BeforeAfter.astro';
+import RelatedPresets from '../../components/RelatedPresets.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+import { getPreset } from '../../lib/presets';
+
+const preset = getPreset('peaky-blinders');
+const path = '/presets/peaky-blinders/';
+
+const title = 'Peaky Blinders Photo Filter & Editor | Free Cinematic Tool';
+const description =
+	"Use this free Peaky Blinders photo filter and photo editor to grade your photo with the show's dark, desaturated, vintage moody look, instantly in your browser — no account needed.";
+const keywords =
+	'peaky blinders photo filter, peaky blinders photo editor, peaky blinders editor, peaky blinders color grade, vintage moody photo filter';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com${path}`,
+	isPartOf: { '@type': 'WebSite', name: 'Cinematic Photo', url: 'https://cinematicphoto.com' },
+};
+
+const faqs = [
+	{
+		q: 'Is this an official Peaky Blinders photo filter?',
+		a: "No. This preset is inspired by the visual aesthetic of Peaky Blinders' cinematography, it isn't an official filter licensed by or affiliated with the BBC or the show's creators. It's an independent color grade built to echo the look, not a branded tie-in product.",
+	},
+	{
+		q: 'Is there a dedicated Peaky Blinders photo editor?',
+		a: "This page is that dedicated editor — the Peaky Blinders grade loads pre-selected in the drop zone above, so you can drop a photo and immediately adjust its vignette, grain, and glow without hunting through the full 60-preset library first.",
+	},
+	{
+		q: 'Why does the Peaky Blinders preset desaturate the image so heavily?',
+		a: "The show builds its post-WWI Birmingham setting around industrial smog and muted, weathered color, browns, greys, and dull greens rather than vivid period color. This preset cuts saturation to half of normal, one of the heaviest desaturation pushes in this tool, to chase that same smog-choked, vintage tone.",
+	},
+	{
+		q: 'How is Peaky Blinders different from the Better Call Saul preset?',
+		a: "They're both muted, warm-adjacent grades, but split in setting and darkness. Peaky Blinders runs much darker overall, with a heavy vignette and low brightness matching its industrial, often night-lit interiors. Better Call Saul stays brighter and closer to a warm, even desert tone, matching its cleaner, more procedural visual style.",
+	},
+	{
+		q: 'Does the Peaky Blinders preset work on daylight photos?',
+		a: "It's built around the show's dim, smog-filtered daylight and firelit interiors, so it shows off most on photos with some existing haze, shadow, or muted light. Bright, clean daylight shots still pick up the desaturated, vintage cast, just less dramatically.",
+	},
+	{
+		q: 'Why is the vignette default so strong on this preset?',
+		a: "The show frequently frames its most iconic shots, silhouettes against smoke, characters lit by a single window or fire, with heavy edge darkening that isolates the subject. A strong vignette default helps recreate that same enclosed, atmospheric framing.",
+	},
+	{
+		q: 'What kind of photos look best with a Peaky Blinders-style color grade?',
+		a: 'Industrial architecture, smoky or hazy scenes, and low-light interiors suit the grade best, since the desaturated palette and heavy vignette reward atmosphere over color. Silhouettes and backlit portraits also hold up especially well.',
+	},
+];
+---
+
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'All Presets', href: '/presets/' },
+				{ label: 'Peaky Blinders' },
+			]}
+		/>
+
+		<DropZone presetId={preset.id} showHeading={false} showFooterLinks={false} />
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">TV-INSPIRED PRESET</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				The Peaky Blinders photo filter: dark, desaturated, vintage moody.
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				A free Peaky Blinders photo editor and color grading preset inspired by the visual
+				aesthetic of Peaky Blinders, built to give photos the show's smog-choked, desaturated,
+				post-industrial Birmingham tone.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE AESTHETIC</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Smog, silhouette, and muted color
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Peaky Blinders builds its post-WWI Birmingham around industrial haze: chimney smoke,
+					factory soot, and overcast sky drain the color out of nearly every frame, leaving browns,
+					greys, and dull olive tones to dominate. It's a palette that trades period vibrancy for
+					weight and grit, reinforcing a city defined by its factories rather than its finery.
+				</p>
+				<p>
+					Against that muted backdrop, the show leans on strong backlighting and silhouette, figures
+					framed against smoke, fog, or firelight rather than lit head-on. This preset's heavy
+					desaturation and strong vignette are built to chase that same atmospheric, smog-filtered
+					weight.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEFORE / AFTER</span>
+			<h2 class="mb-6 font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				See the grade applied
+			</h2>
+			<BeforeAfter preset={preset} />
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE COLOR SCIENCE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				How the Peaky Blinders color grade actually works
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					The base adjustment cuts saturation to roughly half of normal, one of the heaviest
+					desaturation pushes in this tool, while pulling brightness down and adding a touch of
+					sepia to keep the muted tones from turning cold and lifeless. A dark brown-grey overlay
+					then sits across the frame in overlay blend mode, tying shadows and highlights together
+					under the same weathered, smog-choked cast.
+				</p>
+				<p>
+					Grain runs heavy, echoing the show's textured, film-like cinematography, while vignette
+					sits among the strongest defaults in the tool, closing the frame in around the subject to
+					match the show's silhouette-driven framing. Glow stays low, keeping the look grounded
+					rather than glowing or dreamlike.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEST PHOTOS FOR THIS PRESET</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What to shoot it on
+			</h2>
+			<ul class="mt-6 flex flex-col gap-4 text-base leading-7 text-body">
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Industrial architecture.</span> Brick, steel, and factory textures pick up the desaturated, weathered cast especially well.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Smoky, hazy, or foggy scenes.</span> Atmospheric haze matches the show's smog-filtered daylight and reinforces the heavy vignette.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Silhouettes and backlit portraits.</span> A strong light source behind the subject echoes the show's signature framing against smoke or fire.</span>
+				</li>
+			</ul>
+		</section>
+
+		<RelatedPresets
+			heading="More movie- and TV-inspired grades"
+			items={[
+				{ presetId: 'breaking-bad', href: '/presets/breaking-bad/' },
+				{ presetId: 'better-call-saul', href: '/?preset=better-call-saul' },
+				{ presetId: 'the-walking-dead', href: '/?preset=the-walking-dead' },
+				{ presetId: 'dark', href: '/?preset=dark' },
+				{ presetId: 'game-of-thrones', href: '/presets/game-of-thrones/' },
+			]}
+		/>
+
+		<MovieFaq
+			eyebrow="PEAKY BLINDERS FAQ"
+			heading="Common questions about the Peaky Blinders photo filter"
+			faqs={faqs}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 text-center sm:px-6">
+			<p class="text-base leading-7 text-body">
+				Prefer a different show or film's look? Browse the <a href="/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">full library of 60 presets</a>,
+				see more <a href="/looks/dark-and-moody/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">dark and moody presets</a>,
+				or head to the <a href="/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">homepage</a> to start with a blank slate.
+			</p>
+		</section>
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

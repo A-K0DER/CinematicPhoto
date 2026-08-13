@@ -1,0 +1,191 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DropZone from '../../components/DropZone.astro';
+import BeforeAfter from '../../components/BeforeAfter.astro';
+import RelatedPresets from '../../components/RelatedPresets.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+import { getPreset } from '../../lib/presets';
+
+const preset = getPreset('joker');
+const path = '/presets/joker/';
+
+const title = 'Joker Photo Filter & Editor | Free Cinematic Tool';
+const description =
+	"Use this free Joker photo filter and photo editor to grade your photo with the film's grimy, sickly orange-green Gotham palette, instantly in your browser — no account needed.";
+const keywords =
+	'joker photo filter, joker photo editor, joker editor, joker color grade, gotham photo filter';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com${path}`,
+	isPartOf: { '@type': 'WebSite', name: 'Cinematic Photo', url: 'https://cinematicphoto.com' },
+};
+
+const faqs = [
+	{
+		q: 'Is this an official Joker photo filter?',
+		a: "No. This preset is inspired by the visual aesthetic of Joker's cinematography, it isn't an official filter licensed by or affiliated with Warner Bros., DC, or the film's creators. It's an independent color grade built to echo the look, not a branded tie-in product.",
+	},
+	{
+		q: 'Is there a dedicated Joker photo editor?',
+		a: "This page is that dedicated editor — the Joker grade loads pre-selected in the drop zone above, so you can drop a photo and immediately adjust its grain, vignette, and glow without hunting through the full 60-preset library first.",
+	},
+	{
+		q: 'Why does the Joker preset lean orange-green instead of a straight warm tone?',
+		a: "The film splits its palette rather than committing to one warm cast: sodium-vapor streetlight orange against sickly fluorescent green in stairwells, subway cars, and Arkham hallways. This preset's overlay chases that same uneasy split instead of a clean, uniform amber grade.",
+	},
+	{
+		q: 'How is the Joker preset different from The Batman preset?',
+		a: "Both are Gotham-set grades but split in tone and light. Joker leans grimy and high-grain with an orange-green streetlight cast and a brighter overall exposure, echoing 1970s New Hollywood cinematography. The Batman goes darker and colder, built around crimson-black noir and near-constant rain rather than daylight grime.",
+	},
+	{
+		q: 'Does the Joker preset work on daylight photos, or only night shots?',
+		a: "It works on both, but it's built around the film's harsh urban daylight and sodium-lit interiors, so it shows off best on photos with some existing grime, texture, or artificial light: city streets, subway platforms, stairwells, or fluorescent-lit rooms. Clean, evenly-lit daylight shots still get the color and grain, just with less of the film's signature unease.",
+	},
+	{
+		q: 'Why is the grain default so high on this preset?',
+		a: "Joker was shot on 35mm film specifically to echo the grainy, textured look of late-70s crime dramas. The preset's grain default is one of the heaviest of any preset in this tool for the same reason, a clean digital push would undercut the whole aesthetic the grade is built around.",
+	},
+	{
+		q: 'What kind of photos look best with a Joker-style color grade?',
+		a: 'Urban decay, stairwells, subway platforms, and city streets with visible grime or litter suit the grade best, since it rewards texture and mixed artificial light. Portraits under harsh, unflattering light, streetlamps, fluorescent tubes, hold up especially well against the orange-green split.',
+	},
+];
+---
+
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'All Presets', href: '/presets/' },
+				{ label: 'Joker' },
+			]}
+		/>
+
+		<DropZone presetId={preset.id} showHeading={false} showFooterLinks={false} />
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">MOVIE-INSPIRED PRESET</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				The Joker photo filter: grimy Gotham in sickly orange-green.
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				A free Joker photo editor and color grading preset inspired by the visual aesthetic of
+				Todd Phillips' Joker, built to give urban and low-light photos the film's grainy,
+				high-contrast, sodium-and-fluorescent color split.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE AESTHETIC</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				A city rendered in streetlight and decay
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Shot on 35mm film by cinematographer Lawrence Sher, Joker deliberately reaches back to
+					the grainy, unglamorous look of 1970s New York crime dramas, Taxi Driver and The King of
+					Comedy chief among them. Gotham reads as a real, decaying city rather than a comic-book
+					skyline: garbage-strewn stairwells, subway platforms, and cramped apartments lit by
+					whatever's actually in the room.
+				</p>
+				<p>
+					Color splits along that same lived-in logic. Sodium-vapor streetlights push a sickly
+					orange through exteriors and windows, while fluorescent tubes in stairwells, hospitals,
+					and transit cars answer back with a cold, faintly toxic green. Neither tone is flattering,
+					which is exactly the point: the palette mirrors Arthur Fleck's unraveling rather than
+					glamorizing it.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEFORE / AFTER</span>
+			<h2 class="mb-6 font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				See the grade applied
+			</h2>
+			<BeforeAfter preset={preset} />
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE COLOR SCIENCE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				How the Joker color grade actually works
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					The base adjustment pushes contrast hard, pulls saturation and brightness down slightly,
+					and layers in a touch of sepia, the underexposed, slightly muddy foundation the film's
+					interiors and night exteriors share. From there, a strong orange-to-rust overlay sits
+					across the frame in overlay blend mode, at one of the highest opacities of any preset
+					here, to carry that sodium-streetlight cast into shadows and highlights alike.
+				</p>
+				<p>
+					Grain runs heavy, among the heaviest defaults in the tool, matching the visible 35mm
+					texture of the source film, while the vignette sits on the stronger side to keep the
+					frame's edges dark and claustrophobic. Glow stays modest, since the look is about grime
+					and grain rather than soft, diffused bloom.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEST PHOTOS FOR THIS PRESET</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What to shoot it on
+			</h2>
+			<ul class="mt-6 flex flex-col gap-4 text-base leading-7 text-body">
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Urban decay and city streets.</span> Stairwells, subway platforms, and grimy alleys give the orange-green split and heavy grain real texture to work with.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Mixed artificial light.</span> Streetlamps, fluorescent tubes, and neon signage push the grade's warm-cool color split further than flat daylight can.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Harsh, unflattering portraits.</span> Direct overhead or single-source light matches the film's unglamorous character lighting better than soft, diffused portraiture.</span>
+				</li>
+			</ul>
+		</section>
+
+		<RelatedPresets
+			heading="More movie-inspired grades"
+			items={[
+				{ presetId: 'the-batman', href: '/presets/the-batman/' },
+				{ presetId: 'dark-knight', href: '/presets/the-dark-knight/' },
+				{ presetId: 'pulp-fiction', href: '/presets/pulp-fiction/' },
+				{ presetId: 'the-departed', href: '/?preset=the-departed' },
+				{ presetId: 'goodfellas', href: '/?preset=goodfellas' },
+			]}
+		/>
+
+		<MovieFaq
+			eyebrow="JOKER FAQ"
+			heading="Common questions about the Joker photo filter"
+			faqs={faqs}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 text-center sm:px-6">
+			<p class="text-base leading-7 text-body">
+				Prefer a different film's look? Browse the <a href="/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">full library of 60 presets</a>,
+				see more <a href="/looks/dark-and-moody/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">dark and moody presets</a>,
+				or head to the <a href="/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">homepage</a> to start with a blank slate.
+			</p>
+		</section>
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

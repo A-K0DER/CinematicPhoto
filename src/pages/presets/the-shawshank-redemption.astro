@@ -1,0 +1,189 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DropZone from '../../components/DropZone.astro';
+import BeforeAfter from '../../components/BeforeAfter.astro';
+import RelatedPresets from '../../components/RelatedPresets.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+import { getPreset } from '../../lib/presets';
+
+const preset = getPreset('shawshank');
+const path = '/presets/the-shawshank-redemption/';
+
+const title = 'Shawshank Redemption Photo Filter & Editor | Free Cinematic Tool';
+const description =
+	"Use this free Shawshank Redemption photo filter and photo editor to grade your photo with the film's warm 35mm, restrained gold tone, instantly in your browser — no account needed.";
+const keywords =
+	'shawshank redemption photo filter, shawshank photo editor, shawshank editor, shawshank color grade, warm 35mm photo filter';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com${path}`,
+	isPartOf: { '@type': 'WebSite', name: 'Cinematic Photo', url: 'https://cinematicphoto.com' },
+};
+
+const faqs = [
+	{
+		q: 'Is this an official Shawshank Redemption photo filter?',
+		a: "No. This preset is inspired by the visual aesthetic of The Shawshank Redemption's cinematography, it isn't an official filter licensed by or affiliated with Warner Bros. or the film's creators. It's an independent color grade built to echo the look, not a branded tie-in product.",
+	},
+	{
+		q: 'Is there a dedicated Shawshank Redemption photo editor?',
+		a: "This page is that dedicated editor — the Shawshank grade loads pre-selected in the drop zone above, so you can drop a photo and immediately adjust its grain, vignette, and glow without hunting through the full 60-preset library first.",
+	},
+	{
+		q: 'Why does the Shawshank preset lean warm instead of cold and institutional?',
+		a: "Despite its prison setting, cinematographer Roger Deakins shot the film with a warm, nostalgic 35mm sensibility rather than a cold, clinical one, restrained sepia and gold tones that read as memory rather than confinement. This preset follows that same warmth instead of the harsher, bluer palette a typical prison-drama grade might use.",
+	},
+	{
+		q: 'How is Shawshank different from the Titanic preset?',
+		a: "Both are restrained, epic-feeling drama grades, but they split in temperature. Shawshank stays warm and sepia-toned throughout, closer to nostalgic film stock. Titanic leans cool and oceanic, especially in its most iconic imagery, with a stronger glow for soft highlight bloom.",
+	},
+	{
+		q: 'Does the Shawshank preset work on outdoor and landscape photos?',
+		a: "Yes. The warm sepia base and gentle overlay work as a global tone shift, so landscapes, architecture, and portraits all pick up the same restrained gold cast. It reads especially well on photos with some existing warm light, late afternoon sun, indoor incandescent bulbs.",
+	},
+	{
+		q: 'Why is the grain fairly noticeable on this preset?',
+		a: "The film's 35mm cinematography carries a visible, organic grain structure that this preset echoes rather than smooths over. Grain sits above the tool's average, giving the image a filmic, slightly aged texture instead of a clean digital finish.",
+	},
+	{
+		q: 'What kind of photos look best with a Shawshank-style color grade?',
+		a: 'Warm, nostalgic scenes work best: golden-hour landscapes, worn architecture, candid portraits with soft natural light. It also suits black-and-white-adjacent subjects, stone, wood, weathered surfaces, that benefit from a gentle, restrained gold cast rather than a punchy, saturated one.',
+	},
+];
+---
+
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'All Presets', href: '/presets/' },
+				{ label: 'The Shawshank Redemption' },
+			]}
+		/>
+
+		<DropZone presetId={preset.id} showHeading={false} showFooterLinks={false} />
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">MOVIE-INSPIRED PRESET</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				The Shawshank Redemption photo filter: warm 35mm, restrained gold.
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				A free Shawshank Redemption photo editor and color grading preset inspired by the visual
+				aesthetic of Frank Darabont's The Shawshank Redemption, built to give photos the film's
+				warm, nostalgic film-stock tone without touching a curves panel.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE AESTHETIC</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Warmth inside confinement
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Cinematographer Roger Deakins made a counterintuitive choice for a prison drama: rather
+					than a cold, institutional palette, The Shawshank Redemption is shot with restrained
+					warmth, gentle sepia and gold tones that carry a sense of memory and hope through the
+					film's bleakest stretches. It's a look that trusts warmth to sell endurance rather than
+					harsh, clinical color to sell despair.
+				</p>
+				<p>
+					That warmth stays restrained rather than saturated, closer to a faded photograph than a
+					vivid color-timed film. Combined with a visible, organic film grain, the cinematography
+					feels aged and lived-in, which is exactly what gives the film's most hopeful moments,
+					sunlight, open sky, the ocean, their emotional weight.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEFORE / AFTER</span>
+			<h2 class="mb-6 font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				See the grade applied
+			</h2>
+			<BeforeAfter preset={preset} />
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE COLOR SCIENCE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				How the Shawshank color grade actually works
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					The base adjustment layers sepia over a moderate contrast and brightness push while
+					pulling saturation down slightly, the restrained, faded-photograph foundation before any
+					overlay is applied. A soft-light gradient then moves shadows toward deep brown and
+					highlights toward pale gold, gentle enough to keep the effect feeling warm rather than
+					heavily color-cast.
+				</p>
+				<p>
+					Grain sits above the tool's average, giving the image a visible, organic film-stock
+					texture, while vignette and glow both stay moderate, enough to draw the eye inward and
+					soften highlights without pushing the grade toward drama or heaviness.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEST PHOTOS FOR THIS PRESET</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What to shoot it on
+			</h2>
+			<ul class="mt-6 flex flex-col gap-4 text-base leading-7 text-body">
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Golden-hour landscapes.</span> Warm, low-angle light plays directly into the grade's restrained gold cast.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Worn architecture and stone.</span> Weathered textures pick up the sepia base and read as intentional rather than dull.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Candid, naturally-lit portraits.</span> Soft window or outdoor light suits the grade's gentle, nostalgic warmth better than harsh flash.</span>
+				</li>
+			</ul>
+		</section>
+
+		<RelatedPresets
+			heading="More movie-inspired grades"
+			items={[
+				{ presetId: 'titanic', href: '/presets/titanic/' },
+				{ presetId: 'the-green-mile', href: '/?preset=the-green-mile' },
+				{ presetId: 'forrest-gump', href: '/?preset=forrest-gump' },
+				{ presetId: 'american-beauty', href: '/?preset=american-beauty' },
+				{ presetId: 'american-history-x', href: '/?preset=american-history-x' },
+			]}
+		/>
+
+		<MovieFaq
+			eyebrow="SHAWSHANK REDEMPTION FAQ"
+			heading="Common questions about the Shawshank Redemption photo filter"
+			faqs={faqs}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 text-center sm:px-6">
+			<p class="text-base leading-7 text-body">
+				Prefer a different film's look? Browse the <a href="/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">full library of 60 presets</a>,
+				see more <a href="/looks/vintage-35mm-film/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">vintage 35mm film presets</a>,
+				or head to the <a href="/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">homepage</a> to start with a blank slate.
+			</p>
+		</section>
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

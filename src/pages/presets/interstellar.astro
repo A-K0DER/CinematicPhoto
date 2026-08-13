@@ -12,9 +12,11 @@ import { getPreset } from '../../lib/presets';
 const preset = getPreset('interstellar');
 const path = '/presets/interstellar/';
 
-const title = 'Interstellar Photo Filter | Free Cinematic Photo Editor';
+const title = 'Interstellar Photo Filter & Editor | Free Cinematic Tool';
 const description =
-	"Apply a free photo filter inspired by Interstellar's cold cosmic blue and deep blacks. Grade your photo instantly in your browser — no account needed.";
+	"Use this free Interstellar photo filter and photo editor to grade your photo with the film's cold cosmic blue and deep blacks, instantly in your browser — no account needed.";
+const keywords =
+	'interstellar photo filter, interstellar photo editor, interstellar editor, interstellar color grade, inception photo filter';
 
 const structuredData = {
 	'@context': 'https://schema.org',
@@ -35,6 +37,10 @@ const faqs = [
 		a: "That's intentional, not a bug. The film pulls color out of its frame more aggressively than a typical desaturation push, roughly two-fifths of the color removed here, to keep the palette cold and clinical rather than moody or warm. It's the heaviest desaturation of any of the five movie-inspired presets.",
 	},
 	{
+		q: 'Is there a dedicated Interstellar photo editor?',
+		a: "This page is that dedicated editor — the Interstellar grade loads pre-selected in the drop zone above, so you can drop a photo and immediately adjust its grain, vignette, and glow without hunting through the full 60-preset library first.",
+	},
+	{
 		q: 'Does the Interstellar preset work on photos with people, or only landscapes?',
 		a: "It works on both. The grade is a global color and contrast shift, so portraits and people-focused shots hold up fine, though the cold, desaturated tone tends to read more dramatically on wide, minimal compositions than on close, warm-toned portraits.",
 	},
@@ -53,7 +59,7 @@ const faqs = [
 ];
 ---
 
-<Layout {title} {description} {path} structuredData={structuredData}>
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
 	<Navbar variant="landing" />
 	<main>
 		<Breadcrumbs
@@ -72,9 +78,9 @@ const faqs = [
 				The Interstellar photo filter: cold cosmic blue and deep space black.
 			</h1>
 			<p class="mt-5 max-w-xl text-base leading-7 text-body">
-				A free color grading preset inspired by the visual aesthetic of Christopher Nolan's
-				Interstellar, built to give photos the film's restrained, clinical cold-blue palette
-				without touching a curves panel.
+				A free Interstellar photo editor and color grading preset inspired by the visual aesthetic
+				of Christopher Nolan's Interstellar, built to give photos the film's restrained, clinical
+				cold-blue palette without touching a curves panel.
 			</p>
 		</section>
 
@@ -157,7 +163,7 @@ const faqs = [
 				{ presetId: 'blade-runner', href: '/presets/blade-runner-2049/' },
 				{ presetId: 'dune', href: '/presets/dune/' },
 				{ presetId: 'matrix', href: '/presets/the-matrix/' },
-				{ presetId: 'inception', href: '/?preset=inception' },
+				{ presetId: 'inception', href: '/presets/inception/' },
 				{ presetId: 'terminator-2', href: '/?preset=terminator-2' },
 			]}
 		/>

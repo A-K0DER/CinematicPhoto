@@ -1,0 +1,190 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DropZone from '../../components/DropZone.astro';
+import BeforeAfter from '../../components/BeforeAfter.astro';
+import RelatedPresets from '../../components/RelatedPresets.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+import { getPreset } from '../../lib/presets';
+
+const preset = getPreset('inception');
+const path = '/presets/inception/';
+
+const title = 'Inception Photo Filter & Editor | Free Cinematic Tool';
+const description =
+	"Use this free Inception photo filter and photo editor to grade your photo with the film's cool steel-blue dream palette, instantly in your browser — no account needed.";
+const keywords =
+	'inception photo filter, inception photo editor, inception editor, inception color grade, nolan photo filter';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com${path}`,
+	isPartOf: { '@type': 'WebSite', name: 'Cinematic Photo', url: 'https://cinematicphoto.com' },
+};
+
+const faqs = [
+	{
+		q: 'Is this an official Inception photo filter?',
+		a: "No. This preset is inspired by the visual aesthetic of Inception's cinematography, it isn't an official filter licensed by or affiliated with Warner Bros. or the film's creators. It's an independent color grade built to echo the look, not a branded tie-in product.",
+	},
+	{
+		q: 'Is there a dedicated Inception photo editor?',
+		a: "This page is that dedicated editor — the Inception grade loads pre-selected in the drop zone above, so you can drop a photo and immediately adjust its grain, vignette, and glow without hunting through the full 60-preset library first.",
+	},
+	{
+		q: 'How is the Inception preset different from the Interstellar preset?',
+		a: "Both are cool-toned Christopher Nolan sci-fi grades shot with a similar restrained, steel-blue sensibility, but Interstellar pushes desaturation considerably further, one of the coldest, most stripped-down palettes in this tool, and drops grain to near zero. Inception keeps more color in the frame and a touch more grain, closer to a crisp, layered dream state than deep-space isolation.",
+	},
+	{
+		q: 'Does the Inception preset work on daylight photos?',
+		a: "Yes. The grade is a global cool-toned contrast shift rather than a night-specific effect, so it works on daylight, indoor, and low-light photos alike. It reads most convincingly on scenes with clean architectural lines or a hint of existing blue or grey, echoing the film's precise, geometric compositions.",
+	},
+	{
+		q: 'Why does the Inception preset feel crisp rather than moody or grungy?',
+		a: "Nolan's Inception favors clarity over atmosphere: sharp digital-leaning cinematography, controlled lighting, and a restrained color palette rather than heavy grain or haze. The preset keeps grain low and contrast precise rather than pushing toward a grungier, more degraded film look.",
+	},
+	{
+		q: 'Can I use the Inception photo effect on portraits?',
+		a: "Yes. Since the grade shifts tone globally rather than through a strong directional split, portraits hold up well, particularly against clean, architectural, or minimal backgrounds that echo the film's controlled compositions.",
+	},
+	{
+		q: 'What kind of photos look best with an Inception-style color grade?',
+		a: 'Architecture, city streets, and geometric or symmetrical compositions suit the grade especially well. Interiors with strong structural lines, hotel corridors, offices, stairwells, also match the film\'s controlled, precise visual language.',
+	},
+];
+---
+
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'All Presets', href: '/presets/' },
+				{ label: 'Inception' },
+			]}
+		/>
+
+		<DropZone presetId={preset.id} showHeading={false} showFooterLinks={false} />
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">MOVIE-INSPIRED PRESET</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				The Inception photo filter: cool steel-blue, crisp Nolan control.
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				A free Inception photo editor and color grading preset inspired by the visual aesthetic of
+				Christopher Nolan's Inception, built to give photos the film's precise, cool-toned dream
+				state without touching a curves panel.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE AESTHETIC</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Control, not chaos
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Cinematographer Wally Pfister built Inception's world on precision: clean architectural
+					lines, symmetrical compositions, and a restrained, steel-blue palette that stays
+					consistent even as the film nests dream inside dream. Rather than distinguishing each
+					level through a dramatically different look, the film keeps its cinematography controlled
+					throughout, letting the dreamlike quality come from the geometry and physics of each
+					space instead of a shifting color palette.
+				</p>
+				<p>
+					That restraint carries through skin tones and shadow detail alike, cool without going
+					lifeless, contrasted rather than crushed. It's a look built on clarity: every frame reads
+					clean and legible, which is exactly what separates this grade from a moodier, grungier
+					thriller aesthetic.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEFORE / AFTER</span>
+			<h2 class="mb-6 font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				See the grade applied
+			</h2>
+			<BeforeAfter preset={preset} />
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE COLOR SCIENCE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				How the Inception color grade actually works
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					The base adjustment pulls saturation down moderately while nudging contrast up, keeping
+					the image controlled rather than flat or muddy. A dark navy-to-steel-blue overlay then
+					sits across the frame in overlay blend mode, pushing shadows and midtones toward cool
+					without a strong directional split, the opposite approach from a teal-and-orange grade.
+				</p>
+				<p>
+					Grain stays low to moderate, precise rather than gritty, and the vignette runs on the
+					stronger side to keep focus centered on the subject, echoing the film's tightly
+					controlled framing. Glow is kept moderate, enough to soften hard edges without drifting
+					into the soft, hazy bloom of a grade like Blade Runner 2049's.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEST PHOTOS FOR THIS PRESET</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What to shoot it on
+			</h2>
+			<ul class="mt-6 flex flex-col gap-4 text-base leading-7 text-body">
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Architecture and geometric compositions.</span> Clean lines and symmetry are exactly what the grade's precise, controlled palette is built to enhance.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">City streets and hotel interiors.</span> Structural lines and mixed indoor light suit the cool, steel-toned grade especially well.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Portraits against minimal backgrounds.</span> A clean, uncluttered frame lets the cool color shift read clearly without competing detail.</span>
+				</li>
+			</ul>
+		</section>
+
+		<RelatedPresets
+			heading="More movie-inspired grades"
+			items={[
+				{ presetId: 'interstellar', href: '/presets/interstellar/' },
+				{ presetId: 'dark-knight', href: '/presets/the-dark-knight/' },
+				{ presetId: 'oppenheimer', href: '/presets/oppenheimer/' },
+				{ presetId: 'blade-runner', href: '/presets/blade-runner-2049/' },
+				{ presetId: 'matrix', href: '/presets/the-matrix/' },
+			]}
+		/>
+
+		<MovieFaq
+			eyebrow="INCEPTION FAQ"
+			heading="Common questions about the Inception photo filter"
+			faqs={faqs}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 text-center sm:px-6">
+			<p class="text-base leading-7 text-body">
+				Prefer a different film's look? Browse the <a href="/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">full library of 60 presets</a>,
+				learn more about <a href="/guides/cinematic-color-grading/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">cinematic color grading</a>,
+				or head to the <a href="/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">homepage</a> to start with a blank slate.
+			</p>
+		</section>
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

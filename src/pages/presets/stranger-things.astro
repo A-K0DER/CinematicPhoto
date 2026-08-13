@@ -12,9 +12,11 @@ import { getPreset } from '../../lib/presets';
 const preset = getPreset('stranger-things');
 const path = '/presets/stranger-things/';
 
-const title = 'Stranger Things Photo Filter | Free Cinematic Photo Editor';
+const title = 'Stranger Things Photo Filter & Editor | Free Cinematic Tool';
 const description =
-	"Apply a free photo filter inspired by Stranger Things' 80s neon glow and deep shadows. Grade your photo instantly in your browser — no account needed.";
+	"Use this free Stranger Things photo filter and photo editor to grade your photo with the show's 80s neon glow and deep shadows, instantly in your browser — no account needed.";
+const keywords =
+	'stranger things photo filter, stranger things photo editor, stranger things editor, stranger things color grade, 80s photo filter';
 
 const structuredData = {
 	'@context': 'https://schema.org',
@@ -29,6 +31,10 @@ const faqs = [
 	{
 		q: 'Is this an official Stranger Things photo filter?',
 		a: "No. This preset is inspired by the visual aesthetic of Stranger Things' cinematography, it isn't an official filter licensed by or affiliated with Netflix or the show's creators. It's an independent color grade built to echo the look, not a branded tie-in product.",
+	},
+	{
+		q: 'Is there a dedicated Stranger Things photo editor?',
+		a: "This page is that dedicated editor — the Stranger Things grade loads pre-selected in the drop zone above, so you can drop a photo and immediately adjust its haze, glow, and grain without hunting through the full 60-preset library first.",
 	},
 	{
 		q: 'Why does the Stranger Things preset add a pink-red haze?',
@@ -53,7 +59,7 @@ const faqs = [
 ];
 ---
 
-<Layout {title} {description} {path} structuredData={structuredData}>
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
 	<Navbar variant="landing" />
 	<main>
 		<Breadcrumbs
@@ -72,9 +78,9 @@ const faqs = [
 				The Stranger Things photo filter: 80s neon through deep shadow.
 			</h1>
 			<p class="mt-5 max-w-xl text-base leading-7 text-body">
-				A free color grading preset inspired by the visual aesthetic of Stranger Things, built to
-				give night and low-light photos the show's signature neon glow, warm highlights, and
-				near-black shadow.
+				A free Stranger Things photo editor and color grading preset inspired by the visual
+				aesthetic of Stranger Things, built to give night and low-light photos the show's signature
+				neon glow, warm highlights, and near-black shadow.
 			</p>
 		</section>
 
