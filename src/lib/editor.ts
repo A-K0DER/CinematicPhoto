@@ -1,5 +1,14 @@
 import { getOverlayBackground, getPreset, type CinematicPreset } from './presets';
-import { computeCanvasSize, exportCanvas, loadImageFromFile, prepareGradedBase, renderFrame } from './engine';
+import {
+	computeCanvasSize,
+	computeCropForRatio,
+	exportCanvas,
+	getPanBounds,
+	loadImageFromFile,
+	prepareGradedBase,
+	renderFrame,
+	type AspectRatioId,
+} from './engine';
 import { clearCurrentImage, loadCurrentImage, saveCurrentImage } from './imageHandoff';
 import { extractRawPreviewBlob, isRawContainerFile } from './rawPreview';
 
@@ -10,6 +19,8 @@ const editorFileInput = document.getElementById('editor-file-input') as HTMLInpu
 const editorDropzoneError = document.getElementById('editor-dropzone-error') as HTMLParagraphElement;
 const presetGrid = document.getElementById('preset-grid') as HTMLDivElement;
 const presetDropdown = document.getElementById('preset-dropdown') as HTMLSelectElement;
+const aspectRatioGroup = document.getElementById('aspect-ratio-group') as HTMLDivElement;
+const recenterCropBtn = document.getElementById('recenter-crop') as HTMLButtonElement;
 
 const grainSlider = document.getElementById('grain-slider') as HTMLInputElement;
 const vignetteSlider = document.getElementById('vignette-slider') as HTMLInputElement;
@@ -40,6 +51,9 @@ interface State {
 	glow: number;
 	letterbox: boolean;
 	metadata: boolean;
+	aspectRatio: AspectRatioId;
+	panX: number;
+	panY: number;
 }
 
 const state: State = {
@@ -54,6 +68,9 @@ const state: State = {
 	glow: 0,
 	letterbox: false,
 	metadata: false,
+	aspectRatio: 'original',
+	panX: 0,
+	panY: 0,
 };
 
 const STATE_STORAGE_KEY = 'cinematic-photo:editor-state';
@@ -65,6 +82,7 @@ interface PersistedState {
 	glow: number;
 	letterbox: boolean;
 	metadata: boolean;
+	aspectRatio?: AspectRatioId;
 }
 
 /** Written on every render so a page reload can resume the same edit, not just the same photo. */
@@ -76,6 +94,7 @@ function persistState() {
 		glow: state.glow,
 		letterbox: state.letterbox,
 		metadata: state.metadata,
+		aspectRatio: state.aspectRatio,
 	};
 	localStorage.setItem(STATE_STORAGE_KEY, JSON.stringify(persisted));
 }
@@ -108,11 +127,13 @@ function render() {
 	persistState();
 	const preset = getPreset(state.presetId);
 	const stampLabel = `CINEMATIC PHOTO · ${preset.name.toUpperCase()} · 35MM`;
+	const crop = computeCropForRatio(state.width, state.height, state.aspectRatio, { x: state.panX, y: state.panY });
 	renderFrame({
 		canvas,
 		gradedBase: state.gradedBase,
-		width: state.width,
-		height: state.height,
+		width: crop.width,
+		height: crop.height,
+		sourceRect: crop.sourceRect,
 		preset,
 		options: {
 			grain: state.grain,
@@ -203,6 +224,18 @@ function clearDropzoneError() {
 	editorDropzoneError.textContent = '';
 }
 
+function setAspectRatio(ratio: AspectRatioId) {
+	state.aspectRatio = ratio;
+	state.panX = 0;
+	state.panY = 0;
+	for (const btn of aspectRatioGroup.querySelectorAll<HTMLButtonElement>('[data-aspect-ratio]')) {
+		btn.dataset.active = String(btn.dataset.aspectRatio === ratio);
+	}
+	canvas.classList.toggle('cursor-grab', ratio !== 'original');
+	recenterCropBtn.classList.toggle('hidden', ratio === 'original');
+	scheduleRender();
+}
+
 function applyPersistedAdjustments(saved: PersistedState) {
 	state.grain = saved.grain;
 	state.vignette = saved.vignette;
@@ -217,6 +250,7 @@ function applyPersistedAdjustments(saved: PersistedState) {
 	glowValue.textContent = String(state.glow);
 	letterboxToggle.setAttribute('aria-pressed', String(state.letterbox));
 	metadataToggle.setAttribute('aria-pressed', String(state.metadata));
+	setAspectRatio(saved.aspectRatio ?? 'original');
 	scheduleRender();
 }
 
@@ -258,6 +292,8 @@ async function loadFile(file: File) {
 		state.image = image;
 		state.width = width;
 		state.height = height;
+		state.panX = 0;
+		state.panY = 0;
 		state.fileBaseName = file.name.replace(/\.[^.]+$/, '') || 'cinematic-photo';
 		showCanvas();
 		if (replace) {
@@ -356,6 +392,72 @@ presetGrid.addEventListener('click', (e) => {
 	selectPreset(getPreset(card.dataset.presetId));
 });
 
+// --- Aspect ratio ---
+
+aspectRatioGroup.addEventListener('click', (e) => {
+	const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-aspect-ratio]');
+	if (!btn?.dataset.aspectRatio) return;
+	setAspectRatio(btn.dataset.aspectRatio as AspectRatioId);
+});
+
+recenterCropBtn.addEventListener('click', () => {
+	state.panX = 0;
+	state.panY = 0;
+	scheduleRender();
+});
+
+// --- Drag to reposition the crop (only active once an aspect ratio is picked) ---
+
+interface DragState {
+	pointerId: number;
+	startClientX: number;
+	startClientY: number;
+	startPanX: number;
+	startPanY: number;
+}
+
+let drag: DragState | null = null;
+
+canvas.addEventListener('pointerdown', (e) => {
+	if (state.aspectRatio === 'original' || !state.image) return;
+	drag = {
+		pointerId: e.pointerId,
+		startClientX: e.clientX,
+		startClientY: e.clientY,
+		startPanX: state.panX,
+		startPanY: state.panY,
+	};
+	canvas.setPointerCapture(e.pointerId);
+	canvas.classList.add('cursor-grabbing');
+});
+
+canvas.addEventListener('pointermove', (e) => {
+	if (!drag || drag.pointerId !== e.pointerId) return;
+	const rect = canvas.getBoundingClientRect();
+	if (rect.width === 0) return;
+	// Backing-store pixels per CSS pixel — the canvas is drawn at full crop
+	// resolution but displayed scaled down, so mouse deltas need converting.
+	const scale = canvas.width / rect.width;
+	const dxSource = (e.clientX - drag.startClientX) * scale;
+	const dySource = (e.clientY - drag.startClientY) * scale;
+	const bounds = getPanBounds(state.width, state.height, state.aspectRatio);
+	// Dragging right/down should reveal more of the image's left/top edge,
+	// i.e. slide the crop window the opposite way — so we subtract, not add.
+	state.panX = Math.min(Math.max(drag.startPanX - dxSource, -bounds.maxX), bounds.maxX);
+	state.panY = Math.min(Math.max(drag.startPanY - dySource, -bounds.maxY), bounds.maxY);
+	scheduleRender();
+});
+
+function endDrag(e: PointerEvent) {
+	if (!drag || drag.pointerId !== e.pointerId) return;
+	drag = null;
+	canvas.classList.remove('cursor-grabbing');
+	if (canvas.hasPointerCapture(e.pointerId)) canvas.releasePointerCapture(e.pointerId);
+}
+
+canvas.addEventListener('pointerup', endDrag);
+canvas.addEventListener('pointercancel', endDrag);
+
 // --- "Browse all presets" dropdown ---
 
 presetDropdown.addEventListener('change', () => {
@@ -416,14 +518,22 @@ navRemove.addEventListener('click', () => {
 	clearPersistedState();
 });
 
+const ASPECT_RATIO_FILE_SUFFIXES: Record<AspectRatioId, string> = {
+	original: '',
+	'1:1': '-1x1',
+	'4:5': '-4x5',
+	'9:16': '-9x16',
+};
+
 navExport.addEventListener('click', async () => {
 	if (!state.image) return;
 	const preset = getPreset(state.presetId);
 	const suffix = preset.id === 'original' ? 'original' : preset.id;
+	const ratioSuffix = ASPECT_RATIO_FILE_SUFFIXES[state.aspectRatio];
 	navExport.disabled = true;
 	navExport.textContent = 'Exporting…';
 	try {
-		await exportCanvas(canvas, `${state.fileBaseName}-${suffix}.png`);
+		await exportCanvas(canvas, `${state.fileBaseName}-${suffix}${ratioSuffix}.png`);
 	} finally {
 		navExport.disabled = false;
 		navExport.textContent = 'Export';

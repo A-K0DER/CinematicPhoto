@@ -12,6 +12,86 @@ export interface RenderOptions {
 	metadata: boolean;
 }
 
+/** 'original' keeps the source photo's own aspect ratio; the rest are Instagram export sizes. */
+export type AspectRatioId = 'original' | '1:1' | '4:5' | '9:16';
+
+const ASPECT_RATIO_VALUES: Record<Exclude<AspectRatioId, 'original'>, number> = {
+	'1:1': 1,
+	'4:5': 4 / 5,
+	'9:16': 9 / 16,
+};
+
+export interface CropRect {
+	sx: number;
+	sy: number;
+	sw: number;
+	sh: number;
+}
+
+export interface CropPlan {
+	width: number;
+	height: number;
+	sourceRect: CropRect | null;
+}
+
+export interface CropPan {
+	x: number;
+	y: number;
+}
+
+/** How far the crop window can slide off-center, in source pixels, before it would go outside the photo. */
+export interface PanBounds {
+	maxX: number;
+	maxY: number;
+}
+
+function clampNum(value: number, min: number, max: number): number {
+	return Math.min(Math.max(value, min), max);
+}
+
+/** The crop window's pixel dimensions for a ratio, before any pan offset is applied. */
+function computeCropDimensions(sourceWidth: number, sourceHeight: number, ratio: Exclude<AspectRatioId, 'original'>) {
+	const target = ASPECT_RATIO_VALUES[ratio];
+	const sourceRatio = sourceWidth / sourceHeight;
+	if (sourceRatio > target) {
+		// Source is relatively wider than the target — crop the sides.
+		return { sw: Math.round(sourceHeight * target), sh: sourceHeight };
+	}
+	// Source is relatively taller than the target — crop top/bottom.
+	return { sw: sourceWidth, sh: Math.round(sourceWidth / target) };
+}
+
+/** Max pixels the crop window can be dragged off-center in each direction (0 once it already fills that dimension). */
+export function getPanBounds(sourceWidth: number, sourceHeight: number, ratio: AspectRatioId): PanBounds {
+	if (ratio === 'original') return { maxX: 0, maxY: 0 };
+	const { sw, sh } = computeCropDimensions(sourceWidth, sourceHeight, ratio);
+	return { maxX: (sourceWidth - sw) / 2, maxY: (sourceHeight - sh) / 2 };
+}
+
+/**
+ * Center-crops (cover-fit) a source image down to the target Instagram ratio,
+ * the same math as CSS `object-fit: cover`. Never upscales — the output is
+ * always a sub-rectangle of the source at its native pixel density. `pan`
+ * shifts the crop window off-center (e.g. from dragging the preview),
+ * clamped so the window never goes outside the source image.
+ */
+export function computeCropForRatio(
+	sourceWidth: number,
+	sourceHeight: number,
+	ratio: AspectRatioId,
+	pan: CropPan = { x: 0, y: 0 },
+): CropPlan {
+	if (ratio === 'original') {
+		return { width: sourceWidth, height: sourceHeight, sourceRect: null };
+	}
+	const { sw, sh } = computeCropDimensions(sourceWidth, sourceHeight, ratio);
+	const baseSx = (sourceWidth - sw) / 2;
+	const baseSy = (sourceHeight - sh) / 2;
+	const sx = Math.round(clampNum(baseSx + pan.x, 0, sourceWidth - sw));
+	const sy = Math.round(clampNum(baseSy + pan.y, 0, sourceHeight - sh));
+	return { width: sw, height: sh, sourceRect: { sx, sy, sw, sh } };
+}
+
 export function loadImageFromFile(file: Blob): Promise<HTMLImageElement> {
 	return new Promise((resolve, reject) => {
 		const url = URL.createObjectURL(file);
@@ -255,19 +335,34 @@ export interface RenderFrameArgs {
 	gradedBase: HTMLCanvasElement;
 	width: number;
 	height: number;
+	/** When set, only this sub-rectangle of `gradedBase` is drawn (Instagram aspect-ratio crop). */
+	sourceRect?: CropRect | null;
 	preset: CinematicPreset;
 	options: RenderOptions;
 	stampLabel?: string;
 }
 
-export function renderFrame({ canvas, gradedBase, width, height, preset, options, stampLabel }: RenderFrameArgs) {
+export function renderFrame({
+	canvas,
+	gradedBase,
+	width,
+	height,
+	sourceRect,
+	preset,
+	options,
+	stampLabel,
+}: RenderFrameArgs) {
 	if (canvas.width !== width) canvas.width = width;
 	if (canvas.height !== height) canvas.height = height;
 	const ctx = canvas.getContext('2d');
 	if (!ctx) return;
 
 	ctx.clearRect(0, 0, width, height);
-	ctx.drawImage(gradedBase, 0, 0, width, height);
+	if (sourceRect) {
+		ctx.drawImage(gradedBase, sourceRect.sx, sourceRect.sy, sourceRect.sw, sourceRect.sh, 0, 0, width, height);
+	} else {
+		ctx.drawImage(gradedBase, 0, 0, width, height);
+	}
 
 	applyOverlay(ctx, preset, width, height);
 	applyHaze(ctx, preset, width, height);

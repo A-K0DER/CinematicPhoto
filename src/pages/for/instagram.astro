@@ -7,9 +7,11 @@ import DropZone from '../../components/DropZone.astro';
 import MovieFaq from '../../components/MovieFaq.astro';
 
 const path = '/for/instagram/';
-const title = 'Cinematic Instagram Photo Filter | Cinematic Photo Editor';
+const title = 'Cinematic Instagram Photo Filter & Editor | Crop for Feed, Story, Reels';
 const description =
-	'Five cinematic presets picked for Instagram: punchy, colorful movie grades that hold up at feed and story size.';
+	'Five cinematic presets picked for Instagram, plus built-in 1:1, 4:5, and 9:16 crop sizing so your feed, portrait, and Story/Reel exports come out ready to post.';
+const keywords =
+	'instagram photo filter, instagram photo editor, instagram crop size, instagram aspect ratio, instagram story size, instagram reel size, cinematic instagram filter';
 
 const structuredData = {
 	'@context': 'https://schema.org',
@@ -44,10 +46,22 @@ const faqs = [
 		q: 'Which preset works best for aesthetic, moody Instagram feeds?',
 		a: "Euphoria's neon purple-blue haze and Blade Runner 2049's amber-teal split both lean into a moody, atmospheric aesthetic popular on Instagram. For a warmer, softer moody look instead, see the dark and moody photo filter guide.",
 	},
+	{
+		q: 'Does the editor crop photos to the right size for Instagram?',
+		a: "Yes. The editor has a built-in Aspect ratio control with one-click Instagram sizes: 1:1 for the feed, 4:5 for portrait posts, and 9:16 for Stories and Reels. Pick a size after applying a preset and the export is center-cropped to that ratio automatically, no separate cropping tool needed.",
+	},
+	{
+		q: 'Which Instagram aspect ratio should I use: 1:1, 4:5, or 9:16?',
+		a: "4:5 portrait gets the most vertical space in a scrolling feed, since Instagram displays it larger than a square post. 1:1 square is the safest choice if you also plan to reuse the same export elsewhere, since it crops less aggressively from a typical photo. 9:16 is built for Stories and Reels, not feed posts.",
+	},
+	{
+		q: 'Will cropping to a square or portrait ratio cut off part of my photo?',
+		a: "It can, since fitting a rectangular photo into a narrower ratio means trimming the sides or top and bottom. The editor's crop is centered, so the middle of the frame is always preserved, it's a good idea to leave a little breathing room around your subject in the original photo before applying a tight ratio like 4:5 or 9:16.",
+	},
 ];
 ---
 
-<Layout {title} {description} {path} structuredData={structuredData}>
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
 	<Navbar variant="landing" />
 	<main>
 		<Breadcrumbs
@@ -61,11 +75,11 @@ const faqs = [
 		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
 			<span class="mb-4 font-mono text-xs tracking-wide text-mute">USE CASE GUIDE</span>
 			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
-				Cinematic Instagram photo filter
+				Cinematic Instagram photo filter &amp; editor
 			</h1>
 			<p class="mt-5 max-w-xl text-base leading-7 text-body">
-				Five cinematic presets chosen for the feed: punchy, color-forward movie grades that still
-				read clearly at thumbnail size.
+				Five cinematic presets chosen for the feed, and a built-in Instagram photo editor that
+				crops your export to 1:1, 4:5, or 9:16 so it's sized right before you post.
 			</p>
 		</section>
 
@@ -92,6 +106,29 @@ const faqs = [
 					Consistency matters too. Reusing the same preset, or the same two or three, across a
 					grid builds a recognizable aesthetic over time rather than a mismatched set of one-off
 					edits.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BUILT-IN INSTAGRAM SIZES</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Export at the right size, no separate cropping tool
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Once a preset is applied, the editor's <strong class="font-medium text-ink">Aspect ratio</strong>
+					control center-crops the photo to a standard Instagram size before export: <strong class="font-medium text-ink">1:1</strong> for
+					a feed post, <strong class="font-medium text-ink">4:5</strong> for the taller portrait
+					format Instagram gives more vertical space to in a scrolling feed, or <strong class="font-medium text-ink">9:16</strong> for
+					a Story or Reel cover. The crop, the color grade, and the grain/vignette/glow adjustments
+					all happen in the same export, so there's no round trip through a separate cropping app.
+				</p>
+				<p>
+					The crop is always centered on the original photo, and the tool never upscales, it only
+					trims down to the target ratio at the photo's native resolution. Switching ratios after
+					applying a preset doesn't require re-editing anything else; grain, vignette, and glow stay
+					exactly as set.
 				</p>
 			</div>
 		</section>

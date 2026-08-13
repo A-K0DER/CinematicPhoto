@@ -17,7 +17,7 @@ const remainingByGenre = GENRES.map((genre) => ({
 		<div id="preview-wrap" class="flex max-h-full w-full max-w-full flex-col items-center justify-center gap-4 transition-opacity duration-200">
 			<canvas
 				id="canvas"
-				class="max-h-[75vh] max-w-full rounded-sm shadow-[0_1px_1px_rgba(0,0,0,0.2),0_8px_24px_-8px_rgba(0,0,0,0.5)]"
+				class="max-h-[75vh] max-w-full touch-none rounded-sm shadow-[0_1px_1px_rgba(0,0,0,0.2),0_8px_24px_-8px_rgba(0,0,0,0.5)]"
 			></canvas>
 			<label
 				id="editor-dropzone"
@@ -120,6 +120,63 @@ const remainingByGenre = GENRES.map((genre) => ({
 			</select>
 		</div>
 
+		<div class="flex flex-col gap-3 border-t border-hairline pt-5">
+			<div class="flex items-center justify-between">
+				<h2 class="font-mono text-[11px] font-medium tracking-wide text-mute uppercase">
+					Aspect ratio
+				</h2>
+				<button
+					id="recenter-crop"
+					type="button"
+					class="hidden font-mono text-[11px] text-mute transition-colors hover:text-ink"
+				>
+					Recenter
+				</button>
+			</div>
+			<div id="aspect-ratio-group" class="grid grid-cols-4 gap-2">
+				<button
+					type="button"
+					data-aspect-ratio="original"
+					data-active="true"
+					class="aspect-ratio-btn flex flex-col items-center gap-0.5 rounded-md border border-hairline bg-canvas px-1 py-2.5 text-center transition-colors hover:border-hairline-strong data-[active=true]:border-ink data-[active=true]:ring-1 data-[active=true]:ring-ink"
+				>
+					<span class="font-sans text-xs font-medium text-ink">Original</span>
+					<span class="font-mono text-[9px] text-mute">Source</span>
+				</button>
+				<button
+					type="button"
+					data-aspect-ratio="1:1"
+					data-active="false"
+					class="aspect-ratio-btn flex flex-col items-center gap-0.5 rounded-md border border-hairline bg-canvas px-1 py-2.5 text-center transition-colors hover:border-hairline-strong data-[active=true]:border-ink data-[active=true]:ring-1 data-[active=true]:ring-ink"
+				>
+					<span class="font-sans text-xs font-medium text-ink">1:1</span>
+					<span class="font-mono text-[9px] text-mute">Feed</span>
+				</button>
+				<button
+					type="button"
+					data-aspect-ratio="4:5"
+					data-active="false"
+					class="aspect-ratio-btn flex flex-col items-center gap-0.5 rounded-md border border-hairline bg-canvas px-1 py-2.5 text-center transition-colors hover:border-hairline-strong data-[active=true]:border-ink data-[active=true]:ring-1 data-[active=true]:ring-ink"
+				>
+					<span class="font-sans text-xs font-medium text-ink">4:5</span>
+					<span class="font-mono text-[9px] text-mute">Portrait</span>
+				</button>
+				<button
+					type="button"
+					data-aspect-ratio="9:16"
+					data-active="false"
+					class="aspect-ratio-btn flex flex-col items-center gap-0.5 rounded-md border border-hairline bg-canvas px-1 py-2.5 text-center transition-colors hover:border-hairline-strong data-[active=true]:border-ink data-[active=true]:ring-1 data-[active=true]:ring-ink"
+				>
+					<span class="font-sans text-xs font-medium text-ink">9:16</span>
+					<span class="font-mono text-[9px] text-mute">Story</span>
+				</button>
+			</div>
+			<p class="font-mono text-[10px] leading-relaxed text-mute">
+				Center-crops to Instagram's feed, portrait, or Story/Reel size on export. Drag the photo
+				to reposition the crop.
+			</p>
+		</div>
+
 		<div class="flex flex-col gap-4 border-t border-hairline pt-5">
 			<div class="flex items-center justify-between">
 				<h2 class="font-mono text-[11px] font-medium tracking-wide text-mute uppercase">
@@ -200,7 +257,8 @@ const remainingByGenre = GENRES.map((genre) => ({
 </section>
 
 <style>
-	[data-active='true'].preset-card {
+	[data-active='true'].preset-card,
+	[data-active='true'].aspect-ratio-btn {
 		background-color: var(--color-canvas-soft-2);
 	}
 
