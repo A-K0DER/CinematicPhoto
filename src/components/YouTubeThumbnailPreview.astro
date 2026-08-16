@@ -6,6 +6,19 @@ import { YOUTUBE_TIME_AGO_OPTIONS } from '../lib/youtubePreview';
 	id="yt-preview-tool"
 	class="mx-auto grid w-full max-w-6xl grid-cols-1 gap-8 px-4 py-4 sm:px-6 lg:grid-cols-[1fr_320px] lg:items-start"
 >
+	<button
+		id="yt-options-toggle"
+		type="button"
+		class="inline-flex w-fit items-center gap-2 self-start rounded-md border border-hairline bg-canvas px-3 py-2 font-sans text-sm font-medium text-ink transition-colors hover:border-hairline-strong lg:hidden"
+	>
+		<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path d="M4 6h16M4 12h10M4 18h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+		</svg>
+		Options
+	</button>
+
+	<div id="yt-options-backdrop" class="fixed inset-0 z-40 hidden bg-black/60 lg:hidden"></div>
+
 	<div class="flex flex-col items-center gap-10 lg:pt-1">
 		<div class="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
 			<div class="flex flex-col items-start gap-3">
@@ -92,7 +105,24 @@ import { YOUTUBE_TIME_AGO_OPTIONS } from '../lib/youtubePreview';
 		</div>
 	</div>
 
-	<aside class="flex flex-col gap-6 rounded-xl border border-hairline bg-canvas-soft p-5 lg:sticky lg:top-20">
+	<aside
+		id="yt-options-panel"
+		class="fixed inset-y-0 left-0 z-50 flex w-[85%] max-w-xs -translate-x-full flex-col gap-6 overflow-y-auto border-r border-hairline bg-canvas-soft p-5 shadow-2xl transition-transform duration-300 ease-in-out lg:sticky lg:inset-auto lg:top-20 lg:z-auto lg:w-[320px] lg:max-w-none lg:translate-x-0 lg:rounded-xl lg:border lg:shadow-none"
+	>
+		<div class="flex items-center justify-between lg:hidden">
+			<span class="font-mono text-[11px] font-medium tracking-wide text-mute uppercase">Options</span>
+			<button
+				id="yt-options-close"
+				type="button"
+				aria-label="Close options"
+				class="flex h-7 w-7 items-center justify-center rounded-md text-mute transition-colors hover:text-ink"
+			>
+				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+				</svg>
+			</button>
+		</div>
+
 		<div>
 			<h2 class="mb-3 font-mono text-[11px] font-medium tracking-wide text-mute uppercase">Thumbnail</h2>
 			<div class="relative w-full">
@@ -189,6 +219,37 @@ import { YOUTUBE_TIME_AGO_OPTIONS } from '../lib/youtubePreview';
 <script>
 	import { avatarColorFor, formatViewCount, parseDurationBadge } from '../lib/youtubePreview';
 
+	const optionsToggle = document.getElementById('yt-options-toggle') as HTMLButtonElement;
+	const optionsClose = document.getElementById('yt-options-close') as HTMLButtonElement;
+	const optionsPanel = document.getElementById('yt-options-panel') as HTMLElement;
+	const optionsBackdrop = document.getElementById('yt-options-backdrop') as HTMLElement;
+
+	function openOptions() {
+		optionsPanel.classList.remove('-translate-x-full');
+		optionsPanel.classList.add('translate-x-0');
+		optionsBackdrop.classList.remove('hidden');
+		document.body.classList.add('overflow-hidden');
+	}
+
+	function closeOptions() {
+		optionsPanel.classList.add('-translate-x-full');
+		optionsPanel.classList.remove('translate-x-0');
+		optionsBackdrop.classList.add('hidden');
+		document.body.classList.remove('overflow-hidden');
+	}
+
+	optionsToggle.addEventListener('click', openOptions);
+	optionsClose.addEventListener('click', closeOptions);
+	optionsBackdrop.addEventListener('click', closeOptions);
+	window.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape') closeOptions();
+	});
+
+	const lgQuery = window.matchMedia('(min-width: 1024px)');
+	lgQuery.addEventListener('change', (e) => {
+		if (e.matches) closeOptions();
+	});
+
 	const dropzone = document.getElementById('yt-dropzone') as HTMLLabelElement;
 	const fileInput = document.getElementById('yt-file-input') as HTMLInputElement;
 	const errorEl = document.getElementById('yt-error') as HTMLParagraphElement;
@@ -237,6 +298,7 @@ import { YOUTUBE_TIME_AGO_OPTIONS } from '../lib/youtubePreview';
 		}
 		dropzone.classList.add('hidden');
 		removeBtn.classList.remove('hidden');
+		closeOptions();
 	}
 
 	function removeThumbnail() {
