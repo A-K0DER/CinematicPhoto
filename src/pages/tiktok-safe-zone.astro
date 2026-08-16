@@ -25,6 +25,35 @@ const structuredData = {
 	isAccessibleForFree: true,
 };
 
+const howToStructuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'HowTo',
+	name: "How to check TikTok's safe zone on a photo",
+	description: "Overlay TikTok's caption, username, sound title, and engagement icon bands on a photo before posting.",
+	step: [
+		{
+			'@type': 'HowToStep',
+			name: 'Upload a photo',
+			text: 'Drop a photo or thumbnail onto the tool, paste it, or click to upload a JPG, PNG, or WEBP file.',
+		},
+		{
+			'@type': 'HowToStep',
+			name: 'Reposition inside the frame',
+			text: "Drag inside the frame to reposition the photo within TikTok's 9:16 export crop.",
+		},
+		{
+			'@type': 'HowToStep',
+			name: "Check TikTok's UI overlay",
+			text: "Review the dimmed bands showing TikTok's top bar, bottom caption/username/sound area, and right-hand engagement icon column drawn to scale on the photo.",
+		},
+		{
+			'@type': 'HowToStep',
+			name: 'Save a reference image',
+			text: 'Adjust the overlay opacity if needed, then save the cropped reference image or a transparent overlay PNG.',
+		},
+	],
+};
+
 const faqs = [
 	{
 		q: 'What is TikTok\'s safe zone?',
@@ -120,6 +149,8 @@ const faqs = [
 		</section>
 
 		<MovieFaq eyebrow="FAQ" heading="Common questions about TikTok's safe zone" faqs={faqs} />
+
+		<script type="application/ld+json" set:html={JSON.stringify(howToStructuredData)} />
 	</main>
 	<Footer />
 </Layout>

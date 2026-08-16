@@ -25,6 +25,32 @@ import AdSlot from '../components/AdSlot.astro';
 			]}
 		/>
 		<AdSlot />
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">FREE TOOLS</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Check your composition before you post
+			</h2>
+			<p class="mt-4 max-w-xl text-base leading-7 text-body">
+				Free browser tools that overlay a platform's own UI on your photo, so a face, subtitle,
+				or product detail doesn't end up hidden behind a caption or icon rail.
+			</p>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/tools/safe-zones/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">TikTok &amp; Reels safe zone checker</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Compare both platforms' overlays at once</span>
+				</a>
+				<a href="/tiktok-safe-zone/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">TikTok safe zone checker</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Single-platform version, focused on TikTok</span>
+				</a>
+				<a href="/instagram-reels-safe-zone/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Instagram Reels safe zone checker</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Single-platform version, focused on Reels</span>
+				</a>
+			</div>
+		</section>
+
 		<SeoContent />
 	</main>
 	<Footer />
