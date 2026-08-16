@@ -1,0 +1,178 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+
+const path = '/guides/youtube-thumbnail-design/';
+const title = 'How to Design a YouTube Thumbnail That Gets Clicks | Cinematic Photo';
+const description =
+	'The design rules that actually move click-through: contrast at small size, one clear focal point, legible text, and a consistent look — plus how to test a thumbnail before publishing.';
+const keywords =
+	'youtube thumbnail design, how to make a youtube thumbnail, youtube thumbnail best practices, youtube thumbnail tips, youtube thumbnail size, click-through rate thumbnail';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'Article',
+	headline: 'How to Design a YouTube Thumbnail That Gets Clicks',
+	description,
+	url: `https://cinematicphoto.com${path}`,
+	author: { '@type': 'Organization', name: 'Cinematic Photo' },
+	publisher: { '@type': 'Organization', name: 'Cinematic Photo' },
+	mainEntityOfPage: `https://cinematicphoto.com${path}`,
+};
+
+const faqs = [
+	{
+		q: "What's the ideal YouTube thumbnail size?",
+		a: '1280×720 pixels at a 16:9 aspect ratio, saved as a JPG, PNG, or non-animated GIF under 2MB. Anything not exactly 16:9 gets center-cropped by YouTube to that ratio in its UI, so it\'s worth designing at 16:9 from the start rather than fitting a differently-shaped photo into it afterward.',
+	},
+	{
+		q: 'How many words should be on a thumbnail?',
+		a: "Three to five words at most, and only if the title itself doesn't already say it. A thumbnail is judged at 168px, 112px, or smaller on a phone, long sentences turn into an unreadable gray smear at that size. Treat thumbnail text as a hook that adds to the title, not a restatement of it.",
+	},
+	{
+		q: 'Does the thumbnail affect how YouTube ranks or recommends a video?',
+		a: "Not directly as a ranking signal, but indirectly and significantly, YouTube's recommendation system weighs click-through rate heavily, and the thumbnail (alongside the title) is the single biggest lever on whether someone clicks. A well-designed thumbnail on a mediocre video can still underperform if viewers don't finish watching, but a weak thumbnail caps a great video's reach before anyone sees it.",
+	},
+	{
+		q: 'Is it against the rules for a thumbnail to be misleading?',
+		a: "Yes. YouTube's clickbait and misleading thumbnail policies are enforceable, thumbnails that promise something the video doesn't deliver (fake bodies, fabricated events, unrelated shock imagery) can get a video removed or a channel penalized. A bold, high-contrast thumbnail is fine, one that lies about the content isn't.",
+	},
+	{
+		q: 'Should older video thumbnails be redesigned over time?',
+		a: "Often worth it for evergreen videos still pulling in views, since design conventions and a channel's own visual identity both shift over time, and an outdated thumbnail can drag down an otherwise-good video's click-through rate. It's generally not worth it for videos that have already run their course and get little ongoing traffic.",
+	},
+	{
+		q: 'What colors work best for a thumbnail?',
+		a: "High-contrast, saturated colors that hold up at a small size, the same reason bold, high-contrast cinematic grades (Joker, The Batman, Mad Max: Fury Road) tend to work well as a thumbnail base. Complementary color pairs, like orange-and-teal or red-and-cyan, also help separate a subject from its background at a glance.",
+	},
+];
+---
+
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'Guides' },
+				{ label: 'YouTube Thumbnail Design' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">THUMBNAIL GUIDE</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				How to design a YouTube thumbnail that gets clicks
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				A thumbnail is judged in a fraction of a second, at a fraction of its real size, next to a
+				dozen competitors. Here's what actually earns the click, and what just looks good full-size
+				in your editor.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">THE PRINCIPLES</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				What separates a thumbnail that works from one that doesn't
+			</h2>
+			<div class="mt-6 flex flex-col gap-6 text-base leading-7 text-body">
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Contrast wins at small size</h3>
+					<p class="mt-2">
+						Most viewers never see a thumbnail full-size, it's a 168px sidebar suggestion or a
+						phone-width feed card. Subtle tonal differences that read clearly on a desktop monitor
+						flatten into mush at that scale. High contrast between subject and background, and
+						between any text and what's behind it, is what survives the shrink.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">One focal point, not five</h3>
+					<p class="mt-2">
+						A thumbnail has to communicate its idea in under a second. A single clear subject, a
+						face, an object, one dominant color block, reads instantly; a busy composition with
+						multiple competing elements forces a viewer to parse it, and most won't bother.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Text is a hook, not a caption</h3>
+					<p class="mt-2">
+						Three to five words, large, bold, and high-contrast against the background, is the
+						ceiling for text that still reads at 64px wide. If the title already says it, the
+						thumbnail doesn't need to repeat it, use the space for something the title can't
+						convey: an expression, a number, a before/after.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">A consistent look builds recognition</h3>
+					<p class="mt-2">
+						Channels that reuse a color palette, font, or layout across thumbnails become
+						recognizable in a crowded subscription feed, a viewer starts recognizing the channel
+						before they've even read the title. That consistency matters more over a channel's
+						whole library than any single thumbnail's individual cleverness.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Match the promise, not just the aesthetic</h3>
+					<p class="mt-2">
+						A bold, high-contrast thumbnail that oversells or misrepresents the video hurts
+						watch-time and retention once the click happens, and risks a policy strike outright.
+						The best-performing thumbnails are honest about the content and simply present it as
+						compellingly as possible.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">TESTING IT</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Check it the way viewers will actually see it
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					A thumbnail that looks sharp in a design tool at full resolution can fall apart once it's
+					sitting next to a title, a channel name, and a view count in a real layout. Suggested
+					videos, search results, and the mobile home feed each show it at a different size and pair
+					it with different metadata, and YouTube center-crops anything that isn't exactly 16:9.
+				</p>
+				<p>
+					Running a design through those real placements, including the small-size check at 168px,
+					112px, and 64px wide, catches a muddy or clipped result before a video goes live instead of
+					after it's already published and the early view window has passed.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">GO DEEPER</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Put it into practice
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/tools/youtube-thumbnail-preview/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">YouTube thumbnail preview tool</span>
+					<span class="mt-1 block font-mono text-xs text-mute">See it in search, suggested, and mobile</span>
+				</a>
+				<a href="/for/youtube-thumbnails/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Cinematic YouTube thumbnails</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Bold, high-contrast presets for creators</span>
+				</a>
+				<a href="/guides/cinematic-color-grading/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Cinematic color grading, explained</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Why high-contrast grades read well at a glance</span>
+				</a>
+				<a href="/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Browse all 60 presets</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Every color grade, organized by genre</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Common questions about YouTube thumbnail design" faqs={faqs} />
+	</main>
+	<Footer />
+</Layout>

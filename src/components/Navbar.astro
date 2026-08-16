@@ -68,9 +68,25 @@ const { variant = 'landing', editorMode = 'photo' } = Astro.props;
 							</a>
 						</div>
 					</details>
-					<a href="/guides/how-to-make-photos-look-cinematic/" class="font-mono text-xs text-body transition-colors hover:text-ink">
-						Guides
-					</a>
+					<details class="nav-dropdown relative">
+						<summary class="cursor-pointer list-none font-mono text-xs text-body transition-colors hover:text-ink [&::-webkit-details-marker]:hidden">
+							Guides
+						</summary>
+						<div class="absolute left-0 top-full z-50 mt-2 w-56 rounded-md border border-hairline bg-canvas p-1.5 shadow-lg">
+							<a href="/guides/how-to-make-photos-look-cinematic/" class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
+								Make Photos Look Cinematic
+							</a>
+							<a href="/guides/cinematic-color-grading/" class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
+								Cinematic Color Grading
+							</a>
+							<a href="/guides/social-media-safe-zones/" class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
+								Social Media Safe Zones
+							</a>
+							<a href="/guides/youtube-thumbnail-design/" class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
+								YouTube Thumbnail Design
+							</a>
+						</div>
+					</details>
 					<details class="nav-dropdown relative">
 						<summary class="cursor-pointer list-none font-mono text-xs text-body transition-colors hover:text-ink [&::-webkit-details-marker]:hidden">
 							Free Tools
@@ -231,9 +247,25 @@ const { variant = 'landing', editorMode = 'photo' } = Astro.props;
 					</div>
 				</details>
 
-				<a href="/guides/how-to-make-photos-look-cinematic/" class="rounded-md px-2 py-2.5 font-mono text-xs text-body transition-colors hover:text-ink">
-					Guides
-				</a>
+				<details class="nav-dropdown">
+					<summary class="cursor-pointer list-none rounded-md px-2 py-2.5 font-mono text-xs text-body transition-colors hover:text-ink [&::-webkit-details-marker]:hidden">
+						Guides
+					</summary>
+					<div class="ml-2 flex flex-col border-l border-hairline pl-3">
+						<a href="/guides/how-to-make-photos-look-cinematic/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+							Make Photos Look Cinematic
+						</a>
+						<a href="/guides/cinematic-color-grading/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+							Cinematic Color Grading
+						</a>
+						<a href="/guides/social-media-safe-zones/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+							Social Media Safe Zones
+						</a>
+						<a href="/guides/youtube-thumbnail-design/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+							YouTube Thumbnail Design
+						</a>
+					</div>
+				</details>
 
 				<details class="nav-dropdown">
 					<summary class="cursor-pointer list-none rounded-md px-2 py-2.5 font-mono text-xs text-body transition-colors hover:text-ink [&::-webkit-details-marker]:hidden">
