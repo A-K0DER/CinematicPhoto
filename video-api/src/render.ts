@@ -1,6 +1,11 @@
-import { getSandbox } from '@cloudflare/sandbox';
-import type { Env } from '../worker-configuration';
-import { buildFfmpegCommand } from './ffmpeg';
+import { execFile } from 'node:child_process';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import path from 'node:path';
+import { promisify } from 'node:util';
+import ffmpegPath from 'ffmpeg-static';
+import { buildFfmpegArgs } from './ffmpeg';
+
+const execFileAsync = promisify(execFile);
 
 export type JobStatus =
 	| { status: 'queued' }
@@ -8,58 +13,53 @@ export type JobStatus =
 	| { status: 'done' }
 	| { status: 'error'; message: string };
 
-export const sourceKey = (jobId: string) => `source/${jobId}.mp4`;
-export const outputKey = (jobId: string) => `output/${jobId}.mp4`;
+// In-memory job tracking and on-disk source/output files — this is a local
+// dev server, not the deployed article; there's no R2/KV equivalent here.
+const jobs = new Map<string, JobStatus>();
+const DATA_DIR = path.join(process.cwd(), '.local-data');
 
-async function setStatus(env: Env, jobId: string, status: JobStatus) {
-	await env.VIDEO_JOBS.put(jobId, JSON.stringify(status), { expirationTtl: 60 * 60 * 48 });
+export function setStatus(jobId: string, status: JobStatus): void {
+	jobs.set(jobId, status);
 }
 
-export async function getStatus(env: Env, jobId: string): Promise<JobStatus | null> {
-	const raw = await env.VIDEO_JOBS.get(jobId);
-	return raw ? (JSON.parse(raw) as JobStatus) : null;
+export function getStatus(jobId: string): JobStatus | null {
+	return jobs.get(jobId) ?? null;
+}
+
+function jobDir(jobId: string): string {
+	return path.join(DATA_DIR, jobId);
+}
+
+function sourcePath(jobId: string): string {
+	return path.join(jobDir(jobId), 'input.mp4');
+}
+
+function outputPath(jobId: string): string {
+	return path.join(jobDir(jobId), 'output.mp4');
+}
+
+export async function saveSource(jobId: string, bytes: Buffer): Promise<void> {
+	await mkdir(jobDir(jobId), { recursive: true });
+	await writeFile(sourcePath(jobId), bytes);
+}
+
+export async function readOutput(jobId: string): Promise<Buffer> {
+	return readFile(outputPath(jobId));
 }
 
 /**
- * Runs in `ctx.waitUntil()` — the request that kicked off the job has
- * already returned a jobId to the client, which polls GET /jobs/:id for
- * this to finish.
- *
- * Phase-1 shortcut: the source is pulled from R2 into Worker memory and
- * base64-written into the sandbox (`writeFile(..., { encoding: 'base64' })`)
- * rather than streamed, since the Sandbox SDK's file API is string/base64
- * based. Fine for the spike's small test clips; before raising the v1 size
- * cap (~300MB in the plan) this should move to a presigned-URL + curl
- * transfer so the Worker never buffers the whole file.
+ * Fired-and-forgotten by the /jobs route — the client already has the jobId
+ * and polls GET /jobs/:id for this to finish.
  */
-export async function runRender(env: Env, jobId: string): Promise<void> {
-	const sandbox = getSandbox(env.SANDBOX, jobId);
-
+export async function runRender(jobId: string): Promise<void> {
+	setStatus(jobId, { status: 'rendering' });
 	try {
-		await setStatus(env, jobId, { status: 'rendering' });
-
-		const source = await env.VIDEO_BUCKET.get(sourceKey(jobId));
-		if (!source) throw new Error('Source object missing from R2 — upload may not have finished.');
-		const sourceBytes = await source.arrayBuffer();
-
-		const inputPath = '/workspace/input.mp4';
-		const outputPath = '/workspace/output.mp4';
-		await sandbox.writeFile(inputPath, Buffer.from(sourceBytes).toString('base64'), { encoding: 'base64' });
-
-		const result = await sandbox.exec(buildFfmpegCommand(inputPath, outputPath), { timeout: 180_000 });
-		if (!result.success) {
-			throw new Error(`ffmpeg exited ${result.exitCode}: ${result.stderr.slice(-2000)}`);
-		}
-
-		const output = await sandbox.readFile(outputPath, { encoding: 'base64' });
-		await env.VIDEO_BUCKET.put(outputKey(jobId), Buffer.from(output.content, 'base64'), {
-			httpMetadata: { contentType: 'video/mp4' },
-		});
-
-		await setStatus(env, jobId, { status: 'done' });
+		if (!ffmpegPath) throw new Error('ffmpeg-static did not resolve a binary path for this platform.');
+		const args = buildFfmpegArgs(sourcePath(jobId), outputPath(jobId));
+		await execFileAsync(ffmpegPath, args, { maxBuffer: 1024 * 1024 * 64 });
+		setStatus(jobId, { status: 'done' });
 	} catch (err) {
-		await setStatus(env, jobId, { status: 'error', message: err instanceof Error ? err.message : String(err) });
-	} finally {
-		await sandbox.destroy();
+		const message = err instanceof Error ? err.message : String(err);
+		setStatus(jobId, { status: 'error', message: message.slice(-2000) });
 	}
 }
