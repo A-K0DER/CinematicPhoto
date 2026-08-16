@@ -12,6 +12,21 @@ const { variant = 'landing', editorMode = 'photo' } = Astro.props;
 	class="sticky top-0 z-40 flex h-14 items-center justify-between border-b border-hairline bg-canvas/80 px-4 backdrop-blur-md sm:px-6"
 >
 	<div class="flex items-center gap-6">
+		{
+			variant !== 'editor' && (
+				<button
+					id="mobile-nav-toggle"
+					type="button"
+					aria-label="Open menu"
+					class="flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-mute transition-colors hover:text-ink sm:hidden"
+				>
+					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+					</svg>
+				</button>
+			)
+		}
+
 		<a href="/" class="flex items-center gap-2" aria-label="Cinematic Photo home">
 			<img src="/logo.png" width="20" height="20" alt="" class="h-5 w-5" />
 			<span class="font-sans text-[15px] font-semibold tracking-[-0.02em] text-ink"
@@ -162,6 +177,88 @@ const { variant = 'landing', editorMode = 'photo' } = Astro.props;
 	</div>
 </header>
 
+{
+	variant !== 'editor' && (
+		<>
+			<div id="mobile-nav-backdrop" class="fixed inset-0 z-40 hidden bg-black/60 sm:hidden" />
+			<aside
+				id="mobile-nav-panel"
+				class="fixed inset-y-0 left-0 z-50 flex w-[80%] max-w-xs -translate-x-full flex-col gap-1 overflow-y-auto border-r border-hairline bg-canvas p-4 shadow-2xl transition-transform duration-300 ease-in-out sm:hidden"
+			>
+				<div class="mb-2 flex items-center justify-between">
+					<span class="font-mono text-[11px] font-medium tracking-wide text-mute uppercase">Menu</span>
+					<button
+						id="mobile-nav-close"
+						type="button"
+						aria-label="Close menu"
+						class="flex h-7 w-7 items-center justify-center rounded-md text-mute transition-colors hover:text-ink"
+					>
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+						</svg>
+					</button>
+				</div>
+
+				<details class="nav-dropdown">
+					<summary class="cursor-pointer list-none rounded-md px-2 py-2.5 font-mono text-xs text-body transition-colors hover:text-ink [&::-webkit-details-marker]:hidden">
+						Popular Presets
+					</summary>
+					<div class="ml-2 flex flex-col border-l border-hairline pl-3">
+						<a href="/presets/the-dark-knight/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+							The Dark Knight
+						</a>
+						<a href="/presets/blade-runner-2049/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+							Blade Runner 2049
+						</a>
+						<a href="/presets/dune/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+							Dune
+						</a>
+						<a href="/presets/interstellar/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+							Interstellar
+						</a>
+						<a href="/presets/the-matrix/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+							The Matrix
+						</a>
+						<a href="/presets/breaking-bad/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+							Breaking Bad
+						</a>
+						<a href="/presets/stranger-things/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+							Stranger Things
+						</a>
+						<a href="/presets/game-of-thrones/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+							Game of Thrones
+						</a>
+					</div>
+				</details>
+
+				<a href="/guides/how-to-make-photos-look-cinematic/" class="rounded-md px-2 py-2.5 font-mono text-xs text-body transition-colors hover:text-ink">
+					Guides
+				</a>
+
+				<details class="nav-dropdown">
+					<summary class="cursor-pointer list-none rounded-md px-2 py-2.5 font-mono text-xs text-body transition-colors hover:text-ink [&::-webkit-details-marker]:hidden">
+						Free Tools
+					</summary>
+					<div class="ml-2 flex flex-col border-l border-hairline pl-3">
+						<a href="/tiktok-safe-zone/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+							TikTok
+						</a>
+						<a href="/instagram-reels-safe-zone/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+							Instagram Reels
+						</a>
+						<a href="/tools/safe-zones/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+							Compare both
+						</a>
+						<a href="/tools/youtube-thumbnail-preview/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+							YouTube Thumbnail Preview
+						</a>
+					</div>
+				</details>
+			</aside>
+		</>
+	)
+}
+
 <script>
 	const themeToggle = document.getElementById('theme-toggle') as HTMLButtonElement;
 	const themeColorMeta = document.getElementById('theme-color-meta') as HTMLMetaElement;
@@ -187,6 +284,37 @@ const { variant = 'landing', editorMode = 'photo' } = Astro.props;
 		for (const details of navDropdowns) {
 			if (details.open && !details.contains(e.target as Node)) details.open = false;
 		}
+	});
+
+	const mobileNavToggle = document.getElementById('mobile-nav-toggle') as HTMLButtonElement | null;
+	const mobileNavClose = document.getElementById('mobile-nav-close') as HTMLButtonElement | null;
+	const mobileNavPanel = document.getElementById('mobile-nav-panel') as HTMLElement | null;
+	const mobileNavBackdrop = document.getElementById('mobile-nav-backdrop') as HTMLElement | null;
+
+	function openMobileNav() {
+		mobileNavPanel?.classList.remove('-translate-x-full');
+		mobileNavPanel?.classList.add('translate-x-0');
+		mobileNavBackdrop?.classList.remove('hidden');
+		document.body.classList.add('overflow-hidden');
+	}
+
+	function closeMobileNav() {
+		mobileNavPanel?.classList.add('-translate-x-full');
+		mobileNavPanel?.classList.remove('translate-x-0');
+		mobileNavBackdrop?.classList.add('hidden');
+		document.body.classList.remove('overflow-hidden');
+	}
+
+	mobileNavToggle?.addEventListener('click', openMobileNav);
+	mobileNavClose?.addEventListener('click', closeMobileNav);
+	mobileNavBackdrop?.addEventListener('click', closeMobileNav);
+	window.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape') closeMobileNav();
+	});
+
+	const smQuery = window.matchMedia('(min-width: 640px)');
+	smQuery.addEventListener('change', (e) => {
+		if (e.matches) closeMobileNav();
 	});
 </script>
 
