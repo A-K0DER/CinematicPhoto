@@ -14,11 +14,12 @@ const navExport = document.getElementById('nav-export') as HTMLButtonElement;
 interface State {
 	file: File | null;
 	sourceUrl: string | null;
+	gradedUrl: string | null;
 	jobId: string | null;
 	phase: 'idle' | 'uploading' | 'queued' | 'rendering' | 'done' | 'error';
 }
 
-const state: State = { file: null, sourceUrl: null, jobId: null, phase: 'idle' };
+const state: State = { file: null, sourceUrl: null, gradedUrl: null, jobId: null, phase: 'idle' };
 
 let pollTimer: ReturnType<typeof setTimeout> | null = null;
 
@@ -98,9 +99,28 @@ async function pollJob(jobId: string) {
 		return;
 	}
 
-	// done
+	// done — fetched as a blob rather than pointed at directly, since some
+	// browsers won't reliably start a <video> element on a cross-origin URL
+	// even with permissive CORS headers.
+	statusEl.textContent = 'Downloading graded result…';
+	try {
+		const res = await fetch(jobOutputUrl(jobId));
+		if (!res.ok) throw new Error(`Could not download the graded video (${res.status}).`);
+		const blob = await res.blob();
+		if (state.jobId !== jobId) return; // a newer job superseded this one
+		if (state.gradedUrl) URL.revokeObjectURL(state.gradedUrl);
+		state.gradedUrl = URL.createObjectURL(blob);
+		videoPreview.src = state.gradedUrl;
+	} catch (err) {
+		state.phase = 'error';
+		statusEl.textContent = err instanceof Error ? err.message : 'Could not download the graded video.';
+		renderBtn.disabled = false;
+		renderBtn.textContent = 'Retry';
+		return;
+	}
+
 	state.phase = 'done';
-	videoPreview.src = jobOutputUrl(jobId);
+	statusEl.textContent = describeStatus('done');
 	navExport.disabled = false;
 	renderBtn.disabled = false;
 	renderBtn.textContent = 'Re-render';
@@ -140,8 +160,10 @@ function loadFile(file: File) {
 	stopPolling();
 
 	if (state.sourceUrl) URL.revokeObjectURL(state.sourceUrl);
+	if (state.gradedUrl) URL.revokeObjectURL(state.gradedUrl);
 	state.file = file;
 	state.sourceUrl = URL.createObjectURL(file);
+	state.gradedUrl = null;
 	state.jobId = null;
 	state.phase = 'idle';
 
@@ -156,8 +178,10 @@ function loadFile(file: File) {
 function reset() {
 	stopPolling();
 	if (state.sourceUrl) URL.revokeObjectURL(state.sourceUrl);
+	if (state.gradedUrl) URL.revokeObjectURL(state.gradedUrl);
 	state.file = null;
 	state.sourceUrl = null;
+	state.gradedUrl = null;
 	state.jobId = null;
 	state.phase = 'idle';
 	showEmptyState();
