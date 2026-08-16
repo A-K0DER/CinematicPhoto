@@ -7,16 +7,16 @@ import SafeZoneTool from '../components/SafeZoneTool.astro';
 import MovieFaq from '../components/MovieFaq.astro';
 
 const path = '/instagram-reels-safe-zone/';
-const title = 'Instagram Reels Safe Zone Checker | Free Caption & UI Overlay Tool';
+const title = 'Instagram Safe Zone Checker | Reels, Post & Stories UI Overlay Tool';
 const description =
-	"Drop a photo or thumbnail onto a 9:16 frame and see exactly where Instagram Reels' own caption, username, audio title, and like/comment/share rail will sit on top of it.";
+	"Drop a photo onto Instagram's frame and see exactly where the app's own caption, username, and UI elements will sit on top of it, for Reels, feed Posts, and Stories.";
 const keywords =
-	'instagram reels safe zone, reels safe area, reels safe zone template, reels caption safe zone, instagram reels ui overlay, reels 1080x1920 safe zone, instagram video safe zone';
+	'instagram safe zone, reels safe zone, instagram stories safe zone, instagram post safe zone, reels safe zone template, instagram ui overlay, reels 1080x1920 safe zone, instagram video safe zone';
 
 const structuredData = {
 	'@context': 'https://schema.org',
 	'@type': 'WebApplication',
-	name: 'Instagram Reels Safe Zone Checker',
+	name: 'Instagram Safe Zone Checker',
 	url: `https://cinematicphoto.com${path}`,
 	description,
 	applicationCategory: 'DesignApplication',
@@ -104,15 +104,15 @@ const faqs = [
 		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
 			<span class="mb-4 font-mono text-xs tracking-wide text-mute">FREE TOOL</span>
 			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
-				Instagram Reels safe zone checker
+				Instagram safe zone checker
 			</h1>
 			<p class="mt-5 max-w-xl text-base leading-7 text-body">
-				Drop a photo onto a 9:16 frame to see where Reels' caption, username, audio title, and
-				engagement icons will sit on top of it, before you post.
+				Drop a photo onto Instagram's frame to see where the app's own UI will sit on top of it,
+				before you post. Switch between Reels, feed Posts, and Stories above the preview.
 			</p>
 		</section>
 
-		<SafeZoneTool platform="reels" />
+		<SafeZoneTool platform={['reels', 'post', 'stories']} />
 
 		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
 			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">WHY IT MATTERS</span>

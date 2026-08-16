@@ -1,22 +1,47 @@
 ---
-import { DEFAULT_SAFE_ZONE_OPACITY, SAFE_ZONE_PLATFORMS, getZoneMetric, type SafeZonePlatform } from '../lib/safeZones';
+import {
+	DEFAULT_SAFE_ZONE_OPACITY,
+	SAFE_ZONE_PLATFORMS,
+	getSafeZonePlatform,
+	getZoneMetric,
+	type SafeZonePlatform,
+} from '../lib/safeZones';
 
 interface Props {
-	/** When set, locks the tool to a single platform: no toggle row, and the zone breakdown only shows this platform's zones. Used by the dedicated per-platform landing pages so there's no tab UI to fight for SEO focus. */
-	platform?: SafeZonePlatform;
+	/**
+	 * - Omitted: free multi-toggle "compare" mode — every comparable (same-ratio) platform can be overlaid together.
+	 * - A single id: locks the tool to that platform, no toggle UI. Used by dedicated per-platform landing pages so there's no tab UI to fight for SEO focus.
+	 * - An array of ids: locks the toggle set to a single-select segmented control (e.g. Reels / Post / Stories on the Instagram page) — only one active at a time, since they may have different frame ratios.
+	 */
+	platform?: SafeZonePlatform | SafeZonePlatform[];
 }
 
 const { platform } = Astro.props;
 
+const lockedSingle = typeof platform === 'string' ? platform : undefined;
+const selectOptions = Array.isArray(platform) ? platform : undefined;
+const initialSelectPlatform = selectOptions?.[0];
+
 const defaultOpacityPercent = Math.round(DEFAULT_SAFE_ZONE_OPACITY * 100);
-const visiblePlatforms = platform ? SAFE_ZONE_PLATFORMS.filter((p) => p.id === platform) : SAFE_ZONE_PLATFORMS;
+const comparablePlatforms = SAFE_ZONE_PLATFORMS.filter((p) => p.comparable);
+
+// Static breakdown list for locked/multi modes. Select mode renders one panel per option and swaps visibility client-side instead, since only one is active at a time.
+const visiblePlatforms = lockedSingle ? SAFE_ZONE_PLATFORMS.filter((p) => p.id === lockedSingle) : comparablePlatforms;
+
+const mode = selectOptions ? 'select' : lockedSingle ? 'locked' : 'multi';
 ---
 
-<section id="safe-zone-tool" class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 py-4 sm:px-6" data-locked-platform={platform ?? ''}>
+<section
+	id="safe-zone-tool"
+	class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 py-4 sm:px-6"
+	data-mode={mode}
+	data-locked-platform={lockedSingle ?? ''}
+	data-initial-platform={initialSelectPlatform ?? ''}
+>
 	{
-		!platform && (
+		mode === 'multi' && (
 			<div class="flex w-full flex-wrap items-center justify-center gap-2" id="safe-zone-platform-toggles">
-				{SAFE_ZONE_PLATFORMS.map((p) => (
+				{comparablePlatforms.map((p) => (
 					<button
 						type="button"
 						data-platform={p.id}
@@ -31,6 +56,31 @@ const visiblePlatforms = platform ? SAFE_ZONE_PLATFORMS.filter((p) => p.id === p
 						{p.name}
 					</button>
 				))}
+			</div>
+		)
+	}
+
+	{
+		selectOptions && (
+			<div class="flex w-full flex-wrap items-center justify-center gap-2" id="safe-zone-platform-select">
+				{selectOptions.map((id, i) => {
+					const cfg = getSafeZonePlatform(id);
+					return (
+						<button
+							type="button"
+							data-select-platform={id}
+							aria-pressed={i === 0 ? 'true' : 'false'}
+							data-active={i === 0 ? 'true' : 'false'}
+							class="safe-zone-platform-btn group flex items-center gap-2 rounded-full border border-hairline bg-canvas px-3.5 py-1.5 font-mono text-xs text-mute transition-colors hover:border-hairline-strong hover:text-ink data-[active=true]:border-hairline-strong data-[active=true]:text-ink"
+						>
+							<span
+								class="h-2 w-2 rounded-full transition-opacity group-data-[active=false]:opacity-40"
+								style={`background:${cfg.color}`}
+							/>
+							{cfg.name.replace('Instagram ', '')}
+						</button>
+					);
+				})}
 			</div>
 		)
 	}
@@ -72,8 +122,8 @@ const visiblePlatforms = platform ? SAFE_ZONE_PLATFORMS.filter((p) => p.id === p
 
 	<p id="safe-zone-error" class="mt-3 hidden font-mono text-xs text-error" role="alert"></p>
 	<p class="mt-3 max-w-[300px] text-center font-mono text-[10px] leading-relaxed text-mute">
-		Shows a live preview of the 9:16 safe-zone frame — the dimmed area is trimmed on save. Drag
-		inside the frame to reposition it.
+		Shows a live preview of the safe-zone frame — the dimmed area is trimmed on save. Drag inside
+		the frame to reposition it.
 	</p>
 
 	<div class="mt-3 flex w-full max-w-[300px] items-center gap-2">
@@ -109,31 +159,64 @@ const visiblePlatforms = platform ? SAFE_ZONE_PLATFORMS.filter((p) => p.id === p
 			Save image
 		</button>
 	</div>
-	<div class={`mt-8 grid w-full grid-cols-1 gap-4 ${visiblePlatforms.length > 1 ? 'sm:grid-cols-2' : ''}`}>
-		{
-			visiblePlatforms.map((platform) => (
-				<div class="rounded-md border border-hairline bg-canvas p-3.5">
-					<span class="flex items-center gap-2 font-sans text-sm font-medium text-ink">
-						<span class="h-2 w-2 rounded-full" style={`background:${platform.color}`} />
-						{platform.name}
-					</span>
-					<ul class="mt-2 flex flex-col gap-1">
-						{platform.zones.map((zone) => {
-							const metric = getZoneMetric(zone);
-							return (
-								<li class="flex items-baseline justify-between gap-3 font-mono text-[11px] leading-relaxed text-mute">
-									<span>{zone.label}</span>
-									<span class="shrink-0 text-ink">
-										{metric.px}px ({metric.percent}%)
-									</span>
-								</li>
-							);
-						})}
-					</ul>
-				</div>
-			))
-		}
-	</div>
+
+	{
+		selectOptions ? (
+			selectOptions.map((id, i) => {
+				const cfg = getSafeZonePlatform(id);
+				return (
+					<div
+						class={`mt-8 grid w-full grid-cols-1 gap-4 ${i === 0 ? '' : 'hidden'}`}
+						data-breakdown-platform={id}
+					>
+						<div class="rounded-md border border-hairline bg-canvas p-3.5">
+							<span class="flex items-center gap-2 font-sans text-sm font-medium text-ink">
+								<span class="h-2 w-2 rounded-full" style={`background:${cfg.color}`} />
+								{cfg.name}
+							</span>
+							<ul class="mt-2 flex flex-col gap-1">
+								{cfg.zones.map((zone) => {
+									const metric = getZoneMetric(zone, cfg.frame);
+									return (
+										<li class="flex items-baseline justify-between gap-3 font-mono text-[11px] leading-relaxed text-mute">
+											<span>{zone.label}</span>
+											<span class="shrink-0 text-ink">
+												{metric.px}px ({metric.percent}%)
+											</span>
+										</li>
+									);
+								})}
+							</ul>
+						</div>
+					</div>
+				);
+			})
+		) : (
+			<div class={`mt-8 grid w-full grid-cols-1 gap-4 ${visiblePlatforms.length > 1 ? 'sm:grid-cols-2' : ''}`}>
+				{visiblePlatforms.map((platform) => (
+					<div class="rounded-md border border-hairline bg-canvas p-3.5">
+						<span class="flex items-center gap-2 font-sans text-sm font-medium text-ink">
+							<span class="h-2 w-2 rounded-full" style={`background:${platform.color}`} />
+							{platform.name}
+						</span>
+						<ul class="mt-2 flex flex-col gap-1">
+							{platform.zones.map((zone) => {
+								const metric = getZoneMetric(zone, platform.frame);
+								return (
+									<li class="flex items-baseline justify-between gap-3 font-mono text-[11px] leading-relaxed text-mute">
+										<span>{zone.label}</span>
+										<span class="shrink-0 text-ink">
+											{metric.px}px ({metric.percent}%)
+										</span>
+									</li>
+								);
+							})}
+						</ul>
+					</div>
+				))}
+			</div>
+		)
+	}
 </section>
 
 <script>
@@ -143,17 +226,22 @@ const visiblePlatforms = platform ? SAFE_ZONE_PLATFORMS.filter((p) => p.id === p
 		computeSafeZoneCropWindow,
 		drawSafeZones,
 		getSafeZoneCropPanBounds,
+		getSafeZonePlatform,
 		type SafeZonePlatform,
 	} from '../lib/safeZones';
 
 	const toolSection = document.getElementById('safe-zone-tool') as HTMLElement;
+	const mode = toolSection.dataset.mode as 'locked' | 'select' | 'multi';
 	const lockedPlatform = (toolSection.dataset.lockedPlatform || '') as SafeZonePlatform | '';
+	let activeSelectPlatform = (toolSection.dataset.initialPlatform || '') as SafeZonePlatform | '';
 
 	const dropzone = document.getElementById('safe-zone-dropzone') as HTMLLabelElement;
 	const fileInput = document.getElementById('safe-zone-file-input') as HTMLInputElement;
 	const canvas = document.getElementById('safe-zone-canvas') as HTMLCanvasElement;
 	const errorEl = document.getElementById('safe-zone-error') as HTMLParagraphElement;
 	const platformToggles = document.querySelectorAll<HTMLButtonElement>('[data-platform]');
+	const selectToggles = document.querySelectorAll<HTMLButtonElement>('[data-select-platform]');
+	const breakdownPanels = document.querySelectorAll<HTMLElement>('[data-breakdown-platform]');
 	const newImageBtn = document.getElementById('safe-zone-new-image') as HTMLButtonElement;
 	const recenterBtn = document.getElementById('safe-zone-recenter') as HTMLButtonElement;
 	const removeBtn = document.getElementById('safe-zone-remove') as HTMLButtonElement;
@@ -199,10 +287,24 @@ const visiblePlatforms = platform ? SAFE_ZONE_PLATFORMS.filter((p) => p.id === p
 	}
 
 	function activePlatforms(): SafeZonePlatform[] {
-		if (lockedPlatform) return [lockedPlatform];
+		if (mode === 'locked') return [lockedPlatform as SafeZonePlatform];
+		if (mode === 'select') return activeSelectPlatform ? [activeSelectPlatform as SafeZonePlatform] : [];
 		return SAFE_ZONE_PLATFORMS.map((p) => p.id).filter(
 			(id) => document.querySelector<HTMLButtonElement>(`[data-platform="${id}"]`)?.dataset.active === 'true',
 		);
+	}
+
+	/** The frame the canvas/export should currently be sized to — varies per active platform in `select` mode since e.g. Post (4:5) isn't 9:16 like Reels/Stories. */
+	function currentFrame() {
+		if (mode === 'locked') return getSafeZonePlatform(lockedPlatform as SafeZonePlatform).frame;
+		if (mode === 'select' && activeSelectPlatform) return getSafeZonePlatform(activeSelectPlatform as SafeZonePlatform).frame;
+		return SAFE_ZONE_FRAME;
+	}
+
+	function filenamePrefix(): string {
+		if (mode === 'locked') return `${lockedPlatform}-safe-zone`;
+		if (mode === 'select' && activeSelectPlatform) return `${activeSelectPlatform}-safe-zone`;
+		return 'safe-zones';
 	}
 
 	function currentOpacity(): number {
@@ -211,13 +313,15 @@ const visiblePlatforms = platform ? SAFE_ZONE_PLATFORMS.filter((p) => p.id === p
 
 	/**
 	 * Draws the full photo at its native (capped) size with a live crop-window
-	 * overlay — the area outside the 9:16 safe-zone frame is dimmed rather than
+	 * overlay — the area outside the safe-zone frame is dimmed rather than
 	 * physically cut away, so dragging to reposition stays visible against the
 	 * whole photo. The actual pixel crop only happens in `buildExportCanvas`.
 	 */
 	function render() {
+		const frame = currentFrame();
+
 		if (!state.image) {
-			const { width, height } = SAFE_ZONE_FRAME;
+			const { width, height } = frame;
 			if (canvas.width !== width) canvas.width = width;
 			if (canvas.height !== height) canvas.height = height;
 			ctx.clearRect(0, 0, width, height);
@@ -234,7 +338,7 @@ const visiblePlatforms = platform ? SAFE_ZONE_PLATFORMS.filter((p) => p.id === p
 		ctx.clearRect(0, 0, width, height);
 		ctx.drawImage(state.image, 0, 0, width, height);
 
-		const crop = computeSafeZoneCropWindow(width, height, { x: state.panX, y: state.panY });
+		const crop = computeSafeZoneCropWindow(width, height, frame.width / frame.height, { x: state.panX, y: state.panY });
 
 		// Dim everything outside the crop window.
 		ctx.save();
@@ -406,7 +510,8 @@ const visiblePlatforms = platform ? SAFE_ZONE_PLATFORMS.filter((p) => p.id === p
 		const scale = canvas.width / rect.width;
 		const dxSource = (e.clientX - drag.startClientX) * scale;
 		const dySource = (e.clientY - drag.startClientY) * scale;
-		const bounds = getSafeZoneCropPanBounds(state.width, state.height);
+		const frame = currentFrame();
+		const bounds = getSafeZoneCropPanBounds(state.width, state.height, frame.width / frame.height);
 		// Dragging right/down should reveal more of the frame's left/top edge,
 		// i.e. slide the crop window the opposite way — so we subtract, not add.
 		state.panX = Math.min(Math.max(drag.startPanX - dxSource, -bounds.maxX), bounds.maxX);
@@ -424,12 +529,37 @@ const visiblePlatforms = platform ? SAFE_ZONE_PLATFORMS.filter((p) => p.id === p
 	canvas.addEventListener('pointerup', endDrag);
 	canvas.addEventListener('pointercancel', endDrag);
 
-	// --- Platform toggles ---
+	// --- Platform toggles (multi mode) ---
 
 	for (const btn of platformToggles) {
 		btn.addEventListener('click', () => {
 			btn.dataset.active = String(btn.dataset.active !== 'true');
 			btn.setAttribute('aria-pressed', btn.dataset.active);
+			render();
+		});
+	}
+
+	// --- Platform select (single-select mode, e.g. Reels / Post / Stories) ---
+
+	for (const btn of selectToggles) {
+		btn.addEventListener('click', () => {
+			const id = btn.dataset.selectPlatform as SafeZonePlatform;
+			if (id === activeSelectPlatform) return;
+			activeSelectPlatform = id;
+
+			for (const b of selectToggles) {
+				const active = b === btn;
+				b.dataset.active = String(active);
+				b.setAttribute('aria-pressed', String(active));
+			}
+			for (const panel of breakdownPanels) {
+				panel.classList.toggle('hidden', panel.dataset.breakdownPlatform !== id);
+			}
+
+			// The new platform may have a different frame ratio (e.g. switching
+			// to Post's 4:5) — reset the pan so the crop window stays centered.
+			state.panX = 0;
+			state.panY = 0;
 			render();
 		});
 	}
@@ -458,13 +588,13 @@ const visiblePlatforms = platform ? SAFE_ZONE_PLATFORMS.filter((p) => p.id === p
 	}
 
 	/**
-	 * Physically crops the photo to the 9:16 safe-zone frame for saving — the
+	 * Physically crops the photo to the active safe-zone frame for saving — the
 	 * live canvas only shows a preview with the crop dimmed, not cut away.
 	 * Samples the original full-resolution image, not the (possibly
 	 * downscaled) preview canvas, so export quality isn't capped by it.
 	 */
 	function buildExportCanvas(): HTMLCanvasElement {
-		const { width, height } = SAFE_ZONE_FRAME;
+		const { width, height } = currentFrame();
 		const output = document.createElement('canvas');
 		output.width = width;
 		output.height = height;
@@ -473,7 +603,7 @@ const visiblePlatforms = platform ? SAFE_ZONE_PLATFORMS.filter((p) => p.id === p
 		octx.fillRect(0, 0, width, height);
 
 		if (state.image) {
-			const previewCrop = computeSafeZoneCropWindow(state.width, state.height, { x: state.panX, y: state.panY });
+			const previewCrop = computeSafeZoneCropWindow(state.width, state.height, width / height, { x: state.panX, y: state.panY });
 			const naturalScale = state.image.naturalWidth / state.width;
 			const sx = Math.round(previewCrop.sx * naturalScale);
 			const sy = Math.round(previewCrop.sy * naturalScale);
@@ -486,9 +616,7 @@ const visiblePlatforms = platform ? SAFE_ZONE_PLATFORMS.filter((p) => p.id === p
 		return output;
 	}
 
-	const filenamePrefix = lockedPlatform ? `${lockedPlatform}-safe-zone` : 'safe-zones';
-
 	saveBtn.addEventListener('click', () => {
-		downloadCanvas(buildExportCanvas(), `${filenamePrefix}-reference.png`);
+		downloadCanvas(buildExportCanvas(), `${filenamePrefix()}-reference.png`);
 	});
 </script>
