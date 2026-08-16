@@ -109,16 +109,6 @@ const visiblePlatforms = platform ? SAFE_ZONE_PLATFORMS.filter((p) => p.id === p
 			Save image
 		</button>
 	</div>
-	<div class="mt-2 hidden w-full max-w-[300px] items-center gap-2">
-		<button
-			id="safe-zone-save-overlay"
-			type="button"
-			class="flex-1 rounded-md border border-hairline px-3 py-2 font-sans text-sm font-medium text-body transition-colors hover:border-hairline-strong hover:text-ink"
-		>
-			Save overlay only (transparent PNG)
-		</button>
-	</div>
-
 	<div class={`mt-8 grid w-full grid-cols-1 gap-4 ${visiblePlatforms.length > 1 ? 'sm:grid-cols-2' : ''}`}>
 		{
 			visiblePlatforms.map((platform) => (
@@ -168,7 +158,6 @@ const visiblePlatforms = platform ? SAFE_ZONE_PLATFORMS.filter((p) => p.id === p
 	const recenterBtn = document.getElementById('safe-zone-recenter') as HTMLButtonElement;
 	const removeBtn = document.getElementById('safe-zone-remove') as HTMLButtonElement;
 	const saveBtn = document.getElementById('safe-zone-save') as HTMLButtonElement;
-	const saveOverlayBtn = document.getElementById('safe-zone-save-overlay') as HTMLButtonElement;
 	const opacitySlider = document.getElementById('safe-zone-opacity-slider') as HTMLInputElement;
 	const opacityValue = document.getElementById('safe-zone-opacity-value') as HTMLSpanElement;
 
@@ -501,15 +490,5 @@ const visiblePlatforms = platform ? SAFE_ZONE_PLATFORMS.filter((p) => p.id === p
 
 	saveBtn.addEventListener('click', () => {
 		downloadCanvas(buildExportCanvas(), `${filenamePrefix}-reference.png`);
-	});
-
-	saveOverlayBtn.addEventListener('click', () => {
-		const { width, height } = SAFE_ZONE_FRAME;
-		const overlayCanvas = document.createElement('canvas');
-		overlayCanvas.width = width;
-		overlayCanvas.height = height;
-		const overlayCtx = overlayCanvas.getContext('2d')!;
-		drawSafeZones(overlayCtx, width, height, activePlatforms(), currentOpacity());
-		downloadCanvas(overlayCanvas, `${filenamePrefix}-overlay.png`);
 	});
 </script>
