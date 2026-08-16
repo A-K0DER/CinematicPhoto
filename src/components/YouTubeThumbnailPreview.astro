@@ -1,0 +1,326 @@
+---
+import { YOUTUBE_TIME_AGO_OPTIONS } from '../lib/youtubePreview';
+---
+
+<section id="yt-preview-tool" class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 py-4 sm:px-6">
+	<div class="relative w-full max-w-md">
+		<div class="aspect-video w-full overflow-hidden rounded-xl bg-[#272727] shadow-[0_1px_1px_rgba(0,0,0,0.2),0_8px_24px_-8px_rgba(0,0,0,0.5)]">
+			<img id="yt-thumb-main" data-yt-thumb class="hidden h-full w-full object-cover" alt="" />
+		</div>
+		<label
+			id="yt-dropzone"
+			for="yt-file-input"
+			class="absolute inset-0 flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border border-transparent bg-zinc-950/70 px-6 text-center transition-colors"
+		>
+			<svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-1 text-zinc-400">
+				<path d="M12 16V4M12 4L7 9M12 4L17 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+				<path d="M4 16V18C4 19.1046 4.89543 20 6 20H18C19.1046 20 20 19.1046 20 18V16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+			</svg>
+			<span class="font-sans text-sm font-medium text-zinc-100">Drop a thumbnail, paste, or click</span>
+			<span class="font-mono text-[10px] text-zinc-400">JPG, PNG, or WEBP — ideally 1280x720</span>
+			<input id="yt-file-input" type="file" accept="image/png,image/jpeg,image/webp" class="sr-only" />
+		</label>
+	</div>
+
+	<p id="yt-error" class="mt-3 hidden font-mono text-xs text-error" role="alert"></p>
+
+	<button
+		id="yt-remove"
+		type="button"
+		class="mt-3 hidden rounded-md border border-hairline px-3 py-2 font-sans text-sm font-medium text-body transition-colors hover:border-hairline-strong hover:text-ink"
+	>
+		Remove thumbnail
+	</button>
+
+	<div class="mt-8 grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
+		<label class="flex flex-col gap-1.5">
+			<span class="flex items-center justify-between font-mono text-[11px] text-mute">
+				Video title
+				<span id="yt-title-count">0/100</span>
+			</span>
+			<input
+				id="yt-title-input"
+				type="text"
+				maxlength="100"
+				value="I Tried This for 30 Days (Here's What Happened)"
+				class="rounded-md border border-hairline bg-canvas px-3 py-2 font-sans text-sm text-ink outline-none transition-colors focus:border-hairline-strong"
+			/>
+		</label>
+		<label class="flex flex-col gap-1.5">
+			<span class="font-mono text-[11px] text-mute">Channel name</span>
+			<input
+				id="yt-channel-input"
+				type="text"
+				maxlength="50"
+				value="Your Channel"
+				class="rounded-md border border-hairline bg-canvas px-3 py-2 font-sans text-sm text-ink outline-none transition-colors focus:border-hairline-strong"
+			/>
+		</label>
+		<label class="flex flex-col gap-1.5">
+			<span class="font-mono text-[11px] text-mute">Views</span>
+			<input
+				id="yt-views-input"
+				type="number"
+				min="0"
+				value="48000"
+				class="rounded-md border border-hairline bg-canvas px-3 py-2 font-sans text-sm text-ink outline-none transition-colors focus:border-hairline-strong"
+			/>
+		</label>
+		<label class="flex flex-col gap-1.5">
+			<span class="font-mono text-[11px] text-mute">Uploaded</span>
+			<select
+				id="yt-time-input"
+				class="rounded-md border border-hairline bg-canvas px-3 py-2 font-sans text-sm text-ink outline-none transition-colors focus:border-hairline-strong"
+			>
+				{YOUTUBE_TIME_AGO_OPTIONS.map((opt) => <option value={opt} selected={opt === '3 days ago'}>{opt}</option>)}
+			</select>
+		</label>
+		<label class="flex flex-col gap-1.5 sm:col-span-2">
+			<span class="font-mono text-[11px] text-mute">Duration (mm:ss)</span>
+			<input
+				id="yt-duration-input"
+				type="text"
+				value="12:47"
+				placeholder="12:47"
+				class="w-full max-w-[160px] rounded-md border border-hairline bg-canvas px-3 py-2 font-sans text-sm text-ink outline-none transition-colors focus:border-hairline-strong"
+			/>
+		</label>
+	</div>
+
+	<p class="mt-4 max-w-md text-center font-mono text-[10px] leading-relaxed text-mute">
+		Everything renders live in your browser — the thumbnail is never uploaded anywhere.
+	</p>
+
+	<div class="mt-10 grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
+		<div class="flex flex-col items-start gap-3">
+			<span class="font-mono text-xs text-mute">SUGGESTED VIDEOS</span>
+			<div class="w-full max-w-[320px] rounded-xl bg-[#0f0f0f] p-2.5">
+				<div class="relative aspect-video w-full overflow-hidden rounded-xl bg-[#272727]">
+					<img data-yt-thumb class="hidden h-full w-full object-cover" alt="" />
+					<span data-yt-duration-badge class="hidden absolute bottom-1 right-1 rounded bg-black/80 px-1 py-0.5 font-sans text-[11px] font-medium text-white"></span>
+				</div>
+				<div class="mt-3 flex gap-2.5">
+					<span data-yt-avatar class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full font-sans text-xs font-semibold text-white"></span>
+					<div class="min-w-0">
+						<p data-yt-title class="line-clamp-2 font-sans text-sm font-medium leading-5 text-[#f1f1f1]"></p>
+						<p data-yt-channel class="mt-1 font-sans text-xs text-[#aaaaaa]"></p>
+						<p data-yt-meta class="font-sans text-xs text-[#aaaaaa]"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="flex flex-col items-start gap-3">
+			<span class="font-mono text-xs text-mute">SEARCH RESULTS</span>
+			<div class="flex w-full max-w-[320px] gap-3 rounded-xl bg-[#0f0f0f] p-2.5">
+				<div class="relative aspect-video w-[132px] shrink-0 overflow-hidden rounded-xl bg-[#272727]">
+					<img data-yt-thumb class="hidden h-full w-full object-cover" alt="" />
+					<span data-yt-duration-badge class="hidden absolute bottom-1 right-1 rounded bg-black/80 px-1 py-0.5 font-sans text-[11px] font-medium text-white"></span>
+				</div>
+				<div class="min-w-0 py-0.5">
+					<p data-yt-title class="line-clamp-2 font-sans text-sm font-medium leading-5 text-[#f1f1f1]"></p>
+					<p data-yt-meta class="mt-1.5 font-sans text-xs text-[#aaaaaa]"></p>
+					<div class="mt-1.5 flex items-center gap-1.5">
+						<span data-yt-avatar class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full font-sans text-[9px] font-semibold text-white"></span>
+						<p data-yt-channel class="truncate font-sans text-xs text-[#aaaaaa]"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="flex flex-col items-start gap-3 sm:col-span-2">
+			<span class="font-mono text-xs text-mute">MOBILE HOME FEED</span>
+			<div class="w-full max-w-[320px] rounded-xl bg-[#0f0f0f]">
+				<div class="relative aspect-video w-full overflow-hidden rounded-t-xl bg-[#272727]">
+					<img data-yt-thumb class="hidden h-full w-full object-cover" alt="" />
+					<span data-yt-duration-badge class="hidden absolute bottom-1 right-1 rounded bg-black/80 px-1 py-0.5 font-sans text-[11px] font-medium text-white"></span>
+				</div>
+				<div class="flex gap-2.5 p-2.5">
+					<span data-yt-avatar class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full font-sans text-xs font-semibold text-white"></span>
+					<div class="min-w-0">
+						<p data-yt-title class="line-clamp-2 font-sans text-sm font-medium leading-5 text-[#f1f1f1]"></p>
+						<p data-yt-channel class="mt-1 font-sans text-xs text-[#aaaaaa]"></p>
+						<p data-yt-meta class="font-sans text-xs text-[#aaaaaa]"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="mt-10 flex w-full flex-col items-center gap-3">
+		<span class="font-mono text-xs text-mute">SMALL-SIZE CHECK</span>
+		<p class="max-w-md text-center font-mono text-[10px] leading-relaxed text-mute">
+			Most viewers see a thumbnail this small or smaller. If it doesn't read at a glance here, it
+			won't in a real feed either.
+		</p>
+		<div class="flex flex-wrap items-end justify-center gap-4">
+			<div class="flex flex-col items-center gap-1.5">
+				<div class="aspect-video w-[168px] overflow-hidden rounded-md bg-[#272727]">
+					<img data-yt-thumb class="hidden h-full w-full object-cover" alt="" />
+				</div>
+				<span class="font-mono text-[10px] text-mute">168px</span>
+			</div>
+			<div class="flex flex-col items-center gap-1.5">
+				<div class="aspect-video w-[112px] overflow-hidden rounded-md bg-[#272727]">
+					<img data-yt-thumb class="hidden h-full w-full object-cover" alt="" />
+				</div>
+				<span class="font-mono text-[10px] text-mute">112px</span>
+			</div>
+			<div class="flex flex-col items-center gap-1.5">
+				<div class="aspect-video w-[64px] overflow-hidden rounded-md bg-[#272727]">
+					<img data-yt-thumb class="hidden h-full w-full object-cover" alt="" />
+				</div>
+				<span class="font-mono text-[10px] text-mute">64px</span>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	import { avatarColorFor, formatViewCount, parseDurationBadge } from '../lib/youtubePreview';
+
+	const dropzone = document.getElementById('yt-dropzone') as HTMLLabelElement;
+	const fileInput = document.getElementById('yt-file-input') as HTMLInputElement;
+	const errorEl = document.getElementById('yt-error') as HTMLParagraphElement;
+	const removeBtn = document.getElementById('yt-remove') as HTMLButtonElement;
+
+	const thumbImgs = document.querySelectorAll<HTMLImageElement>('[data-yt-thumb]');
+	const durationBadges = document.querySelectorAll<HTMLSpanElement>('[data-yt-duration-badge]');
+	const titleEls = document.querySelectorAll<HTMLParagraphElement>('[data-yt-title]');
+	const channelEls = document.querySelectorAll<HTMLParagraphElement>('[data-yt-channel]');
+	const metaEls = document.querySelectorAll<HTMLParagraphElement>('[data-yt-meta]');
+	const avatarEls = document.querySelectorAll<HTMLSpanElement>('[data-yt-avatar]');
+
+	const titleInput = document.getElementById('yt-title-input') as HTMLInputElement;
+	const titleCount = document.getElementById('yt-title-count') as HTMLSpanElement;
+	const channelInput = document.getElementById('yt-channel-input') as HTMLInputElement;
+	const viewsInput = document.getElementById('yt-views-input') as HTMLInputElement;
+	const timeInput = document.getElementById('yt-time-input') as HTMLSelectElement;
+	const durationInput = document.getElementById('yt-duration-input') as HTMLInputElement;
+
+	let currentObjectUrl: string | null = null;
+
+	function showError(message: string) {
+		errorEl.textContent = message;
+		errorEl.classList.remove('hidden');
+	}
+
+	function clearError() {
+		errorEl.classList.add('hidden');
+		errorEl.textContent = '';
+	}
+
+	async function loadFile(file: File) {
+		if (!file.type.startsWith('image/')) {
+			showError('That file type is not supported. Try a JPG, PNG, or WEBP.');
+			return;
+		}
+		clearError();
+
+		const url = URL.createObjectURL(file);
+		if (currentObjectUrl) URL.revokeObjectURL(currentObjectUrl);
+		currentObjectUrl = url;
+
+		for (const img of thumbImgs) {
+			img.src = url;
+			img.classList.remove('hidden');
+		}
+		dropzone.classList.add('hidden');
+		removeBtn.classList.remove('hidden');
+	}
+
+	function removeThumbnail() {
+		if (currentObjectUrl) URL.revokeObjectURL(currentObjectUrl);
+		currentObjectUrl = null;
+		for (const img of thumbImgs) {
+			img.removeAttribute('src');
+			img.classList.add('hidden');
+		}
+		dropzone.classList.remove('hidden');
+		removeBtn.classList.add('hidden');
+		clearError();
+	}
+
+	fileInput.addEventListener('change', () => {
+		const file = fileInput.files?.[0];
+		fileInput.value = '';
+		if (file) loadFile(file);
+	});
+
+	for (const evt of ['dragenter', 'dragover']) {
+		dropzone.addEventListener(evt, (e) => {
+			e.preventDefault();
+			dropzone.classList.add('border-hairline-strong');
+		});
+	}
+
+	for (const evt of ['dragleave', 'dragend']) {
+		dropzone.addEventListener(evt, (e) => {
+			e.preventDefault();
+			dropzone.classList.remove('border-hairline-strong');
+		});
+	}
+
+	dropzone.addEventListener('drop', (e) => {
+		e.preventDefault();
+		dropzone.classList.remove('border-hairline-strong');
+		const file = e.dataTransfer?.files?.[0];
+		if (file) loadFile(file);
+	});
+
+	for (const evt of ['dragover', 'drop']) {
+		window.addEventListener(evt, (e) => {
+			if ((e.target as HTMLElement)?.closest('#yt-dropzone')) return;
+			e.preventDefault();
+		});
+	}
+
+	window.addEventListener('paste', (e) => {
+		const items = e.clipboardData?.items;
+		if (!items) return;
+		for (const item of items) {
+			if (item.type.startsWith('image/')) {
+				const file = item.getAsFile();
+				if (file) loadFile(file);
+				break;
+			}
+		}
+	});
+
+	removeBtn.addEventListener('click', removeThumbnail);
+
+	function updateText() {
+		const title = titleInput.value.trim() || 'Enter a title to preview it here';
+		const channel = channelInput.value.trim() || 'Channel name';
+		const meta = `${formatViewCount(Number(viewsInput.value) || 0)} • ${timeInput.value}`;
+		const badge = parseDurationBadge(durationInput.value);
+		const initial = channel.trim().charAt(0).toUpperCase() || 'C';
+		const avatarColor = avatarColorFor(channel);
+
+		for (const el of titleEls) el.textContent = title;
+		for (const el of channelEls) el.textContent = channel;
+		for (const el of metaEls) el.textContent = meta;
+		for (const el of avatarEls) {
+			el.textContent = initial;
+			el.style.background = avatarColor;
+		}
+		for (const el of durationBadges) {
+			if (badge) {
+				el.textContent = badge;
+				el.classList.remove('hidden');
+			} else {
+				el.classList.add('hidden');
+			}
+		}
+
+		const titleLength = titleInput.value.length;
+		titleCount.textContent = `${titleLength}/100`;
+		titleCount.classList.toggle('text-error', titleLength >= 100);
+	}
+
+	for (const input of [titleInput, channelInput, viewsInput, timeInput, durationInput]) {
+		input.addEventListener('input', updateText);
+	}
+
+	updateText();
+</script>

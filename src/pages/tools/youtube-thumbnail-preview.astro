@@ -1,0 +1,160 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import YouTubeThumbnailPreview from '../../components/YouTubeThumbnailPreview.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+
+const path = '/tools/youtube-thumbnail-preview/';
+const title = 'YouTube Thumbnail Preview Tool | Free, No Upload';
+const description =
+	"See exactly how a YouTube thumbnail, title, and channel name will look in suggested videos, search results, and the mobile feed, before you publish. Runs entirely in your browser.";
+const keywords =
+	'youtube thumbnail preview, youtube thumbnail tester, youtube thumbnail checker, youtube title preview, youtube search result preview, youtube thumbnail small size test, youtube thumbnail simulator';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebApplication',
+	name: 'YouTube Thumbnail Preview Tool',
+	url: `https://cinematicphoto.com${path}`,
+	description,
+	applicationCategory: 'DesignApplication',
+	operatingSystem: 'Any (runs in browser)',
+	offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+	isAccessibleForFree: true,
+};
+
+const howToStructuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'HowTo',
+	name: 'How to preview a YouTube thumbnail before publishing',
+	description:
+		'Upload a thumbnail and fill in a title, channel name, view count, and duration to see how it will look in suggested videos, search results, and the mobile home feed.',
+	step: [
+		{
+			'@type': 'HowToStep',
+			name: 'Upload a thumbnail',
+			text: 'Drop a thumbnail image, paste it, or click to upload a JPG, PNG, or WEBP file, ideally 1280x720.',
+		},
+		{
+			'@type': 'HowToStep',
+			name: 'Fill in the video details',
+			text: 'Enter a title, channel name, view count, upload time, and duration to match a real video.',
+		},
+		{
+			'@type': 'HowToStep',
+			name: 'Compare placements',
+			text: 'Check how the thumbnail and title read in suggested videos, search results, and the mobile home feed.',
+		},
+		{
+			'@type': 'HowToStep',
+			name: 'Run the small-size check',
+			text: 'Look at the thumbnail at 168px, 112px, and 64px wide to confirm it still reads at a glance.',
+		},
+	],
+};
+
+const faqs = [
+	{
+		q: 'Does this tool upload my thumbnail anywhere?',
+		a: 'No. The image is drawn straight into the page and never leaves your browser, the same client-side approach used by the rest of the site.',
+	},
+	{
+		q: 'Why does the thumbnail look cropped differently than what I uploaded?',
+		a: "YouTube center-crops any thumbnail that isn't exactly 16:9 down to that ratio in its UI, so this tool applies the same center-crop rather than stretching or letterboxing the image, matching what viewers will actually see.",
+	},
+	{
+		q: 'Why does the same thumbnail look different in each preview?',
+		a: "Suggested videos, search results, and the mobile feed each show the thumbnail at a different width and pair it with a different amount of title and metadata, so a design that reads clearly in one spot can lose detail in another. Comparing all three catches that before you publish.",
+	},
+	{
+		q: "What's the small-size check for?",
+		a: "Most viewers scroll past a thumbnail at a small size, on a phone, in a sidebar, or in a crowded grid, not full-size on a desktop monitor. Shrinking the thumbnail down to 168px, 112px, and 64px wide is a quick gut-check for whether the subject and any text still read at a glance.",
+	},
+	{
+		q: 'Are the view count and title truncation rules exact?',
+		a: "They're close approximations of YouTube's own abbreviation and line-clamp behavior, not pixel-perfect measurements pulled from the live site. YouTube tweaks its UI over time, so treat this as a composition and legibility check, not a guarantee of the exact live layout.",
+	},
+	{
+		q: 'Can I use this to design the thumbnail itself?',
+		a: "No, it's a preview tool for a thumbnail you've already made, not an editor. For color grading a photo before turning it into a thumbnail, see the cinematic YouTube thumbnail filter page.",
+	},
+];
+---
+
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'Tools' },
+				{ label: 'YouTube Thumbnail Preview' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">FREE TOOL</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				YouTube thumbnail preview tool
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Upload a thumbnail and see how it, and your title, will actually look in suggested videos,
+				search results, and the mobile feed, before you publish.
+			</p>
+		</section>
+
+		<YouTubeThumbnailPreview />
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">WHY IT MATTERS</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				A thumbnail that only gets judged at full size
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					A thumbnail that looks sharp and legible full-size in a design tool can turn into a muddy,
+					unreadable blob once it's shrunk down to a 168px sidebar suggestion or a phone screen. The
+					title next to it gets clipped by YouTube's own line limits too, so a clever opening line
+					can end up cut off mid-sentence in some placements and not others.
+				</p>
+				<p>
+					Checking a thumbnail and title against suggested videos, search results, and the mobile
+					feed, at the actual sizes viewers see them, catches both problems before a video goes live
+					instead of after.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">GO DEEPER</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				More tools for creators
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/for/youtube-thumbnails/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Cinematic YouTube thumbnails</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Bold, high-contrast presets for creators</span>
+				</a>
+				<a href="/tools/safe-zones/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">TikTok &amp; Reels safe zone checker</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Check composition against platform UI</span>
+				</a>
+				<a href="/guides/how-to-make-photos-look-cinematic/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">How to make photos look cinematic</span>
+					<span class="mt-1 block font-mono text-xs text-mute">The complete step-by-step guide</span>
+				</a>
+				<a href="/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Browse all 60 presets</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Every color grade, organized by genre</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Common questions about the thumbnail preview tool" faqs={faqs} />
+
+		<script type="application/ld+json" set:html={JSON.stringify(howToStructuredData)} />
+	</main>
+	<Footer />
+</Layout>
