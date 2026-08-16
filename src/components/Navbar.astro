@@ -56,9 +56,22 @@ const { variant = 'landing', editorMode = 'photo' } = Astro.props;
 					<a href="/guides/how-to-make-photos-look-cinematic/" class="font-mono text-xs text-body transition-colors hover:text-ink">
 						Guides
 					</a>
-					<a href="/tools/safe-zones/" class="font-mono text-xs text-body transition-colors hover:text-ink">
-						Safe Zones
-					</a>
+					<details class="nav-dropdown relative">
+						<summary class="cursor-pointer list-none font-mono text-xs text-body transition-colors hover:text-ink [&::-webkit-details-marker]:hidden">
+							Safe Zones
+						</summary>
+						<div class="absolute left-0 top-full z-50 mt-2 w-56 rounded-md border border-hairline bg-canvas p-1.5 shadow-lg">
+							<a href="/tiktok-safe-zone/" class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
+								TikTok
+							</a>
+							<a href="/instagram-reels-safe-zone/" class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
+								Instagram Reels
+							</a>
+							<a href="/tools/safe-zones/" class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
+								Compare both
+							</a>
+						</div>
+					</details>
 					<a href="/video-editor/" class="hidden font-mono text-xs text-body transition-colors hover:text-ink">
 						Video
 					</a>
