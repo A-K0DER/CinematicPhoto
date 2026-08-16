@@ -1,0 +1,125 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import SafeZoneTool from '../components/SafeZoneTool.astro';
+import MovieFaq from '../components/MovieFaq.astro';
+
+const path = '/instagram-reels-safe-zone/';
+const title = 'Instagram Reels Safe Zone Checker | Free Caption & UI Overlay Tool';
+const description =
+	"Drop a photo or thumbnail onto a 9:16 frame and see exactly where Instagram Reels' own caption, username, audio title, and like/comment/share rail will sit on top of it.";
+const keywords =
+	'instagram reels safe zone, reels safe area, reels safe zone template, reels caption safe zone, instagram reels ui overlay, reels 1080x1920 safe zone, instagram video safe zone';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebApplication',
+	name: 'Instagram Reels Safe Zone Checker',
+	url: `https://cinematicphoto.com${path}`,
+	description,
+	applicationCategory: 'DesignApplication',
+	operatingSystem: 'Any (runs in browser)',
+	offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+	isAccessibleForFree: true,
+};
+
+const faqs = [
+	{
+		q: "What is Instagram Reels' safe zone?",
+		a: "It's the part of a vertical 9:16 frame that Reels' own interface sits on top of once a video is posted: a thin top bar, a bottom band for the caption/username/audio title, and a right-hand column of like, comment, share, and profile icons. Anything important placed there, a face, a subtitle, a product, gets partly or fully covered while someone is actually watching.",
+	},
+	{
+		q: 'What size is the Reels safe zone?',
+		a: "At the standard 1080x1920 export, the bottom caption/username/audio band runs roughly 24% up from the base (about 461px), and the right-hand icon column eats roughly the last 12% of width (about 130px). This tool shows both bands drawn to scale on your own photo, plus the exact pixel and percent figures below the preview.",
+	},
+	{
+		q: 'Is this safe zone measurement exact?',
+		a: "It's a close approximation based on Instagram's published creator and ads specs, not a pixel-perfect measurement pulled from the live app. Instagram tweaks its UI over time, so treat this as a composition check, not a guarantee.",
+	},
+	{
+		q: 'Does this tool upload my photo anywhere?',
+		a: 'No. The image is drawn straight into an on-page canvas and never leaves your browser.',
+	},
+	{
+		q: 'Can I check TikTok too?',
+		a: "Yes, TikTok reserves similar but not identical space. Use the dedicated TikTok safe zone checker, or the combined checker that overlays both platforms at once for a side-by-side comparison.",
+	},
+];
+---
+
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Home', href: '/' },
+				{ label: 'Tools', href: '/tools/safe-zones/' },
+				{ label: 'Instagram Reels Safe Zone' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">FREE TOOL</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Instagram Reels safe zone checker
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Drop a photo onto a 9:16 frame to see where Reels' caption, username, audio title, and
+				engagement icons will sit on top of it, before you post.
+			</p>
+		</section>
+
+		<SafeZoneTool platform="reels" />
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">WHY IT MATTERS</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Composition that survives Reels' own UI
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					A vertical frame that looks perfectly composed in a raw export can still lose its subject
+					once Instagram lays a caption, a username, an audio title, and a column of like/comment/share
+					icons on top of it. Checking against Reels' safe zone before posting means a face, a
+					subtitle, or a key product detail doesn't end up hidden behind the app's own chrome.
+				</p>
+				<p>
+					Reels reserves a thin top bar for the Reels label and audio, a bottom band for caption,
+					username, and audio title, and a right-hand column for engagement icons. This tool overlays
+					all three at the sizes Instagram's own creator specs publish, drawn straight onto your photo
+					so you can see the effect on your actual composition.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">GO DEEPER</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				More tools for creators
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/tiktok-safe-zone/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">TikTok safe zone checker</span>
+					<span class="mt-1 block font-mono text-xs text-mute">The same check, tuned to TikTok's UI</span>
+				</a>
+				<a href="/tools/safe-zones/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Compare TikTok vs. Reels</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Toggle both platforms' overlays at once</span>
+				</a>
+				<a href="/for/instagram/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Cinematic Instagram editor</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Presets plus 1:1 / 4:5 / 9:16 export crops</span>
+				</a>
+				<a href="/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Browse all 60 presets</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Every color grade, organized by genre</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Common questions about Reels' safe zone" faqs={faqs} />
+	</main>
+	<Footer />
+</Layout>

@@ -1,29 +1,39 @@
 ---
-import { DEFAULT_SAFE_ZONE_OPACITY, SAFE_ZONE_PLATFORMS, getZoneMetric } from '../lib/safeZones';
+import { DEFAULT_SAFE_ZONE_OPACITY, SAFE_ZONE_PLATFORMS, getZoneMetric, type SafeZonePlatform } from '../lib/safeZones';
+
+interface Props {
+	/** When set, locks the tool to a single platform: no toggle row, and the zone breakdown only shows this platform's zones. Used by the dedicated per-platform landing pages so there's no tab UI to fight for SEO focus. */
+	platform?: SafeZonePlatform;
+}
+
+const { platform } = Astro.props;
 
 const defaultOpacityPercent = Math.round(DEFAULT_SAFE_ZONE_OPACITY * 100);
+const visiblePlatforms = platform ? SAFE_ZONE_PLATFORMS.filter((p) => p.id === platform) : SAFE_ZONE_PLATFORMS;
 ---
 
-<section id="safe-zone-tool" class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 py-4 sm:px-6">
-	<div class="flex w-full flex-wrap items-center justify-center gap-2" id="safe-zone-platform-toggles">
-		{
-			SAFE_ZONE_PLATFORMS.map((platform) => (
-				<button
-					type="button"
-					data-platform={platform.id}
-					aria-pressed="true"
-					data-active="true"
-					class="safe-zone-platform-btn group flex items-center gap-2 rounded-full border border-hairline bg-canvas px-3.5 py-1.5 font-mono text-xs text-mute transition-colors hover:border-hairline-strong hover:text-ink data-[active=true]:border-hairline-strong data-[active=true]:text-ink"
-				>
-					<span
-						class="h-2 w-2 rounded-full transition-opacity group-data-[active=false]:opacity-40"
-						style={`background:${platform.color}`}
-					/>
-					{platform.name}
-				</button>
-			))
-		}
-	</div>
+<section id="safe-zone-tool" class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 py-4 sm:px-6" data-locked-platform={platform ?? ''}>
+	{
+		!platform && (
+			<div class="flex w-full flex-wrap items-center justify-center gap-2" id="safe-zone-platform-toggles">
+				{SAFE_ZONE_PLATFORMS.map((p) => (
+					<button
+						type="button"
+						data-platform={p.id}
+						aria-pressed="true"
+						data-active="true"
+						class="safe-zone-platform-btn group flex items-center gap-2 rounded-full border border-hairline bg-canvas px-3.5 py-1.5 font-mono text-xs text-mute transition-colors hover:border-hairline-strong hover:text-ink data-[active=true]:border-hairline-strong data-[active=true]:text-ink"
+					>
+						<span
+							class="h-2 w-2 rounded-full transition-opacity group-data-[active=false]:opacity-40"
+							style={`background:${p.color}`}
+						/>
+						{p.name}
+					</button>
+				))}
+			</div>
+		)
+	}
 
 	<label class="mt-4 flex w-full max-w-[300px] flex-col gap-2">
 		<span class="flex items-center justify-between font-mono text-[11px] text-mute">
@@ -109,9 +119,9 @@ const defaultOpacityPercent = Math.round(DEFAULT_SAFE_ZONE_OPACITY * 100);
 		</button>
 	</div>
 
-	<div class="mt-8 grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
+	<div class={`mt-8 grid w-full grid-cols-1 gap-4 ${visiblePlatforms.length > 1 ? 'sm:grid-cols-2' : ''}`}>
 		{
-			SAFE_ZONE_PLATFORMS.map((platform) => (
+			visiblePlatforms.map((platform) => (
 				<div class="rounded-md border border-hairline bg-canvas p-3.5">
 					<span class="flex items-center gap-2 font-sans text-sm font-medium text-ink">
 						<span class="h-2 w-2 rounded-full" style={`background:${platform.color}`} />
@@ -145,6 +155,9 @@ const defaultOpacityPercent = Math.round(DEFAULT_SAFE_ZONE_OPACITY * 100);
 		getSafeZoneCropPanBounds,
 		type SafeZonePlatform,
 	} from '../lib/safeZones';
+
+	const toolSection = document.getElementById('safe-zone-tool') as HTMLElement;
+	const lockedPlatform = (toolSection.dataset.lockedPlatform || '') as SafeZonePlatform | '';
 
 	const dropzone = document.getElementById('safe-zone-dropzone') as HTMLLabelElement;
 	const fileInput = document.getElementById('safe-zone-file-input') as HTMLInputElement;
@@ -197,6 +210,7 @@ const defaultOpacityPercent = Math.round(DEFAULT_SAFE_ZONE_OPACITY * 100);
 	}
 
 	function activePlatforms(): SafeZonePlatform[] {
+		if (lockedPlatform) return [lockedPlatform];
 		return SAFE_ZONE_PLATFORMS.map((p) => p.id).filter(
 			(id) => document.querySelector<HTMLButtonElement>(`[data-platform="${id}"]`)?.dataset.active === 'true',
 		);
@@ -483,8 +497,10 @@ const defaultOpacityPercent = Math.round(DEFAULT_SAFE_ZONE_OPACITY * 100);
 		return output;
 	}
 
+	const filenamePrefix = lockedPlatform ? `${lockedPlatform}-safe-zone` : 'safe-zones';
+
 	saveBtn.addEventListener('click', () => {
-		downloadCanvas(buildExportCanvas(), 'safe-zones-reference.png');
+		downloadCanvas(buildExportCanvas(), `${filenamePrefix}-reference.png`);
 	});
 
 	saveOverlayBtn.addEventListener('click', () => {
@@ -494,6 +510,6 @@ const defaultOpacityPercent = Math.round(DEFAULT_SAFE_ZONE_OPACITY * 100);
 		overlayCanvas.height = height;
 		const overlayCtx = overlayCanvas.getContext('2d')!;
 		drawSafeZones(overlayCtx, width, height, activePlatforms(), currentOpacity());
-		downloadCanvas(overlayCanvas, 'safe-zones-overlay.png');
+		downloadCanvas(overlayCanvas, `${filenamePrefix}-overlay.png`);
 	});
 </script>
