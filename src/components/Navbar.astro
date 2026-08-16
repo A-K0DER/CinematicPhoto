@@ -1,9 +1,11 @@
 ---
 interface Props {
 	variant?: 'landing' | 'editor';
+	/** Only used when variant is 'editor' — labels the nav action buttons for photo vs. video editing. */
+	editorMode?: 'photo' | 'video';
 }
 
-const { variant = 'landing' } = Astro.props;
+const { variant = 'landing', editorMode = 'photo' } = Astro.props;
 ---
 
 <header
@@ -57,6 +59,9 @@ const { variant = 'landing' } = Astro.props;
 					<a href="/tools/safe-zones/" class="font-mono text-xs text-body transition-colors hover:text-ink">
 						Safe Zones
 					</a>
+					<a href="/video-editor/" class="font-mono text-xs text-body transition-colors hover:text-ink">
+						Video
+					</a>
 				</nav>
 			)
 		}
@@ -79,21 +84,21 @@ const { variant = 'landing' } = Astro.props;
 						type="button"
 						class="rounded-md border border-hairline px-3 py-1.5 font-sans text-sm font-medium text-body transition-colors hover:border-hairline-strong hover:text-ink"
 					>
-						Remove image
+						{editorMode === 'video' ? 'Remove video' : 'Remove image'}
 					</button>
 					<button
 						id="nav-reset"
 						type="button"
 						class="rounded-md border border-hairline px-3 py-1.5 font-sans text-sm font-medium text-body transition-colors hover:border-hairline-strong hover:text-ink"
 					>
-						New image
+						{editorMode === 'video' ? 'New video' : 'New image'}
 					</button>
 					<button
 						id="nav-export"
 						type="button"
 						class="rounded-md bg-primary px-3 py-1.5 font-sans text-sm font-medium text-on-primary transition-opacity hover:opacity-90"
 					>
-						Export
+						{editorMode === 'video' ? 'Download' : 'Export'}
 					</button>
 				</>
 			)

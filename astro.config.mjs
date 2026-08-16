@@ -8,7 +8,8 @@ export default defineConfig({
 	site: 'https://cinematicphoto.com',
 	integrations: [
 		sitemap({
-			filter: (page) => page !== 'https://cinematicphoto.com/editor/',
+			filter: (page) =>
+				page !== 'https://cinematicphoto.com/editor/' && page !== 'https://cinematicphoto.com/video-editor/',
 		}),
 	],
 	vite: {

@@ -1,0 +1,105 @@
+---
+import { PHASE1_PRESET_NAME } from '../lib/videoPresets';
+---
+
+<section
+	id="video-editor"
+	class="grid min-h-[calc(100vh-3.5rem)] grid-cols-1 lg:h-[calc(100vh-3.5rem)] lg:grid-cols-[1fr_320px] lg:overflow-hidden"
+>
+	<div class="flex items-center justify-center overflow-hidden bg-zinc-950 p-4 sm:p-10">
+		<div id="video-preview-wrap" class="flex max-h-full w-full max-w-full flex-col items-center justify-center gap-4 transition-opacity duration-200">
+			<video
+				id="video-preview"
+				controls
+				playsinline
+				class="hidden max-h-[75vh] max-w-full rounded-sm shadow-[0_1px_1px_rgba(0,0,0,0.2),0_8px_24px_-8px_rgba(0,0,0,0.5)]"
+			></video>
+			<label
+				id="video-dropzone"
+				for="video-file-input"
+				class="flex w-full max-w-3xl cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-hairline-strong bg-canvas-soft px-6 py-24 text-center transition-colors hover:border-zinc-500 hover:bg-canvas-soft-2"
+			>
+				<svg
+					width="36"
+					height="36"
+					viewBox="0 0 24 24"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+					class="mb-5 text-mute"
+				>
+					<path
+						d="M12 16V4M12 4L7 9M12 4L17 9"
+						stroke="currentColor"
+						stroke-width="1.6"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					></path>
+					<path
+						d="M4 16V18C4 19.1046 4.89543 20 6 20H18C19.1046 20 20 19.1046 20 18V16"
+						stroke="currentColor"
+						stroke-width="1.6"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					></path>
+				</svg>
+				<span class="font-sans text-base font-medium text-ink">Drop a video, paste, or click to browse</span>
+				<span class="mt-2 font-mono text-sm text-mute">MP4, MOV, or WEBM</span>
+				<input id="video-file-input" type="file" accept="video/mp4,video/quicktime,video/webm" class="sr-only" />
+			</label>
+			<p id="video-dropzone-error" class="hidden font-mono text-xs text-error" role="alert"></p>
+		</div>
+	</div>
+
+	<aside
+		class="flex flex-col gap-6 overflow-y-auto border-t border-hairline bg-canvas-soft p-5 lg:border-t-0 lg:border-l"
+	>
+		<div>
+			<h2 class="mb-3 font-mono text-[11px] font-medium tracking-wide text-mute uppercase">
+				Mode
+			</h2>
+			<div class="grid grid-cols-2 gap-2 rounded-md border border-hairline p-1">
+				<a
+					href="/editor/"
+					class="rounded-sm px-2 py-1.5 text-center font-sans text-xs font-medium text-mute transition-colors hover:text-ink"
+				>
+					Photo
+				</a>
+				<span class="rounded-sm bg-canvas-soft-2 px-2 py-1.5 text-center font-sans text-xs font-medium text-ink">
+					Video
+				</span>
+			</div>
+		</div>
+
+		<div class="flex flex-col gap-2 border-t border-hairline pt-5">
+			<h2 class="font-mono text-[11px] font-medium tracking-wide text-mute uppercase">
+				Preset
+			</h2>
+			<div class="flex flex-col items-start gap-2 rounded-md border border-ink bg-canvas p-2.5 ring-1 ring-ink">
+				<span class="font-sans text-xs font-medium text-ink">{PHASE1_PRESET_NAME}</span>
+				<span class="font-mono text-[10px] leading-relaxed text-mute">
+					The only video grade available right now — more of the 60 photo presets are coming to video
+					soon.
+				</span>
+			</div>
+		</div>
+
+		<div class="flex flex-col gap-3 border-t border-hairline pt-5">
+			<h2 class="font-mono text-[11px] font-medium tracking-wide text-mute uppercase">
+				Render
+			</h2>
+			<button
+				id="video-render-btn"
+				type="button"
+				disabled
+				class="rounded-md bg-primary px-3 py-2 font-sans text-sm font-medium text-on-primary transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
+			>
+				Apply {PHASE1_PRESET_NAME} grade
+			</button>
+			<p id="video-status" class="font-mono text-[11px] leading-relaxed text-mute"></p>
+			<p class="font-mono text-[10px] leading-relaxed text-mute">
+				Rendering happens on our servers with ffmpeg, not in your browser — the clip is uploaded, graded,
+				then downloaded back. May take a minute or two.
+			</p>
+		</div>
+	</aside>
+</section>

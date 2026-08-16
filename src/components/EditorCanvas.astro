@@ -65,6 +65,23 @@ const remainingByGenre = GENRES.map((genre) => ({
 	>
 		<div>
 			<h2 class="mb-3 font-mono text-[11px] font-medium tracking-wide text-mute uppercase">
+				Mode
+			</h2>
+			<div class="grid grid-cols-2 gap-2 rounded-md border border-hairline p-1">
+				<span class="rounded-sm bg-canvas-soft-2 px-2 py-1.5 text-center font-sans text-xs font-medium text-ink">
+					Photo
+				</span>
+				<a
+					href="/video-editor/"
+					class="rounded-sm px-2 py-1.5 text-center font-sans text-xs font-medium text-mute transition-colors hover:text-ink"
+				>
+					Video
+				</a>
+			</div>
+		</div>
+
+		<div class="border-t border-hairline pt-5">
+			<h2 class="mb-3 font-mono text-[11px] font-medium tracking-wide text-mute uppercase">
 				Preset
 			</h2>
 			<div id="preset-grid" class="grid grid-cols-2 gap-2">

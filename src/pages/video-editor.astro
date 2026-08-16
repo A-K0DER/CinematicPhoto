@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import VideoEditorCanvas from '../components/VideoEditorCanvas.astro';
+
+const title = 'Video Editor | Cinematic Photo Editor';
+const description = 'Apply movie-inspired color grades to your video.';
+---
+
+<Layout title={title} description={description} path="/video-editor/" noindex>
+	<Navbar variant="editor" editorMode="video" />
+	<main>
+		<VideoEditorCanvas />
+	</main>
+</Layout>
+
+<script>
+	import '../lib/videoEditor';
+</script>
