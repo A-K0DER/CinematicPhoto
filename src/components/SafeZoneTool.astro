@@ -40,15 +40,15 @@ const defaultOpacityPercent = Math.round(DEFAULT_SAFE_ZONE_OPACITY * 100);
 		/>
 	</label>
 
-	<label
-		id="safe-zone-dropzone"
-		for="safe-zone-file-input"
-		class="relative mt-6 flex aspect-[9/16] w-full max-w-[300px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-xl border border-hairline bg-zinc-950"
-	>
-		<canvas id="safe-zone-canvas" class="h-full w-full"></canvas>
-		<div
-			id="safe-zone-empty-hint"
-			class="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-2 bg-zinc-950/70 px-6 text-center"
+	<div class="relative mt-6 flex max-w-full items-center justify-center">
+		<canvas
+			id="safe-zone-canvas"
+			class="max-h-[70vh] max-w-full touch-none rounded-xl shadow-[0_1px_1px_rgba(0,0,0,0.2),0_8px_24px_-8px_rgba(0,0,0,0.5)]"
+		></canvas>
+		<label
+			id="safe-zone-dropzone"
+			for="safe-zone-file-input"
+			class="absolute inset-0 flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border border-transparent bg-zinc-950/70 px-6 text-center transition-colors"
 		>
 			<svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-1 text-zinc-400">
 				<path d="M12 16V4M12 4L7 9M12 4L17 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
@@ -56,11 +56,15 @@ const defaultOpacityPercent = Math.round(DEFAULT_SAFE_ZONE_OPACITY * 100);
 			</svg>
 			<span class="font-sans text-sm font-medium text-zinc-100">Drop a photo, paste, or click</span>
 			<span class="font-mono text-[10px] text-zinc-400">JPG, PNG, or WEBP</span>
-		</div>
-		<input id="safe-zone-file-input" type="file" accept="image/png,image/jpeg,image/webp" class="sr-only" />
-	</label>
+			<input id="safe-zone-file-input" type="file" accept="image/png,image/jpeg,image/webp" class="sr-only" />
+		</label>
+	</div>
 
 	<p id="safe-zone-error" class="mt-3 hidden font-mono text-xs text-error" role="alert"></p>
+	<p class="mt-3 max-w-[300px] text-center font-mono text-[10px] leading-relaxed text-mute">
+		Shows a live preview of the 9:16 safe-zone frame — the dimmed area is trimmed on save. Drag
+		inside the frame to reposition it.
+	</p>
 
 	<div class="mt-5 flex w-full max-w-[300px] items-center gap-2">
 		<button
@@ -69,6 +73,13 @@ const defaultOpacityPercent = Math.round(DEFAULT_SAFE_ZONE_OPACITY * 100);
 			class="hidden flex-1 rounded-md border border-hairline px-3 py-2 font-sans text-sm font-medium text-body transition-colors hover:border-hairline-strong hover:text-ink"
 		>
 			New image
+		</button>
+		<button
+			id="safe-zone-recenter"
+			type="button"
+			class="hidden flex-1 rounded-md border border-hairline px-3 py-2 font-sans text-sm font-medium text-body transition-colors hover:border-hairline-strong hover:text-ink"
+		>
+			Recenter
 		</button>
 		<button
 			id="safe-zone-save"
@@ -116,22 +127,42 @@ const defaultOpacityPercent = Math.round(DEFAULT_SAFE_ZONE_OPACITY * 100);
 </section>
 
 <script>
-	import { SAFE_ZONE_FRAME, SAFE_ZONE_PLATFORMS, drawSafeZones, type SafeZonePlatform } from '../lib/safeZones';
+	import {
+		SAFE_ZONE_FRAME,
+		SAFE_ZONE_PLATFORMS,
+		computeSafeZoneCropWindow,
+		drawSafeZones,
+		getSafeZoneCropPanBounds,
+		type SafeZonePlatform,
+	} from '../lib/safeZones';
 
 	const dropzone = document.getElementById('safe-zone-dropzone') as HTMLLabelElement;
 	const fileInput = document.getElementById('safe-zone-file-input') as HTMLInputElement;
 	const canvas = document.getElementById('safe-zone-canvas') as HTMLCanvasElement;
-	const emptyHint = document.getElementById('safe-zone-empty-hint') as HTMLDivElement;
 	const errorEl = document.getElementById('safe-zone-error') as HTMLParagraphElement;
 	const platformToggles = document.querySelectorAll<HTMLButtonElement>('[data-platform]');
 	const newImageBtn = document.getElementById('safe-zone-new-image') as HTMLButtonElement;
+	const recenterBtn = document.getElementById('safe-zone-recenter') as HTMLButtonElement;
 	const saveBtn = document.getElementById('safe-zone-save') as HTMLButtonElement;
 	const saveOverlayBtn = document.getElementById('safe-zone-save-overlay') as HTMLButtonElement;
 	const opacitySlider = document.getElementById('safe-zone-opacity-slider') as HTMLInputElement;
 	const opacityValue = document.getElementById('safe-zone-opacity-value') as HTMLSpanElement;
 
 	const ctx = canvas.getContext('2d')!;
-	let currentImage: HTMLImageElement | null = null;
+
+	// Preview resolution is capped independently of export — the export always
+	// samples the original full-res image, so this only affects on-screen crispness.
+	const MAX_PREVIEW_DIMENSION = 1600;
+
+	interface State {
+		image: HTMLImageElement | null;
+		width: number;
+		height: number;
+		panX: number;
+		panY: number;
+	}
+
+	const state: State = { image: null, width: 0, height: 0, panX: 0, panY: 0 };
 
 	function loadImageFromFile(file: Blob): Promise<HTMLImageElement> {
 		return new Promise((resolve, reject) => {
@@ -149,6 +180,11 @@ const defaultOpacityPercent = Math.round(DEFAULT_SAFE_ZONE_OPACITY * 100);
 		});
 	}
 
+	function computePreviewSize(naturalWidth: number, naturalHeight: number) {
+		const scale = Math.min(1, MAX_PREVIEW_DIMENSION / Math.max(naturalWidth, naturalHeight));
+		return { width: Math.round(naturalWidth * scale), height: Math.round(naturalHeight * scale) };
+	}
+
 	function activePlatforms(): SafeZonePlatform[] {
 		return SAFE_ZONE_PLATFORMS.map((p) => p.id).filter(
 			(id) => document.querySelector<HTMLButtonElement>(`[data-platform="${id}"]`)?.dataset.active === 'true',
@@ -159,23 +195,57 @@ const defaultOpacityPercent = Math.round(DEFAULT_SAFE_ZONE_OPACITY * 100);
 		return Number(opacitySlider.value) / 100;
 	}
 
+	/**
+	 * Draws the full photo at its native (capped) size with a live crop-window
+	 * overlay — the area outside the 9:16 safe-zone frame is dimmed rather than
+	 * physically cut away, so dragging to reposition stays visible against the
+	 * whole photo. The actual pixel crop only happens in `buildExportCanvas`.
+	 */
 	function render() {
-		const { width, height } = SAFE_ZONE_FRAME;
+		if (!state.image) {
+			const { width, height } = SAFE_ZONE_FRAME;
+			if (canvas.width !== width) canvas.width = width;
+			if (canvas.height !== height) canvas.height = height;
+			ctx.clearRect(0, 0, width, height);
+			ctx.fillStyle = '#09090b';
+			ctx.fillRect(0, 0, width, height);
+			drawSafeZones(ctx, width, height, activePlatforms(), currentOpacity());
+			return;
+		}
+
+		const { width, height } = state;
 		if (canvas.width !== width) canvas.width = width;
 		if (canvas.height !== height) canvas.height = height;
 
 		ctx.clearRect(0, 0, width, height);
-		ctx.fillStyle = '#09090b';
-		ctx.fillRect(0, 0, width, height);
+		ctx.drawImage(state.image, 0, 0, width, height);
 
-		if (currentImage) {
-			const scale = Math.max(width / currentImage.naturalWidth, height / currentImage.naturalHeight);
-			const dw = currentImage.naturalWidth * scale;
-			const dh = currentImage.naturalHeight * scale;
-			ctx.drawImage(currentImage, (width - dw) / 2, (height - dh) / 2, dw, dh);
-		}
+		const crop = computeSafeZoneCropWindow(width, height, { x: state.panX, y: state.panY });
 
-		drawSafeZones(ctx, width, height, activePlatforms(), currentOpacity());
+		// Dim everything outside the crop window.
+		ctx.save();
+		ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+		ctx.beginPath();
+		ctx.rect(0, 0, width, height);
+		ctx.rect(crop.sx, crop.sy, crop.sw, crop.sh);
+		ctx.fill('evenodd');
+		ctx.restore();
+
+		// Safe-zone overlays, scoped to the crop window so they match the export.
+		ctx.save();
+		ctx.beginPath();
+		ctx.rect(crop.sx, crop.sy, crop.sw, crop.sh);
+		ctx.clip();
+		ctx.translate(crop.sx, crop.sy);
+		drawSafeZones(ctx, crop.sw, crop.sh, activePlatforms(), currentOpacity());
+		ctx.restore();
+
+		// Crop window frame.
+		ctx.save();
+		ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+		ctx.lineWidth = Math.max(1.5, Math.min(width, height) * 0.0025);
+		ctx.strokeRect(crop.sx, crop.sy, crop.sw, crop.sh);
+		ctx.restore();
 	}
 
 	function showError(message: string) {
@@ -195,9 +265,17 @@ const defaultOpacityPercent = Math.round(DEFAULT_SAFE_ZONE_OPACITY * 100);
 		}
 		clearError();
 		try {
-			currentImage = await loadImageFromFile(file);
-			emptyHint.classList.add('hidden');
+			const image = await loadImageFromFile(file);
+			const { width, height } = computePreviewSize(image.naturalWidth, image.naturalHeight);
+			state.image = image;
+			state.width = width;
+			state.height = height;
+			state.panX = 0;
+			state.panY = 0;
+			dropzone.classList.add('hidden');
 			newImageBtn.classList.remove('hidden');
+			recenterBtn.classList.remove('hidden');
+			canvas.classList.add('cursor-grab');
 			render();
 		} catch (err) {
 			showError(err instanceof Error ? err.message : 'Could not read this image file.');
@@ -256,6 +334,64 @@ const defaultOpacityPercent = Math.round(DEFAULT_SAFE_ZONE_OPACITY * 100);
 
 	newImageBtn.addEventListener('click', () => fileInput.click());
 
+	recenterBtn.addEventListener('click', () => {
+		state.panX = 0;
+		state.panY = 0;
+		render();
+	});
+
+	// --- Drag to reposition the crop window ---
+
+	interface DragState {
+		pointerId: number;
+		startClientX: number;
+		startClientY: number;
+		startPanX: number;
+		startPanY: number;
+	}
+
+	let drag: DragState | null = null;
+
+	canvas.addEventListener('pointerdown', (e) => {
+		if (!state.image) return;
+		drag = {
+			pointerId: e.pointerId,
+			startClientX: e.clientX,
+			startClientY: e.clientY,
+			startPanX: state.panX,
+			startPanY: state.panY,
+		};
+		canvas.setPointerCapture(e.pointerId);
+		canvas.classList.add('cursor-grabbing');
+	});
+
+	canvas.addEventListener('pointermove', (e) => {
+		if (!drag || drag.pointerId !== e.pointerId) return;
+		const rect = canvas.getBoundingClientRect();
+		if (rect.width === 0) return;
+		// Backing-store pixels per CSS pixel — the canvas is drawn at full
+		// preview resolution but displayed scaled down, so mouse deltas need converting.
+		const scale = canvas.width / rect.width;
+		const dxSource = (e.clientX - drag.startClientX) * scale;
+		const dySource = (e.clientY - drag.startClientY) * scale;
+		const bounds = getSafeZoneCropPanBounds(state.width, state.height);
+		// Dragging right/down should reveal more of the frame's left/top edge,
+		// i.e. slide the crop window the opposite way — so we subtract, not add.
+		state.panX = Math.min(Math.max(drag.startPanX - dxSource, -bounds.maxX), bounds.maxX);
+		state.panY = Math.min(Math.max(drag.startPanY - dySource, -bounds.maxY), bounds.maxY);
+		render();
+	});
+
+	function endDrag(e: PointerEvent) {
+		if (!drag || drag.pointerId !== e.pointerId) return;
+		drag = null;
+		canvas.classList.remove('cursor-grabbing');
+		if (canvas.hasPointerCapture(e.pointerId)) canvas.releasePointerCapture(e.pointerId);
+	}
+
+	canvas.addEventListener('pointerup', endDrag);
+	canvas.addEventListener('pointercancel', endDrag);
+
 	// --- Platform toggles ---
 
 	for (const btn of platformToggles) {
@@ -289,8 +425,37 @@ const defaultOpacityPercent = Math.round(DEFAULT_SAFE_ZONE_OPACITY * 100);
 		}, 'image/png');
 	}
 
+	/**
+	 * Physically crops the photo to the 9:16 safe-zone frame for saving — the
+	 * live canvas only shows a preview with the crop dimmed, not cut away.
+	 * Samples the original full-resolution image, not the (possibly
+	 * downscaled) preview canvas, so export quality isn't capped by it.
+	 */
+	function buildExportCanvas(): HTMLCanvasElement {
+		const { width, height } = SAFE_ZONE_FRAME;
+		const output = document.createElement('canvas');
+		output.width = width;
+		output.height = height;
+		const octx = output.getContext('2d')!;
+		octx.fillStyle = '#09090b';
+		octx.fillRect(0, 0, width, height);
+
+		if (state.image) {
+			const previewCrop = computeSafeZoneCropWindow(state.width, state.height, { x: state.panX, y: state.panY });
+			const naturalScale = state.image.naturalWidth / state.width;
+			const sx = Math.round(previewCrop.sx * naturalScale);
+			const sy = Math.round(previewCrop.sy * naturalScale);
+			const sw = Math.round(previewCrop.sw * naturalScale);
+			const sh = Math.round(previewCrop.sh * naturalScale);
+			octx.drawImage(state.image, sx, sy, sw, sh, 0, 0, width, height);
+		}
+
+		drawSafeZones(octx, width, height, activePlatforms(), currentOpacity());
+		return output;
+	}
+
 	saveBtn.addEventListener('click', () => {
-		downloadCanvas(canvas, 'safe-zones-reference.png');
+		downloadCanvas(buildExportCanvas(), 'safe-zones-reference.png');
 	});
 
 	saveOverlayBtn.addEventListener('click', () => {

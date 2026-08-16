@@ -374,6 +374,103 @@ export function renderFrame({
 	if (options.metadata && stampLabel) drawMetadataStamp(ctx, width, height, stampLabel);
 }
 
+export interface RenderPreviewFrameArgs {
+	canvas: HTMLCanvasElement;
+	gradedBase: HTMLCanvasElement;
+	width: number;
+	height: number;
+	/** The Instagram aspect-ratio crop window, in the same pixel space as `width`/`height`; null shows the full photo uncropped. */
+	cropRect: CropRect | null;
+	preset: CinematicPreset;
+	options: RenderOptions;
+	stampLabel?: string;
+}
+
+/**
+ * Draws the full photo at its native size with a live crop-window overlay —
+ * the area outside `cropRect` is dimmed rather than physically cut away, so
+ * dragging to reposition the crop stays visible against the whole image.
+ * The actual pixel crop only happens in `renderFrame`, used for export, so
+ * letterbox/metadata are clipped to the crop window here to match it.
+ */
+export function renderPreviewFrame({
+	canvas,
+	gradedBase,
+	width,
+	height,
+	cropRect,
+	preset,
+	options,
+	stampLabel,
+}: RenderPreviewFrameArgs) {
+	if (canvas.width !== width) canvas.width = width;
+	if (canvas.height !== height) canvas.height = height;
+	const ctx = canvas.getContext('2d');
+	if (!ctx) return;
+
+	ctx.clearRect(0, 0, width, height);
+	ctx.drawImage(gradedBase, 0, 0, width, height);
+
+	applyOverlay(ctx, preset, width, height);
+	applyHaze(ctx, preset, width, height);
+	applyGlow(ctx, width, height, options.glow);
+	applyVignette(ctx, width, height, options.vignette);
+	applyGrain(ctx, width, height, options.grain);
+
+	if (!cropRect) {
+		if (options.letterbox) drawLetterbox(ctx, width, height);
+		if (options.metadata && stampLabel) drawMetadataStamp(ctx, width, height, stampLabel);
+		return;
+	}
+
+	const { sx, sy, sw, sh } = cropRect;
+
+	if (options.letterbox || (options.metadata && stampLabel)) {
+		ctx.save();
+		ctx.beginPath();
+		ctx.rect(sx, sy, sw, sh);
+		ctx.clip();
+		ctx.translate(sx, sy);
+		if (options.letterbox) drawLetterbox(ctx, sw, sh);
+		if (options.metadata && stampLabel) drawMetadataStamp(ctx, sw, sh, stampLabel);
+		ctx.restore();
+	}
+
+	// Dim everything outside the crop window.
+	ctx.save();
+	ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+	ctx.beginPath();
+	ctx.rect(0, 0, width, height);
+	ctx.rect(sx, sy, sw, sh);
+	ctx.fill('evenodd');
+	ctx.restore();
+
+	// Rule-of-thirds guides inside the crop window.
+	ctx.save();
+	ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
+	ctx.lineWidth = Math.max(1, Math.min(width, height) * 0.0015);
+	for (let i = 1; i <= 2; i++) {
+		const x = sx + (sw * i) / 3;
+		ctx.beginPath();
+		ctx.moveTo(x, sy);
+		ctx.lineTo(x, sy + sh);
+		ctx.stroke();
+		const y = sy + (sh * i) / 3;
+		ctx.beginPath();
+		ctx.moveTo(sx, y);
+		ctx.lineTo(sx + sw, y);
+		ctx.stroke();
+	}
+	ctx.restore();
+
+	// Crop window frame.
+	ctx.save();
+	ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+	ctx.lineWidth = Math.max(1.5, Math.min(width, height) * 0.0025);
+	ctx.strokeRect(sx, sy, sw, sh);
+	ctx.restore();
+}
+
 export function exportCanvas(canvas: HTMLCanvasElement, filename: string): Promise<void> {
 	return new Promise((resolve, reject) => {
 		canvas.toBlob((blob) => {

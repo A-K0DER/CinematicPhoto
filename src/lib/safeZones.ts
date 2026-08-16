@@ -112,3 +112,62 @@ export function drawSafeZones(
 		ctx.restore();
 	}
 }
+
+export interface SafeZoneCropPan {
+	x: number;
+	y: number;
+}
+
+export interface SafeZoneCropWindow {
+	sx: number;
+	sy: number;
+	sw: number;
+	sh: number;
+}
+
+export interface SafeZoneCropPanBounds {
+	maxX: number;
+	maxY: number;
+}
+
+const FRAME_RATIO = SAFE_ZONE_FRAME.width / SAFE_ZONE_FRAME.height;
+
+function clampNum(value: number, min: number, max: number): number {
+	return Math.min(Math.max(value, min), max);
+}
+
+/** The 9:16 crop window's pixel size within a source photo, before any pan offset. */
+function cropWindowSize(sourceWidth: number, sourceHeight: number) {
+	const sourceRatio = sourceWidth / sourceHeight;
+	if (sourceRatio > FRAME_RATIO) {
+		// Source is relatively wider than 9:16 — crop the sides.
+		return { sw: Math.round(sourceHeight * FRAME_RATIO), sh: sourceHeight };
+	}
+	// Source is relatively taller than 9:16 — crop top/bottom.
+	return { sw: sourceWidth, sh: Math.round(sourceWidth / FRAME_RATIO) };
+}
+
+/** Max pixels the crop window can be dragged off-center in each direction (0 once it already fills that dimension). */
+export function getSafeZoneCropPanBounds(sourceWidth: number, sourceHeight: number): SafeZoneCropPanBounds {
+	const { sw, sh } = cropWindowSize(sourceWidth, sourceHeight);
+	return { maxX: (sourceWidth - sw) / 2, maxY: (sourceHeight - sh) / 2 };
+}
+
+/**
+ * Center-crops (cover-fit) a source photo down to the 9:16 safe-zone frame,
+ * the same math as CSS `object-fit: cover`. `pan` shifts the crop window off
+ * -center (e.g. from dragging the preview), clamped so it never leaves the
+ * source photo.
+ */
+export function computeSafeZoneCropWindow(
+	sourceWidth: number,
+	sourceHeight: number,
+	pan: SafeZoneCropPan = { x: 0, y: 0 },
+): SafeZoneCropWindow {
+	const { sw, sh } = cropWindowSize(sourceWidth, sourceHeight);
+	const baseSx = (sourceWidth - sw) / 2;
+	const baseSy = (sourceHeight - sh) / 2;
+	const sx = Math.round(clampNum(baseSx + pan.x, 0, sourceWidth - sw));
+	const sy = Math.round(clampNum(baseSy + pan.y, 0, sourceHeight - sh));
+	return { sx, sy, sw, sh };
+}

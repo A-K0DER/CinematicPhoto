@@ -7,6 +7,7 @@ import {
 	loadImageFromFile,
 	prepareGradedBase,
 	renderFrame,
+	renderPreviewFrame,
 	type AspectRatioId,
 } from './engine';
 import { clearCurrentImage, loadCurrentImage, saveCurrentImage } from './imageHandoff';
@@ -122,18 +123,27 @@ function scheduleRender() {
 	});
 }
 
+function stampLabelFor(preset: CinematicPreset): string {
+	return `CINEMATIC PHOTO · ${preset.name.toUpperCase()} · 35MM`;
+}
+
+/**
+ * Draws the full photo with a live crop-window overlay (dimmed outside the
+ * selected aspect ratio) rather than physically cropping the canvas, so
+ * dragging to reposition the crop stays visible against the whole image.
+ * The actual crop is only applied on export — see the `navExport` handler.
+ */
 function render() {
 	if (!state.image || !state.gradedBase) return;
 	persistState();
 	const preset = getPreset(state.presetId);
-	const stampLabel = `CINEMATIC PHOTO · ${preset.name.toUpperCase()} · 35MM`;
 	const crop = computeCropForRatio(state.width, state.height, state.aspectRatio, { x: state.panX, y: state.panY });
-	renderFrame({
+	renderPreviewFrame({
 		canvas,
 		gradedBase: state.gradedBase,
-		width: crop.width,
-		height: crop.height,
-		sourceRect: crop.sourceRect,
+		width: state.width,
+		height: state.height,
+		cropRect: crop.sourceRect,
 		preset,
 		options: {
 			grain: state.grain,
@@ -142,7 +152,7 @@ function render() {
 			letterbox: state.letterbox,
 			metadata: state.metadata,
 		},
-		stampLabel,
+		stampLabel: stampLabelFor(preset),
 	});
 }
 
@@ -526,14 +536,32 @@ const ASPECT_RATIO_FILE_SUFFIXES: Record<AspectRatioId, string> = {
 };
 
 navExport.addEventListener('click', async () => {
-	if (!state.image) return;
+	if (!state.image || !state.gradedBase) return;
 	const preset = getPreset(state.presetId);
 	const suffix = preset.id === 'original' ? 'original' : preset.id;
 	const ratioSuffix = ASPECT_RATIO_FILE_SUFFIXES[state.aspectRatio];
 	navExport.disabled = true;
 	navExport.textContent = 'Exporting…';
 	try {
-		await exportCanvas(canvas, `${state.fileBaseName}-${suffix}${ratioSuffix}.png`);
+		const crop = computeCropForRatio(state.width, state.height, state.aspectRatio, { x: state.panX, y: state.panY });
+		const output = document.createElement('canvas');
+		renderFrame({
+			canvas: output,
+			gradedBase: state.gradedBase,
+			width: crop.width,
+			height: crop.height,
+			sourceRect: crop.sourceRect,
+			preset,
+			options: {
+				grain: state.grain,
+				vignette: state.vignette,
+				glow: state.glow,
+				letterbox: state.letterbox,
+				metadata: state.metadata,
+			},
+			stampLabel: stampLabelFor(preset),
+		});
+		await exportCanvas(output, `${state.fileBaseName}-${suffix}${ratioSuffix}.png`);
 	} finally {
 		navExport.disabled = false;
 		navExport.textContent = 'Export';
