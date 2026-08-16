@@ -1,0 +1,305 @@
+---
+import { DEFAULT_SAFE_ZONE_OPACITY, SAFE_ZONE_PLATFORMS, getZoneMetric } from '../lib/safeZones';
+
+const defaultOpacityPercent = Math.round(DEFAULT_SAFE_ZONE_OPACITY * 100);
+---
+
+<section id="safe-zone-tool" class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 py-4 sm:px-6">
+	<div class="flex w-full flex-wrap items-center justify-center gap-2" id="safe-zone-platform-toggles">
+		{
+			SAFE_ZONE_PLATFORMS.map((platform) => (
+				<button
+					type="button"
+					data-platform={platform.id}
+					aria-pressed="true"
+					data-active="true"
+					class="safe-zone-platform-btn group flex items-center gap-2 rounded-full border border-hairline bg-canvas px-3.5 py-1.5 font-mono text-xs text-mute transition-colors hover:border-hairline-strong hover:text-ink data-[active=true]:border-hairline-strong data-[active=true]:text-ink"
+				>
+					<span
+						class="h-2 w-2 rounded-full transition-opacity group-data-[active=false]:opacity-40"
+						style={`background:${platform.color}`}
+					/>
+					{platform.name}
+				</button>
+			))
+		}
+	</div>
+
+	<label class="mt-4 flex w-full max-w-[300px] flex-col gap-2">
+		<span class="flex items-center justify-between font-mono text-[11px] text-mute">
+			Overlay opacity
+			<span id="safe-zone-opacity-value">{defaultOpacityPercent}%</span>
+		</span>
+		<input
+			id="safe-zone-opacity-slider"
+			type="range"
+			min="10"
+			max="80"
+			step="5"
+			value={defaultOpacityPercent}
+		/>
+	</label>
+
+	<label
+		id="safe-zone-dropzone"
+		for="safe-zone-file-input"
+		class="relative mt-6 flex aspect-[9/16] w-full max-w-[300px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-xl border border-hairline bg-zinc-950"
+	>
+		<canvas id="safe-zone-canvas" class="h-full w-full"></canvas>
+		<div
+			id="safe-zone-empty-hint"
+			class="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-2 bg-zinc-950/70 px-6 text-center"
+		>
+			<svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-1 text-zinc-400">
+				<path d="M12 16V4M12 4L7 9M12 4L17 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+				<path d="M4 16V18C4 19.1046 4.89543 20 6 20H18C19.1046 20 20 19.1046 20 18V16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+			</svg>
+			<span class="font-sans text-sm font-medium text-zinc-100">Drop a photo, paste, or click</span>
+			<span class="font-mono text-[10px] text-zinc-400">JPG, PNG, or WEBP</span>
+		</div>
+		<input id="safe-zone-file-input" type="file" accept="image/png,image/jpeg,image/webp" class="sr-only" />
+	</label>
+
+	<p id="safe-zone-error" class="mt-3 hidden font-mono text-xs text-error" role="alert"></p>
+
+	<div class="mt-5 flex w-full max-w-[300px] items-center gap-2">
+		<button
+			id="safe-zone-new-image"
+			type="button"
+			class="hidden flex-1 rounded-md border border-hairline px-3 py-2 font-sans text-sm font-medium text-body transition-colors hover:border-hairline-strong hover:text-ink"
+		>
+			New image
+		</button>
+		<button
+			id="safe-zone-save"
+			type="button"
+			class="flex-1 rounded-md bg-primary px-3 py-2 font-sans text-sm font-medium text-on-primary transition-opacity hover:opacity-90"
+		>
+			Save image
+		</button>
+	</div>
+	<div class="mt-2 hidden w-full max-w-[300px] items-center gap-2">
+		<button
+			id="safe-zone-save-overlay"
+			type="button"
+			class="flex-1 rounded-md border border-hairline px-3 py-2 font-sans text-sm font-medium text-body transition-colors hover:border-hairline-strong hover:text-ink"
+		>
+			Save overlay only (transparent PNG)
+		</button>
+	</div>
+
+	<div class="mt-8 grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
+		{
+			SAFE_ZONE_PLATFORMS.map((platform) => (
+				<div class="rounded-md border border-hairline bg-canvas p-3.5">
+					<span class="flex items-center gap-2 font-sans text-sm font-medium text-ink">
+						<span class="h-2 w-2 rounded-full" style={`background:${platform.color}`} />
+						{platform.name}
+					</span>
+					<ul class="mt-2 flex flex-col gap-1">
+						{platform.zones.map((zone) => {
+							const metric = getZoneMetric(zone);
+							return (
+								<li class="flex items-baseline justify-between gap-3 font-mono text-[11px] leading-relaxed text-mute">
+									<span>{zone.label}</span>
+									<span class="shrink-0 text-ink">
+										{metric.px}px ({metric.percent}%)
+									</span>
+								</li>
+							);
+						})}
+					</ul>
+				</div>
+			))
+		}
+	</div>
+</section>
+
+<script>
+	import { SAFE_ZONE_FRAME, SAFE_ZONE_PLATFORMS, drawSafeZones, type SafeZonePlatform } from '../lib/safeZones';
+
+	const dropzone = document.getElementById('safe-zone-dropzone') as HTMLLabelElement;
+	const fileInput = document.getElementById('safe-zone-file-input') as HTMLInputElement;
+	const canvas = document.getElementById('safe-zone-canvas') as HTMLCanvasElement;
+	const emptyHint = document.getElementById('safe-zone-empty-hint') as HTMLDivElement;
+	const errorEl = document.getElementById('safe-zone-error') as HTMLParagraphElement;
+	const platformToggles = document.querySelectorAll<HTMLButtonElement>('[data-platform]');
+	const newImageBtn = document.getElementById('safe-zone-new-image') as HTMLButtonElement;
+	const saveBtn = document.getElementById('safe-zone-save') as HTMLButtonElement;
+	const saveOverlayBtn = document.getElementById('safe-zone-save-overlay') as HTMLButtonElement;
+	const opacitySlider = document.getElementById('safe-zone-opacity-slider') as HTMLInputElement;
+	const opacityValue = document.getElementById('safe-zone-opacity-value') as HTMLSpanElement;
+
+	const ctx = canvas.getContext('2d')!;
+	let currentImage: HTMLImageElement | null = null;
+
+	function loadImageFromFile(file: Blob): Promise<HTMLImageElement> {
+		return new Promise((resolve, reject) => {
+			const url = URL.createObjectURL(file);
+			const img = new Image();
+			img.onload = () => {
+				URL.revokeObjectURL(url);
+				resolve(img);
+			};
+			img.onerror = () => {
+				URL.revokeObjectURL(url);
+				reject(new Error('Could not read this image file.'));
+			};
+			img.src = url;
+		});
+	}
+
+	function activePlatforms(): SafeZonePlatform[] {
+		return SAFE_ZONE_PLATFORMS.map((p) => p.id).filter(
+			(id) => document.querySelector<HTMLButtonElement>(`[data-platform="${id}"]`)?.dataset.active === 'true',
+		);
+	}
+
+	function currentOpacity(): number {
+		return Number(opacitySlider.value) / 100;
+	}
+
+	function render() {
+		const { width, height } = SAFE_ZONE_FRAME;
+		if (canvas.width !== width) canvas.width = width;
+		if (canvas.height !== height) canvas.height = height;
+
+		ctx.clearRect(0, 0, width, height);
+		ctx.fillStyle = '#09090b';
+		ctx.fillRect(0, 0, width, height);
+
+		if (currentImage) {
+			const scale = Math.max(width / currentImage.naturalWidth, height / currentImage.naturalHeight);
+			const dw = currentImage.naturalWidth * scale;
+			const dh = currentImage.naturalHeight * scale;
+			ctx.drawImage(currentImage, (width - dw) / 2, (height - dh) / 2, dw, dh);
+		}
+
+		drawSafeZones(ctx, width, height, activePlatforms(), currentOpacity());
+	}
+
+	function showError(message: string) {
+		errorEl.textContent = message;
+		errorEl.classList.remove('hidden');
+	}
+
+	function clearError() {
+		errorEl.classList.add('hidden');
+		errorEl.textContent = '';
+	}
+
+	async function loadFile(file: File) {
+		if (!file.type.startsWith('image/')) {
+			showError('That file type is not supported. Try a JPG, PNG, or WEBP.');
+			return;
+		}
+		clearError();
+		try {
+			currentImage = await loadImageFromFile(file);
+			emptyHint.classList.add('hidden');
+			newImageBtn.classList.remove('hidden');
+			render();
+		} catch (err) {
+			showError(err instanceof Error ? err.message : 'Could not read this image file.');
+		}
+	}
+
+	render();
+
+	// --- Upload ---
+
+	fileInput.addEventListener('change', () => {
+		const file = fileInput.files?.[0];
+		fileInput.value = '';
+		if (file) loadFile(file);
+	});
+
+	for (const evt of ['dragenter', 'dragover']) {
+		dropzone.addEventListener(evt, (e) => {
+			e.preventDefault();
+			dropzone.classList.add('border-hairline-strong');
+		});
+	}
+
+	for (const evt of ['dragleave', 'dragend']) {
+		dropzone.addEventListener(evt, (e) => {
+			e.preventDefault();
+			dropzone.classList.remove('border-hairline-strong');
+		});
+	}
+
+	dropzone.addEventListener('drop', (e) => {
+		e.preventDefault();
+		dropzone.classList.remove('border-hairline-strong');
+		const file = e.dataTransfer?.files?.[0];
+		if (file) loadFile(file);
+	});
+
+	for (const evt of ['dragover', 'drop']) {
+		window.addEventListener(evt, (e) => {
+			if ((e.target as HTMLElement)?.closest('#safe-zone-dropzone')) return;
+			e.preventDefault();
+		});
+	}
+
+	window.addEventListener('paste', (e) => {
+		const items = e.clipboardData?.items;
+		if (!items) return;
+		for (const item of items) {
+			if (item.type.startsWith('image/')) {
+				const file = item.getAsFile();
+				if (file) loadFile(file);
+				break;
+			}
+		}
+	});
+
+	newImageBtn.addEventListener('click', () => fileInput.click());
+
+	// --- Platform toggles ---
+
+	for (const btn of platformToggles) {
+		btn.addEventListener('click', () => {
+			btn.dataset.active = String(btn.dataset.active !== 'true');
+			btn.setAttribute('aria-pressed', btn.dataset.active);
+			render();
+		});
+	}
+
+	// --- Opacity ---
+
+	opacitySlider.addEventListener('input', () => {
+		opacityValue.textContent = `${opacitySlider.value}%`;
+		render();
+	});
+
+	// --- Save ---
+
+	function downloadCanvas(source: HTMLCanvasElement, filename: string) {
+		source.toBlob((blob) => {
+			if (!blob) return;
+			const url = URL.createObjectURL(blob);
+			const a = document.createElement('a');
+			a.href = url;
+			a.download = filename;
+			document.body.appendChild(a);
+			a.click();
+			a.remove();
+			URL.revokeObjectURL(url);
+		}, 'image/png');
+	}
+
+	saveBtn.addEventListener('click', () => {
+		downloadCanvas(canvas, 'safe-zones-reference.png');
+	});
+
+	saveOverlayBtn.addEventListener('click', () => {
+		const { width, height } = SAFE_ZONE_FRAME;
+		const overlayCanvas = document.createElement('canvas');
+		overlayCanvas.width = width;
+		overlayCanvas.height = height;
+		const overlayCtx = overlayCanvas.getContext('2d')!;
+		drawSafeZones(overlayCtx, width, height, activePlatforms(), currentOpacity());
+		downloadCanvas(overlayCanvas, 'safe-zones-overlay.png');
+	});
+</script>
