@@ -28,9 +28,14 @@ const structuredData = {
 const howToStructuredData = {
 	'@context': 'https://schema.org',
 	'@type': 'HowTo',
-	name: "How to check Instagram Reels' safe zone on a photo",
-	description: "Overlay Reels' caption, username, audio title, and engagement icon bands on a photo before posting.",
+	name: "How to check Instagram's safe zone on a photo",
+	description: "Overlay Reels', Stories', or feed Post's UI and crop bands on a photo before posting.",
 	step: [
+		{
+			'@type': 'HowToStep',
+			name: 'Pick a format',
+			text: 'Switch between Reels, Post, and Stories above the preview — each uses its own frame and safe-zone bands.',
+		},
 		{
 			'@type': 'HowToStep',
 			name: 'Upload a photo',
@@ -39,29 +44,25 @@ const howToStructuredData = {
 		{
 			'@type': 'HowToStep',
 			name: 'Reposition inside the frame',
-			text: "Drag inside the frame to reposition the photo within Reels' 9:16 export crop.",
+			text: "Drag inside the frame to reposition the photo within the selected format's export crop.",
 		},
 		{
 			'@type': 'HowToStep',
-			name: "Check Reels' UI overlay",
-			text: "Review the dimmed bands showing Reels' top bar, bottom caption/username/audio area, and right-hand engagement icon column drawn to scale on the photo.",
+			name: "Check the UI overlay",
+			text: "Review the dimmed bands showing that format's UI or grid-crop safe zones, drawn to scale on the photo.",
 		},
 		{
 			'@type': 'HowToStep',
 			name: 'Save a reference image',
-			text: 'Adjust the overlay opacity if needed, then save the cropped reference image or a transparent overlay PNG.',
+			text: 'Adjust the overlay opacity if needed, then save the cropped reference image.',
 		},
 	],
 };
 
 const faqs = [
 	{
-		q: "What is Instagram Reels' safe zone?",
-		a: "It's the part of a vertical 9:16 frame that Reels' own interface sits on top of once a video is posted: a thin top bar, a bottom band for the caption/username/audio title, and a right-hand column of like, comment, share, and profile icons. Anything important placed there, a face, a subtitle, a product, gets partly or fully covered while someone is actually watching.",
-	},
-	{
-		q: 'What size is the Reels safe zone?',
-		a: "At the standard 1080x1920 export, the bottom caption/username/audio band runs roughly 24% up from the base (about 461px), and the right-hand icon column eats roughly the last 12% of width (about 130px). This tool shows both bands drawn to scale on your own photo, plus the exact pixel and percent figures below the preview.",
+		q: "What is Instagram's safe zone?",
+		a: "It's the part of the frame that gets covered or cropped once a photo is actually posted. Reels and Stories lay their own interface, captions, usernames, a reply field, engagement icons, on top of a 9:16 video frame. Feed Posts don't get a UI overlay, but a 4:5 post gets center-cropped to a square in the profile grid, so its top and bottom edges are hidden there. Anything important, a face, a subtitle, a product, placed in those zones gets partly or fully hidden depending on where someone sees it. Reels, Stories, and Post each reserve different space, use the tabs above to check the one you're actually posting to.",
 	},
 	{
 		q: 'Is this safe zone measurement exact?',
@@ -73,19 +74,47 @@ const faqs = [
 	},
 	{
 		q: 'Can I check TikTok too?',
-		a: "Yes, TikTok reserves similar but not identical space. Use the dedicated TikTok safe zone checker, or the combined checker that overlays both platforms at once for a side-by-side comparison.",
+		a: "Yes, TikTok reserves similar but not identical space to Reels and Stories. Use the dedicated TikTok safe zone checker, or the combined checker that overlays TikTok and Reels at once for a side-by-side comparison.",
 	},
 	{
-		q: "What's Instagram Reels' ideal video size and aspect ratio?",
-		a: "1080x1920 pixels at a 9:16 aspect ratio is Instagram's standard export size for Reels. This tool's frame matches that resolution, so the safe-zone measurements line up directly with whatever you export from your camera or editor.",
+		q: 'What size is the Reels safe zone?',
+		a: "At the standard 1080x1920 export, the bottom caption/username/audio band runs roughly 24% up from the base (about 461px), and the right-hand icon column eats roughly the last 12% of width (about 130px). Switch to the Reels tab above to see both bands drawn to scale on your own photo, plus the exact pixel and percent figures.",
+	},
+	{
+		q: "What's Reels' ideal video size and aspect ratio?",
+		a: "1080x1920 pixels at a 9:16 aspect ratio is Instagram's standard export size for Reels. This tool's Reels tab matches that resolution, so the safe-zone measurements line up directly with whatever you export from your camera or editor.",
+	},
+	{
+		q: 'Does the Reels safe zone apply to Reels cover photos too?',
+		a: "Yes. A Reels cover image, the still frame or photo shown before someone taps play, sits inside the same 9:16 frame and gets the same caption, username, audio, and icon overlay as the video itself, so the same safe zone applies.",
+	},
+	{
+		q: 'What is the Instagram Stories safe zone?',
+		a: "At the standard 1080x1920 export, Stories reserves roughly the top 12% (about 230px) for the profile picture, username, timestamp, and close button, and roughly the bottom 12% (about 230px) for the reply field and share row. Switch to the Stories tab above to see both bands drawn to scale on your own photo.",
+	},
+	{
+		q: "What's Stories' ideal size and aspect ratio?",
+		a: "1080x1920 pixels at 9:16, the same export size as Reels. The UI bands differ, though, Stories has no side icon column, so don't reuse a Reels-checked composition for Stories without checking the top and bottom bands too.",
+	},
+	{
+		q: 'Does the Stories safe zone apply to Highlight covers too?',
+		a: "Partly. A Highlight cover is a small circular crop taken from the center of your Story image, so it automatically discards the top and bottom UI bands. Keeping your subject centered per the Stories safe zone above generally keeps it inside the Highlight cover too, but text near the edges of that center square can still get trimmed by the circular mask, so keep any text closer to the middle if it also needs to survive as a Highlight cover.",
+	},
+	{
+		q: 'What is the Instagram Post safe zone?',
+		a: "A 4:5 feed Post (1080x1350) gets center-cropped to a 1:1 square in the profile grid, cutting roughly 10% (about 135px) off the top and another 10% off the bottom. There's no app UI drawn on top of a Post the way there is on Reels or Stories, so this is really a \"what survives the grid crop\" check, not a UI-overlap one.",
+	},
+	{
+		q: "What's Post's ideal size and aspect ratio?",
+		a: "1080x1350 pixels at a 4:5 aspect ratio is Instagram's recommended portrait size for feed Posts, it shows more of the photo in-feed than a square 1:1 crop does. The profile grid still displays a square thumbnail though, which is what the Post safe zone above accounts for.",
+	},
+	{
+		q: 'Does the Post safe zone apply to carousel (multi-photo) posts too?',
+		a: "Yes, but only for the first slide. Every slide in a carousel is exported at the same 4:5 frame, but Instagram only ever generates the profile grid thumbnail from the first slide's center-cropped square. Slides beyond the first are only ever seen at full 4:5 size when someone swipes through, so their top and bottom edges are never trimmed by the grid crop.",
 	},
 	{
 		q: 'Where should I put a face, subtitle, or logo to keep it visible?',
-		a: "The center third of the frame, roughly the middle of the width and the area between the thin top bar and the bottom caption band, stays clear across devices. Keep faces and key text there rather than pinned to the very bottom or right edge.",
-	},
-	{
-		q: "Does the Reels safe zone apply to cover photos and photo posts too?",
-		a: "Yes. A Reels cover image or a photo shared to Reels sits inside the same 9:16 frame and gets the same caption, username, audio, and icon overlay as video Reels, so the same safe zone applies.",
+		a: "For Reels, the center third of the frame, roughly the middle of the width and the area between the top bar and bottom caption band, stays clear across devices. For Stories, keep it centered between the top profile bar and bottom reply row. For a Post, keep the subject within the middle square so it still reads once the profile grid crops the top and bottom.",
 	},
 ];
 ---
@@ -97,7 +126,7 @@ const faqs = [
 			items={[
 				{ label: 'Home', href: '/' },
 				{ label: 'Tools', href: '/tools/safe-zones/' },
-				{ label: 'Instagram Reels Safe Zone' },
+				{ label: 'Instagram Safe Zone' },
 			]}
 		/>
 
@@ -117,20 +146,23 @@ const faqs = [
 		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
 			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">WHY IT MATTERS</span>
 			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
-				Composition that survives Reels' own UI
+				Composition that survives Instagram's own UI and crops
 			</h2>
 			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
 				<p>
-					A vertical frame that looks perfectly composed in a raw export can still lose its subject
-					once Instagram lays a caption, a username, an audio title, and a column of like/comment/share
-					icons on top of it. Checking against Reels' safe zone before posting means a face, a
-					subtitle, or a key product detail doesn't end up hidden behind the app's own chrome.
+					A frame that looks perfectly composed in a raw export can still lose its subject once
+					Instagram lays its own interface on top, or crops it into a different shape. Reels and
+					Stories both draw a caption, username, and engagement or reply UI over a 9:16 video frame;
+					a 4:5 feed Post instead gets center-cropped to a square in the profile grid. Checking
+					against the right safe zone before posting means a face, a subtitle, or a key product
+					detail doesn't end up hidden or cut off.
 				</p>
 				<p>
-					Reels reserves a thin top bar for the Reels label and audio, a bottom band for caption,
-					username, and audio title, and a right-hand column for engagement icons. This tool overlays
-					all three at the sizes Instagram's own creator specs publish, drawn straight onto your photo
-					so you can see the effect on your actual composition.
+					Reels reserves a thin top bar and a bottom caption/username/audio band plus a right-hand
+					engagement column; Stories reserves a top profile bar and a bottom reply row; a Post loses
+					roughly 10% off its top and bottom edges in the grid view. This tool switches its overlay
+					to match whichever format you're checking, drawn straight onto your photo so you can see
+					the effect on your actual composition.
 				</p>
 			</div>
 		</section>
@@ -160,7 +192,7 @@ const faqs = [
 			</div>
 		</section>
 
-		<MovieFaq eyebrow="FAQ" heading="Common questions about Reels' safe zone" faqs={faqs} />
+		<MovieFaq eyebrow="FAQ" heading="Common questions about Instagram's safe zones" faqs={faqs} />
 
 		<script type="application/ld+json" set:html={JSON.stringify(howToStructuredData)} />
 	</main>
