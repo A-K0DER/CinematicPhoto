@@ -1,0 +1,41 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "cinematicphoto-video-api",
+	"main": "src/index.ts",
+	"compatibility_date": "2025-01-01",
+	"compatibility_flags": ["nodejs_compat"],
+
+	// Phase 1 infra spike: one Container binding running ffmpeg via the
+	// Sandbox SDK. See ../DESIGN.md / the approved plan for the full
+	// upload -> render -> download flow this is the backbone of.
+	"containers": [
+		{
+			"class_name": "Sandbox",
+			"image": "./Dockerfile",
+			"instance_type": "lite",
+			"max_instances": 1
+		}
+	],
+	"durable_objects": {
+		"bindings": [{ "class_name": "Sandbox", "name": "SANDBOX" }]
+	},
+	"migrations": [{ "tag": "v1", "new_sqlite_classes": ["Sandbox"] }],
+
+	// TODO(user): create with `wrangler r2 bucket create cinematicphoto-video`
+	// and fill in — see README.md.
+	"r2_buckets": [
+		{
+			"binding": "VIDEO_BUCKET",
+			"bucket_name": "cinematicphoto-video"
+		}
+	],
+
+	// TODO(user): create with `wrangler kv namespace create VIDEO_JOBS`
+	// and paste the returned id below — see README.md.
+	"kv_namespaces": [
+		{
+			"binding": "VIDEO_JOBS",
+			"id": "REPLACE_WITH_KV_NAMESPACE_ID"
+		}
+	]
+}
