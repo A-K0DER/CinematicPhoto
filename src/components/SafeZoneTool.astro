@@ -29,6 +29,9 @@ const comparablePlatforms = SAFE_ZONE_PLATFORMS.filter((p) => p.comparable);
 const visiblePlatforms = lockedSingle ? SAFE_ZONE_PLATFORMS.filter((p) => p.id === lockedSingle) : comparablePlatforms;
 
 const mode = selectOptions ? 'select' : lockedSingle ? 'locked' : 'multi';
+
+const DODO_PRODUCT_ID = 'pdt_0Nm93aR1Gx0XNF06QTHVI';
+const checkoutUrl = `https://checkout.dodopayments.com/buy/${DODO_PRODUCT_ID}?redirect_url=${encodeURIComponent(Astro.url.href)}`;
 ---
 
 <section
@@ -122,7 +125,7 @@ const mode = selectOptions ? 'select' : lockedSingle ? 'locked' : 'multi';
 
 	<p id="safe-zone-error" class="mt-3 hidden font-mono text-xs text-error" role="alert"></p>
 	<p class="mt-3 max-w-[300px] text-center font-mono text-[10px] leading-relaxed text-mute">
-		Shows a live preview of the safe-zone frame — the dimmed area is trimmed on save. Drag inside
+		Shows a live preview of the safe-zone frame — the dimmed area falls outside it. Drag inside
 		the frame to reposition it.
 	</p>
 
@@ -151,17 +154,10 @@ const mode = selectOptions ? 'select' : lockedSingle ? 'locked' : 'multi';
 		>
 			New image
 		</button>
-		<button
-			id="safe-zone-save"
-			type="button"
-			class="flex-1 rounded-md bg-primary px-3 py-2 font-sans text-sm font-medium text-on-primary transition-opacity hover:opacity-90"
-		>
-			Save image
-		</button>
 	</div>
 	<div class="mt-2 flex w-full max-w-[300px] items-center gap-2">
 		<a
-			href="https://checkout.dodopayments.com/buy/pdt_0Nm93aR1Gx0XNF06QTHVI"
+			href={checkoutUrl}
 			target="_blank"
 			rel="noopener noreferrer"
 			class="flex-1 rounded-md border border-hairline px-3 py-2 text-center font-sans text-sm font-medium text-body transition-colors hover:border-hairline-strong hover:text-ink"
@@ -255,7 +251,6 @@ const mode = selectOptions ? 'select' : lockedSingle ? 'locked' : 'multi';
 	const newImageBtn = document.getElementById('safe-zone-new-image') as HTMLButtonElement;
 	const recenterBtn = document.getElementById('safe-zone-recenter') as HTMLButtonElement;
 	const removeBtn = document.getElementById('safe-zone-remove') as HTMLButtonElement;
-	const saveBtn = document.getElementById('safe-zone-save') as HTMLButtonElement;
 	const opacitySlider = document.getElementById('safe-zone-opacity-slider') as HTMLInputElement;
 	const opacityValue = document.getElementById('safe-zone-opacity-value') as HTMLSpanElement;
 
@@ -309,12 +304,6 @@ const mode = selectOptions ? 'select' : lockedSingle ? 'locked' : 'multi';
 		if (mode === 'locked') return getSafeZonePlatform(lockedPlatform as SafeZonePlatform).frame;
 		if (mode === 'select' && activeSelectPlatform) return getSafeZonePlatform(activeSelectPlatform as SafeZonePlatform).frame;
 		return SAFE_ZONE_FRAME;
-	}
-
-	function filenamePrefix(): string {
-		if (mode === 'locked') return `${lockedPlatform}-safe-zone`;
-		if (mode === 'select' && activeSelectPlatform) return `${activeSelectPlatform}-safe-zone`;
-		return 'safe-zones';
 	}
 
 	function currentOpacity(): number {
@@ -581,52 +570,4 @@ const mode = selectOptions ? 'select' : lockedSingle ? 'locked' : 'multi';
 		render();
 	});
 
-	// --- Save ---
-
-	function downloadCanvas(source: HTMLCanvasElement, filename: string) {
-		source.toBlob((blob) => {
-			if (!blob) return;
-			const url = URL.createObjectURL(blob);
-			const a = document.createElement('a');
-			a.href = url;
-			a.download = filename;
-			document.body.appendChild(a);
-			a.click();
-			a.remove();
-			URL.revokeObjectURL(url);
-		}, 'image/png');
-	}
-
-	/**
-	 * Physically crops the photo to the active safe-zone frame for saving — the
-	 * live canvas only shows a preview with the crop dimmed, not cut away.
-	 * Samples the original full-resolution image, not the (possibly
-	 * downscaled) preview canvas, so export quality isn't capped by it.
-	 */
-	function buildExportCanvas(): HTMLCanvasElement {
-		const { width, height } = currentFrame();
-		const output = document.createElement('canvas');
-		output.width = width;
-		output.height = height;
-		const octx = output.getContext('2d')!;
-		octx.fillStyle = '#09090b';
-		octx.fillRect(0, 0, width, height);
-
-		if (state.image) {
-			const previewCrop = computeSafeZoneCropWindow(state.width, state.height, width / height, { x: state.panX, y: state.panY });
-			const naturalScale = state.image.naturalWidth / state.width;
-			const sx = Math.round(previewCrop.sx * naturalScale);
-			const sy = Math.round(previewCrop.sy * naturalScale);
-			const sw = Math.round(previewCrop.sw * naturalScale);
-			const sh = Math.round(previewCrop.sh * naturalScale);
-			octx.drawImage(state.image, sx, sy, sw, sh, 0, 0, width, height);
-		}
-
-		drawSafeZones(octx, width, height, activePlatforms(), currentOpacity());
-		return output;
-	}
-
-	saveBtn.addEventListener('click', () => {
-		downloadCanvas(buildExportCanvas(), `${filenamePrefix()}-reference.png`);
-	});
 </script>
