@@ -1,0 +1,196 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import DropZone from '../../../components/DropZone.astro';
+import BeforeAfter from '../../../components/BeforeAfter.astro';
+import RelatedPresets from '../../../components/RelatedPresets.astro';
+import MovieFaq from '../../../components/MovieFaq.astro';
+import { getPreset } from '../../../lib/presets';
+
+const preset = getPreset('blade-runner');
+const path = '/presets/blade-runner-2049/';
+const url = `https://cinematicphoto.com/de${path}`;
+
+const title = 'Blade Runner 2049 Fotofilter & Editor | Kostenloses Cinematic-Tool';
+const description =
+	"Bearbeite dein Foto mit diesem kostenlosen Blade Runner 2049 Fotofilter und Fotoeditor im Amber-Neon-Look mit petrolfarbenem Dunst des Films, sofort in deinem Browser, kein Konto nötig.";
+const keywords =
+	'blade runner 2049 fotofilter, blade runner 2049 fotoeditor, blade runner editor, blade runner 2049 farbkorrektur, sci-fi fotofilter';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	name: title,
+	description,
+	url,
+	isPartOf: { '@type': 'WebSite', name: 'Cinematic Photo', url: 'https://cinematicphoto.com' },
+};
+
+const faqs = [
+	{
+		q: 'Ist das ein offizieller Blade Runner 2049 Fotofilter?',
+		a: "Nein. Dieses Preset ist von der visuellen Ästhetik der Kameraarbeit in Blade Runner 2049 inspiriert, es ist kein offizieller Filter, der vom Studio oder den Machern des Films lizenziert wurde oder mit ihnen verbunden ist. Es ist eine unabhängige Farbkorrektur, die den Look nachbildet, kein lizenziertes Produkt.",
+	},
+	{
+		q: 'Gibt es einen eigenen Blade-Runner-2049-Fotoeditor?',
+		a: "Diese Seite ist genau dieser eigene Editor: Die Blade-Runner-2049-Korrektur ist oben in der Drop-Zone bereits vorausgewählt, du kannst also direkt ein Foto ablegen und sofort Dunst, Glow und Vignette anpassen, ohne vorher durch die komplette 60-Preset-Bibliothek zu suchen.",
+	},
+	{
+		q: 'Was macht die Dunst-Einstellung im Blade-Runner-2049-Preset?',
+		a: "Anders als die meisten Presets in diesem Tool legt die Blade-Runner-2049-Korrektur einen weichen Amber-Dunst über die üblichen Farb- und Kontrastanpassungen, was den atmosphärischen Nebel und das diffuse Licht des Films nachbildet. Genau das gibt hellen Lichtquellen ihr weiches Blühen statt eines hart begrenzten Leuchtens.",
+	},
+	{
+		q: 'Wie unterscheidet sich Blade Runner 2049 vom Matrix-Grünstich-Preset?',
+		a: "Beide sind neon-nahe Sci-Fi-Korrekturen, gehen aber in entgegengesetzte Richtungen. Blade Runner 2049 teilt Schatten Richtung Petrol und Lichter Richtung Amber, mit weichem Dunst und starkem Glow für ein diffuses, verschwommenes Gefühl. Das Matrix-Preset entsättigt zuerst das ganze Bild und tönt dann alles einheitlich grün, ein deutlich gleichmäßigerer, weniger gerichteter Effekt.",
+	},
+	{
+		q: 'Funktioniert das Blade-Runner-2049-Preset bei Tages- oder Innenfotos?',
+		a: "Es ist um Neon-, Straßenlicht- und Nachtszenen-Farbtrennung herum gebaut und wirkt daher am besten bei Aufnahmen mit sichtbaren künstlichen Lichtquellen. Tageslichtfotos bekommen trotzdem die Amber-Petrol-Korrektur und den Dunst, der Effekt wirkt aber subtiler ohne Neon- oder Gegenlicht zum Blühen.",
+	},
+	{
+		q: 'Wie hole ich am meisten aus dem Neon-Glow-Effekt auf meinem Foto heraus?',
+		a: "Das Preset kommt mit einem ungewöhnlich hohen Standard-Glow, dem höchsten aller Presets in diesem Tool, sodass helle Lichtpunkte bereits stark blühen. Wenn dir das zu viel ist, kannst du den Glow-/Halation-Regler im Editor nach dem Anwenden des Presets zurückdrehen.",
+	},
+	{
+		q: 'Welche Art von Fotos passt am besten zu einer Korrektur im Blade-Runner-2049-Stil?',
+		a: 'Nächtliche Stadtstraßen, Leuchtreklamen, nasser reflektierender Asphalt sowie Porträts im Gegenlicht oder als Silhouette passen am besten, da sie der Amber-Petrol-Aufteilung und dem Dunst genug bieten. Auch neblige oder bewölkte Außenszenen kommen gut damit zurecht.',
+	},
+];
+---
+
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Startseite', href: '/de/' },
+				{ label: 'Alle Presets', href: '/de/presets/' },
+				{ label: 'Blade Runner 2049' },
+			]}
+		/>
+
+		<DropZone presetId={preset.id} showHeading={false} showFooterLinks={false} />
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">FILMINSPIRIERTES PRESET</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Der Blade Runner 2049 Fotofilter: Amber-Neon durch petrolfarbenen Dunst.
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Ein kostenloser Blade Runner 2049 Fotoeditor und Color-Grading-Preset, inspiriert von der
+				visuellen Ästhetik von Denis Villeneuves Blade Runner 2049, gebaut, um Nachtfotos die
+				charakteristische diesige, neonbeleuchtete Aufteilung zwischen warmen Lichtern und
+				kühlen Schatten des Films zu geben.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">DIE ÄSTHETIK</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Eine diesige Zukunft in Amber und Petrol
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Kameramann Roger Deakins baute die Welt von Blade Runner 2049 um volumetrisches
+					Licht herum: Nebel, Staub und Dunst, die jeden Neon- oder Natriumdampf-Lichtstrahl
+					sichtbar machen, in der Luft, nicht nur dort, wo er auftrifft. Farbe teilt sich klar
+					nach Temperatur: kränkliches Amber und Orange in den staubigen Außenszenen und
+					Verhörraum-Interieurs des Films, kühles Petrolblau in seinen regen- und
+					schneebedeckten Außenszenen, statt zu einem einzigen matschigen Ton zu verschmelzen.
+				</p>
+				<p>
+					Es ist ein ungewöhnlich symmetrischer, bewusster Bildstil, gepaart mit einer
+					Atmosphäre, die nie sauber wirkt. Lichtquellen blühen und streuen, statt scharf zu
+					bleiben, genau das Detail, auf das dieses Preset am stärksten setzt: eine weiche
+					Dunst-Ebene liegt über der eigentlichen Farbkorrektur, etwas, das keines der anderen
+					Presets dieses Tools macht.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">VORHER / NACHHER</span>
+			<h2 class="mb-6 font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Sieh dir die Korrektur an
+			</h2>
+			<BeforeAfter preset={preset} />
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">DIE FARBWISSENSCHAFT</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Wie die Blade-Runner-2049-Farbkorrektur tatsächlich funktioniert
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Die Basisanpassung hebt Kontrast und Sättigung gemeinsam an und fügt dann einen Hauch
+					Sepia hinzu, um das gesamte Bild leicht zu erwärmen, bevor überhaupt eine gerichtete
+					Farbe angewendet wird. Ein zweifarbiger Overlay teilt dann das Bild: tiefes Petrol in
+					den Schatten, leuchtendes Amber-Orange in den Lichtern, genau der Temperaturkontrast,
+					der sofort als die Welt dieses Films erkennbar ist.
+				</p>
+				<p>
+					Was dieses Preset strukturell von den anderen Filmkorrekturen in diesem Tool
+					unterscheidet, ist eine eigene Dunst-Ebene obendrauf: eine weiche, gering deckende
+					Amber-Waschung über dem gesamten Bild, die atmosphärischen Nebel simuliert. Zusammen
+					mit dem höchsten Standard-Glow aller Presets hier sorgt das dafür, dass Lichtquellen
+					blühen und streuen statt scharf und punktförmig zu bleiben.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BESTE FOTOS FÜR DIESES PRESET</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Worauf du es anwenden solltest
+			</h2>
+			<ul class="mt-6 flex flex-col gap-4 text-base leading-7 text-body">
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Nächtliche Stadtstraßen und Leuchtreklamen.</span> Sichtbare Lichtquellen sind genau das, um das Dunst und Glow herum gebaut sind, um zu blühen.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Nasser, reflektierender Asphalt.</span> Regen und Pfützen verdoppeln die Amber-Petrol-Aufteilung als reflektierte Farbe und vertiefen den Effekt.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Porträts im Gegenlicht oder als Silhouette.</span> Eine starke Lichtquelle hinter dem Motiv gibt Glow und Dunst etwas Dramatisches zum Einfangen.</span>
+				</li>
+			</ul>
+		</section>
+
+		<RelatedPresets
+			heading="Weitere filminspirierte Korrekturen"
+			items={[
+				{ presetId: 'dark-knight', href: '/de/presets/the-dark-knight/' },
+				{ presetId: 'dune', href: '/de/presets/dune/' },
+				{ presetId: 'interstellar', href: '/de/presets/interstellar/' },
+				{ presetId: 'matrix', href: '/de/presets/the-matrix/' },
+				{ presetId: 'v-for-vendetta', href: '/de/?preset=v-for-vendetta' },
+				{ presetId: 'terminator-2', href: '/de/?preset=terminator-2' },
+			]}
+		/>
+
+		<MovieFaq
+			eyebrow="BLADE RUNNER 2049 FAQ"
+			heading="Häufige Fragen zum Blade Runner 2049 Fotofilter"
+			faqs={faqs}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 text-center sm:px-6">
+			<p class="text-base leading-7 text-body">
+				Bevorzugst du den Look eines anderen Films? Durchstöbere die <a href="/de/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">vollständige Bibliothek mit 60 Presets</a>,
+				erfahre mehr über <a href="/de/guides/cinematic-color-grading/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">cinematisches Color Grading</a>,
+				oder geh zur <a href="/de/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Startseite</a>, um mit einer leeren Leinwand zu beginnen.
+			</p>
+		</section>
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../../lib/landing';
+</script>

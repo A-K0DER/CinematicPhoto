@@ -1,0 +1,52 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+
+const title = 'Über uns | Cinematic Photo Editor';
+const description = 'Erfahre mehr über Cinematic Photo, einen kostenlosen Client-Side-Fotoeditor, der filminspirierte Farbkorrekturen, Filmkorn und Letterboxing direkt in deinem Browser anwendet.';
+---
+
+<Layout title={title} description={description} path="/about-us/">
+	<Navbar />
+	<main class="mx-auto max-w-3xl px-4 py-20 sm:px-6">
+		<span class="mb-4 block font-mono text-xs tracking-wide text-mute">ÜBER UNS</span>
+		<h1 class="font-sans text-3xl font-semibold tracking-[-0.03em] text-ink sm:text-4xl">
+			Ein cinematischer Fotoeditor von Leuten, die Filmfarben lieben
+		</h1>
+
+		<div class="mt-8 flex flex-col gap-6 text-base leading-7 text-body">
+			<p>
+				Cinematic Photo entstand aus einer einfachen Frustration: Ein Foto wie ein Standbild aus
+				einem Lieblingsfilm aussehen zu lassen, bedeutete meist stundenlanges Feintuning von
+				Kurven in einer Desktop-Software, die Suche nach Presets unklarer Herkunft, oder ein Abo
+				nur zu bezahlen, um ein paar Farbkorrekturen auszuprobieren. Wir wollten etwas Schnelleres:
+				ein Tool, das direkt von einem flachen Foto zu einem filmreifen Look führt, mit einem
+				Klick, ohne dass eine Lernkurve im Weg steht.
+			</p>
+			<p>
+				Also haben wir einen fokussierten, browserbasierten Editor gebaut, rund um eine kleine
+				Auswahl an Farbkorrekturen, die sich an wiedererkennbaren Film-Looks orientieren
+				(Teal-and-Orange-Neo-Noir, kühles kosmisches Blau, warmes Wüstengold,
+				hochkontrastiges digitales Grün und zerdrückte Schatten in Stahlblau), dazu die
+				Textur-Details, die einen cinematischen Still ausmachen: Filmkorn, Vignette, Glow und
+				Halation, anamorphotische Letterbox und ein Filmstock-Stempel.
+			</p>
+			<h2 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">Warum es standardmäßig privat ist</h2>
+			<p>
+				Jeder Filter, jede Korrektur und jeder Export in Cinematic Photo läuft lokal auf einem
+				HTML-Canvas in deinem eigenen Browser-Tab. Diese Entscheidung haben wir bewusst
+				getroffen: deine Fotos gehören dir, und ein Color-Grading-Tool hat keinen wirklichen
+				Grund, sie zu sehen. Es gibt keine Uploads, keine Konten und keine serverseitige
+				Speicherung. Die Bearbeitung passiert vollständig auf deinem Gerät.
+			</p>
+			<h2 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">Für wen wir bauen</h2>
+			<p>
+				Fotografen, Filmemacher und Social-Creator nutzen Cinematic Photo für Thumbnails, Poster
+				und Portfolio-Stills. Wenn das nach dir klingt und du auf eine Unstimmigkeit stößt oder
+				dir ein neues Preset wünschst, würden wir gerne davon hören. Melde dich auf unserer <a href="/de/contact-us" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Kontakt</a>-Seite.
+			</p>
+		</div>
+	</main>
+	<Footer />
+</Layout>

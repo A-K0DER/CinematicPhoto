@@ -1,13 +1,20 @@
 ---
+import { getRelativeLocaleUrl } from 'astro:i18n';
 import LanguageSwitcher from './LanguageSwitcher.astro';
+import { useTranslations } from '../i18n/utils';
+import { defaultLocale } from '../i18n/config';
 
 interface Props {
 	variant?: 'landing' | 'editor';
-	/** Only used when variant is 'editor' — labels the nav action buttons for photo vs. video editing. */
+	/** Only used when variant is 'editor', labels the nav action buttons for photo vs. video editing. */
 	editorMode?: 'photo' | 'video';
 }
 
 const { variant = 'landing', editorMode = 'photo' } = Astro.props;
+
+const lang = Astro.currentLocale ?? defaultLocale;
+const t = useTranslations(lang);
+const u = (path: string) => getRelativeLocaleUrl(lang, path);
 ---
 
 <header
@@ -19,7 +26,7 @@ const { variant = 'landing', editorMode = 'photo' } = Astro.props;
 				<button
 					id="mobile-nav-toggle"
 					type="button"
-					aria-label="Open menu"
+					aria-label={t('nav.openMenu')}
 					class="flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-mute transition-colors hover:text-ink sm:hidden"
 				>
 					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -29,7 +36,7 @@ const { variant = 'landing', editorMode = 'photo' } = Astro.props;
 			)
 		}
 
-		<a href="/" class="flex items-center gap-2" aria-label="Cinematic Photo home">
+		<a href={u('/')} class="flex items-center gap-2" aria-label={t('nav.homeAriaLabel')}>
 			<img src="/logo.png" width="20" height="20" alt="" class="h-5 w-5" />
 			<span class="font-sans text-[15px] font-semibold tracking-[-0.02em] text-ink"
 				>Cinematic Photo</span
@@ -41,78 +48,78 @@ const { variant = 'landing', editorMode = 'photo' } = Astro.props;
 				<nav aria-label="Primary" class="hidden items-center gap-5 sm:flex">
 					<details class="nav-dropdown relative">
 						<summary class="cursor-pointer list-none font-mono text-xs text-body transition-colors hover:text-ink [&::-webkit-details-marker]:hidden">
-							Popular Presets
+							{t('nav.popularPresets')}
 						</summary>
 						<div class="absolute left-0 top-full z-50 mt-2 w-56 rounded-md border border-hairline bg-canvas p-1.5 shadow-lg">
-							<a href="/presets/the-dark-knight/" class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
+							<a href={u('/presets/the-dark-knight/')} class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
 								The Dark Knight
 							</a>
-							<a href="/presets/blade-runner-2049/" class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
+							<a href={u('/presets/blade-runner-2049/')} class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
 								Blade Runner 2049
 							</a>
-							<a href="/presets/dune/" class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
+							<a href={u('/presets/dune/')} class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
 								Dune
 							</a>
-							<a href="/presets/interstellar/" class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
+							<a href={u('/presets/interstellar/')} class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
 								Interstellar
 							</a>
-							<a href="/presets/the-matrix/" class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
+							<a href={u('/presets/the-matrix/')} class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
 								The Matrix
 							</a>
-							<a href="/presets/breaking-bad/" class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
+							<a href={u('/presets/breaking-bad/')} class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
 								Breaking Bad
 							</a>
-							<a href="/presets/stranger-things/" class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
+							<a href={u('/presets/stranger-things/')} class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
 								Stranger Things
 							</a>
-							<a href="/presets/game-of-thrones/" class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
+							<a href={u('/presets/game-of-thrones/')} class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
 								Game of Thrones
 							</a>
 						</div>
 					</details>
 					<details class="nav-dropdown relative">
 						<summary class="cursor-pointer list-none font-mono text-xs text-body transition-colors hover:text-ink [&::-webkit-details-marker]:hidden">
-							Guides
+							{t('nav.guides')}
 						</summary>
 						<div class="absolute left-0 top-full z-50 mt-2 w-56 rounded-md border border-hairline bg-canvas p-1.5 shadow-lg">
-							<a href="/guides/how-to-make-photos-look-cinematic/" class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
-								Make Photos Look Cinematic
+							<a href={u('/guides/how-to-make-photos-look-cinematic/')} class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
+								{t('nav.guideCinematic')}
 							</a>
-							<a href="/guides/cinematic-color-grading/" class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
-								Cinematic Color Grading
+							<a href={u('/guides/cinematic-color-grading/')} class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
+								{t('nav.guideColorGrading')}
 							</a>
-							<a href="/guides/social-media-safe-zones/" class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
-								Social Media Safe Zones
+							<a href={u('/guides/social-media-safe-zones/')} class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
+								{t('nav.guideSafeZones')}
 							</a>
-							<a href="/guides/youtube-thumbnail-design/" class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
-								YouTube Thumbnail Design
+							<a href={u('/guides/youtube-thumbnail-design/')} class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
+								{t('nav.guideThumbnails')}
 							</a>
-							<a href="/tiktok-safe-zone-template/" class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
-								TikTok Safe Zone Template
+							<a href={u('/tiktok-safe-zone-template/')} class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
+								{t('nav.tiktokTemplate')}
 							</a>
-							<a href="/instagram-safe-zone-template/" class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
-								Instagram Safe Zone Template
+							<a href={u('/instagram-safe-zone-template/')} class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
+								{t('nav.instagramTemplate')}
 							</a>
 						</div>
 					</details>
 					<details class="nav-dropdown relative">
 						<summary class="cursor-pointer list-none font-mono text-xs text-body transition-colors hover:text-ink [&::-webkit-details-marker]:hidden">
-							Free Tools
+							{t('nav.freeTools')}
 						</summary>
 						<div class="absolute left-0 top-full z-50 mt-2 w-56 rounded-md border border-hairline bg-canvas p-1.5 shadow-lg">
-							<a href="/tiktok-safe-zone/" class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
-								TikTok Safe Zone Checker
+							<a href={u('/tiktok-safe-zone/')} class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
+								{t('nav.tiktokChecker')}
 							</a>
-							<a href="/instagram-reels-safe-zone/" class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
-								Insta Safe Zone Checker
+							<a href={u('/instagram-reels-safe-zone/')} class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
+								{t('nav.instaChecker')}
 							</a>
-							<a href="/tools/youtube-thumbnail-preview/" class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
-								YouTube Thumbnail Preview
+							<a href={u('/tools/youtube-thumbnail-preview/')} class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink">
+								{t('nav.thumbnailPreview')}
 							</a>
 						</div>
 					</details>
-					<a href="/video-editor/" class="hidden font-mono text-xs text-body transition-colors hover:text-ink">
-						Video
+					<a href={u('/video-editor/')} class="hidden font-mono text-xs text-body transition-colors hover:text-ink">
+						{t('nav.video')}
 					</a>
 				</nav>
 			)
@@ -123,7 +130,7 @@ const { variant = 'landing', editorMode = 'photo' } = Astro.props;
 		{
 			variant === 'landing' && (
 				<span class="hidden font-mono text-xs text-mute sm:inline-block">
-					no uploads &middot; processed on-device
+					{t('nav.noUploads')}
 				</span>
 			)
 		}
@@ -136,21 +143,21 @@ const { variant = 'landing', editorMode = 'photo' } = Astro.props;
 						type="button"
 						class="rounded-md border border-hairline px-3 py-1.5 font-sans text-sm font-medium text-body transition-colors hover:border-hairline-strong hover:text-ink"
 					>
-						{editorMode === 'video' ? 'Remove video' : 'Remove image'}
+						{editorMode === 'video' ? t('nav.removeVideo') : t('nav.removeImage')}
 					</button>
 					<button
 						id="nav-reset"
 						type="button"
 						class="rounded-md border border-hairline px-3 py-1.5 font-sans text-sm font-medium text-body transition-colors hover:border-hairline-strong hover:text-ink"
 					>
-						{editorMode === 'video' ? 'New video' : 'New image'}
+						{editorMode === 'video' ? t('nav.newVideo') : t('nav.newImage')}
 					</button>
 					<button
 						id="nav-export"
 						type="button"
 						class="rounded-md bg-primary px-3 py-1.5 font-sans text-sm font-medium text-on-primary transition-opacity hover:opacity-90"
 					>
-						{editorMode === 'video' ? 'Download' : 'Export'}
+						{editorMode === 'video' ? t('nav.download') : t('nav.export')}
 					</button>
 				</>
 			)
@@ -161,7 +168,7 @@ const { variant = 'landing', editorMode = 'photo' } = Astro.props;
 		<button
 			id="theme-toggle"
 			type="button"
-			aria-label="Switch theme"
+			aria-label={t('nav.switchTheme')}
 			class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-hairline text-mute transition-colors hover:border-hairline-strong hover:text-ink"
 		>
 			<svg
@@ -209,11 +216,11 @@ const { variant = 'landing', editorMode = 'photo' } = Astro.props;
 				class="fixed inset-y-0 left-0 z-50 flex w-[80%] max-w-xs -translate-x-full flex-col gap-1 overflow-y-auto border-r border-hairline bg-canvas p-4 shadow-2xl transition-transform duration-300 ease-in-out sm:hidden"
 			>
 				<div class="mb-2 flex items-center justify-between">
-					<span class="font-mono text-[11px] font-medium tracking-wide text-mute uppercase">Menu</span>
+					<span class="font-mono text-[11px] font-medium tracking-wide text-mute uppercase">{t('nav.menu')}</span>
 					<button
 						id="mobile-nav-close"
 						type="button"
-						aria-label="Close menu"
+						aria-label={t('nav.closeMenu')}
 						class="flex h-7 w-7 items-center justify-center rounded-md text-mute transition-colors hover:text-ink"
 					>
 						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -224,31 +231,31 @@ const { variant = 'landing', editorMode = 'photo' } = Astro.props;
 
 				<details class="nav-dropdown">
 					<summary class="cursor-pointer list-none rounded-md px-2 py-2.5 font-mono text-xs text-body transition-colors hover:text-ink [&::-webkit-details-marker]:hidden">
-						Popular Presets
+						{t('nav.popularPresets')}
 					</summary>
 					<div class="ml-2 flex flex-col border-l border-hairline pl-3">
-						<a href="/presets/the-dark-knight/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+						<a href={u('/presets/the-dark-knight/')} class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
 							The Dark Knight
 						</a>
-						<a href="/presets/blade-runner-2049/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+						<a href={u('/presets/blade-runner-2049/')} class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
 							Blade Runner 2049
 						</a>
-						<a href="/presets/dune/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+						<a href={u('/presets/dune/')} class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
 							Dune
 						</a>
-						<a href="/presets/interstellar/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+						<a href={u('/presets/interstellar/')} class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
 							Interstellar
 						</a>
-						<a href="/presets/the-matrix/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+						<a href={u('/presets/the-matrix/')} class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
 							The Matrix
 						</a>
-						<a href="/presets/breaking-bad/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+						<a href={u('/presets/breaking-bad/')} class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
 							Breaking Bad
 						</a>
-						<a href="/presets/stranger-things/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+						<a href={u('/presets/stranger-things/')} class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
 							Stranger Things
 						</a>
-						<a href="/presets/game-of-thrones/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+						<a href={u('/presets/game-of-thrones/')} class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
 							Game of Thrones
 						</a>
 					</div>
@@ -256,43 +263,43 @@ const { variant = 'landing', editorMode = 'photo' } = Astro.props;
 
 				<details class="nav-dropdown">
 					<summary class="cursor-pointer list-none rounded-md px-2 py-2.5 font-mono text-xs text-body transition-colors hover:text-ink [&::-webkit-details-marker]:hidden">
-						Guides
+						{t('nav.guides')}
 					</summary>
 					<div class="ml-2 flex flex-col border-l border-hairline pl-3">
-						<a href="/guides/how-to-make-photos-look-cinematic/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
-							Make Photos Look Cinematic
+						<a href={u('/guides/how-to-make-photos-look-cinematic/')} class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+							{t('nav.guideCinematic')}
 						</a>
-						<a href="/guides/cinematic-color-grading/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
-							Cinematic Color Grading
+						<a href={u('/guides/cinematic-color-grading/')} class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+							{t('nav.guideColorGrading')}
 						</a>
-						<a href="/guides/social-media-safe-zones/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
-							Social Media Safe Zones
+						<a href={u('/guides/social-media-safe-zones/')} class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+							{t('nav.guideSafeZones')}
 						</a>
-						<a href="/guides/youtube-thumbnail-design/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
-							YouTube Thumbnail Design
+						<a href={u('/guides/youtube-thumbnail-design/')} class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+							{t('nav.guideThumbnails')}
 						</a>
-						<a href="/tiktok-safe-zone-template/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
-							TikTok Safe Zone Template
+						<a href={u('/tiktok-safe-zone-template/')} class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+							{t('nav.tiktokTemplate')}
 						</a>
-						<a href="/instagram-safe-zone-template/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
-							Instagram Safe Zone Template
+						<a href={u('/instagram-safe-zone-template/')} class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+							{t('nav.instagramTemplate')}
 						</a>
 					</div>
 				</details>
 
 				<details class="nav-dropdown">
 					<summary class="cursor-pointer list-none rounded-md px-2 py-2.5 font-mono text-xs text-body transition-colors hover:text-ink [&::-webkit-details-marker]:hidden">
-						Free Tools
+						{t('nav.freeTools')}
 					</summary>
 					<div class="ml-2 flex flex-col border-l border-hairline pl-3">
-						<a href="/tiktok-safe-zone/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
-							TikTok Safe Zone Checker
+						<a href={u('/tiktok-safe-zone/')} class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+							{t('nav.tiktokChecker')}
 						</a>
-						<a href="/instagram-reels-safe-zone/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
-							Insta Safe Zone Checker
+						<a href={u('/instagram-reels-safe-zone/')} class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+							{t('nav.instaChecker')}
 						</a>
-						<a href="/tools/youtube-thumbnail-preview/" class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
-							YouTube Thumbnail Preview
+						<a href={u('/tools/youtube-thumbnail-preview/')} class="rounded-sm px-2 py-2 font-sans text-sm text-body transition-colors hover:text-ink">
+							{t('nav.thumbnailPreview')}
 						</a>
 					</div>
 				</details>

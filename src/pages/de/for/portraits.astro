@@ -1,0 +1,154 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import DropZone from '../../../components/DropZone.astro';
+import MovieFaq from '../../../components/MovieFaq.astro';
+
+const path = '/for/portraits/';
+const title = 'Cinematischer Portrait-Fotofilter | Cinematic Photo Editor';
+const description =
+	'Cinematische Porträts ohne Hautton-Risiko: fünf Presets für Gesichter ausgewählt, die Stimmung hinzufügen, ohne die Haut in eine unnatürliche Farbe zu verschieben.';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'CollectionPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com/de${path}`,
+};
+
+const faqs = [
+	{
+		q: 'Welche cinematischen Presets sind am sichersten für Hauttöne?',
+		a: 'Die fünf auf dieser Seite vorgestellten Presets, Shawshank, The Prestige, Top Gun: Maverick, Life of Pi und Spirited Away, nutzen alle einen warmen oder ausgewogenen Farbsplit, der Haut wie Haut aussehen lässt, statt sie zu einem unnatürlichen Farbton zu verschieben. Sie wurden speziell ausgewählt, weil ihre Overlays keine einzelne flache Farbe über das gesamte Bild legen.',
+	},
+	{
+		q: 'Warum lassen manche cinematischen Filter Haut auf Gesichtern kränklich oder unnatürlich wirken?',
+		a: 'Presets, die um einen starken, flachen Farbstich herum gebaut sind, etwa ein kräftiges Grün oder Magenta, legen diese Farbe gleichmäßig über alles im Bild, einschließlich der Haut. Bei Landschaften oder Architektur wirkt das stilvoll; bei einem Gesicht liest es sich oft als seltsamer, ungesunder Farbstich. Presets mit einem Schatten-/Licht-Farbsplit statt eines flachen Farbstichs sind auf Gesichtern deutlich nachsichtiger.',
+	},
+	{
+		q: 'Kann ich statt dieser fünf ein dunkles, moody Preset für ein dramatisches Portrait nutzen?',
+		a: 'Ja, aber es braucht die richtige Beleuchtung: Ein dunkler, moody Grade funktioniert bei Porträts, die von einer einzigen starken, gerichteten Lichtquelle beleuchtet werden, einem Fenster, einer Lampe, Gegenlicht, wo Schatten schon eine Form haben. Bei flach, gleichmäßig beleuchteten Porträts verdunkelt er meist einfach nur das Bild. Sieh dir für genau diesen Look die Anleitung zum dunklen, moody Fotofilter an.',
+	},
+	{
+		q: 'Welches Preset funktioniert am besten für Hochzeits- oder Familienporträts?',
+		a: 'Die warme, zurückhaltende 35mm-Korrektur von Shawshank ist am vielseitigsten für Gruppen und gemischte Hauttöne, sie ist mild genug, um eine Bandbreite an Gesichtern in einem Bild nicht zu überwältigen. Das glänzende Himmelblau und Amber von Top Gun: Maverick passt besonders gut zu Outdoor-Hochzeitsaufnahmen zur goldenen Stunde.',
+	},
+	{
+		q: 'Wie vermeide ich eine Übersättigung von Hauttönen beim Anwenden eines cinematischen Presets?',
+		a: 'Fang mit einem der fünf Presets auf dieser Seite an statt mit einem sättigungsstarken Grade, und nutz dann die Korn-, Vignette- und Glow-Regler im Editor, um Stimmung hinzuzufügen, ohne die Farbintensität weiter zu erhöhen. Wenn ein Preset immer noch zu stark wirkt, mildert die Anwendung auf ein etwas helleres Originalfoto den Effekt.',
+	},
+	{
+		q: 'Brauchen Gruppenfotos ein anderes Preset als Einzelporträts?',
+		a: 'Kein anderes Preset, aber achte stärker auf gleichmäßige Beleuchtung über alle Personen hinweg, ein ungleichmäßig beleuchtetes Gruppenfoto zeigt die Schattenzerdrückung eines kräftigeren Grades ungleichmäßig über die Gesichter verteilt. Die milderen Grades hier, besonders Shawshank und The Prestige, sind nachsichtiger, wenn die Beleuchtung innerhalb einer Gruppe variiert.',
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Startseite', href: '/de/' },
+				{ label: 'Für' },
+				{ label: 'Porträts' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">ANWENDUNGSFALL</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Cinematischer Portrait-Fotofilter
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Nicht jeder Film-Grade ist für Gesichter geeignet. Diese fünf sind gezielt für cinematische
+				Porträts ausgewählt: genug Stimmung, um wie ein Filmstill zu wirken, ohne die Haut in eine
+				unnatürliche Farbe zu verschieben.
+			</p>
+		</section>
+
+		<DropZone
+			presetIds={['shawshank', 'the-prestige', 'top-gun-maverick', 'life-of-pi', 'spirited-away']}
+			showHeading={false}
+			showFooterLinks={false}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">WORAUF ES ANKOMMT</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Was ein Preset portrait-sicher macht
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Gute cinematische Porträts entstehen durch denselben Trick, den echte Coloristen bei
+					Gesichtern nutzen: die meisten cinematischen Grades splitten die Farbe zwischen Schatten
+					und Lichtern, statt das ganze Bild in einen einzigen flachen Farbton zu tauchen, und
+					dieser Split zählt bei Gesichtern am meisten. Ein warm geneigter Lichter-Ton lässt Haut
+					wie Haut aussehen; ein Preset, das um eine einzelne kräftige Farbwäsche herum gebaut ist
+					und gleichmäßig über das gesamte Bild angewendet wird, kann Haut in Richtung Grün,
+					Magenta oder einen anderen unnatürlichen Farbstich verschieben, der bei einer Landschaft
+					gut aussieht, bei einer Person aber nicht.
+				</p>
+				<p>
+					Kontrast und Vignette zählen bei Porträts ebenfalls mehr als bei Weitwinkelaufnahmen: zu
+					aggressiv eingestellt, und Schattendetails im Gesicht zerdrücken zu konturlosem Schwarz.
+					Die fünf Presets oben setzen auf Wärme oder Balance und halten den Kontrast moderat, das
+					ist auch der Grund, warum sie hier vorgestellt werden statt der härteren, stärker
+					entsättigten Grades des Tools.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">MIT VORSICHT BEI GESICHTERN</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Presets, bei denen man für Porträts zweimal überlegen sollte
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Der flache Grünstich des <a href="/de/presets/the-matrix/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Matrix-Presets</a> wird
+					absichtlich gleichmäßig über das gesamte Bild gelegt, auffällig bei einer urbanen Szene,
+					aber auf Haut liest er sich als ungewöhnlicher Farbstich. Sehr starke Vignetten und
+					zerdrückte Schatten wie bei den Presets auf der Seite <a href="/de/looks/dark-and-moody/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Dunkler, moody Fotofilter</a> können
+					speziell für dramatische, hart beleuchtete Porträts funktionieren, neigen aber dazu,
+					Details bei weich, gleichmäßig beleuchteten Gesichtern zu flachen.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">TIEFER EINSTEIGEN</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Weitere Wege, den Look zu gestalten
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/de/looks/vintage-35mm-film/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Vintage-35mm-Filmlook</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Sanft, warm und nachsichtig bei Hauttönen</span>
+				</a>
+				<a href="/de/looks/dark-and-moody/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Dunkler &amp; moody cinematischer Filter</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Speziell für dramatische, hart beleuchtete Porträts</span>
+				</a>
+				<a href="/de/guides/how-to-make-photos-look-cinematic/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Fotos kinoreif machen</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Die vollständige Schritt-für-Schritt-Anleitung</span>
+				</a>
+				<a href="/de/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Alle 60 Presets ansehen</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Jede Farbkorrektur, nach Genre sortiert</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Häufige Fragen zu cinematischen Portrait-Filtern" faqs={faqs} />
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../../lib/landing';
+</script>

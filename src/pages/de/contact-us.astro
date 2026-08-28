@@ -1,0 +1,127 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+
+const title = 'Kontakt | Cinematic Photo Editor';
+const description = 'Kontaktiere das Cinematic-Photo-Team für Support, Feedback, Preset-Wünsche oder Presseanfragen zu unserem kostenlosen Online-Fotoeditor.';
+---
+
+<Layout title={title} description={description} path="/contact-us/">
+	<Navbar />
+	<main class="mx-auto max-w-3xl px-4 py-20 sm:px-6">
+		<span class="mb-4 block font-mono text-xs tracking-wide text-mute">KONTAKT</span>
+		<h1 class="font-sans text-3xl font-semibold tracking-[-0.03em] text-ink sm:text-4xl">
+			Wir freuen uns, von dir zu hören
+		</h1>
+
+		<div class="mt-8 flex flex-col gap-6 text-base leading-7 text-body">
+			<p>
+				Egal ob du einen Bug gefunden hast, dir eine neue Farbkorrektur als Preset wünschst,
+				oder eine Presse- oder Partnerschaftsanfrage hast, schick uns unten eine Nachricht und
+				wir melden uns bei dir.
+			</p>
+
+			<form
+				id="contact-form"
+				action="https://formspree.io/f/xoeadery"
+				method="POST"
+				class="flex flex-col gap-4 rounded-xl border border-hairline bg-canvas-soft p-6"
+			>
+				<div class="flex flex-col gap-1.5">
+					<label for="name" class="font-mono text-xs tracking-wide text-mute">NAME</label>
+					<input
+						id="name"
+						name="name"
+						type="text"
+						required
+						class="rounded-md border border-hairline bg-canvas px-3 py-2 font-sans text-sm text-ink outline-none placeholder:text-mute focus:border-hairline-strong"
+						placeholder="Dein Name"
+					/>
+				</div>
+
+				<div class="flex flex-col gap-1.5">
+					<label for="email" class="font-mono text-xs tracking-wide text-mute">E-MAIL</label>
+					<input
+						id="email"
+						name="email"
+						type="email"
+						required
+						class="rounded-md border border-hairline bg-canvas px-3 py-2 font-sans text-sm text-ink outline-none placeholder:text-mute focus:border-hairline-strong"
+						placeholder="du@beispiel.de"
+					/>
+				</div>
+
+				<div class="flex flex-col gap-1.5">
+					<label for="message" class="font-mono text-xs tracking-wide text-mute">NACHRICHT</label>
+					<textarea
+						id="message"
+						name="message"
+						rows="5"
+						required
+						class="resize-none rounded-md border border-hairline bg-canvas px-3 py-2 font-sans text-sm text-ink outline-none placeholder:text-mute focus:border-hairline-strong"
+						placeholder="Wie können wir helfen?"
+					></textarea>
+				</div>
+
+				<button
+					type="submit"
+					class="mt-2 self-start rounded-md bg-primary px-4 py-2 font-sans text-sm font-medium text-on-primary transition-opacity hover:opacity-90 disabled:opacity-60"
+				>
+					Nachricht senden
+				</button>
+				<p id="form-error" class="hidden font-sans text-sm text-red-500">
+					Beim Senden deiner Nachricht ist etwas schiefgelaufen. Bitte versuch es erneut.
+				</p>
+			</form>
+
+			<h2 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">Support</h2>
+			<p>
+				Da Cinematic Photo jedes Bild lokal in deinem Browser verarbeitet, hängen die meisten
+				Probleme mit einem bestimmten Browser, Dateiformat oder Gerät zusammen. Wenn du ein
+				Problem meldest, hilft es, deinen Browser und dessen Version, das verwendete
+				Bildformat und eine Beschreibung dessen anzugeben, was du erwartet hast im Vergleich zu
+				dem, was tatsächlich passiert ist.
+			</p>
+
+			<h2 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">Feedback und Preset-Wünsche</h2>
+			<p>
+				Wenn es eine Filmfarbkorrektur gibt, die du gerne als Preset sehen würdest, nenn uns den
+				Film und, wenn möglich, ein Referenzbild oder eine Szene. Preset-Wünsche beeinflussen
+				direkt, was wir als Nächstes bauen.
+			</p>
+		</div>
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	const form = document.getElementById('contact-form') as HTMLFormElement;
+	const errorMessage = document.getElementById('form-error');
+	const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+	form.addEventListener('submit', async (event) => {
+		event.preventDefault();
+		errorMessage?.classList.add('hidden');
+		submitButton.disabled = true;
+
+		try {
+			const response = await fetch(form.action, {
+				method: form.method,
+				body: new FormData(form),
+				headers: { Accept: 'application/json' },
+			});
+
+			if (response.ok) {
+				window.location.href = '/de/thank-you/';
+				return;
+			}
+
+			errorMessage?.classList.remove('hidden');
+		} catch {
+			errorMessage?.classList.remove('hidden');
+		} finally {
+			submitButton.disabled = false;
+		}
+	});
+</script>

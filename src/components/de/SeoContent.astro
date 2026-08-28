@@ -1,0 +1,171 @@
+---
+// German translation of ../SeoContent.astro. The featured FAQ block still pulls
+// from the shared English src/data/faqs.ts, that dataset is not localized yet.
+import { getFeaturedFaqs } from '../../data/faqs';
+
+const faqs = getFeaturedFaqs();
+
+const faqStructuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	mainEntity: faqs.map((f) => ({
+		'@type': 'Question',
+		name: f.q,
+		acceptedAnswer: {
+			'@type': 'Answer',
+			text: f.a,
+		},
+	})),
+};
+---
+
+<section class="border-t border-hairline bg-canvas-soft px-4 py-20 sm:px-6">
+	<div class="mx-auto max-w-3xl">
+		<span class="mb-4 block font-mono text-xs tracking-wide text-mute">WARUM CINEMATIC PHOTO</span>
+		<h2 class="max-w-2xl font-sans text-3xl font-semibold tracking-[-0.03em] text-ink sm:text-4xl">
+			Ein cinematischer Fotoeditor für filmreifes Color Grading
+		</h2>
+
+		<div class="mt-8 flex flex-col gap-6 text-base leading-7 text-body">
+			<p>
+				Cinematic Photo ist ein kostenloser Online-Fotoeditor, der ein gewöhnliches Bild mit
+				einem Klick in einen filmreifen Still verwandelt, ganz ohne Vorkenntnisse in cinematischer
+				Fotobearbeitung. Die meisten Fotoeditor-Apps verstecken filmische Looks hinter Abos,
+				Masking-Tools oder einer steilen Lernkurve. Cinematic Photo funktioniert eher wie die
+				Abkürzung eines Coloristen: Preset auswählen, ein paar Regler anpassen, exportieren. Keine
+				Anleitung nötig. Es ist eine echte, einfache Alternative zu Lightroom-Cinematic-Presets für
+				alle, die einfach nur die Kino-Optik wollen, ohne Desktop-Software zu installieren oder
+				sich durch komplizierte Bedienfelder zu arbeiten, und eine schnellere Option als ein
+				generischer iloveimg-Fotoeditor-Ersatz, wenn der gewünschte Look konkret cinematisch sein
+				soll.
+			</p>
+			<p>
+				Als Fotoeditor-App bleibt es bewusst schmal: statt zu versuchen, ein
+				General-Purpose-Editor mit hunderten unzusammenhängenden Tools zu sein, konzentriert es
+				sich vollständig auf eine Aufgabe: ein Foto wie ein Standbild aus einem Film aussehen und
+				wirken zu lassen. Genau dieser Fokus macht es schnell. Es gibt kein Suchen durch Menüs nach
+				dem Kino-Look; jede Steuerung auf dem Bildschirm dient dazu, ein Foto näher an ein
+				filmreifes Bild zu bringen, sodass der Weg von einem flachen Schnappschuss zu einem
+				fertigen Grade nur Sekunden statt des vielstufigen Workflows braucht, den ein allgemeiner
+				Online-Fotoeditor mit Filmfiltern normalerweise verlangt.
+			</p>
+
+			<h3 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">
+				Was einen cinematischen Fotoeffekt ausmacht
+			</h3>
+			<p>
+				Ein cinematischer Fotoeffekt ist mehr als ein Filter mit einem einzigen Regler: Es ist die
+				Kombination aus einer Schatten-/Licht-Farbkorrektur, Filmkorn, einer Vignette und oft
+				einem Breitbild-Letterbox-Zuschnitt, denselben Werkzeugen, zu denen ein Colorist und ein
+				Kameramann am Set greifen. Ein einfacher Farbstich allein wirkt wie ein
+				Instagram-Filter; erst das Zusammenspiel dieser Elemente lässt ein Foto wie ein Standbild
+				aus einem Film und nicht wie ein bearbeiteter Schnappschuss wirken. Jedes Preset in diesem
+				Editor bündelt eine genre-genaue Farbkorrektur mit Korn-, Glow- und
+				Letterbox-Einstellungen, damit du diesen vollen cinematischen Fotoeffekt mit einem Klick
+				bekommst, statt jede Ebene von Hand einzustellen.
+			</p>
+
+			<h3 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">
+				Filminspirierte Color-Grading-Presets
+			</h3>
+			<p>
+				Jedes der 60 Presets in diesem cinematischen Editor orientiert sich an einem
+				wiedererkennbaren Film- oder Serien-Look, aufgeteilt in neun Genres: Thriller & Mystery,
+				Crime, Sci-Fi, Drama, Krieg & Historie, Fantasy & Abenteuer, Action, Superhelden und
+				TV-Serien. Greif zum Shawshank-Redemption-Preset für eine warme, zurückhaltende
+				35mm-Drama-Korrektur, zum Pulp-Fiction-Fotofilter für satte bernstein-rote
+				Tarantino-Töne, oder zum <a href="/de/presets/the-dark-knight/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Dark-Knight-Color-Grading-Preset</a> für
+				zerdrückte Schwarztöne und einen kühlen Stahl-Ton. Die <a href="/de/presets/interstellar/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Inception- und
+				Interstellar-Filmfarbfilter-Effekte</a> liefern Nolans charakteristische kühle
+				stahlblaue Sci-Fi-Palette, das Gladiator-Preset bringt gebleichte, goldene
+				Wüstenwärme, und der <a href="/de/presets/the-matrix/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Matrix-Grünstich-Fotofilter</a> rekonstruiert das
+				markante digitale Hochkontrast-Grün des Films. Jede Option legt einen cinematischen
+				Filter kostenlos, sofort und direkt auf dem Canvas über dein Foto, stöbere in der{' '}
+				<a href="/de/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">vollständigen Liste aller 60 Presets</a>{' '}
+				und finde genau den Film, den dein Foto braucht.
+			</p>
+
+			<h3 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">
+				Filmtextur und cinematische Bildkomposition
+			</h3>
+			<p>
+				Über die Farbe hinaus fügt Cinematic Photo die Textur- und Rahmen-Details hinzu, die
+				einen Kino-Look ausmachen. Füge kostenlos und online mit einem einzigen Regler Filmkorn
+				zu einem Foto hinzu, stelle eine Vignette ein oder füge Glow und Halation hinzu, so wie
+				anamorphotische Objektive um helle Lichtquellen herum aufblühen, das Nächste an{' '}
+				<a href="/de/guides/cinematic-color-grading/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">cinematischem Color Grading</a> mit
+				einem Film-LUT, ohne dedizierte Grading-Software. Füge mit einem Klick eine
+				cinematische Letterbox zu einem Foto online hinzu, um auf ein cinematisches
+				Seitenverhältnis von 2,39:1 zuzuschneiden, komplett mit schwarzen Balken über und unter
+				dem Bild, und stemple ein Filmstock-Label in die Ecke für ein Finish inspiriert vom{' '}
+				<a href="/de/looks/vintage-35mm-film/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Vintage-35mm-Filmlook</a>.
+				Für eine vollständige Anleitung, sieh dir an, wie man{' '}
+				<a href="/de/guides/how-to-make-photos-look-cinematic/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">jedes Foto cinematisch aussehen lässt</a>.
+			</p>
+
+			<h3 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">
+				Privat by design: nichts verlässt jemals dein Gerät
+			</h3>
+			<p>
+				Das ist ein browserbasierter cinematischer Fotoeditor mit einer Client-Side-Architektur
+				von Grund auf: keine Uploads, keine Konten, und kein Server sieht jemals dein Bild.
+				Jeder Filter, jede Korrektur und jeder Export wird lokal in einem HTML-Canvas in deinem
+				Browser-Tab gerendert, sodass ein schneller Filmlook-Fotofilter auch bei langsamer
+				Verbindung verfügbar ist, und deine Fotos bleiben deine.
+			</p>
+
+			<h3 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">
+				Für wen es gedacht ist
+			</h3>
+			<p>
+				Fotografen, Filmemacher und Social-Creator nutzen Cinematic Photo als kostenloses
+				Online-Tool für den fotografischen Look bei Thumbnails, Postern und Portfolio-Stills.
+				Stell es dir vor wie einen Indie-Film-Fotoeffekt-Generator für alle, die einen
+				Hollywood-Foto-Filter in ihren Workflow einbauen wollen: einen Online-Filmfarbkorrektor,
+				der ein flaches Foto in der Zeit, die ein Regler-Schieben braucht, in ein filmreifes
+				Bild verwandelt. Sieh dir kuratierte Preset-Empfehlungen an für{' '}
+				<a href="/de/for/instagram/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Instagram</a>,{' '}
+				<a href="/de/for/youtube-thumbnails/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">YouTube-Thumbnails</a>,{' '}
+				<a href="/de/for/travel-photography/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Reisefotografie</a> und{' '}
+				<a href="/de/for/portraits/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">cinematische Porträts</a>,
+				oder sieh, wie es sich schlägt gegen{' '}
+				<a href="/de/alternatives/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Lightroom-Presets, VSCO und andere cinematische Editing-Tools</a>.
+			</p>
+		</div>
+
+		<div class="mt-16 border-t border-hairline pt-10">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">FAQ</span>
+			<div class="flex flex-col divide-y divide-hairline">
+				{
+					faqs.map((faq) => (
+						<details class="group py-5">
+							<summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-sans text-base font-semibold text-ink [&::-webkit-details-marker]:hidden">
+								<span>{faq.q}</span>
+								<svg
+									class="h-4 w-4 flex-shrink-0 text-mute transition-transform duration-200 group-open:rotate-180"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								>
+									<polyline points="6 9 12 15 18 9" />
+								</svg>
+							</summary>
+							<p class="mt-2 text-sm leading-6 text-body">{faq.a}</p>
+						</details>
+					))
+				}
+			</div>
+			<a
+				href="/de/faq/"
+				class="mt-6 inline-block font-sans text-sm font-medium text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink"
+			>
+				Alle häufig gestellten Fragen ansehen →
+			</a>
+		</div>
+	</div>
+
+	<script type="application/ld+json" set:html={JSON.stringify(faqStructuredData)} />
+</section>

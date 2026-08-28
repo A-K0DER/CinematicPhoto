@@ -1,7 +1,6 @@
-// Central registry of supported locales. Adding a locale here is only step 1 —
+// Central registry of supported locales. Adding a locale here is only step 1,
 // it must also be added to `locales` in astro.config.mjs, get a translation
-// block in `src/i18n/ui.ts`, and (unless routing.fallbackType is left as the
-// default "redirect") a src/pages/<locale>/ folder with translated pages.
+// block in `src/i18n/ui.ts`, and a src/pages/<locale>/ folder with translated pages.
 
 export interface LocaleInfo {
 	/** BCP-47 language tag, must match astro.config.mjs `i18n.locales` and the src/pages/<code>/ folder name. */
@@ -21,7 +20,7 @@ export interface LocaleInfo {
 
 export const locales: LocaleInfo[] = [
 	{ code: 'en', label: 'English', ogLocale: 'en_US', dir: 'ltr', contentReady: true },
-	{ code: 'de', label: 'Deutsch', ogLocale: 'de_DE', dir: 'ltr', contentReady: false },
+	{ code: 'de', label: 'Deutsch', ogLocale: 'de_DE', dir: 'ltr', contentReady: true },
 	{ code: 'fr', label: 'Français', ogLocale: 'fr_FR', dir: 'ltr', contentReady: false },
 	{ code: 'es', label: 'Español', ogLocale: 'es_ES', dir: 'ltr', contentReady: false },
 	{ code: 'ja', label: '日本語', ogLocale: 'ja_JP', dir: 'ltr', contentReady: false },
@@ -41,5 +40,5 @@ export const defaultLocale = 'en';
 
 export const localesByCode = Object.fromEntries(locales.map((l) => [l.code, l])) as Record<string, LocaleInfo>;
 
-/** Locales that actually have translated pages — safe to advertise via hreflang and the language switcher. */
+/** Locales that actually have translated pages, safe to advertise via hreflang and the language switcher. */
 export const readyLocales = locales.filter((l) => l.contentReady);

@@ -1,0 +1,183 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import MovieFaq from '../../../components/MovieFaq.astro';
+
+const path = '/guides/youtube-thumbnail-design/';
+const title = 'Wie du ein YouTube-Thumbnail gestaltest, das geklickt wird | Cinematic Photo';
+const description =
+	'Die Gestaltungsregeln, die Klickrate wirklich bewegen: Kontrast in kleiner Größe, ein klarer Blickpunkt, lesbarer Text und ein konsistenter Look, plus wie du ein Thumbnail vor der Veröffentlichung testest.';
+const keywords =
+	'YouTube Thumbnail Design, YouTube Thumbnail erstellen, YouTube Thumbnail Best Practices, YouTube Thumbnail Tipps, YouTube Thumbnail Größe, Klickrate Thumbnail';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'Article',
+	headline: 'Wie du ein YouTube-Thumbnail gestaltest, das geklickt wird',
+	description,
+	url: `https://cinematicphoto.com/de${path}`,
+	author: { '@type': 'Organization', name: 'Cinematic Photo' },
+	publisher: { '@type': 'Organization', name: 'Cinematic Photo' },
+	mainEntityOfPage: `https://cinematicphoto.com/de${path}`,
+};
+
+const faqs = [
+	{
+		q: 'Was ist die ideale YouTube-Thumbnail-Größe?',
+		a: '1280×720 Pixel bei einem Seitenverhältnis von 16:9, gespeichert als JPG, PNG oder nicht-animiertes GIF unter 2MB. Alles, was nicht exakt 16:9 ist, wird von YouTube in der Oberfläche mittig auf dieses Verhältnis zugeschnitten, daher lohnt es sich, von Anfang an in 16:9 zu gestalten, statt ein anders geformtes Foto nachträglich hineinzupressen.',
+	},
+	{
+		q: 'Wie viele Wörter sollten auf einem Thumbnail stehen?',
+		a: 'Höchstens drei bis fünf Wörter, und nur, wenn der Titel selbst es nicht schon sagt. Ein Thumbnail wird bei 168px, 112px oder noch kleiner auf dem Handy beurteilt, lange Sätze werden bei dieser Größe zu einem unlesbaren grauen Fleck. Behandle Thumbnail-Text als Aufhänger, der den Titel ergänzt, nicht als dessen Wiederholung.',
+	},
+	{
+		q: 'Beeinflusst das Thumbnail, wie YouTube ein Video rankt oder empfiehlt?',
+		a: 'Nicht direkt als Ranking-Signal, aber indirekt und deutlich, YouTubes Empfehlungssystem gewichtet die Klickrate stark, und das Thumbnail ist zusammen mit dem Titel der größte einzelne Hebel dafür, ob jemand klickt. Ein gut gestaltetes Thumbnail auf einem mittelmäßigen Video kann trotzdem unterdurchschnittlich abschneiden, wenn Zuschauer nicht zu Ende schauen, aber ein schwaches Thumbnail deckelt die Reichweite eines großartigen Videos, bevor es überhaupt jemand sieht.',
+	},
+	{
+		q: 'Ist es gegen die Regeln, wenn ein Thumbnail irreführend ist?',
+		a: 'Ja. YouTubes Richtlinien gegen Clickbait und irreführende Thumbnails werden durchgesetzt, Thumbnails, die etwas versprechen, das das Video nicht liefert (gefälschte Körper, erfundene Ereignisse, unpassende Schock-Bilder), können zur Entfernung des Videos oder einer Kanal-Sanktion führen. Ein mutiges, kontrastreiches Thumbnail ist in Ordnung, eines, das über den Inhalt lügt, nicht.',
+	},
+	{
+		q: 'Sollten ältere Video-Thumbnails im Lauf der Zeit neu gestaltet werden?',
+		a: 'Oft lohnenswert für evergreen Videos, die weiterhin Aufrufe bekommen, da sich sowohl Gestaltungskonventionen als auch die visuelle Identität eines Kanals mit der Zeit ändern, und ein veraltetes Thumbnail die Klickrate eines ansonsten guten Videos nach unten ziehen kann. Für Videos, die ihren Lauf bereits genommen haben und wenig laufenden Traffic bekommen, lohnt es sich in der Regel nicht.',
+	},
+	{
+		q: 'Welche Farben funktionieren am besten für ein Thumbnail?',
+		a: 'Kontrastreiche, gesättigte Farben, die auch in kleiner Größe funktionieren, aus demselben Grund funktionieren mutige, kontrastreiche cinematische Korrekturen (Joker, The Batman, Mad Max: Fury Road) meist gut als Thumbnail-Basis. Komplementäre Farbpaare, wie Orange-und-Türkis oder Rot-und-Cyan, helfen außerdem, ein Motiv auf einen Blick vom Hintergrund abzuheben.',
+	},
+];
+---
+
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Startseite', href: '/de/' },
+				{ label: 'Anleitungen' },
+				{ label: 'YouTube-Thumbnail-Design' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">THUMBNAIL-ANLEITUNG</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Wie du ein YouTube-Thumbnail gestaltest, das geklickt wird
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Ein Thumbnail wird in einem Bruchteil einer Sekunde beurteilt, in einem Bruchteil seiner
+				echten Größe, neben einem Dutzend Konkurrenten. Hier ist, was wirklich den Klick bringt,
+				und was nur in voller Größe in deinem Editor gut aussieht.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">DIE PRINZIPIEN</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Was ein funktionierendes Thumbnail von einem nicht funktionierenden unterscheidet
+			</h2>
+			<div class="mt-6 flex flex-col gap-6 text-base leading-7 text-body">
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Kontrast gewinnt bei kleiner Größe</h3>
+					<p class="mt-2">
+						Die meisten Zuschauer sehen ein Thumbnail nie in voller Größe, es ist ein 168px
+						großer Seitenleisten-Vorschlag oder eine handybreite Feed-Karte. Feine Tonwertunterschiede,
+						die auf einem Desktop-Monitor klar lesbar sind, verschwimmen bei dieser Skalierung zu
+						Brei. Hoher Kontrast zwischen Motiv und Hintergrund, und zwischen Text und dem, was
+						dahinter liegt, ist das, was das Schrumpfen übersteht.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Ein Blickpunkt, nicht fünf</h3>
+					<p class="mt-2">
+						Ein Thumbnail muss seine Idee in unter einer Sekunde vermitteln. Ein einzelnes klares
+						Motiv, ein Gesicht, ein Objekt, ein dominanter Farbblock, wird sofort erfasst; eine
+						unruhige Komposition mit mehreren konkurrierenden Elementen zwingt Zuschauer dazu, sie
+						zu entschlüsseln, und die meisten machen sich diese Mühe nicht.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Text ist ein Aufhänger, keine Bildunterschrift</h3>
+					<p class="mt-2">
+						Drei bis fünf Wörter, groß, fett und kontrastreich gegen den Hintergrund, ist die
+						Obergrenze für Text, der noch bei 64px Breite lesbar bleibt. Wenn der Titel es schon
+						sagt, muss das Thumbnail es nicht wiederholen, nutze den Platz für etwas, das der
+						Titel nicht vermitteln kann: einen Gesichtsausdruck, eine Zahl, ein Vorher/Nachher.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Ein konsistenter Look schafft Wiedererkennung</h3>
+					<p class="mt-2">
+						Kanäle, die eine Farbpalette, Schriftart oder ein Layout über Thumbnails hinweg
+						wiederverwenden, werden in einem überfüllten Abo-Feed wiedererkennbar, ein Zuschauer
+						erkennt den Kanal, bevor er überhaupt den Titel gelesen hat. Diese Konsistenz zählt
+						über die gesamte Bibliothek eines Kanals mehr als die individuelle Cleverness eines
+						einzelnen Thumbnails.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Zum Versprechen passen, nicht nur zur Ästhetik</h3>
+					<p class="mt-2">
+						Ein mutiges, kontrastreiches Thumbnail, das das Video übertreibt oder falsch darstellt,
+						schadet Watchtime und Bindung, sobald geklickt wurde, und riskiert direkt eine
+						Richtlinienverwarnung. Die erfolgreichsten Thumbnails sind ehrlich über den Inhalt
+						und präsentieren ihn einfach so überzeugend wie möglich.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">TESTEN</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Prüfe es so, wie Zuschauer es wirklich sehen
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Ein Thumbnail, das in einem Design-Tool in voller Auflösung scharf aussieht, kann
+					auseinanderfallen, sobald es neben einem Titel, einem Kanalnamen und einer Aufrufzahl
+					in einem echten Layout sitzt. Empfohlene Videos, Suchergebnisse und der mobile
+					Startbildschirm-Feed zeigen es jeweils in einer anderen Größe und mit anderen
+					Metadaten, und YouTube schneidet alles, was nicht exakt 16:9 ist, mittig zu.
+				</p>
+				<p>
+					Ein Design durch diese echten Platzierungen laufen zu lassen, inklusive des
+					Kleingrößen-Checks bei 168px, 112px und 64px Breite, fängt ein unscharfes oder
+					beschnittenes Ergebnis ab, bevor ein Video live geht, statt danach, wenn es bereits
+					veröffentlicht ist und das frühe Aufruf-Fenster vorbei ist.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">TIEFER EINSTEIGEN</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				In der Praxis anwenden
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/de/tools/youtube-thumbnail-preview/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">YouTube-Thumbnail-Vorschau-Tool</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Sieh es dir in Suche, Empfehlungen und auf dem Handy an</span>
+				</a>
+				<a href="/de/for/youtube-thumbnails/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Cinematische YouTube-Thumbnails</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Mutige, kontrastreiche Presets für Creator</span>
+				</a>
+				<a href="/de/guides/cinematic-color-grading/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Cinematisches Color Grading erklärt</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Warum kontrastreiche Korrekturen auf einen Blick gut wirken</span>
+				</a>
+				<a href="/de/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Alle 60 Presets ansehen</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Jede Farbkorrektur, sortiert nach Genre</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Häufige Fragen zum YouTube-Thumbnail-Design" faqs={faqs} />
+	</main>
+	<Footer />
+</Layout>

@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { getRelativeLocaleUrl } from 'astro:i18n';
 import { getHreflangLinks } from '../i18n/utils';
 import { defaultLocale, localesByCode } from '../i18n/config';
 
@@ -7,6 +8,7 @@ interface Props {
 	title?: string;
 	description?: string;
 	keywords?: string;
+	/** Locale-neutral path, e.g. "/about-us/", never include a locale prefix, the layout adds it. */
 	path?: string;
 	structuredData?: object;
 	noindex?: boolean;
@@ -22,11 +24,10 @@ const {
 } = Astro.props;
 
 const siteUrl = 'https://cinematicphoto.com';
-const canonicalUrl = new URL(path, siteUrl).toString();
-const ogImageUrl = new URL('/og-image.png', siteUrl).toString();
-
 const locale = Astro.currentLocale ?? defaultLocale;
 const localeInfo = localesByCode[locale];
+const canonicalUrl = new URL(getRelativeLocaleUrl(locale, path), siteUrl).toString();
+const ogImageUrl = new URL('/og-image.png', siteUrl).toString();
 const hreflangLinks = getHreflangLinks(path, siteUrl);
 
 const defaultStructuredData = {

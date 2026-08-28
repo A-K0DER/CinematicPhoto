@@ -1,0 +1,202 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import DropZone from '../../../components/DropZone.astro';
+import MovieFaq from '../../../components/MovieFaq.astro';
+
+const path = '/guides/cinematic-color-grading/';
+const title = 'Cinematisches Color Grading erklärt | Cinematic Photo Editor';
+const description =
+	'Was cinematisches Color Grading wirklich ist: Teal-and-Orange, Split-Toning und was ein LUT macht, plus wie du echte Movie-Style-Korrekturen mit einem Klick anwendest.';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'Article',
+	headline: 'Cinematisches Color Grading erklärt',
+	description,
+	url: `https://cinematicphoto.com/de${path}`,
+	author: { '@type': 'Organization', name: 'Cinematic Photo' },
+	publisher: { '@type': 'Organization', name: 'Cinematic Photo' },
+	mainEntityOfPage: `https://cinematicphoto.com/de${path}`,
+};
+
+const faqs = [
+	{
+		q: 'Was ist der Unterschied zwischen Farbkorrektur und Color Grading?',
+		a: 'Farbkorrektur repariert ein Foto: neutraler Weißabgleich, korrekte Belichtung, natürliche Hauttöne. Color Grading ist die stilistische Entscheidung danach: Schatten und Lichter werden gezielt, oft in komplementäre Farben verschoben, um eine Stimmung zu erzeugen. Jedes Preset in diesem Tool ist eine echte Korrektur im Sinne von Grading, keine simple Farbkorrektur.',
+	},
+	{
+		q: 'Was ist Teal-and-Orange-Color-Grading, und warum nutzen so viele Filme es?',
+		a: 'Dabei werden Schatten und Mitteltöne Richtung Türkis/Cyan geschoben, während Lichter und Hauttöne Richtung Orange/Bernstein wandern. Das funktioniert, weil Türkis und Orange sich im Farbkreis gegenüberliegen, sodass sich das Motiv (meist warme Hauttöne) visuell vom Hintergrund (oft kühlere Schatten und Himmel) abhebt, und weil Haut von Natur aus orange wirkt, bleibt sie auch unter einer starken Korrektur schmeichelhaft.',
+	},
+	{
+		q: 'Was ist ein LUT, und wie unterscheidet er sich von einem Preset oder Filter?',
+		a: 'Ein LUT (Lookup-Table) ist eine gespeicherte mathematische Farbtransformation: Lade ihn in eine Editing-Software, und er ordnet jede Farbe in deinem Foto jedes Mal auf dieselbe Weise um. Ein Preset in Cinematic Photo macht genau dasselbe, eine gespeicherte, wiederholbare Farbtransformation, nur direkt im Browser angewendet, ohne dass du zuerst eine .cube-Datei in eine Desktop-Software installieren musst.',
+	},
+	{
+		q: 'Wie erzeuge ich einen Split-Tone-Effekt, unterschiedliche Farben in Schatten und Lichtern, ohne Software?',
+		a: 'Genau das machen die Presets von Cinematic Photo im Hintergrund: Jedes legt einen Farbverlauf über dein Foto, der Schatten in eine Farbe und Lichter in eine andere schiebt, statt das ganze Bild mit einem einzigen flachen Farbton zu überziehen. Wähl irgendein Preset, und du wendest einen Split-Tone an; der sichtbare Unterschied zwischen den Presets liegt darin, welche zwei Farben aufgeteilt werden und wie stark.',
+	},
+	{
+		q: 'Warum wirken meine Fotos immer noch flach, selbst nachdem ich Sättigung und Kontrast erhöht habe?',
+		a: 'Sättigung und Kontrast allein verstärken nur vorhandene Farben, sie fügen nicht die Farbbeziehungen hinzu, die eine echte Korrektur ausmacht. Ein flaches Foto braucht meist Schatten und Lichter, die in unterschiedliche Farbtöne verschoben werden, nicht nur intensivere Versionen derselben Farben. Genau diese gerichtete Farbverschiebung liefert eine echte Korrektur, eine simple Sättigungserhöhung kann das nicht.',
+	},
+	{
+		q: 'Kann ich die exakte Farbkorrektur eines bestimmten Films auf mein Foto anwenden?',
+		a: 'Nicht Pixel für Pixel, da eine echte Korrektur auch vom ursprünglichen Licht und Objektiv abhängt, aber die filminspirierten Presets von Cinematic Photo bilden die visuelle Ästhetik sehr genau nach: Farbaufteilung, Kontrastkurve und Filmkorn passend gebaut. Schau dir die eigenen Seiten zu The Dark Knight, Blade Runner 2049, Dune, Interstellar und The Matrix an, oder die komplette Bibliothek mit 60 Presets, um die beste Übereinstimmung zu finden.',
+	},
+	{
+		q: 'Ist "cinematische Farbgebung" dasselbe wie cinematisches Color Grading?',
+		a: 'Ja, beide beschreiben dasselbe Ergebnis. "Cinematische Farbgebung" ist die umgangssprachliche Art, wie die meisten Leute beschreiben, was sie suchen; "Color Grading" ist der Fachbegriff für die Schatten-/Licht-Farbaufteilung, die genau das erzeugt. Jedes Preset in diesem Editor führt so oder so eine echte Korrektur aus, keinen flachen Farbstich.',
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Startseite', href: '/de/' },
+				{ label: 'Anleitungen' },
+				{ label: 'Cinematisches Color Grading' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">COLOR-GRADING-ANLEITUNG</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Cinematisches Color Grading erklärt
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Teal-and-Orange, Split-Toning, LUTs: Das Vokabular des Movie-Color-Gradings klingt
+				technisch, aber die Idee dahinter ist simpel. Hier ist, was wirklich passiert, und wie
+				du es anwendest, ganz ohne Farbwissenschafts-Software.
+			</p>
+		</section>
+
+		<DropZone
+			presetIds={['blade-runner', 'mad-max-fury-road', 'baby-driver', 'dark-knight']}
+			showHeading={false}
+			showFooterLinks={false}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">DIE GRUNDLAGEN</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Was Color Grading wirklich ist
+			</h2>
+			<div class="mt-6 flex flex-col gap-6 text-base leading-7 text-body">
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Korrektur vs. Grading</h3>
+					<p class="mt-2">
+						Farbkorrektur ist der neutrale, technische Durchgang: Weißabgleich, Belichtung und
+						Hautton werden so eingestellt, dass das Bild natürlich wirkt. Color Grading kommt
+						danach, es ist ein bewusster stilistischer Schub in eine bestimmte Stimmung. Der
+						Kameramann eines Films korrigiert zuerst und gradet dann, um den Ton zu setzen.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Split-Toning: unterschiedliche Farben in Schatten und Lichtern</h3>
+					<p class="mt-2">
+						Statt ein ganzes Foto mit einem einzigen flachen Farbton zu überziehen, schiebt eine
+						echte Korrektur Schatten in eine Farbe und Lichter in eine andere. Das unterscheidet
+						ein "gegradetes" Bild von einem "gefilterten", und genau das macht jedes Preset in
+						diesem Tool im Hintergrund: ein Farbverlauf-Overlay, das den Ton nach Helligkeit
+						verschiebt, kein einzelner flacher Anstrich.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Teal und Orange: die klassische Aufteilung</h3>
+					<p class="mt-2">
+						Die bekannteste Farbaufteilung im modernen Film: Schatten und Hintergründe werden kühl
+						Richtung Türkis geschoben, Hauttöne und Lichter warm Richtung Orange. Das
+						funktioniert, weil Türkis und Orange sich im Farbkreis gegenüberliegen und so Motiv
+						und Hintergrund trennen, und weil Haut von Natur aus orange wirkt, bleibt sie auch
+						unter einer starken Korrektur schmeichelhaft.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Was ein LUT wirklich macht</h3>
+					<p class="mt-2">
+						Ein LUT, eine Lookup-Table, ist eine gespeicherte Farbtransformation: Für jede
+						Eingabefarbe legt sie genau fest, welche Ausgabefarbe erzeugt wird. Einen LUT in
+						eine Editing-Software zu laden, wendet diese Transformation konsistent auf jedes
+						Foto an. Ein Preset hier macht identische Arbeit, nur fest eingebaut und sofort
+						angewendet, ohne Datei zum Herunterladen oder Importieren.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Kontrast und Schattentiefe</h3>
+					<p class="mt-2">
+						Grading geht meist mit einem Kontrast-Schub einher, der Schatten eher absaufen lässt,
+						statt jedes Detail zu bewahren. Das ist ein bewusster Kompromiss: weniger rettbares
+						Schattendetail, dafür mehr visuelles Gewicht und Trennung, weshalb ein gegradetes
+						Standbild oft "massiver" wirkt als ein flaches, gleichmäßig belichtetes Original.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BEGRIFFE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				"Cinematische Farbgebung" vs. cinematisches Color Grading
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Leute, die nach cinematischer Farbgebung suchen, und Leute, die nach cinematischem
+					Color Grading suchen, wollen meist dasselbe Ergebnis, sie nutzen nur unterschiedliches
+					Vokabular dafür. "Cinematische Farbgebung" ist der lockere Alltagsausdruck dafür, die
+					Farben eines Fotos in Richtung Kino-Look zu schieben; "Color Grading" ist der
+					Fachbegriff, den Coloristen für dieselbe Schatten-/Licht-Farbaufteilung von oben
+					benutzen. Hinter dem einfacheren Ausdruck versteckt sich keine andere Technik, ein
+					Preset in diesem Editor führt eine echte Korrektur aus, egal welchen Begriff du zum
+					Suchen benutzt hast.
+				</p>
+				<p>
+					Das lohnt sich zu wissen, wenn du Tools vergleichst: Eine Seite, die nur einen einzigen
+					Sättigungs- oder Farbton-Regler bietet, macht Farbgebung im lockersten Sinne, sie
+					färbt das ganze Bild in eine Richtung. Ein Tool mit echtem cinematischem Color Grading,
+					wie die Presets hier, wendet unabhängige Farbverschiebungen auf Schatten und Lichter
+					an, und genau das lässt das Ergebnis wie ein Film-Still wirken statt wie ein
+					Instagram-Filter.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">TIEFER EINSTEIGEN</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				In der Praxis anwenden
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/de/guides/how-to-make-photos-look-cinematic/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Wie man Fotos cinematisch aussehen lässt</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Die vollständige Schritt-für-Schritt-Anleitung</span>
+				</a>
+				<a href="/de/looks/vintage-35mm-film/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Vintage-35mm-Filmlook</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Korn, Wärme und nostalgische Filmstock-Töne</span>
+				</a>
+				<a href="/de/presets/blade-runner-2049/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Blade Runner 2049 Fotofilter</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Eine lehrbuchreife Bernstein-Türkis-Aufteilung, mit Dunst</span>
+				</a>
+				<a href="/de/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Alle 60 Presets ansehen</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Jede Farbkorrektur, sortiert nach Genre</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Häufige Fragen zu Color Grading" faqs={faqs} />
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../../lib/landing';
+</script>

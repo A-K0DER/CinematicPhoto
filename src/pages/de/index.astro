@@ -1,0 +1,149 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import DropZone from '../../components/DropZone.astro';
+import SeoContent from '../../components/de/SeoContent.astro';
+import Footer from '../../components/Footer.astro';
+import AdSlot from '../../components/AdSlot.astro';
+
+const title = 'Cinematic Photo Editor | Kostenlose Online Filmlook-Farbkorrektur';
+const description =
+	"Kostenlose filmische Fotobearbeitung online, ohne Upload. Verwandle jedes Foto mit einem Klick in einen filmreifen Look, mit 60 filminspirierten Color-Grading-Presets.";
+const keywords =
+	'cinematischer Fotoeditor, filmische Fotobearbeitung online kostenlos, cinematischer Fotoeffekt, filmische Porträts, filmisches Color Grading, Movie Color Grade Presets, Filmlook Fotofilter, TikTok Vorlage, TikTok Template, TikTok Safe Zone, TikTok Safe Zone Vorlage, TikTok Safe Zone PNG, TikTok Safe Zone Overlay, Instagram Safe Zone, Instagram Safe Zone Vorlage, Instagram Safe Zone Overlay, Instagram Reels Safe Zone, Instagram Reels Safe Zone Vorlage, Instagram Reels Safe Zone Vorlage PNG, YouTube Thumbnail Größe, YouTube Thumbnail Maker, YouTube Thumbnail Checker, YouTube Thumbnail Grabber, YouTube Thumbnail Viewer';
+---
+
+<Layout title={title} description={description} keywords={keywords} path="/">
+	<Navbar variant="landing" />
+	<main>
+		<DropZone
+			presetIds={[
+				'dark-knight',
+				'blade-runner',
+				'dune',
+				'interstellar',
+				'matrix',
+				'breaking-bad',
+				'stranger-things',
+				'game-of-thrones',
+				'dark',
+				'peaky-blinders',
+			]}
+		/>
+		<AdSlot />
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">KOSTENLOSE TOOLS</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Prüfe deinen Content, bevor du ihn veröffentlichst
+			</h2>
+			<p class="mt-4 max-w-xl text-base leading-7 text-body">
+				Kostenlose Browser-Tools, die zeigen, wie dein Foto oder Thumbnail live wirklich aussieht,
+				mit der echten Oberfläche der Plattform darüber gelegt, oder ein Thumbnail auf
+				Feed-Größe verkleinert.
+			</p>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/de/tools/youtube-thumbnail-preview/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">YouTube-Thumbnail-Vorschau-Tool</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Sieh es dir in Suche, Empfehlungen und auf dem Handy an</span>
+				</a>
+				<a href="/de/tiktok-safe-zone/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">TikTok-Safe-Zone-Checker</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Einzelplattform-Version, fokussiert auf TikTok</span>
+				</a>
+				<a href="/de/instagram-reels-safe-zone/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Instagram-Reels-Safe-Zone-Checker</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Einzelplattform-Version, fokussiert auf Reels</span>
+				</a>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">TIKTOK-, INSTAGRAM- &amp; YOUTUBE-TOOLS</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Eine kostenlose TikTok-Vorlage, Instagram-Safe-Zone und YouTube-Thumbnail-Toolkit
+			</h2>
+			<div class="mt-6 flex flex-col gap-6 text-base leading-7 text-body">
+				<p>
+					Cinematic Photo hat als Color-Grading-Editor angefangen, aber ein Foto oder ein
+					Kurzvideo gut zu veröffentlichen braucht mehr als eine gute Farbkorrektur, es braucht
+					auch einen Check der Komposition gegen die eigene Oberfläche der Plattform, bevor
+					irgendetwas live geht. Neben dem 60-Preset-Editor oben bietet diese Seite ein kleines
+					Toolkit aus kostenlosen Browser-Tools genau für diesen Schritt: einen
+					TikTok-Vorlage-Checker, ein Instagram-Safe-Zone-Tool für Reels, Story und Feed-Posts,
+					sowie ein YouTube-Thumbnail-Vorschau-Tool. Jedes davon läuft genauso wie der
+					Fotoeditor, komplett lokal in einem HTML-Canvas, ohne dass jemals etwas auf einen
+					Server hochgeladen wird, du brauchst also weder ein Konto noch eine native App, um sie
+					zu nutzen.
+				</p>
+
+				<h3 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">
+					TikTok-Vorlage und Safe-Zone-Checker
+				</h3>
+				<p>
+					Der <a href="/de/tiktok-safe-zone/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">TikTok-Safe-Zone-Checker</a> funktioniert wie eine
+					schlanke TikTok-Vorlage-App direkt im Browser: leg ein Foto oder einen Frame auf ein
+					1080x1920-Raster, und er zeichnet die eigene obere Leiste von TikTok, das
+					Beschriftungs-/Benutzername-/Sound-Band und die Like-Kommentar-Teilen-Icon-Leiste
+					maßstabsgetreu genau dort ein, wo TikToks Oberfläche später wirklich sitzt, sobald ein
+					Video live ist. Für alle, die in CapCut oder Premiere Pro schneiden, schlüsselt die
+					eigene Seite zur <a href="/de/tiktok-safe-zone-template/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">TikTok-Safe-Zone-Vorlage</a> dieselbe
+					TikTok-Vorlage-PNG in exakte Pixel- und Prozentwerte für jede Zone auf, inklusive
+					Anleitung, wie man aus diesem TikTok-Safe-Zone-Overlay eine Hilfsebene macht, die man
+					vor dem finalen Export wieder löscht. Beide Seiten werden regelmäßig gegen die aktuelle
+					TikTok-Oberfläche geprüft, statt als statisches TikTok-Safe-Zone-PNG einmal erstellt
+					und dann vergessen zu werden.
+				</p>
+
+				<h3 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">
+					Instagram-Safe-Zone-Vorlage für Reels, Story &amp; Post
+				</h3>
+				<p>
+					Instagram verteilt sein eigenes Safe-Zone-Problem auf drei verschiedene Formate, und
+					dieses Toolkit behandelt sie als drei getrennte Prüfungen statt als ein einziges
+					Instagram-Safe-Zone-Overlay, das überall wiederverwendet wird. Der <a href="/de/instagram-reels-safe-zone/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Instagram-Safe-Zone-Checker</a> wechselt
+					zwischen Reels, Story und Feed-Post, sodass ein Gesicht, eine Beschriftung oder ein
+					Logo genau gegen das Format getestet werden kann, für das es tatsächlich gedacht ist;
+					die Instagram-Reels-Safe-Zone berücksichtigt speziell die Beschriftung, den
+					Benutzernamen, den Audio-Titel und die Spalte mit den Interaktions-Icons, die
+					Instagram über ein 9:16-Reel legt. Die begleitende Seite zur <a href="/de/instagram-safe-zone-template/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Instagram-Safe-Zone-Vorlage</a> verwandelt
+					dieselben Werte, einschließlich der Maße der Instagram-Reels-Safe-Zone-Vorlage-PNG, in
+					eine Referenz, die sich jede Schnittsoftware als Hilfsebene vor dem finalen Export
+					importieren lässt.
+				</p>
+
+				<h3 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">
+					YouTube-Thumbnail-Größe, Checker &amp; Vorschau
+				</h3>
+				<p>
+					YouTubes eigene empfohlene YouTube-Thumbnail-Größe ist 1280x720, aber ein Thumbnail,
+					das in dieser Größe scharf aussieht, kann bei 168px in einer Seitenleiste oder 112px
+					auf dem Handy trotzdem auseinanderfallen. Das <a href="/de/tools/youtube-thumbnail-preview/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">YouTube-Thumbnail-Vorschau-Tool</a> funktioniert
+					sowohl als YouTube-Thumbnail-Checker als auch als YouTube-Thumbnail-Viewer für deine
+					eigenen Uploads: lade ein fertiges Thumbnail hoch, trage Titel und Kanalnamen ein und
+					sieh es dir in Empfehlungen, Suchergebnissen und im mobilen Feed an, dazu einen
+					eigenen Kleingrößen-Check bei drei realistischen Breiten. Es ist kein
+					YouTube-Thumbnail-Maker, der die Grafik gestaltet, und auch kein
+					YouTube-Thumbnail-Grabber, der ein Thumbnail von einem fremden Video zieht, es ist der
+					Schritt, der nach beidem kommt und bestätigt, dass ein fertiges Thumbnail auch
+					wirklich funktioniert, bevor es live geht.
+				</p>
+
+				<p>
+					Keines dieser Tools braucht die cinematischen Presets von oben, sie sind auch für sich
+					allein kostenlos nutzbar. Aber zusammen mit dem Color-Grading-Editor decken sie die
+					zwei Hälften ab, die es braucht, um ein Foto oder einen Clip veröffentlichungsreif zu
+					machen: dass es gut aussieht, und dass es die eigene Oberfläche der Plattform
+					übersteht, sobald es live ist.
+				</p>
+			</div>
+		</section>
+
+		<SeoContent />
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

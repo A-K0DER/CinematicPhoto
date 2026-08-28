@@ -1,0 +1,206 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import DropZone from '../../../components/DropZone.astro';
+import MovieFaq from '../../../components/MovieFaq.astro';
+
+const path = '/guides/how-to-make-photos-look-cinematic/';
+const title = 'Fotos cinematisch aussehen lassen (Komplette Anleitung) | Cinematic Photo Editor';
+const description =
+	'Eine praktische Anleitung, um jedes Foto cinematisch aussehen zu lassen: Color Grading, Kontrast, Filmkorn und das 2,39:1-Seitenverhältnis, plus wie du es mit einem Klick anwendest.';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'Article',
+	headline: 'Wie du deine Fotos cinematisch aussehen lässt',
+	description,
+	url: `https://cinematicphoto.com/de${path}`,
+	author: { '@type': 'Organization', name: 'Cinematic Photo' },
+	publisher: { '@type': 'Organization', name: 'Cinematic Photo' },
+	mainEntityOfPage: `https://cinematicphoto.com/de${path}`,
+};
+
+const howToStructuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'HowTo',
+	name: 'Wie man ein Foto cinematisch aussehen lässt',
+	description: 'Verwandle ein flaches Foto mit Color Grading, Korn und Bildkomposition in ein filmreifes Standbild.',
+	step: [
+		{ '@type': 'HowToStep', name: 'Foto hochladen', text: 'Ziehe eine JPG-, PNG-, WEBP- oder Kamera-RAW-Datei hinein, füge sie ein, oder durchsuche deine Dateien. Sie bleibt auf deinem Gerät.' },
+		{ '@type': 'HowToStep', name: 'Farbkorrektur wählen', text: 'Wähl ein Preset passend zur gewünschten Stimmung: kalt und stählern, warm und golden, oder neonfarben und düster.' },
+		{ '@type': 'HowToStep', name: 'Korn, Vignette und Glow feinjustieren', text: 'Passe Filmkorn, Vignette und Glow/Halation an, damit die Intensität des Looks zu deinem Foto passt.' },
+		{ '@type': 'HowToStep', name: 'Letterbox hinzufügen und exportieren', text: 'Aktiviere die 2,39:1-anamorphotische Letterbox für ein Kino-Bildformat und exportiere dann das fertige Standbild.' },
+	],
+};
+
+const faqs = [
+	{
+		q: 'Was ist der einfachste Weg, ein Foto ohne Photoshop cinematisch aussehen zu lassen?',
+		a: 'Ein speziell für Movie-Looks gebautes Color-Grading-Tool bringt dich am schnellsten dorthin. Cinematic Photo wendet eine vollständige Farbkorrektur, passendes Korn, Vignette und Glow mit einem Klick an, und lässt dich danach jedes Element feinjustieren, keine Ebenen, Kurven oder Plugins nötig.',
+	},
+	{
+		q: 'Brauche ich teure Software oder LUTs für eine Movie-Farbkorrektur?',
+		a: 'Nein. Ein LUT (Lookup-Table) ist nur eine gespeicherte Farbtransformation, genau das, was ein Preset ist. Die 60 Presets von Cinematic Photo sind fest eingebaute LUT-artige Farbkorrekturen, die du direkt im Browser anwendest, statt .cube-Dateien zu installieren und in eine Desktop-Software zu laden.',
+	},
+	{
+		q: 'Welches Seitenverhältnis nutzen Filme, und sollte ich meine Fotos entsprechend zuschneiden?',
+		a: 'Die meisten modernen Filme werden in 2,39:1 gedreht (genannt "Scope" oder anamorphotisches Breitbild), spürbar breiter als das native Seitenverhältnis eines Handyfotos. Der Zuschnitt auf 2,39:1 mit Letterbox-Balken ist optional, aber einer der schnellsten Wege, damit ein Standbild auf den ersten Blick "wie aus einem Film" wirkt.',
+	},
+	{
+		q: 'Lässt Filmkorn ein Foto wirklich cinematischer wirken, oder sieht es nur verrauscht aus?',
+		a: 'Kommt auf die Menge an. Ein leichtes, gleichmäßiges Korn ahmt echten Filmstock nach und fügt Textur hinzu; zu viel wirkt schnell wie digitales Rauschen. Starte niedrig, 15 bis 25 auf der Skala von Cinematic Photo ist für die meisten Fotos ein guter Bereich, und erhöhe nur, wenn das Ausgangsfoto bereits starken Kontrast hat, der die zusätzliche Textur trägt.',
+	},
+	{
+		q: 'Kann ich ein Handyfoto cinematisch aussehen lassen, oder brauche ich eine bestimmte Kamera?',
+		a: 'Ein cinematischer Look ist fast komplett eine Frage von Nachbearbeitung und Licht, nicht der Kamera. Ein gut ausgeleuchtetes Handyfoto mit starker Farbkorrektur, etwas Korn und richtiger Bildkomposition wirkt cinematisch; ein flaches, gleichmäßig belichtetes Foto einer teuren Kamera nicht, ohne dieselbe Behandlung.',
+	},
+	{
+		q: 'Was ist der tatsächliche Unterschied zwischen einem "cinematischen Filter" und einem normalen Instagram-Filter?',
+		a: 'Ein normaler Filter verschiebt meist das ganze Bild in einen Farbton oder erhöht Sättigung und Kontrast einheitlich. Eine cinematische Farbkorrektur teilt Schatten und Lichter in unterschiedliche, komplementäre Töne auf (wie türkise Schatten und bernsteinfarbene Lichter), und genau das gibt Film seine Tiefe statt eines flachen Farbstichs.',
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Startseite', href: '/de/' },
+				{ label: 'Anleitungen' },
+				{ label: 'Fotos cinematisch aussehen lassen' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">KOMPLETTE ANLEITUNG</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Wie du deine Fotos cinematisch aussehen lässt
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Ein cinematischer Look läuft auf eine Handvoll konkreter Entscheidungen hinaus: Farbe,
+				Kontrast, Korn und Bildausschnitt. Hier ist, was jede davon wirklich macht, und wie du
+				alle in unter einer Minute auf ein Foto anwendest.
+			</p>
+		</section>
+
+		<DropZone
+			presetIds={['dark-knight', 'blade-runner', 'shawshank', 'interstellar']}
+			showHeading={false}
+			showFooterLinks={false}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">DIE GRUNDLAGEN</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Was ein Foto wirklich cinematisch macht
+			</h2>
+			<div class="mt-6 flex flex-col gap-6 text-base leading-7 text-body">
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Color Grading, nicht nur ein Filter</h3>
+					<p class="mt-2">
+						Filmisches Color Grading teilt Schatten und Lichter in unterschiedliche, oft
+						komplementäre Töne auf, türkise Schatten gegen bernsteinfarbene Lichter, kaltes
+						Stahlblau gegen warme Haut, statt das ganze Bild in eine Richtung zu schieben.
+						Genau diese Aufteilung wirkt bewusst und "gegradet" statt "gefiltert".
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Kontrast und Schattentiefe</h3>
+					<p class="mt-2">
+						Filme schützen Schattendetails selten so, wie es der HDR-Modus einer Handykamera tut.
+						Schwarztöne leicht absaufen zu lassen und den Kontrast anzuheben, gibt einem Bild
+						Gewicht und Tiefe, die ein flaches, gleichmäßig belichtetes Foto nicht hat.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Filmkorn und Textur</h3>
+					<p class="mt-2">
+						Selbst digital gedrehte Filme fügen in der Postproduktion Korn hinzu, um einen
+						sterilen, videoartigen Look zu vermeiden. Eine leichte, gleichmäßige Kornschicht ist
+						eines der schnellsten Signale, das ein "Foto mit Filter" von etwas trennt, das wie
+						ein Standbild wirkt.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Das 2,39:1-Seitenverhältnis</h3>
+					<p class="mt-2">
+						Die meisten Filme werden spürbar breiter als ein Handyfoto gedreht. Der Zuschnitt auf
+						eine 2,39:1-Letterbox mit schwarzen Balken oben und unten ist ein rein visuelles
+						Signal, es ändert nichts an der Farbe, aber es ist ein sofortiges, unverkennbares
+						Zeichen für "Filmbild".
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">SCHRITT FÜR SCHRITT</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				So geht's in 4 Schritten
+			</h2>
+			<ol class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<li class="flex gap-4">
+					<span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-hairline-strong font-mono text-xs text-ink">1</span>
+					<span><span class="font-medium text-ink">Foto hochladen.</span> Zieh eine JPG-, PNG-, WEBP- oder Kamera-RAW-Datei oben hinein, füge sie ein, oder durchsuche deine Dateien, sie wird auf deinem Gerät verarbeitet, niemals hochgeladen.</span>
+				</li>
+				<li class="flex gap-4">
+					<span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-hairline-strong font-mono text-xs text-ink">2</span>
+					<span><span class="font-medium text-ink">Farbkorrektur wählen.</span> Wähl ein Preset passend zur Stimmung: kalt und stählern, warm und golden, oder neonfarben und düster. Alle 50 lassen sich nach Genre durchstöbern.</span>
+				</li>
+				<li class="flex gap-4">
+					<span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-hairline-strong font-mono text-xs text-ink">3</span>
+					<span><span class="font-medium text-ink">Korn, Vignette und Glow feinjustieren.</span> Jedes Preset kommt mit sinnvollen Standardwerten; feinjustiere die Regler, damit die Intensität zu deinem konkreten Foto passt.</span>
+				</li>
+				<li class="flex gap-4">
+					<span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-hairline-strong font-mono text-xs text-ink">4</span>
+					<span><span class="font-medium text-ink">Letterbox hinzufügen und exportieren.</span> Aktiviere die 2,39:1-anamorphotische Letterbox für ein Kino-Bildformat und exportiere dann das fertige Standbild.</span>
+				</li>
+			</ol>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">TIEFER EINSTEIGEN</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Weitere Anleitungen und Looks
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/de/guides/cinematic-color-grading/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Cinematisches Color Grading erklärt</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Teal-and-Orange, Split-Toning und was ein LUT wirklich ist</span>
+				</a>
+				<a href="/de/looks/vintage-35mm-film/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Vintage-35mm-Filmlook</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Warme, körnige, nostalgische Filmstock-Presets</span>
+				</a>
+				<a href="/de/looks/dark-and-moody/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Dark & Moody Cinematic Filter</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Zerdrückte Schatten, kalte Töne, kräftige Vignetten</span>
+				</a>
+				<a href="/de/for/portraits/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Cinematischer Porträtfilter</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Welche Presets Hauttöne schmeicheln, und welche du meiden solltest</span>
+				</a>
+			</div>
+			<p class="mt-6 text-base leading-7 text-body">
+				Oder spring direkt zum Look eines bestimmten Films: durchstöbere alle <a href="/de/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">60 film- und serieninspirierten Presets</a>,
+				inklusive eigener Seiten für <a href="/de/presets/the-dark-knight/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">The Dark Knight</a>,
+				<a href="/de/presets/blade-runner-2049/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Blade Runner 2049</a>,
+				<a href="/de/presets/dune/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Dune</a>,
+				<a href="/de/presets/interstellar/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Interstellar</a>, und
+				<a href="/de/presets/the-matrix/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">The Matrix</a>.
+			</p>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Häufige Fragen zur cinematischen Fotobearbeitung" faqs={faqs} />
+	</main>
+	<Footer />
+
+	<script type="application/ld+json" set:html={JSON.stringify(howToStructuredData)} />
+</Layout>
+
+<script>
+	import '../../../lib/landing';
+</script>

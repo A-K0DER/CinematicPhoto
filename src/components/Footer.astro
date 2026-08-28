@@ -1,110 +1,117 @@
 ---
+import { getRelativeLocaleUrl } from 'astro:i18n';
 import LanguageSwitcher from './LanguageSwitcher.astro';
+import { useTranslations } from '../i18n/utils';
+import { defaultLocale } from '../i18n/config';
 
 const year = new Date().getFullYear();
+
+const lang = Astro.currentLocale ?? defaultLocale;
+const t = useTranslations(lang);
+const u = (path: string) => getRelativeLocaleUrl(lang, path);
 ---
 
 <footer class="border-t border-hairline px-4 py-10 sm:px-6">
 	<div class="mx-auto flex max-w-3xl flex-col items-center gap-4 text-center">
 		<nav aria-label="Footer" class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
 			<a
-				href="/presets"
+				href={u('/presets')}
 				class="font-sans text-sm text-body transition-colors hover:text-ink"
 			>
-				All Presets
+				{t('nav.allPresets')}
 			</a>
 			<a
-				href="/guides/how-to-make-photos-look-cinematic/"
+				href={u('/guides/how-to-make-photos-look-cinematic/')}
 				class="font-sans text-sm text-body transition-colors hover:text-ink"
 			>
-				Guides
+				{t('nav.guides')}
 			</a>
 			<a
-				href="/guides/cinematic-color-grading/"
+				href={u('/guides/cinematic-color-grading/')}
 				class="font-sans text-sm text-body transition-colors hover:text-ink"
 			>
-				Cinematic Color Grading
+				{t('nav.guideColorGrading')}
 			</a>
 			<a
-				href="/guides/social-media-safe-zones/"
+				href={u('/guides/social-media-safe-zones/')}
 				class="font-sans text-sm text-body transition-colors hover:text-ink"
 			>
-				Safe Zone Guide
+				{t('footer.safeZoneGuide')}
 			</a>
 			<a
-				href="/guides/youtube-thumbnail-design/"
+				href={u('/guides/youtube-thumbnail-design/')}
 				class="font-sans text-sm text-body transition-colors hover:text-ink"
 			>
-				Thumbnail Design Guide
+				{t('footer.thumbnailGuide')}
 			</a>
 			<a
-				href="/for/portraits/"
+				href={u('/for/portraits/')}
 				class="font-sans text-sm text-body transition-colors hover:text-ink"
 			>
-				Cinematic Portraits
+				{t('footer.portraits')}
 			</a>
 			<a
-				href="/tiktok-safe-zone/"
+				href={u('/tiktok-safe-zone/')}
 				class="font-sans text-sm text-body transition-colors hover:text-ink"
 			>
-				TikTok Safe Zone
+				{t('footer.tiktokSafeZone')}
 			</a>
 			<a
-				href="/tiktok-safe-zone-template/"
+				href={u('/tiktok-safe-zone-template/')}
 				class="font-sans text-sm text-body transition-colors hover:text-ink"
 			>
-				TikTok Safe Zone Template
+				{t('nav.tiktokTemplate')}
 			</a>
 			<a
-				href="/instagram-reels-safe-zone/"
+				href={u('/instagram-reels-safe-zone/')}
 				class="font-sans text-sm text-body transition-colors hover:text-ink"
 			>
-				Reels Safe Zone
+				{t('footer.reelsSafeZone')}
 			</a>
 			<a
-				href="/instagram-safe-zone-template/"
+				href={u('/instagram-safe-zone-template/')}
 				class="font-sans text-sm text-body transition-colors hover:text-ink"
 			>
-				Instagram Safe Zone Template
+				{t('nav.instagramTemplate')}
 			</a>
 			<a
-				href="/alternatives/"
+				href={u('/alternatives/')}
 				class="font-sans text-sm text-body transition-colors hover:text-ink"
 			>
-				Alternatives
+				{t('footer.alternatives')}
 			</a>
 			<a
-				href="/faq/"
+				href={u('/faq/')}
 				class="font-sans text-sm text-body transition-colors hover:text-ink"
 			>
-				FAQ
+				{t('footer.faq')}
 			</a>
 			<a
-				href="/about-us"
+				href={u('/about-us')}
 				class="font-sans text-sm text-body transition-colors hover:text-ink"
 			>
-				About Us
+				{t('footer.aboutUs')}
 			</a>
 			<a
-				href="/contact-us"
+				href={u('/contact-us')}
 				class="font-sans text-sm text-body transition-colors hover:text-ink"
 			>
-				Contact Us
+				{t('footer.contactUs')}
 			</a>
 			<a
 				href="/privacy-policy"
 				class="font-sans text-sm text-body transition-colors hover:text-ink"
 			>
-				Privacy Policy
+				{t('footer.privacyPolicy')}
 			</a>
 			<a
 				href="/terms-and-conditions"
 				class="font-sans text-sm text-body transition-colors hover:text-ink"
 			>
-				Terms &amp; Conditions
+				{t('footer.termsAndConditions')}
 			</a>
 		</nav>
 		<LanguageSwitcher />
-		<p class="font-mono text-xs text-mute">&copy; {year} Cinematic Photo. All rights reserved.</p>
+		<p class="font-mono text-xs text-mute">&copy; {year} Cinematic Photo. {t('footer.allRightsReserved')}</p>
 	</div>
 </footer>

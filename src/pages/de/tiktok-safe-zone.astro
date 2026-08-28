@@ -1,0 +1,212 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import SafeZoneTool from '../../components/SafeZoneTool.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+
+const path = '/tiktok-safe-zone/';
+const title = 'TikTok Safe Zone Checker | Kostenloses Tool für Caption & UI-Overlay';
+const description =
+	"Leg ein Foto oder Thumbnail auf ein 9:16-Raster und sieh genau, wo TikToks eigene Caption, Benutzername, Sound-Titel und die Like-/Kommentar-/Speichern-/Teilen-Leiste darüber sitzen werden.";
+const keywords =
+	'tiktok vorlage, tiktok template png, tiktok template app, tiktok safe zone, tiktok safe area, tiktok safe zone vorlage, tiktok safe zone overlay, tiktok caption safe zone, tiktok ui overlay, tiktok 1080x1920 safe zone, tiktok video safe zone, tiktok safe zone png, tiktok safe zone 2026';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebApplication',
+	name: 'TikTok Safe Zone Checker',
+	url: `https://cinematicphoto.com${path}`,
+	description,
+	applicationCategory: 'DesignApplication',
+	operatingSystem: 'Any (runs in browser)',
+	offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+	isAccessibleForFree: true,
+};
+
+const howToStructuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'HowTo',
+	name: 'So prüfst du TikToks Safe Zone an einem Foto',
+	description: "Leg TikToks Caption-, Benutzername-, Sound-Titel- und Interaktions-Icon-Bänder über ein Foto, bevor du postest.",
+	step: [
+		{
+			'@type': 'HowToStep',
+			name: 'Foto hochladen',
+			text: 'Leg ein Foto oder Thumbnail auf das Tool, füge es ein, oder klicke, um eine JPG-, PNG- oder WEBP-Datei hochzuladen.',
+		},
+		{
+			'@type': 'HowToStep',
+			name: 'Im Rahmen neu positionieren',
+			text: "Zieh innerhalb des Rahmens, um das Foto innerhalb von TikToks 9:16-Export-Zuschnitt neu zu positionieren.",
+		},
+		{
+			'@type': 'HowToStep',
+			name: 'TikToks UI-Overlay prüfen',
+			text: "Sieh dir die abgedunkelten Bänder an, die TikToks obere Leiste, den unteren Caption-/Benutzername-/Sound-Bereich und die rechte Interaktions-Icon-Spalte maßstabsgetreu auf dem Foto zeigen.",
+		},
+		{
+			'@type': 'HowToStep',
+			name: 'Referenzbild speichern',
+			text: 'Passe bei Bedarf die Deckkraft des Overlays an und speichere dann das zugeschnittene Referenzbild oder ein transparentes Overlay-PNG.',
+		},
+	],
+};
+
+const faqs = [
+	{
+		q: 'Was ist TikToks Safe Zone?',
+		a: "Das ist der Teil eines vertikalen 9:16-Rahmens, über den TikToks eigene Oberfläche gelegt wird, sobald ein Video gepostet ist: eine schmale obere Leiste, ein unteres Band für Caption/Benutzername/Sound-Titel und eine rechte Spalte mit Like-, Kommentar-, Speichern-, Teilen- und Profil-Icons. Alles Wichtige, das dort platziert wird, ein Gesicht, ein Untertitel, ein Produkt, wird teilweise oder ganz verdeckt, während jemand das Video tatsächlich ansieht.",
+	},
+	{
+		q: 'Wie groß ist TikToks Safe Zone?',
+		a: "Beim Standard-Export von 1080x1920 beginnt das untere Caption-/Benutzername-/Sound-Band bei rund 20% von unten (etwa 384px), und die rechte Icon-Spalte nimmt rund die letzten 14% der Breite ein (etwa 151px). Dieses Tool zeigt beide Bänder maßstabsgetreu auf deinem eigenen Foto, dazu die exakten Pixel- und Prozentwerte unter der Vorschau.",
+	},
+	{
+		q: 'Ist diese Safe-Zone-Messung exakt?',
+		a: "Es ist eine enge Annäherung basierend auf TikToks veröffentlichten Creator- und Ads-Spezifikationen, keine pixelgenaue Messung aus der Live-App. TikTok passt seine Oberfläche im Lauf der Zeit an, betrachte das also als Kompositions-Check und nicht als Garantie.",
+	},
+	{
+		q: 'Lädt dieses Tool mein Foto irgendwohin hoch?',
+		a: 'Nein. Das Bild wird direkt in ein Canvas auf der Seite gezeichnet und verlässt deinen Browser nie.',
+	},
+	{
+		q: 'Kann ich auch Instagram Reels prüfen?',
+		a: "Ja, Reels reserviert ähnlichen, aber nicht identischen Platz. Nutze den eigenen Instagram-Safe-Zone-Checker, um die Oberfläche von Reels, Story oder Feed-Post über dein Foto zu legen.",
+	},
+	{
+		q: "Was ist TikToks ideale Videogröße und Seitenverhältnis?",
+		a: "1080x1920 Pixel bei einem Seitenverhältnis von 9:16 ist TikToks Standard-Exportgröße für organische Posts und Ads gleichermaßen. Der Rahmen dieses Tools entspricht genau dieser Auflösung, sodass die Safe-Zone-Werte direkt zu allem passen, was du aus deiner Kamera oder deinem Editor exportierst.",
+	},
+	{
+		q: 'Wo sollte ich ein Gesicht, einen Untertitel oder ein Logo platzieren, damit es sichtbar bleibt?',
+		a: "Das mittlere Drittel des Rahmens, ungefähr die Mitte der Breite und der Bereich zwischen der schmalen oberen Leiste und dem unteren Caption-Band, bleibt geräteübergreifend frei. Platziere Gesichter und wichtigen Text dort statt ganz unten oder am rechten Rand.",
+	},
+	{
+		q: "Gilt TikToks Safe Zone auch für Foto-Posts, nicht nur für Videos?",
+		a: "Ja. TikTok-Foto-Posts (Karussell-Slides) sitzen im selben 9:16-Rahmen und bekommen dasselbe Caption-, Benutzername-, Sound- und Icon-Overlay wie Videos, also gilt dieselbe Safe Zone.",
+	},
+	{
+		q: 'Gibt es eine TikTok-Safe-Zone-Vorlage, die ich in CapCut oder Premiere Pro nutzen kann?',
+		a: 'Ja, sieh dir die eigene Seite zur TikTok-Safe-Zone-Vorlage an, für die exakte Pixel- und Prozentaufschlüsselung sowie eine Schritt-für-Schritt-Anleitung, wie du daraus vor dem Export eine Hilfsebene in CapCut oder Premiere Pro machst.',
+	},
+	{
+		q: 'Was ist eine TikTok-Vorlage?',
+		a: "Im Kontext des Postens ist eine TikTok-Vorlage eine Referenz dafür, wo TikToks eigene Oberfläche, die obere Leiste, das Caption-/Benutzername-/Sound-Band und die Interaktions-Icon-Spalte, über einem Video sitzt, sobald es live ist, damit Creator Gesichter, Untertitel und Logos aus diesem Bereich heraushalten können. Dieser Checker funktioniert als kostenlose, browserbasierte Version dieser Vorlage: statt eines statischen PNGs zeichnet er dieselben Zonen maßstabsgetreu auf dein eigenes Foto oder deinen Frame-Grab.",
+	},
+	{
+		q: 'Wie nutze ich eine Vorlage auf TikTok?',
+		a: "Leg ein Foto, Thumbnail oder exportiertes Frame auf dieses Tool, um TikToks Safe-Zone-Bänder über deiner tatsächlichen Komposition zu sehen, und passe dein Material dann so an, dass Gesichter, Text und Logos außerhalb der abgedunkelten Bereiche liegen, bevor du exportierst. Für eine Version, die du direkt als Hilfsebene in einen Editor ziehen kannst, erzeuge hier ein Referenz-PNG oder nutze die exakte Pixel-/Prozentaufschlüsselung auf der Seite zur TikTok-Safe-Zone-Vorlage, um eine manuell in CapCut oder Premiere Pro zu bauen.",
+	},
+];
+---
+
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Startseite', href: '/de/' },
+				{ label: 'Tools' },
+				{ label: 'TikTok Safe Zone' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">KOSTENLOSES TOOL</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				TikTok Safe Zone Checker
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Leg ein Foto auf ein 9:16-Raster, um zu sehen, wo TikToks Caption, Benutzername, Sound-Titel
+				und Interaktions-Icons darüber sitzen werden, bevor du postest.
+			</p>
+		</section>
+
+		<SafeZoneTool platform="tiktok" />
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">WARUM ES WICHTIG IST</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Eine Komposition, die TikToks eigene Oberfläche übersteht
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Ein vertikaler Rahmen, der im rohen Export perfekt komponiert aussieht, kann sein Motiv
+					trotzdem verlieren, sobald TikTok eine Caption, einen Benutzernamen, einen Sound-Titel und
+					eine Spalte mit Like-/Kommentar-/Teilen-Icons darüber legt. Ein Check gegen TikToks Safe
+					Zone vor dem Posten bedeutet, dass ein Gesicht, ein Untertitel oder ein wichtiges
+					Produktdetail nicht hinter der eigenen Oberfläche der App verschwindet.
+				</p>
+				<p>
+					TikTok reserviert eine schmale obere Leiste für Following/For You, ein unteres Band für
+					Caption, Benutzername und Sound, und eine rechte Spalte für Interaktions-Icons. Dieses Tool
+					legt alle drei in den Größen darüber, die TikToks eigene Creator-Spezifikationen
+					veröffentlichen, direkt auf dein Foto gezeichnet, damit du die Wirkung auf deine tatsächliche
+					Komposition siehst.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">TIKTOK-VORLAGE-APP</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Eine kostenlose TikTok-Vorlage-App, direkt im Browser
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Die Suche nach einer TikTok-Vorlage führt meist zu einer nativen App zum Herunterladen
+					oder einem kostenpflichtigen Paket aus TikTok-Vorlage-PNG-Dateien, die auf die
+					Export-Einstellungen eines anderen Creators zugeschnitten sind. Dieser Checker funktioniert
+					anders: Er ist eine kostenlose TikTok-Vorlage-App, die vollständig im Browser läuft, statt
+					also ein festes TikTok-Safe-Zone-PNG herunterzuladen und zu hoffen, dass es zu deinem
+					eigenen Material passt, legst du dein eigenes Foto oder deinen Frame-Grab hinein und siehst
+					das TikTok-Safe-Zone-Overlay maßstabsgetreu auf deiner tatsächlichen Komposition.
+				</p>
+				<p>
+					Das macht es im praktischen Sinne zu einer Vorlage, einer wiederverwendbaren, exakten
+					Referenz dafür, wo TikToks Oberfläche sitzt, ohne ein statisches TikTok-Vorlage-PNG zu
+					sein, das du sonst jedes Mal neu herunterladen müsstest, wenn TikTok sein Layout anpasst.
+					Brauchst du dieselben Werte stattdessen als herunterladbare Referenz für CapCut oder
+					Premiere Pro? Die <a href="/de/tiktok-safe-zone-template/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">TikTok-Safe-Zone-Vorlage</a> schlüsselt
+					dieselbe TikTok-Vorlage in exakte Pixel- und Prozentwerte auf.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">TIEFER EINSTEIGEN</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Weitere Tools für Creator
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/de/instagram-reels-safe-zone/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Instagram-Reels-Safe-Zone-Checker</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Derselbe Check, abgestimmt auf Reels' Oberfläche</span>
+				</a>
+				<a href="/de/tiktok-safe-zone-template/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">TikTok-Safe-Zone-Vorlage</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Exakte Maße für CapCut & Premiere Pro</span>
+				</a>
+				<a href="/de/guides/social-media-safe-zones/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Social-Media-Safe-Zone-Anleitung</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Die Maße jeder Plattform, an einem Ort</span>
+				</a>
+				<a href="/de/for/instagram/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Cinematischer Instagram-Editor</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Presets plus 1:1 / 4:5 / 9:16 Export-Zuschnitte</span>
+				</a>
+				<a href="/de/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Alle 60 Presets ansehen</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Jede Farbkorrektur, sortiert nach Genre</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Häufige Fragen zu TikToks Safe Zone" faqs={faqs} />
+
+		<script type="application/ld+json" set:html={JSON.stringify(howToStructuredData)} />
+	</main>
+	<Footer />
+</Layout>
