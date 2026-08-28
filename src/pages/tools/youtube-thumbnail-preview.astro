@@ -57,6 +57,34 @@ const howToStructuredData = {
 
 const faqs = [
 	{
+		q: 'What is a YouTube thumbnail?',
+		a: "It's the small preview image shown for a video everywhere it appears outside the watch page, suggested videos, search results, the subscriptions feed, and playlists. YouTube can auto-generate one from a frame of the video, but a custom thumbnail, an image uploaded separately from the footage, is what almost every channel actually uses, since it can be designed around a title, a face, or a specific composition rather than left to whatever frame YouTube happens to grab.",
+	},
+	{
+		q: 'What is a thumbnail on YouTube?',
+		a: "Same thing as a YouTube thumbnail: the still image that represents a video before someone clicks play. YouTube offers three auto-generated options pulled from the video itself, but any channel that's verified its phone number can upload a custom thumbnail instead, which is what this preview tool is built to check before it goes live.",
+	},
+	{
+		q: 'What size is a YouTube thumbnail?',
+		a: "1280x720 pixels at a 16:9 aspect ratio is YouTube's recommended thumbnail size. That matches the video frame itself, so a thumbnail exported at that size lines up with how YouTube actually displays and crops it, rather than getting stretched or unexpectedly cropped in the UI.",
+	},
+	{
+		q: 'How big is a YouTube thumbnail?',
+		a: 'As a file, YouTube caps a custom thumbnail upload at 2MB, in JPG, GIF, PNG, or BMP format. As an image, the recommended size is 1280x720 pixels, with a hard minimum width of 640 pixels, anything narrower gets rejected on upload.',
+	},
+	{
+		q: 'What is the size of a YouTube thumbnail?',
+		a: "1280x720 pixels, even though it's rarely displayed anywhere near that large, a sidebar suggestion shows it around 168px wide, and a mobile feed card isn't much bigger either. Uploading at the full 1280x720 keeps the image sharp on the rare placements that do show it larger, like a maximized search result or a TV screen.",
+	},
+	{
+		q: 'What is the YouTube thumbnail size?',
+		a: "The full spec: 1280x720 pixels, a 16:9 aspect ratio, a 640px minimum width, and a 2MB maximum file size in JPG, GIF, PNG, or BMP. Design to that size, then use this tool's small-size check (168px, 112px, 64px) to see whether it still reads once YouTube shrinks it back down for suggested videos and search.",
+	},
+	{
+		q: 'How do I make a thumbnail for YouTube?',
+		a: "Start from a still that reads clearly at a glance, a face with a clear expression, high contrast, and minimal text usually outperforms a busy frame, export it at 1280x720 (16:9), and keep any text large enough to survive being shown at 168px wide in a sidebar. This tool doesn't design the thumbnail itself, but once you've made one, drop it in above to see how it and its title actually look in suggested videos, search results, and the mobile feed before you publish. For the full set of composition and contrast rules, see the YouTube thumbnail design guide.",
+	},
+	{
 		q: 'Does this tool upload my thumbnail anywhere?',
 		a: 'No. The image is drawn straight into the page and never leaves your browser, the same client-side approach used by the rest of the site.',
 	},
