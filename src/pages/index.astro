@@ -5,9 +5,12 @@ import DropZone from '../components/DropZone.astro';
 import SeoContent from '../components/SeoContent.astro';
 import Footer from '../components/Footer.astro';
 import AdSlot from '../components/AdSlot.astro';
+
+const keywords =
+	'cinematic photo editor, cinematic photo editing online free, cinematic photo effect, cinematic portraits, cinematic color grading, movie color grade presets, film look photo filter, tiktok template, tiktok template png, tiktok template app, tiktok safe zone, tiktok safe zone template, tiktok safe zone png, tiktok safe zone overlay, instagram safe zone, instagram safe zone template, instagram safe zone overlay, instagram reels safe zone, instagram reels safe zone template, instagram reels safe zone template png, youtube thumbnail size, youtube thumbnail maker, youtube thumbnail checker, youtube thumbnail grabber, youtube thumbnail viewer';
 ---
 
-<Layout>
+<Layout {keywords}>
 	<Navbar variant="landing" />
 	<main>
 		<DropZone
@@ -48,6 +51,77 @@ import AdSlot from '../components/AdSlot.astro';
 					<span class="block font-sans text-sm font-medium text-ink">Instagram Reels safe zone checker</span>
 					<span class="mt-1 block font-mono text-xs text-mute">Single-platform version, focused on Reels</span>
 				</a>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">TIKTOK, INSTAGRAM &amp; YOUTUBE TOOLS</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				A free tiktok template, Instagram safe zone, and YouTube thumbnail toolkit
+			</h2>
+			<div class="mt-6 flex flex-col gap-6 text-base leading-7 text-body">
+				<p>
+					Cinematic Photo started as a color grading editor, but publishing a photo or a short-form
+					video well takes more than a good grade, it takes checking the composition against the
+					platform's own interface before anything goes live. Alongside the 60-preset editor above,
+					this site ships a small toolkit of free browser tools built for exactly that step: a
+					tiktok template checker, an Instagram safe zone tool covering Reels, Story, and feed
+					Posts, and a YouTube thumbnail preview tool. Every one of them runs the same way the photo
+					editor does, entirely on-device in an HTML canvas, with nothing ever uploaded to a server,
+					so there's no account to create and no native app to install before using any of them.
+				</p>
+
+				<h3 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">
+					TikTok template and safe zone checker
+				</h3>
+				<p>
+					The <a href="/tiktok-safe-zone/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">tiktok safe zone checker</a> works as a lightweight tiktok template app right
+					inside the browser: drop a photo or a frame grab onto a 1080x1920 frame and it draws
+					TikTok's own top bar, caption/username/sound band, and like-comment-share icon rail on
+					top, to scale, exactly where TikTok's UI will actually sit once a video is live. For
+					anyone editing in CapCut or Premiere Pro, the dedicated <a href="/tiktok-safe-zone-template/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">tiktok safe zone template</a> page
+					breaks the same tiktok template png down into exact pixel and percent figures for each
+					zone, plus how to turn that tiktok safe zone overlay into a guide layer you delete before
+					the final export. Both pages get rechecked against TikTok's current UI rather than left as
+					a static tiktok safe zone png pulled once and forgotten.
+				</p>
+
+				<h3 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">
+					Instagram safe zone template for Reels, Story &amp; Post
+				</h3>
+				<p>
+					Instagram spreads its own safe-zone problem across three different formats, and this
+					toolkit treats them as three separate checks rather than one instagram safe zone overlay
+					reused everywhere. The <a href="/instagram-reels-safe-zone/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Instagram safe zone checker</a> switches between Reels, Story,
+					and feed Post so a face, caption, or logo can be tested against whichever format it's
+					actually shipping to; the instagram reels safe zone specifically accounts for the caption,
+					username, audio title, and engagement icon column Instagram lays over a 9:16 Reel. The
+					companion <a href="/instagram-safe-zone-template/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">instagram safe zone template</a> page turns those same numbers, including
+					the instagram reels safe zone template png dimensions, into a reference any editor can
+					import as a guide layer before exporting the final cut.
+				</p>
+
+				<h3 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">
+					YouTube thumbnail size, checker &amp; preview
+				</h3>
+				<p>
+					YouTube's own recommended youtube thumbnail size is 1280x720, but a thumbnail that looks
+					sharp at that size can still fall apart once it's shown at 168px in a sidebar or 112px on
+					a phone. The <a href="/tools/youtube-thumbnail-preview/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">YouTube thumbnail preview tool</a> acts as both a youtube thumbnail
+					checker and a youtube thumbnail viewer for your own uploads: drop in a finished thumbnail,
+					fill in a title and channel name, and see it rendered in suggested videos, search results,
+					and the mobile feed, alongside a dedicated small-size check at three real-world widths. It
+					isn't a youtube thumbnail maker that designs the artwork, or a youtube thumbnail grabber
+					that pulls a thumbnail off someone else's existing video, it's the step that comes after
+					either of those, confirming a finished thumbnail actually reads before it goes live.
+				</p>
+
+				<p>
+					None of these tools require the cinematic presets above, they're free to use on their
+					own. But together with the color grading editor, they cover the two halves of getting a
+					photo or clip ready to post: making it look right, and confirming it survives the
+					platform's own UI once it's live.
+				</p>
 			</div>
 		</section>
 
