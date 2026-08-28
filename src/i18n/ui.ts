@@ -129,11 +129,11 @@ export const ui = {
 	},
 	'nav.tiktokChecker': {
 		en: 'TikTok Safe Zone Checker',
-		de: 'TikTok Safe Zone Checker',
+		de: 'TikTok-Safe-Zone-Checker',
 	},
 	'nav.instaChecker': {
 		en: 'Insta Safe Zone Checker',
-		de: 'Insta Safe Zone Checker',
+		de: 'Insta-Safe-Zone-Checker',
 	},
 	'nav.thumbnailPreview': {
 		en: 'YouTube Thumbnail Preview',
