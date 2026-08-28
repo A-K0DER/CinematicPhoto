@@ -8,9 +8,9 @@ export default defineConfig({
 	site: 'https://cinematicphoto.com',
 	i18n: {
 		defaultLocale: 'en',
-		// Add more BCP-47 locale codes here once translated content lands — each
-		// needs a matching src/pages/<locale>/ folder and an entry in src/i18n/config.ts.
-		locales: ['en'],
+		// Keep in sync with `locales` in src/i18n/config.ts. Each non-default
+		// locale gets a src/pages/<locale>/ folder once its pages are translated.
+		locales: ['en', 'de', 'fr', 'es', 'ja', 'nl', 'it', 'ko', 'pt-BR', 'pt-PT', 'sv', 'da', 'nb', 'fi', 'pl'],
 		routing: {
 			// English stays unprefixed at "/" — every other locale gets "/<locale>/".
 			prefixDefaultLocale: false,

@@ -1,5 +1,5 @@
 import { ui, type UIKey } from './ui';
-import { defaultLocale, locales } from './config';
+import { defaultLocale, readyLocales } from './config';
 
 export function useTranslations(locale: string | undefined) {
 	const lang = locale ?? defaultLocale;
@@ -9,10 +9,10 @@ export function useTranslations(locale: string | undefined) {
 	};
 }
 
-/** Absolute URLs for every locale variant of `path`, for hreflang tags. Includes "x-default". */
+/** Absolute URLs for every locale variant of `path` that actually has content, for hreflang tags. Includes "x-default". */
 export function getHreflangLinks(path: string, siteUrl: string) {
 	const normalizedPath = path.startsWith('/') ? path : `/${path}`;
-	const links = locales.map((locale) => ({
+	const links = readyLocales.map((locale) => ({
 		hreflang: locale.code,
 		href: new URL(
 			locale.code === defaultLocale ? normalizedPath : `/${locale.code}${normalizedPath}`,

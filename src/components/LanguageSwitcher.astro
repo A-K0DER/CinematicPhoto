@@ -1,8 +1,8 @@
 ---
-// Renders nothing until a second locale is registered in src/i18n/config.ts —
+// Renders nothing until a second locale has contentReady: true in src/i18n/config.ts —
 // safe to drop into Navbar/Footer ahead of time.
 import { getRelativeLocaleUrl } from 'astro:i18n';
-import { locales, defaultLocale } from '../i18n/config';
+import { readyLocales, defaultLocale } from '../i18n/config';
 
 const currentLocale = Astro.currentLocale ?? defaultLocale;
 const currentPath = Astro.url.pathname;
@@ -17,13 +17,13 @@ const basePath = pathWithoutLocalePrefix(currentPath);
 ---
 
 {
-	locales.length > 1 && (
+	readyLocales.length > 1 && (
 		<details class="lang-switcher relative">
 			<summary class="cursor-pointer list-none font-mono text-xs text-body transition-colors hover:text-ink [&::-webkit-details-marker]:hidden">
 				{currentLocale.toUpperCase()}
 			</summary>
 			<div class="absolute right-0 top-full z-50 mt-2 w-40 rounded-md border border-hairline bg-canvas p-1.5 shadow-lg">
-				{locales.map((locale) => (
+				{readyLocales.map((locale) => (
 					<a
 						href={locale.code === defaultLocale ? basePath : getRelativeLocaleUrl(locale.code, basePath)}
 						class="block rounded-sm px-3 py-2 font-sans text-sm text-body transition-colors hover:bg-canvas-soft hover:text-ink aria-current:text-ink"
