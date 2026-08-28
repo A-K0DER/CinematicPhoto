@@ -1,4 +1,6 @@
 ---
+import LanguageSwitcher from './LanguageSwitcher.astro';
+
 interface Props {
 	variant?: 'landing' | 'editor';
 	/** Only used when variant is 'editor' — labels the nav action buttons for photo vs. video editing. */
@@ -153,6 +155,8 @@ const { variant = 'landing', editorMode = 'photo' } = Astro.props;
 				</>
 			)
 		}
+
+		<LanguageSwitcher />
 
 		<button
 			id="theme-toggle"

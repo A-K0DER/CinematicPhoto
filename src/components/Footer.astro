@@ -1,4 +1,6 @@
 ---
+import LanguageSwitcher from './LanguageSwitcher.astro';
+
 const year = new Date().getFullYear();
 ---
 
@@ -102,6 +104,7 @@ const year = new Date().getFullYear();
 				Terms &amp; Conditions
 			</a>
 		</nav>
+		<LanguageSwitcher />
 		<p class="font-mono text-xs text-mute">&copy; {year} Cinematic Photo. All rights reserved.</p>
 	</div>
 </footer>
