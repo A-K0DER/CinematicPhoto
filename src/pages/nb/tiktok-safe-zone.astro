@@ -1,0 +1,209 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import SafeZoneTool from '../../components/SafeZoneTool.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+
+const path = '/tiktok-safe-zone/';
+const title = 'TikTok Safe Zone-sjekker | Gratis verktøy for caption og UI-overlay';
+const description =
+	"Slipp et bilde eller en thumbnail inn i en 9:16-ramme og se nøyaktig hvor TikToks egen caption, brukernavn, lydtittel og lik-/kommentar-/lagre-/del-rekke havner oppå det.";
+const keywords =
+	'tiktok mal, tiktok template png, tiktok template app, tiktok safe zone, tiktok safe area, tiktok safe zone mal, tiktok safe zone overlay, tiktok caption safe zone, tiktok ui overlay, tiktok 1080x1920 safe zone, tiktok video safe zone, tiktok safe zone png, tiktok safe zone 2026';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebApplication',
+	name: 'TikTok Safe Zone Checker',
+	url: `https://cinematicphoto.com${path}`,
+	description,
+	applicationCategory: 'DesignApplication',
+	operatingSystem: 'Any (runs in browser)',
+	offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+	isAccessibleForFree: true,
+};
+
+const howToStructuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'HowTo',
+	name: 'Slik sjekker du TikToks safe zone på et bilde',
+	description: "Legg TikToks caption-, brukernavn-, lydtittel- og interaksjonsikon-bånd over et bilde før du poster.",
+	step: [
+		{
+			'@type': 'HowToStep',
+			name: 'Last opp et bilde',
+			text: 'Slipp et bilde eller en thumbnail på verktøyet, lim det inn, eller klikk for å laste opp en JPG-, PNG- eller WEBP-fil.',
+		},
+		{
+			'@type': 'HowToStep',
+			name: 'Flytt bildet i rammen',
+			text: "Dra inne i rammen for å flytte bildet innenfor TikToks 9:16-eksportbeskjæring.",
+		},
+		{
+			'@type': 'HowToStep',
+			name: "Sjekk TikToks UI-overlay",
+			text: "Se på de nedtonede båndene som viser TikToks topplinje, nederste caption-/brukernavn-/lyd-område og høyre interaksjonsikon-kolonne tegnet i riktig skala på bildet.",
+		},
+		{
+			'@type': 'HowToStep',
+			name: 'Lagre et referansebilde',
+			text: 'Juster gjennomsiktigheten på overlayen om nødvendig, og lagre deretter det beskårne referansebildet eller et transparent overlay-PNG.',
+		},
+	],
+};
+
+const faqs = [
+	{
+		q: 'Hva er TikToks safe zone?',
+		a: "Det er den delen av en vertikal 9:16-ramme som TikToks eget grensesnitt legges oppå når en video er lagt ut: en tynn topplinje, et nederste bånd for caption/brukernavn/lydtittel, og en høyre kolonne med lik-, kommentar-, lagre-, del- og profilikoner. Alt viktig som plasseres der, et ansikt, en undertekst, et produkt, blir delvis eller helt dekket mens noen faktisk ser på.",
+	},
+	{
+		q: 'Hvor stor er TikToks safe zone?',
+		a: "Ved standard eksport på 1080x1920 starter det nederste caption-/brukernavn-/lyd-båndet rundt 20% opp fra bunnen (cirka 384px), og den høyre ikonkolonnen tar opp rundt de siste 14% av bredden (cirka 151px). Dette verktøyet viser begge bånd tegnet i riktig skala på ditt eget bilde, i tillegg til de eksakte piksel- og prosenttallene under forhåndsvisningen.",
+	},
+	{
+		q: 'Er denne safe zone-målingen eksakt?',
+		a: "Det er en tett tilnærming basert på TikToks publiserte spesifikasjoner for skapere og annonser, ikke en pikselnøyaktig måling hentet fra selve appen. TikTok justerer grensesnittet sitt over tid, så betrakt dette som en komposisjonssjekk, ikke en garanti.",
+	},
+	{
+		q: 'Laster dette verktøyet opp bildet mitt noe sted?',
+		a: 'Nei. Bildet tegnes rett inn i et canvas på siden og forlater aldri nettleseren din.',
+	},
+	{
+		q: 'Kan jeg sjekke Instagram Reels også?',
+		a: "Ja, Reels reserverer lignende, men ikke identisk plass. Bruk den dedikerte Instagram safe zone-sjekkeren for å legge grensesnittet til Reels, Stories eller feed-Post over bildet ditt.",
+	},
+	{
+		q: "Hva er TikToks ideelle videostørrelse og bildeforhold?",
+		a: "1080x1920 piksler i bildeforholdet 9:16 er TikToks standard eksportstørrelse for både organiske innlegg og annonser. Rammen i dette verktøyet matcher nettopp den oppløsningen, slik at safe zone-målene stemmer direkte med det du eksporterer fra kameraet eller redigeringsprogrammet ditt.",
+	},
+	{
+		q: 'Hvor bør jeg plassere et ansikt, en undertekst eller en logo for at det skal forbli synlig?',
+		a: "Den midtre tredjedelen av rammen, omtrent midten av bredden og området mellom den tynne topplinjen og det nederste caption-båndet, forblir fri på tvers av enheter. Hold ansikter og viktig tekst der i stedet for helt nederst eller ved høyre kant.",
+	},
+	{
+		q: "Gjelder TikToks safe zone for foto-innlegg, ikke bare video?",
+		a: "Ja. TikTok-foto-innlegg (karusell-bilder) sitter i samme 9:16-ramme og får det samme caption-, brukernavn-, lyd- og ikonoverlayet som videoer, så den samme safe zonen gjelder.",
+	},
+	{
+		q: 'Finnes det en TikTok safe zone-mal jeg kan bruke i CapCut eller Premiere Pro?',
+		a: 'Ja, se den dedikerte siden for TikTok safe zone-mal for den eksakte piksel- og prosentfordelingen, pluss trinnvise instruksjoner for hvordan du gjør den om til et hjelpelag i CapCut eller Premiere Pro før du eksporterer.',
+	},
+	{
+		q: 'Hva er en TikTok-mal?',
+		a: "I sammenheng med posting er en TikTok-mal en referanse for hvor TikToks eget grensesnitt, topplinjen, caption-/brukernavn-/lyd-båndet og interaksjonsikon-kolonnen, legger seg oppå en video når den er live, slik at en skaper kan holde ansikter, undertekster og logoer utenfor det området. Denne sjekkeren fungerer som en gratis, nettleserbasert versjon av den malen: i stedet for et statisk PNG tegner den de samme sonene i riktig skala på ditt eget bilde eller frame-grab.",
+	},
+	{
+		q: 'Hvordan bruker jeg en mal på TikTok?',
+		a: "Slipp et bilde, en thumbnail eller et eksportert bilde på dette verktøyet for å se TikToks safe zone-bånd lagt over din faktiske komposisjon, og juster deretter materialet ditt slik at ansikter, tekst og logoer ligger utenfor de nedtonede områdene før du eksporterer. For en versjon du kan dra rett inn i et redigeringsprogram som et hjelpelag, lag et referanse-PNG her, eller bruk den eksakte piksel-/prosentfordelingen på siden for TikTok safe zone-mal til å bygge en manuelt i CapCut eller Premiere Pro.",
+	},
+];
+---
+
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Hjem', href: '/nb/' },
+				{ label: 'Tools' },
+				{ label: 'TikTok Safe Zone' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">GRATIS VERKTØY</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				TikTok safe zone-sjekker
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Legg et bilde over en 9:16-ramme for å se hvor TikToks caption, brukernavn, lydtittel og
+				interaksjonsikoner havner oppå det, før du poster.
+			</p>
+		</section>
+
+		<SafeZoneTool platform="tiktok" />
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">HVORFOR DET BETYR NOE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				En komposisjon som overlever TikToks eget grensesnitt
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					En vertikal ramme som ser perfekt komponert ut i en rå eksport kan likevel miste motivet
+					sitt når TikTok legger en caption, et brukernavn, en lydtittel og en kolonne med
+					lik-/kommentar-/del-ikoner oppå den. Å sjekke mot TikToks safe zone før du poster betyr
+					at et ansikt, en undertekst eller et viktig produktdetalj ikke forsvinner bak appens eget
+					grensesnitt.
+				</p>
+				<p>
+					TikTok reserverer en tynn topplinje til Following/For You, et nederste bånd til caption,
+					brukernavn og lyd, og en høyre kolonne til interaksjonsikoner. Dette verktøyet legger
+					alle tre oppå i de størrelsene TikToks egne creator-spesifikasjoner oppgir, tegnet rett
+					på bildet ditt slik at du ser effekten på din egen komposisjon.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">TIKTOK-MAL-APP</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				En gratis tiktok-mal-app, rett i nettleseren
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Å søke etter en tiktok-mal gir som regel enten en native app å laste ned eller en betalt
+					pakke med tiktok-mal-PNG-filer tilpasset en annen skapers eksportinnstillinger. Denne
+					sjekkeren fungerer annerledes: den er en gratis tiktok-mal-app som kjører helt i
+					nettleseren, så i stedet for å laste ned et fast tiktok safe zone-PNG og håpe det stemmer
+					med ditt eget materiale, slipper du inn ditt eget bilde eller frame-grab og ser tiktok
+					safe zone-overlayet tegnet i riktig skala på din faktiske komposisjon.
+				</p>
+				<p>
+					Det gjør den til en mal i praktisk forstand, en gjenbrukbar, eksakt referanse for hvor
+					TikToks grensesnitt sitter, uten å være et statisk tiktok-mal-PNG du ellers måtte laste
+					ned på nytt hver gang TikTok justerer layouten. Trenger du de samme tallene som en
+					nedlastbar referanse for CapCut eller Premiere Pro i stedet? Siden <a href="/nb/tiktok-safe-zone-template/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">TikTok safe zone-mal</a> bryter
+					ned denne samme tiktok-malen i eksakte piksel- og prosenttall.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">GÅ DYPERE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Flere verktøy for skapere
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/nb/instagram-reels-safe-zone/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Instagram Reels safe zone-sjekker</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Samme sjekk, tilpasset Reels' grensesnitt</span>
+				</a>
+				<a href="/nb/tiktok-safe-zone-template/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">TikTok safe zone-mal</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Eksakte mål for CapCut og Premiere Pro</span>
+				</a>
+				<a href="/nb/guides/social-media-safe-zones/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Guide til safe zones for sosiale medier</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Alle plattformers mål, samlet ett sted</span>
+				</a>
+				<a href="/nb/for/instagram/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Filmatisk Instagram-editor</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Presets pluss 1:1 / 4:5 / 9:16 eksport-beskjæringer</span>
+				</a>
+				<a href="/nb/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Se alle 60 presets</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Hver fargegrad, sortert etter sjanger</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Vanlige spørsmål om TikToks safe zone" faqs={faqs} />
+
+		<script type="application/ld+json" set:html={JSON.stringify(howToStructuredData)} />
+	</main>
+	<Footer />
+</Layout>

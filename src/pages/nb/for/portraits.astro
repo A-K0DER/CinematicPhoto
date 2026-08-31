@@ -1,0 +1,151 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import DropZone from '../../../components/DropZone.astro';
+import MovieFaq from '../../../components/MovieFaq.astro';
+
+const path = '/for/portraits/';
+const title = 'Filmatisk portrettfotofilter | Cinematic Photo Editor';
+const description =
+	'Filmatiske portretter uten hudtone-risiko: fem presets valgt for ansikter, som legger til stemning uten å skifte huden til en unaturlig farge.';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'CollectionPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com/nb${path}`,
+};
+
+const faqs = [
+	{
+		q: 'Hvilke filmatiske presets er tryggest for hudtoner?',
+		a: 'De fem presetene på denne siden, Shawshank, The Prestige, Top Gun: Maverick, Life of Pi og Spirited Away, bruker alle en varmtonet eller balansert fargesplitt som holder huden seende ut som hud fremfor å skifte den mot en unaturlig fargetone. De ble valgt spesifikt fordi overlayene deres ikke legger én flat farge over hele bildet.',
+	},
+	{
+		q: 'Hvorfor får noen filmatiske filtre huden på ansikter til å se sykelig eller unaturlig ut?',
+		a: 'Presets bygget rundt en sterk, flat fargetone, som en kraftig grønn eller magenta vask, bruker den fargen jevnt over alt i bildet, inkludert huden. På landskap eller arkitektur leses det som stilfullt; på et ansikt leses det ofte som en merkelig, usunn fargetone. Presets med en skygge-/lys-fargesplitt fremfor en flat fargetone er langt mer overbærende på ansikter.',
+	},
+	{
+		q: 'Kan jeg bruke en mørk, stemningsfull preset for et dramatisk portrett i stedet for disse fem?',
+		a: 'Ja, men det krever riktig belysning: en mørk, stemningsfull grad fungerer på portretter belyst av én sterk, retningsbestemt lyskilde, et vindu, en lampe, motlys, hvor skyggene allerede har form. På flate, jevnt belyste portretter har den en tendens til bare å mørkne bildet. Se guiden til det mørke, stemningsfulle fotofilteret for akkurat den looken.',
+	},
+	{
+		q: 'Hvilken preset fungerer best for bryllups- eller familieportretter?',
+		a: 'Den varme, tilbakeholdne 35mm-graden i Shawshank er mest allsidig for grupper og blandede hudtoner, den er mild nok til ikke å overvelde en rekke ansikter i ett bilde. Det blanke himmelblåe og amber i Top Gun: Maverick passer spesielt godt til utendørs bryllupsbilder i gyllen time.',
+	},
+	{
+		q: 'Hvordan unngår jeg overmetning av hudtoner når jeg bruker en filmatisk preset?',
+		a: 'Start med en av de fem presetene på denne siden i stedet for en metningstung grad, og bruk deretter korn-, vignetterings- og glødegliderne i editoren for å legge til stemning uten å øke fargeintensiteten ytterligere. Hvis en preset fortsatt føles for sterk, demper det effekten å bruke den på et litt lysere originalbilde.',
+	},
+	{
+		q: 'Trenger gruppebilder en annen preset enn enkeltportretter?',
+		a: 'Ikke en annen preset, men vær mer oppmerksom på jevn belysning på tvers av alle motivene, et gruppebilde med ujevnt lys vil vise en kraftigere grads skyggeknusing ujevnt fordelt over ansiktene. De mildere gradene her, spesielt Shawshank og The Prestige, er mer overbærende når belysningen varierer på tvers av en gruppe.',
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Hjem', href: '/nb/' },
+				{ label: 'For' },
+				{ label: 'Portretter' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">BRUKSOMRÅDE-GUIDE</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Filmatisk portrettfotofilter
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Ikke enhver filmgrad er trygg for ansikter. Disse fem er valgt spesifikt for filmatiske
+				portretter: nok stemning til å føles som et filmstillbilde, uten å gjøre huden til en
+				unaturlig farge.
+			</p>
+		</section>
+
+		<DropZone
+			presetIds={['shawshank', 'the-prestige', 'top-gun-maverick', 'life-of-pi', 'spirited-away']}
+			showHeading={false}
+			showFooterLinks={false}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">HVA DU BØR SE ETTER</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Hva som gjør en preset portrett-trygg
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Gode filmatiske portretter kommer fra det samme trikset ekte fargefolk bruker på
+					ansikter: de fleste filmatiske grader splitter fargen mellom skygger og lys fremfor å
+					dyppe hele bildet i én flat fargetone, og den splitten teller mest på ansikter. En
+					varmtonet lystone holder huden seende ut som hud; en preset bygget rundt én enkelt
+					kraftig fargevask, brukt jevnt over hele bildet, kan skifte huden mot grønt, magenta
+					eller en annen unaturlig tone som ser bra ut på et landskap, men dårlig på en person.
+				</p>
+				<p>
+					Kontrast og vignettering teller også mer på portretter enn på vide bilder: for
+					aggressivt, og skyggedetaljer i ansiktet knuses til konturløst svart. De fem presetene
+					over lener mot varme eller balanse og holder kontrasten moderat, det er også grunnen til
+					at de er fremhevet her i stedet for verktøyets hardere, mer avmettede grader.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BRUK MED FORSIKTIGHET PÅ ANSIKTER</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Presets du bør tenke deg om to ganger med for portretter
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Den flate grønnfargen i <a href="/nb/presets/the-matrix/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Matrix-presetten</a> legges
+					bevisst jevnt over hele bildet, slående på en urban scene, men på hud leses den som en
+					uvanlig fargetone. Svært sterk vignettering og knuste skygger som i presetene på siden
+					<a href="/nb/looks/dark-and-moody/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Mørkt, stemningsfullt fotofilter</a> kan
+					fungere spesielt for dramatiske, hardt belyste portretter, men har en tendens til å flate
+					ut detaljer på mykt, jevnt belyste ansikter.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">GÅ DYPERE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Flere måter å forme looken på
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/nb/looks/vintage-35mm-film/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Vintage 35mm-filmlook</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Mild, varm og overbærende med hudtoner</span>
+				</a>
+				<a href="/nb/looks/dark-and-moody/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Dark &amp; Moody filmatisk filter</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Spesielt for dramatiske, hardt belyste portretter</span>
+				</a>
+				<a href="/nb/guides/how-to-make-photos-look-cinematic/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Slik får du bilder til å se filmatiske ut</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Den komplette steg-for-steg-guiden</span>
+				</a>
+				<a href="/nb/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Se alle 60 presets</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Hver fargegrad, sortert etter sjanger</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Vanlige spørsmål om filmatiske portrettfiltre" faqs={faqs} />
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../../lib/landing';
+</script>

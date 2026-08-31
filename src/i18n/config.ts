@@ -31,7 +31,7 @@ export const locales: LocaleInfo[] = [
 	{ code: 'pt-PT', label: 'Português (Portugal)', ogLocale: 'pt_PT', dir: 'ltr', contentReady: false },
 	{ code: 'sv', label: 'Svenska', ogLocale: 'sv_SE', dir: 'ltr', contentReady: false },
 	{ code: 'da', label: 'Dansk', ogLocale: 'da_DK', dir: 'ltr', contentReady: false },
-	{ code: 'nb', label: 'Norsk bokmål', ogLocale: 'nb_NO', dir: 'ltr', contentReady: false },
+	{ code: 'nb', label: 'Norsk bokmål', ogLocale: 'nb_NO', dir: 'ltr', contentReady: true },
 	{ code: 'fi', label: 'Suomi', ogLocale: 'fi_FI', dir: 'ltr', contentReady: false },
 	{ code: 'pl', label: 'Polski', ogLocale: 'pl_PL', dir: 'ltr', contentReady: false },
 ];

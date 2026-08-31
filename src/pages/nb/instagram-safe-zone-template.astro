@@ -1,0 +1,277 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+import { getSafeZonePlatform, getZoneMetric } from '../../lib/safeZones';
+
+const path = '/instagram-safe-zone-template/';
+const title = 'Instagram Safe Zone-mal (2026) | PNG-guide for Reels, Story og Post';
+const description =
+	'Instagram safe zone-malen for 2026: eksakte mål for Reels, Story og feed-Post i piksler og prosent, ingen app å laste ned, bare den gratis sjekkeren pluss et referanse-PNG du kan eksportere.';
+const keywords =
+	'instagram safe zone, instagram safe zone mal, instagram safe zone overlay, instagram safe zone app, instagram safe zone 2026, instagram reels safe zone, instagram reels safe zone mal, instagram reels safe zone mal png, safe zone instagram reel, instagram safe zone guide, instagram safe zone png, safe zone instagram story, instagram safe zone 2026 png';
+
+const reels = getSafeZonePlatform('reels');
+const [reelsTop, reelsCaption, reelsIcons] = reels.zones;
+const reelsTopMetric = getZoneMetric(reelsTop, reels.frame);
+const reelsCaptionMetric = getZoneMetric(reelsCaption, reels.frame);
+const reelsIconsMetric = getZoneMetric(reelsIcons, reels.frame);
+
+const stories = getSafeZonePlatform('stories');
+const [storiesTop, storiesBottom] = stories.zones;
+const storiesTopMetric = getZoneMetric(storiesTop, stories.frame);
+const storiesBottomMetric = getZoneMetric(storiesBottom, stories.frame);
+
+const post = getSafeZonePlatform('post');
+const [postTop, postBottom] = post.zones;
+const postTopMetric = getZoneMetric(postTop, post.frame);
+const postBottomMetric = getZoneMetric(postBottom, post.frame);
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'Article',
+	headline: 'Instagram Safe Zone-mal (2026): Mål for Reels, Story og Post',
+	description,
+	url: `https://cinematicphoto.com${path}`,
+	author: { '@type': 'Organization', name: 'Cinematic Photo' },
+	publisher: { '@type': 'Organization', name: 'Cinematic Photo' },
+	mainEntityOfPage: `https://cinematicphoto.com${path}`,
+};
+
+const howToStructuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'HowTo',
+	name: 'Slik bruker du en Instagram safe zone-mal mens du redigerer',
+	description:
+		"Bygg et referanselag for Reels- eller Story-safe zone, slik at captions, ansikter og logoer aldri havner under Instagrams eget grensesnitt eller profilrutenett-beskjæringen.",
+	step: [
+		{
+			'@type': 'HowToStep',
+			name: 'Velg formatet',
+			text: 'Reels, Story og feed-Post reserverer hver sin plass, så sjekk det formatet du faktisk skal poste til i stedet for å gjenbruke én mal for alle tre.',
+		},
+		{
+			'@type': 'HowToStep',
+			name: 'Lag et referanse-PNG',
+			text: 'Slipp en frame eller et bilde inn i den gratis Instagram safe zone-sjekkeren og eksporter referanse-PNG-et som viser nøyaktig hvor grensesnittet eller beskjæringen havner.',
+		},
+		{
+			'@type': 'HowToStep',
+			name: 'Legg det til som overlay eller øverste spor',
+			text: 'I et redigeringsprogram plasserer du referanse-PNG-et på et spor over materialet ditt og senker gjennomsiktigheten til rundt 30-40% slik at det oppfattes som en veiledning.',
+		},
+		{
+			'@type': 'HowToStep',
+			name: 'Skjul eller slett det før eksport',
+			text: 'Slå av overlayen, eller slett laget, når komposisjonen din er klar av safe zonen, slik at den aldri havner i den endelige eksporten.',
+		},
+	],
+};
+
+const faqs = [
+	{
+		q: 'Finnes det en egen Instagram safe zone-app å laste ned?',
+		a: 'Ingen nedlasting nødvendig, sjekkeren lenket under fungerer som en gratis nettapp rett i nettleseren din, på desktop eller mobil, ingenting å installere og ingenting lastes opp, bildet tegnes rett inn i et canvas på siden.',
+	},
+	{
+		q: 'Finnes det et nedlastbart Instagram safe zone-mal-PNG?',
+		a: 'En egen pakke med transparente overlay-PNG-er er under arbeid og ikke lansert ennå. I mellomtiden tegner den gratis sjekkeren allerede den eksakte safe zonen i riktig skala på ditt eget bilde, og lar deg eksportere et referanse-PNG som viser grensene bakt inn i komposisjonen din.',
+	},
+	{
+		q: 'Har Instagrams safe zone endret seg for 2026?',
+		a: 'Målene på denne siden gjenspeiler Instagrams nåværende publiserte spesifikasjoner for skapere og annonser. Instagram justerer Reels- og Story-grensesnittet sitt fra tid til annen, så denne malen sjekkes på nytt mot selve appen i stedet for å bli stående statisk, betrakt enhver safe zone-mal, denne inkludert, som en tett tilnærming og ikke en permanent pikselnøyaktig spesifikasjon.',
+	},
+	{
+		q: 'Hva er Instagram Reels safe zone-malen?',
+		a: `Ved 1080x1920 reserverer Reels en topplinje (${reelsTopMetric.px}px, ${reelsTopMetric.percent}%) til Reels-etiketten og lyd, et nederste bånd (${reelsCaptionMetric.px}px, ${reelsCaptionMetric.percent}%) til caption, brukernavn og lydtittel, og en høyre kolonne (${reelsIconsMetric.px}px, ${reelsIconsMetric.percent}%) til lik-, kommentar-, del- og profilikonene.`,
+	},
+	{
+		q: 'Hva er safe zonen for en Instagram Story?',
+		a: `Ved 1080x1920 reserverer Stories omtrent de øverste ${storiesTopMetric.percent}% (${storiesTopMetric.px}px) til profilbilde, brukernavn, tidsstempel og lukkeknapp, og omtrent de nederste ${storiesBottomMetric.percent}% (${storiesBottomMetric.px}px) til svarfeltet og delerraden. Det finnes ingen ikonkolonne på siden her, i motsetning til Reels, så risikoen ligger i topp- og bunnkanten, ikke på sidene.`,
+	},
+	{
+		q: 'Hva er safe zonen for et feed-innlegg?',
+		a: `Et 4:5-feed-innlegg (1080x1350) blir midtbeskåret til et kvadrat i profilrutenettet, som kutter rundt ${postTopMetric.percent}% (${postTopMetric.px}px) fra toppen og ytterligere ${postBottomMetric.percent}% fra bunnen. Det ligger ingenting oppå et innlegg, så dette er en beskjæringssjekk, ikke en UI-overlappingssjekk.`,
+	},
+	{
+		q: 'Hvordan skiller en Reels safe zone-mal seg fra en Story- eller Post-mal?',
+		a: "Alle tre sitter i en annen ramme eller behandles ulikt når de er lagt ut. Reels legger en caption, et brukernavn, en lydtittel og en ikonkolonne over en 9:16-video. En Story legger en profillinje og svarrad over den samme 9:16-rammen, men har ingen ikonkolonne på siden. Et innlegg er i det hele tatt ikke et UI-overlappingsproblem, det er et 4:5-til-1:1-beskjæringsproblem i rutenettet. Å bruke en Reels-mal på en Story, eller omvendt, bommer på det faktiske risikoområdet til hvert format.",
+	},
+];
+---
+
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Hjem', href: '/nb/' },
+				{ label: 'Guider' },
+				{ label: 'Instagram Safe Zone-mal' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">GUIDE 2026</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Instagram safe zone-mal
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				De eksakte målene for Reels, Story og feed-Post som Instagram reserverer til sitt eget
+				grensesnitt eller beskjæring, ingen app å laste ned, bare en gratis nettleserbasert sjekker.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">MALEN</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Instagrams safe zones, i piksler og prosent
+			</h2>
+			<div class="mt-6 overflow-x-auto">
+				<table class="w-full min-w-[560px] border-collapse text-left">
+					<thead>
+						<tr class="border-b border-hairline">
+							<th class="py-2.5 pr-4 font-mono text-[11px] font-medium tracking-wide text-mute uppercase">Format</th>
+							<th class="py-2.5 pr-4 font-mono text-[11px] font-medium tracking-wide text-mute uppercase">Sone</th>
+							<th class="py-2.5 pr-4 font-mono text-[11px] font-medium tracking-wide text-mute uppercase">Dybde</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="border-b border-hairline align-top">
+							<td class="py-3 pr-4 font-sans text-sm font-medium whitespace-nowrap text-ink">Reels (1080×1920)</td>
+							<td class="py-3 pr-4 text-sm leading-6 text-body">Topplinje</td>
+							<td class="py-3 pr-4 font-mono text-xs whitespace-nowrap text-mute">{reelsTopMetric.px}px ({reelsTopMetric.percent}%)</td>
+						</tr>
+						<tr class="border-b border-hairline align-top">
+							<td class="py-3 pr-4"></td>
+							<td class="py-3 pr-4 text-sm leading-6 text-body">Caption, brukernavn, lyd</td>
+							<td class="py-3 pr-4 font-mono text-xs whitespace-nowrap text-mute">{reelsCaptionMetric.px}px ({reelsCaptionMetric.percent}%)</td>
+						</tr>
+						<tr class="border-b border-hairline align-top">
+							<td class="py-3 pr-4"></td>
+							<td class="py-3 pr-4 text-sm leading-6 text-body">Lik, kommentar, del, profil</td>
+							<td class="py-3 pr-4 font-mono text-xs whitespace-nowrap text-mute">{reelsIconsMetric.px}px ({reelsIconsMetric.percent}%)</td>
+						</tr>
+						<tr class="border-b border-hairline align-top">
+							<td class="py-3 pr-4 font-sans text-sm font-medium whitespace-nowrap text-ink">Story (1080×1920)</td>
+							<td class="py-3 pr-4 text-sm leading-6 text-body">Profil, brukernavn, tidsstempel, lukk</td>
+							<td class="py-3 pr-4 font-mono text-xs whitespace-nowrap text-mute">{storiesTopMetric.px}px ({storiesTopMetric.percent}%)</td>
+						</tr>
+						<tr class="border-b border-hairline align-top">
+							<td class="py-3 pr-4"></td>
+							<td class="py-3 pr-4 text-sm leading-6 text-body">Svarfelt / delerad</td>
+							<td class="py-3 pr-4 font-mono text-xs whitespace-nowrap text-mute">{storiesBottomMetric.px}px ({storiesBottomMetric.percent}%)</td>
+						</tr>
+						<tr class="border-b border-hairline align-top">
+							<td class="py-3 pr-4 font-sans text-sm font-medium whitespace-nowrap text-ink">Post (1080×1350)</td>
+							<td class="py-3 pr-4 text-sm leading-6 text-body">Beskåret bort i kvadratisk rutenettvisning (topp)</td>
+							<td class="py-3 pr-4 font-mono text-xs whitespace-nowrap text-mute">{postTopMetric.px}px ({postTopMetric.percent}%)</td>
+						</tr>
+						<tr class="border-b border-hairline align-top">
+							<td class="py-3 pr-4"></td>
+							<td class="py-3 pr-4 text-sm leading-6 text-body">Beskåret bort i kvadratisk rutenettvisning (bunn)</td>
+							<td class="py-3 pr-4 font-mono text-xs whitespace-nowrap text-mute">{postBottomMetric.px}px ({postBottomMetric.percent}%)</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<p class="mt-4 text-sm leading-6 text-mute">
+				Tette tilnærminger basert på Instagrams publiserte spesifikasjoner for skapere og annonser,
+				ikke pikselnøyaktige målinger hentet fra selve appen. Gjelder både organiske innlegg og annonser.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">INGEN APP Å INSTALLERE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Sjekk det mot ditt eget bilde først
+			</h2>
+			<p class="mt-4 text-base leading-7 text-body">
+				I stedet for en egen app, slipp et frame-grab eller en thumbnail inn i den interaktive
+				sjekkeren for å se disse sonene tegnet i riktig skala på din faktiske komposisjon, bytt
+				mellom Reels, Story og Post, og eksporter et referanse-PNG rett derfra.
+			</p>
+			<a
+				href="/nb/instagram-reels-safe-zone/"
+				class="mt-6 inline-block rounded-md bg-primary px-5 py-2.5 font-sans text-sm font-medium text-on-primary transition-opacity hover:opacity-90"
+			>
+				Åpne Instagram safe zone-sjekkeren →
+			</a>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BRUKE MALEN</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Slik blir det et hjelpelag mens du redigerer
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					For en Reels-redigering, lag et referanse-PNG fra sjekkeren, plasser det på et spor over
+					materialet ditt i redigeringsprogrammet, og senk gjennomsiktigheten til rundt 30-40% slik
+					at det oppfattes som en veiledning og ikke en fastbrent grafikk. Skaler det til å fylle
+					hele 1080x1920-rammen, hold det øverst mens du plasserer captions, ansikter og logoer, og
+					skjul eller slett det deretter før din endelige eksport slik at det aldri havner i videoen.
+				</p>
+				<p>
+					For en Story eller et innlegg, siden ingen av dem vanligvis settes sammen i en
+					tidslinjeeditor slik Reels gjør, er det som regel raskere å sjekke komposisjonen direkte i
+					verktøyet over før du eksporterer, i stedet for å bygge et hjelpelag.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">ÉN MAL, TRE FORMATER</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				En instagram safe zone-mal for hvert format, ikke bare Reels
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Et generisk instagram safe zone-overlay antar som regel Reels og stopper der, noe som er
+					et problem hvis det som faktisk skal ut er en Story eller et feed-innlegg. Denne siden
+					holder instagram safe zone-malen bevisst delt opp etter format: instagram reels safe
+					zone-malen over tar hensyn til Reels' caption, lyd og ikonkolonne; Stories får sine egne
+					topp- og bunnbånd; Post får sine egne grid-beskjæringstall. Å gjenbruke én instagram safe
+					zone for alle tre bommer på den som faktisk kommer til å bety noe.
+				</p>
+				<p>
+					For et instagram reels safe zone-mal-PNG å bruke som hjelpelag, eksporter en referanse
+					rett fra sjekkeren lenket over, siden den vil matche den eksakte rammen til ditt eget
+					materiale i stedet for et gjennomsnitt hentet fra noen andres eksport.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">GÅ DYPERE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Flere safe zone-verktøy
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/nb/instagram-reels-safe-zone/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Instagram safe zone-sjekker</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Legg malen over ditt eget bilde</span>
+				</a>
+				<a href="/nb/tiktok-safe-zone-template/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">TikTok safe zone-mal</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Mål for CapCut og Premiere Pro</span>
+				</a>
+				<a href="/nb/tiktok-safe-zone/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">TikTok safe zone-sjekker</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Legg TikToks grensesnitt over bildet ditt</span>
+				</a>
+				<a href="/nb/guides/social-media-safe-zones/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Guide til safe zones for sosiale medier</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Alle plattformers mål, samlet ett sted</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Vanlige spørsmål om Instagram safe zone-malen" faqs={faqs} />
+
+		<script type="application/ld+json" set:html={JSON.stringify(howToStructuredData)} />
+	</main>
+	<Footer />
+</Layout>

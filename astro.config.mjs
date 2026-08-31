@@ -22,6 +22,7 @@ export default defineConfig({
 		// to true in src/i18n/config.ts), so untranslated pages fall back to English.
 		fallback: {
 			de: 'en',
+			nb: 'en',
 		},
 	},
 	integrations: [

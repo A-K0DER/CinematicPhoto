@@ -1,0 +1,179 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import MovieFaq from '../../../components/MovieFaq.astro';
+
+const path = '/guides/youtube-thumbnail-design/';
+const title = 'Slik designer du en YouTube-thumbnail som får klikk | Cinematic Photo';
+const description =
+	'Designreglene som faktisk flytter klikkraten: kontrast i liten størrelse, ett tydelig fokuspunkt, lesbar tekst og et konsistent uttrykk, pluss hvordan du tester en thumbnail før publisering.';
+const keywords =
+	'youtube thumbnail design, hvordan lage en youtube thumbnail, youtube thumbnail beste praksis, youtube thumbnail tips, youtube thumbnail størrelse, klikkrate thumbnail';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'Article',
+	headline: 'Slik designer du en YouTube-thumbnail som får klikk',
+	description,
+	url: `https://cinematicphoto.com/nb${path}`,
+	author: { '@type': 'Organization', name: 'Cinematic Photo' },
+	publisher: { '@type': 'Organization', name: 'Cinematic Photo' },
+	mainEntityOfPage: `https://cinematicphoto.com/nb${path}`,
+};
+
+const faqs = [
+	{
+		q: 'Hva er den ideelle YouTube-thumbnail-størrelsen?',
+		a: '1280×720 piksler i bildeforholdet 16:9, lagret som JPG, PNG eller ikke-animert GIF under 2MB. Alt som ikke er nøyaktig 16:9 blir midtbeskåret av YouTube i grensesnittet til dette forholdet, så det lønner seg å designe i 16:9 fra starten i stedet for å presse et annerledes formet bilde inn i det etterpå.',
+	},
+	{
+		q: 'Hvor mange ord bør stå på en thumbnail?',
+		a: 'Høyst tre til fem ord, og bare hvis ikke tittelen allerede sier det. En thumbnail vurderes ved 168px, 112px eller enda mindre på en mobil, lange setninger blir til en uleselig grå flekk i den størrelsen. Behandle thumbnail-tekst som en krok som legger til noe tittelen ikke sier, ikke en gjentakelse av den.',
+	},
+	{
+		q: 'Påvirker thumbnailen hvordan YouTube rangerer eller anbefaler en video?',
+		a: 'Ikke direkte som et rangeringssignal, men indirekte og betydelig, YouTubes anbefalingssystem vekter klikkrate tungt, og thumbnailen (sammen med tittelen) er den enkeltstørste hendelen for om noen klikker. En godt designet thumbnail på en middelmådig video kan likevel underprestere hvis seerne ikke ser videoen ferdig, men en svak thumbnail begrenser rekkevidden til en flott video før noen i det hele tatt ser den.',
+	},
+	{
+		q: 'Er det mot reglene at en thumbnail er villedende?',
+		a: 'Ja. YouTubes retningslinjer mot clickbait og villedende thumbnails håndheves, thumbnails som lover noe videoen ikke leverer (falske kropper, oppdiktede hendelser, urelaterte sjokkbilder) kan føre til at en video fjernes eller en kanal straffes. En dristig, kontrastrik thumbnail er greit, en som lyver om innholdet er det ikke.',
+	},
+	{
+		q: 'Bør eldre video-thumbnails redesignes over tid?',
+		a: 'Ofte verdt det for evigrønne videoer som fortsatt trekker inn visninger, siden både designkonvensjoner og en kanals egen visuelle identitet endrer seg over tid, og en utdatert thumbnail kan trekke ned klikkraten til en ellers god video. Det er som regel ikke verdt det for videoer som allerede har gått sin gang og får lite løpende trafikk.',
+	},
+	{
+		q: 'Hvilke farger fungerer best for en thumbnail?',
+		a: 'Kontrastrike, mettede farger som holder seg i liten størrelse, av samme grunn pleier dristige, kontrastrike filmatiske grader (Joker, The Batman, Mad Max: Fury Road) å fungere godt som thumbnail-basis. Komplementære fargepar, som oransje-og-petroleumsfarge eller rødt-og-cyan, hjelper også med å skille et motiv fra bakgrunnen ved første blikk.',
+	},
+];
+---
+
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Hjem', href: '/nb/' },
+				{ label: 'Guider' },
+				{ label: 'YouTube-thumbnail-design' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">THUMBNAIL-GUIDE</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Slik designer du en YouTube-thumbnail som får klikk
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				En thumbnail vurderes på en brøkdel av et sekund, i en brøkdel av sin virkelige størrelse,
+				ved siden av et dusin konkurrenter. Her er hva som faktisk gir klikk, og hva som bare ser
+				bra ut i full størrelse i redigeringsprogrammet ditt.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">PRINSIPPENE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Hva som skiller en thumbnail som fungerer fra en som ikke gjør det
+			</h2>
+			<div class="mt-6 flex flex-col gap-6 text-base leading-7 text-body">
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Kontrast vinner i liten størrelse</h3>
+					<p class="mt-2">
+						De fleste seere ser aldri en thumbnail i full størrelse, det er et 168px sidefeltforslag
+						eller et mobilbredt feed-kort. Subtile tonale forskjeller som leses klart på en
+						desktop-skjerm flater ut til grøt i den skalaen. Høy kontrast mellom motiv og bakgrunn,
+						og mellom tekst og det som er bak, er det som overlever krympingen.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Ett fokuspunkt, ikke fem</h3>
+					<p class="mt-2">
+						En thumbnail må formidle ideen sin på under ett sekund. Ett tydelig motiv, et ansikt,
+						en gjenstand, én dominerende fargeblokk, leses umiddelbart; en travel komposisjon med
+						flere konkurrerende elementer tvinger en seer til å tolke den, og de fleste gidder ikke.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Tekst er en krok, ikke en billedtekst</h3>
+					<p class="mt-2">
+						Tre til fem ord, store, fete og kontrastrike mot bakgrunnen, er taket for tekst som
+						fortsatt leses ved 64px bredde. Hvis tittelen allerede sier det, trenger ikke
+						thumbnailen å gjenta det, bruk plassen på noe tittelen ikke kan formidle: et
+						ansiktsuttrykk, et tall, et før/etter.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Et konsistent uttrykk bygger gjenkjenning</h3>
+					<p class="mt-2">
+						Kanaler som gjenbruker en fargepalett, skrift eller layout på tvers av thumbnails blir
+						gjenkjennelige i en overfylt abonnement-feed, en seer begynner å kjenne igjen kanalen
+						før de i det hele tatt har lest tittelen. Den konsistensen betyr mer over en kanals
+						hele bibliotek enn hvor smart en enkelt thumbnail er.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Match løftet, ikke bare estetikken</h3>
+					<p class="mt-2">
+						En dristig, kontrastrik thumbnail som overselger eller feilrepresenterer videoen skader
+						watchtime og retensjon når klikket først har skjedd, og risikerer direkte en
+						retningslinjeadvarsel. De best presterende thumbnailene er ærlige om innholdet og
+						presenterer det bare så overbevisende som mulig.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">TEST DET</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Sjekk det slik seerne faktisk ser det
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					En thumbnail som ser skarp ut i et designverktøy i full oppløsning kan falle fra hverandre
+					når den sitter ved siden av en tittel, et kanalnavn og et visningstall i en ekte layout.
+					Anbefalte videoer, søkeresultater og mobil-hjemfeeden viser den hver sin størrelse og
+					parer den med ulike metadata, og YouTube midtbeskjærer alt som ikke er nøyaktig 16:9.
+				</p>
+				<p>
+					Å kjøre et design gjennom disse ekte plasseringene, inkludert liten-størrelse-sjekken ved
+					168px, 112px og 64px bredde, fanger opp et grumsete eller klippet resultat før en video
+					går live i stedet for etterpå, når den allerede er publisert og det tidlige
+					visningsvinduet har passert.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">GÅ DYPERE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Sett det ut i praksis
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/nb/tools/youtube-thumbnail-preview/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">YouTube thumbnail-forhåndsvisningsverktøy</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Se det i søk, anbefalinger og på mobil</span>
+				</a>
+				<a href="/nb/for/youtube-thumbnails/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Filmatiske YouTube-thumbnails</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Dristige, kontrastrike presets for skapere</span>
+				</a>
+				<a href="/nb/guides/cinematic-color-grading/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Filmatisk fargegrading forklart</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Hvorfor kontrastrike grader fungerer godt på et blikk</span>
+				</a>
+				<a href="/nb/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Se alle 60 presets</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Hver fargegrad, sortert etter sjanger</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Vanlige spørsmål om YouTube-thumbnail-design" faqs={faqs} />
+	</main>
+	<Footer />
+</Layout>

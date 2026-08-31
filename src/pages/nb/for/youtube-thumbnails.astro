@@ -1,0 +1,139 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import DropZone from '../../../components/DropZone.astro';
+import MovieFaq from '../../../components/MovieFaq.astro';
+
+const path = '/for/youtube-thumbnails/';
+const title = 'Filmatisk YouTube-thumbnail-filter | Cinematic Photo Editor';
+const description =
+	'Fem filmatiske presets valgt for YouTube-thumbnails: dristige, kontrastrike filmgrader bygget for å skille seg ut i liten størrelse ved siden av andre videoer.';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'CollectionPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com/nb${path}`,
+};
+
+const faqs = [
+	{
+		q: 'Hva gjør en filmatisk preset bra for en YouTube-thumbnail?',
+		a: 'Thumbnails konkurrerer om oppmerksomhet i en svært liten størrelse i en overfylt feed, så høy kontrast og en sterk, lesbar fargeidentitet betyr mer enn subtilitet. De fem presetene her, Joker, The Batman, Mad Max: Fury Road, Deadpool og Kill Bill, skrur alle opp kontrast og metning nok til å leses ved et blikk.',
+	},
+	{
+		q: 'Bør thumbnail-tekst fortsatt være lesbar etter at en filmatisk grad er brukt?',
+		a: 'Ja, legg til teksten og grafikken din etter at du har eksportert det graderte bildet, i thumbnail- eller designverktøyet ditt. Presets med sterk vignettering, som Joker eller The Batman, mørkner naturlig kantene på bildet, som ofte er akkurat der thumbnail-tekst sitter, noe som gir den mer kontrast mot bakgrunnen.',
+	},
+	{
+		q: 'Hvilken preset fungerer best for energiske action- eller gaming-thumbnails?',
+		a: 'Den aggressive oransje-og-petroleumsfarge-splitten i Mad Max: Fury Road og det bikkjede gule i Kill Bill er begge bygget for energisk, kontrastrikt innhold. Den slående rød-svart-graden i Deadpool fungerer også godt for respektløst eller komisk gaming-innhold.',
+	},
+	{
+		q: 'Hvilken preset fungerer for mørkere, mer alvorlig thumbnail-innhold?',
+		a: 'Den karmosinrøde-svarte noir-graden i The Batman og det sykelige oransje-grønne i Joker passer begge til mørkere, mer dramatisk eller true crime-aktig innhold. For en enda kaldere, mer klinisk stemning, se guiden til det mørke, stemningsfulle fotofilteret.',
+	},
+	{
+		q: 'Må jeg beskjære eller endre størrelsen på bildet mitt annerledes for en thumbnail?',
+		a: 'Bruk fargegraden først i full oppløsning, og beskjær deretter til en 16:9-ramme i thumbnail-redigeringsverktøyet ditt etterpå. Å beskjære før grading kan endre hvordan en presets vignettering og overlay sitter i forhold til motivet ditt.',
+	},
+	{
+		q: 'Kan jeg bruke de samme presetene for et videocover eller kanaldesign også?',
+		a: 'Ja, siden kanaldesign og videocovere har det samme problemet med liten størrelse og høy konkurranse om lesbarhet som thumbnails, har en tendens til at de samme dristige, kontrastrike presetene fungerer godt der også.',
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Hjem', href: '/nb/' },
+				{ label: 'For' },
+				{ label: 'YouTube-thumbnails' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">BRUKSOMRÅDE-GUIDE</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Filmatisk YouTube-thumbnail-filter
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Fem filmatiske presets bygget for å skille seg ut: dristige, kontrastrike filmgrader som
+				holder stand ved siden av et dusin andre thumbnails i en feed.
+			</p>
+		</section>
+
+		<DropZone
+			presetIds={['joker', 'the-batman', 'mad-max-fury-road', 'deadpool', 'kill-bill']}
+			showHeading={false}
+			showFooterLinks={false}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">HVA DU BØR SE ETTER</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Hva som gjør en preset thumbnail-klar
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					En thumbnail må vinne oppmerksomhet i liten størrelse, plassert ved siden av et rutenett
+					med konkurrerende videoer, så subtilitet er fienden. Presetene her skrur opp kontrast og
+					farge kraftig: oransje-og-petroleumsfarge-splitten i Mad Max: Fury Road, det sykelige
+					oransje-grønne i Joker, og det bikkjede gule i Kill Bill leses alle tydelig selv skalert
+					ned til en brøkdel av sin opprinnelige størrelse.
+				</p>
+				<p>
+					Sterk vignettering hjelper også her på en måte den ikke alltid gjør for andre bruksområder:
+					mørknede kanter gir thumbnail-tekst og -grafikk, lagt til etterpå i et thumbnail-verktøy,
+					mer kontrast å sitte på.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">GÅ DYPERE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Flere måter å forme looken på
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/nb/tools/youtube-thumbnail-preview/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">YouTube thumbnail-forhåndsvisningsverktøy</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Se det i søk, anbefalinger og på mobil</span>
+				</a>
+				<a href="/nb/guides/youtube-thumbnail-design/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Guide til YouTube-thumbnail-design</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Reglene som faktisk flytter klikkraten</span>
+				</a>
+				<a href="/nb/for/instagram/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Filmatisk Instagram-filter</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Slående grader bygget for feeden</span>
+				</a>
+				<a href="/nb/for/travel-photography/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Filmatisk reisefotografi</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Landskaps- og utendørsvennlige grader</span>
+				</a>
+				<a href="/nb/looks/dark-and-moody/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Dark &amp; Moody filmatisk filter</span>
+					<span class="mt-1 block font-mono text-xs text-mute">For mørkere, mer alvorlige thumbnails</span>
+				</a>
+				<a href="/nb/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Se alle 60 presets</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Hver fargegrad, sortert etter sjanger</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Vanlige spørsmål om filmatiske YouTube-thumbnail-filtre" faqs={faqs} />
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../../lib/landing';
+</script>

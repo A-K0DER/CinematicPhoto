@@ -1,0 +1,205 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import DropZone from '../../../components/DropZone.astro';
+import MovieFaq from '../../../components/MovieFaq.astro';
+
+const path = '/guides/how-to-make-photos-look-cinematic/';
+const title = 'Slik får du bilder til å se filmatiske ut (komplett guide) | Cinematic Photo Editor';
+const description =
+	'En praktisk guide til å få ethvert bilde til å se filmatisk ut: fargegrading, kontrast, filmkorn og bildeforholdet 2,39:1, pluss hvordan du bruker det med ett klikk.';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'Article',
+	headline: 'Slik får du bildene dine til å se filmatiske ut',
+	description,
+	url: `https://cinematicphoto.com/nb${path}`,
+	author: { '@type': 'Organization', name: 'Cinematic Photo' },
+	publisher: { '@type': 'Organization', name: 'Cinematic Photo' },
+	mainEntityOfPage: `https://cinematicphoto.com/nb${path}`,
+};
+
+const howToStructuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'HowTo',
+	name: 'Slik får du et bilde til å se filmatisk ut',
+	description: 'Gjør et flatt bilde om til et filmaktig stillbilde med fargegrading, korn og komposisjon.',
+	step: [
+		{ '@type': 'HowToStep', name: 'Last opp et bilde', text: 'Slipp inn, lim inn, eller bla opp en JPG-, PNG-, WEBP- eller kamera-RAW-fil. Den blir på enheten din.' },
+		{ '@type': 'HowToStep', name: 'Velg en fargegrad', text: 'Velg en preset bygget rundt stemningen du vil ha: kaldt og stålaktig, varmt og gyllent, eller neon og dystert.' },
+		{ '@type': 'HowToStep', name: 'Finjuster korn, vignettering og glød', text: 'Juster filmkorn, vignettering og glød/halation slik at intensiteten på looken passer bildet ditt.' },
+		{ '@type': 'HowToStep', name: 'Legg til letterbox og eksporter', text: 'Skru på 2,39:1-anamorfisk letterbox for en kinoramme, og eksporter deretter det ferdige stillbildet.' },
+	],
+};
+
+const faqs = [
+	{
+		q: 'Hva er den enkleste måten å få et bilde til å se filmatisk ut uten Photoshop?',
+		a: 'Et fargegradingsverktøy bygget spesielt for filmatiske looks tar deg dit raskest. Cinematic Photo bruker en full fargegrad, tilpasset korn, vignettering og glød med ett klikk, og lar deg deretter finjustere hvert element, ingen lag, kurver eller plugins nødvendig.',
+	},
+	{
+		q: 'Trenger jeg dyr programvare eller LUT-er for å få en filmatisk fargegrad?',
+		a: 'Nei. En LUT (lookup table) er bare en lagret fargetransformasjon, akkurat det en preset er. Cinematic Photos 60 presets er innebygde LUT-lignende fargegrader du bruker direkte i nettleseren i stedet for å installere og laste .cube-filer inn i skrivebordsprogramvare.',
+	},
+	{
+		q: 'Hvilket bildeforhold bruker filmer, og bør jeg beskjære bildene mine for å matche?',
+		a: 'De fleste moderne filmer filmes i 2,39:1 (kalt "scope" eller anamorfisk widescreen), merkbart bredere enn en mobiltelefons opprinnelige bildeforhold. Å beskjære til 2,39:1 med letterbox-striper er valgfritt, men det er en av de raskeste måtene å få et stillbilde til å lese som "fra en film" ved første øyekast.',
+	},
+	{
+		q: 'Gjør filmkorn faktisk et bilde mer filmatisk, eller ser det bare støyete ut?',
+		a: 'Det kommer an på mengden. Et lett, jevnt korn etterligner ekte filmstock og legger til tekstur; for mye begynner å se ut som digital støy. Start lavt, 15-25 på Cinematic Photos skala er et godt utgangspunkt for de fleste bilder, og øk kun hvis grunnbildet allerede har sterk kontrast som støtter den ekstra teksturen.',
+	},
+	{
+		q: 'Kan jeg få et mobilbilde til å se filmatisk ut, eller trenger jeg et spesifikt kamera?',
+		a: 'En filmatisk look handler nesten utelukkende om etterbehandling og lys, ikke kameraet. Et godt belyst mobilbilde med en sterk fargegrad, litt korn og riktig komposisjon vil lese som filmatisk; et flatt, jevnt belyst bilde fra et dyrt kamera vil ikke, uten den samme behandlingen.',
+	},
+	{
+		q: 'Hva er den faktiske forskjellen mellom et "filmatisk filter" og et vanlig Instagram-filter?',
+		a: 'Et vanlig filter skifter som regel hele bildet mot én fargetone eller øker metning og kontrast jevnt. En filmatisk fargegrad splitter skygger og lys mot ulike, komplementære toner (som petroleumsfargede skygger og ambernyanse-lys), og det er dette som gir film sin dybde i stedet for en flat fargetone.',
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Hjem', href: '/nb/' },
+				{ label: 'Guider' },
+				{ label: 'Slik får du bilder til å se filmatiske ut' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">KOMPLETT GUIDE</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Slik får du bildene dine til å se filmatiske ut
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				En filmatisk look kommer ned til en håndfull konkrete valg: farge, kontrast, korn og
+				bilderamme. Her er hva hver av dem faktisk gjør, og hvordan du bruker alle sammen på et
+				bilde på under ett minutt.
+			</p>
+		</section>
+
+		<DropZone
+			presetIds={['dark-knight', 'blade-runner', 'shawshank', 'interstellar']}
+			showHeading={false}
+			showFooterLinks={false}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">GRUNNLEGGENDE PRINSIPPER</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Hva som faktisk gjør et bilde filmatisk
+			</h2>
+			<div class="mt-6 flex flex-col gap-6 text-base leading-7 text-body">
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Fargegrading, ikke bare et filter</h3>
+					<p class="mt-2">
+						Filmatisk fargegrading splitter skygger og lys mot ulike, ofte komplementære toner,
+						petroleumsfargede skygger mot ambernyanse-lys, kaldt stål mot varm hud, i stedet for
+						å skyve hele bildet én retning. Den splittingen er det som leses som bevisst og
+						"gradert" i stedet for "filtrert".
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Kontrast og skyggedybde</h3>
+					<p class="mt-2">
+						Filmer beskytter sjelden skyggedetaljer slik en mobilkameras HDR-modus gjør. Å la
+						svarttoner knuses litt og skru opp kontrasten gir et bilde vekt og dybde som et flatt,
+						jevnt belyst bilde ikke har.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Filmkorn og tekstur</h3>
+					<p class="mt-2">
+						Selv digitalt filmede filmer legger til korn i etterbehandlingen for å unngå en steril,
+						videoaktig look. Et lett, jevnt lag med korn er et av de raskeste signalene som
+						skiller et "bilde med filter" fra noe som leses som et stillbilde.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Bildeforholdet 2,39:1</h3>
+					<p class="mt-2">
+						De fleste filmer filmes merkbart bredere enn et mobilbilde. Å beskjære til en
+						2,39:1-letterbox med svarte striper øverst og nederst er et rent visuelt signal, det
+						endrer ingenting ved fargen, men det er et umiddelbart, umiskjennelig tegn på
+						"filmramme".
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">STEG FOR STEG</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Slik gjør du det i 4 steg
+			</h2>
+			<ol class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<li class="flex gap-4">
+					<span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-hairline-strong font-mono text-xs text-ink">1</span>
+					<span><span class="font-medium text-ink">Last opp et bilde.</span> Slipp inn, lim inn, eller bla opp en JPG-, PNG-, WEBP- eller kamera-RAW-fil over, den behandles på enheten din, aldri lastet opp.</span>
+				</li>
+				<li class="flex gap-4">
+					<span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-hairline-strong font-mono text-xs text-ink">2</span>
+					<span><span class="font-medium text-ink">Velg en fargegrad.</span> Velg en preset som matcher stemningen: kaldt og stålaktig, varmt og gyllent, eller neon og dystert. Alle 50 kan bla gjennom etter sjanger.</span>
+				</li>
+				<li class="flex gap-4">
+					<span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-hairline-strong font-mono text-xs text-ink">3</span>
+					<span><span class="font-medium text-ink">Finjuster korn, vignettering og glød.</span> Hver preset kommer med fornuftige standardverdier; juster glidebryterne slik at intensiteten passer ditt spesifikke bilde.</span>
+				</li>
+				<li class="flex gap-4">
+					<span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-hairline-strong font-mono text-xs text-ink">4</span>
+					<span><span class="font-medium text-ink">Legg til letterbox og eksporter.</span> Skru på 2,39:1-anamorfisk letterbox for en kinoramme, og eksporter deretter det ferdige stillbildet.</span>
+				</li>
+			</ol>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">GÅ DYPERE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Flere guider og looks
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/nb/guides/cinematic-color-grading/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Filmatisk fargegrading forklart</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Teal-and-orange, split-toning og hva en LUT egentlig er</span>
+				</a>
+				<a href="/nb/looks/vintage-35mm-film/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Vintage 35mm-filmlook</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Varme, kornete, nostalgiske filmstock-presets</span>
+				</a>
+				<a href="/nb/looks/dark-and-moody/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Dark & Moody filmatisk filter</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Knuste skygger, kalde toner, tunge vignetteringer</span>
+				</a>
+				<a href="/nb/for/portraits/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Filmatisk portrettfilter</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Hvilke presets smigrer hudtoner, og hvilke du bør unngå</span>
+				</a>
+			</div>
+			<p class="mt-6 text-base leading-7 text-body">
+				Eller hopp rett til en spesifikk films look: bla gjennom alle <a href="/nb/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">60 film- og serieinspirerte presets</a>,
+				inkludert egne sider for <a href="/nb/presets/the-dark-knight/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">The Dark Knight</a>,
+				<a href="/nb/presets/blade-runner-2049/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Blade Runner 2049</a>,
+				<a href="/nb/presets/dune/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Dune</a>,
+				<a href="/nb/presets/interstellar/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Interstellar</a>, og
+				<a href="/nb/presets/the-matrix/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">The Matrix</a>.
+			</p>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Vanlige spørsmål om filmatisk fotoredigering" faqs={faqs} />
+	</main>
+	<Footer />
+
+	<script type="application/ld+json" set:html={JSON.stringify(howToStructuredData)} />
+</Layout>
+
+<script>
+	import '../../../lib/landing';
+</script>

@@ -1,0 +1,199 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import DropZone from '../../../components/DropZone.astro';
+import MovieFaq from '../../../components/MovieFaq.astro';
+
+const path = '/guides/cinematic-color-grading/';
+const title = 'Filmatisk fargegrading forklart | Cinematic Photo Editor';
+const description =
+	'Hva filmatisk fargegrading egentlig er: teal-and-orange, split-toning og hva en LUT gjør, pluss hvordan du bruker ekte filmatiske grader med ett klikk.';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'Article',
+	headline: 'Filmatisk fargegrading forklart',
+	description,
+	url: `https://cinematicphoto.com/nb${path}`,
+	author: { '@type': 'Organization', name: 'Cinematic Photo' },
+	publisher: { '@type': 'Organization', name: 'Cinematic Photo' },
+	mainEntityOfPage: `https://cinematicphoto.com/nb${path}`,
+};
+
+const faqs = [
+	{
+		q: 'Hva er forskjellen mellom fargekorrigering og fargegrading?',
+		a: 'Fargekorrigering fikser et bilde: nøytral hvitbalanse, riktig eksponering, naturlige hudtoner. Fargegrading er det stilistiske valget etterpå: skygger og lys skyves bevisst, ofte mot komplementære farger, for å skape en stemning. Hver preset i dette verktøyet er en ekte grad, ikke bare en korrigering.',
+	},
+	{
+		q: 'Hva er teal-and-orange fargegrading, og hvorfor bruker så mange filmer det?',
+		a: 'Det er praksisen med å skyve skygger og mellomtoner mot petroleumsfarge/cyan mens lys og hudtoner skyves mot oransje/ambernyanse. Det fungerer fordi petroleumsfarge og oransje ligger motsatt hverandre på fargesirkelen, slik at de to fargene visuelt skiller motivet (som regel varmtonet hud) fra bakgrunnen (ofte kjøligere skygger og himmel), og fordi hudtoner naturlig leses som oransje, forblir de smigrende selv under en tung grad.',
+	},
+	{
+		q: 'Hva er en LUT, og hvordan er den forskjellig fra en preset eller et filter?',
+		a: 'En LUT (lookup table) er en lagret matematisk fargetransformasjon, last den inn i redigeringsprogramvare og den omregner hver farge i bildet ditt på samme måte, hver gang. En preset i Cinematic Photo gjør den samme jobben, en lagret, gjentagbar fargetransformasjon, bare brukt umiddelbart i nettleseren i stedet for at du må installere en .cube-fil i skrivebordsprogramvare først.',
+	},
+	{
+		q: 'Hvordan lager jeg en split-tone-effekt, ulike farger i skygger versus lys, uten programvare?',
+		a: 'Dette er akkurat det Cinematic Photos presets gjør under panseret: hver av dem legger en gradient over bildet ditt som skyver skygger mot én farge og lys mot en annen, i stedet for å tone hele bildet i én flat fargetone. Velg hvilken som helst preset og du bruker en split-tone; den synlige forskjellen mellom presets er hvilke to farger som splittes og hvor sterkt.',
+	},
+	{
+		q: 'Hvorfor ser bildene mine fortsatt flate ut selv etter at jeg har økt metning og kontrast?',
+		a: 'Metning og kontrast alene forsterker bare eksisterende farger, de introduserer ikke fargerelasjonene en grad gjør. Et flatt bilde trenger som regel at skyggene og lysene skyves mot ulike fargetoner, ikke bare mer intense versjoner av de samme. Det retningsbestemte fargeskiftet er det en grad legger til, noe en enkel metningsøkning ikke kan.',
+	},
+	{
+		q: 'Kan jeg bruke den eksakte fargegraden til en spesifikk film på bildet mitt?',
+		a: 'Ikke piksel for piksel, siden en ekte grad også avhenger av det opprinnelige lyset og objektivet, men Cinematic Photos filminspirerte presets gjenskaper den visuelle estetikken nøye: fargesplitt, kontrastkurve og korn bygget for å matche. Bla gjennom de dedikerte sidene for The Dark Knight, Blade Runner 2049, Dune, Interstellar og The Matrix, eller hele 50-preset-biblioteket, for å finne den nærmeste match.',
+	},
+	{
+		q: 'Er "filmatisk fargelegging" det samme som filmatisk fargegrading?',
+		a: 'Ja, begge beskriver samme resultat. "Filmatisk fargelegging" er den uformelle måten de fleste beskriver det de er ute etter på; "fargegrading" er fagbegrepet for skygge-/lys-fargesplitten som faktisk skaper det. Enhver preset i denne editoren utfører en ekte grad uansett, ikke en flat fargetone.',
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Hjem', href: '/nb/' },
+				{ label: 'Guider' },
+				{ label: 'Filmatisk fargegrading' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">FARGEGRADING-GUIDE</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Filmatisk fargegrading forklart
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Teal-and-orange, split-toning, LUT-er: vokabularet i filmatisk fargegrading høres teknisk
+				ut, men ideen bak er enkel. Her er hva som faktisk skjer, og hvordan du bruker det uten
+				fargevitenskaps-programvare.
+			</p>
+		</section>
+
+		<DropZone
+			presetIds={['blade-runner', 'mad-max-fury-road', 'baby-driver', 'dark-knight']}
+			showHeading={false}
+			showFooterLinks={false}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">GRUNNLEGGENDE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Hva fargegrading faktisk er
+			</h2>
+			<div class="mt-6 flex flex-col gap-6 text-base leading-7 text-body">
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Korrigering versus grading</h3>
+					<p class="mt-2">
+						Fargekorrigering er den nøytrale, tekniske omgangen: hvitbalanse, eksponering og
+						hudtone justeres slik at bildet ser naturlig ut. Fargegrading kommer etterpå, det er
+						et bevisst stilistisk skyv mot en spesifikk stemning. En films fotograf korrigerer
+						først, og graderer deretter for å sette tonen.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Split-toning: ulike farger i skygger og lys</h3>
+					<p class="mt-2">
+						I stedet for å tone et helt bilde i én flat fargetone, skyver en ekte grad skygger mot
+						én farge og lys mot en annen. Det er det som skiller et "gradert" bilde fra et
+						"filtrert" et, og det er akkurat det hver preset i dette verktøyet gjør under
+						panseret: en gradient-overlay som skifter tone etter lysstyrke, ikke en enkelt flat vask.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Petroleumsfarge og oransje: den klassiske splitten</h3>
+					<p class="mt-2">
+						Den mest gjenkjennelige splitten i moderne film: skygger og bakgrunner skyves kjølig
+						mot petroleumsfarge, hudtoner og lys skyves varmt mot oransje. Det fungerer fordi
+						petroleumsfarge og oransje ligger motsatt hverandre på fargesirkelen, noe som skiller
+						motivet fra bakgrunnen, og fordi hud naturlig leses som oransje, forblir den
+						smigrende selv under en sterk grad.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Hva en LUT faktisk gjør</h3>
+					<p class="mt-2">
+						En LUT, en lookup table, er en lagret fargetransformasjon: for enhver inputfarge
+						definerer den nøyaktig hvilken outputfarge som skal produseres. Å laste en LUT inn i
+						redigeringsprogramvare bruker den transformasjonen konsekvent på hvert bilde. En
+						preset her gjør identisk arbeid, bare innebygd og brukt umiddelbart, ingen fil å
+						laste ned eller importere.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Kontrast og skyggedybde</h3>
+					<p class="mt-2">
+						Grading kommer som regel med et kontrastskyv, som lar skygger knuses i stedet for å
+						beskytte hver detalj. Det er et bevisst kompromiss: mindre gjenopprettbar skyggedetalj,
+						men mer visuell tyngde og separasjon, som er hvorfor et gradert stillbilde ofte virker
+						mer "solid" enn et flatt, jevnt eksponert original.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">TERMINOLOGI</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				"Filmatisk fargelegging" versus filmatisk fargegrading
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Folk som søker etter filmatisk fargelegging og folk som søker etter filmatisk
+					fargegrading er som regel ute etter det samme resultatet, de bruker bare ulikt vokabular
+					for det. "Filmatisk fargelegging" er det uformelle, hverdagslige uttrykket for å skyve
+					fargene i et bilde mot en film-look; "fargegrading" er fagbegrepet fargefolk bruker for
+					den samme skygge-/lys-fargesplitten beskrevet over. Det finnes ingen egen teknikk
+					gjemt bak det enklere uttrykket, en preset i denne editoren utfører en ekte grad
+					uansett hvilket begrep du søkte med for å finne den.
+				</p>
+				<p>
+					Det er verdt å vite hvis du sammenligner verktøy: et nettsted som bare tilbyr én enkelt
+					metnings- eller fargetone-glider gjør fargelegging i løsest forstand, det farger hele
+					bildet i én retning. Et verktøy med ekte filmatisk fargegrading, som presetene her,
+					bruker uavhengige fargeskift på skygger og lys, og det er akkurat det som gjør at
+					resultatet ser ut som et filmstillbilde i stedet for et Instagram-filter.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">GÅ DYPERE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Sett det ut i praksis
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/nb/guides/how-to-make-photos-look-cinematic/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Slik får du bilder til å se filmatiske ut</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Den komplette steg-for-steg-guiden</span>
+				</a>
+				<a href="/nb/looks/vintage-35mm-film/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Vintage 35mm-filmlook</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Korn, varme og nostalgiske filmstock-toner</span>
+				</a>
+				<a href="/nb/presets/blade-runner-2049/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Blade Runner 2049-fotofilter</span>
+					<span class="mt-1 block font-mono text-xs text-mute">En lærebok-perfekt amber-petroleum-splitt, med dis</span>
+				</a>
+				<a href="/nb/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Se alle 60 presets</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Hver fargegrad, sortert etter sjanger</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Vanlige spørsmål om fargegrading" faqs={faqs} />
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../../lib/landing';
+</script>

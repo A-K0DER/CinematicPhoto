@@ -1,0 +1,52 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+
+const title = 'Om oss | Cinematic Photo Editor';
+const description = 'Les om Cinematic Photo, en gratis client-side fotoeditor som bruker filminspirerte color grades, filmkorn og letterboxing direkte i nettleseren din.';
+---
+
+<Layout title={title} description={description} path="/about-us/">
+	<Navbar />
+	<main class="mx-auto max-w-3xl px-4 py-20 sm:px-6">
+		<span class="mb-4 block font-mono text-xs tracking-wide text-mute">OM OSS</span>
+		<h1 class="font-sans text-3xl font-semibold tracking-[-0.03em] text-ink sm:text-4xl">
+			En cinematisk fotoeditor laget av folk som elsker filmfarger
+		</h1>
+
+		<div class="mt-8 flex flex-col gap-6 text-base leading-7 text-body">
+			<p>
+				Cinematic Photo startet med en enkel frustrasjon: å få et foto til å se ut som et
+				stillbilde fra en favorittfilm betydde vanligvis timevis med håndjustering av kurver i
+				en skrivebordseditor, leting etter presets med uklar opprinnelse, eller å betale for et
+				abonnement bare for å prøve noen få fargekorreksjoner. Vi ville ha noe raskere: et
+				verktøy som går rett fra et flatt foto til en filmklar look med ett klikk, uten en
+				læringskurve i veien.
+			</p>
+			<p>
+				Så vi bygde en fokusert, nettleserbasert editor rundt et lite utvalg fargekorreksjoner
+				modellert etter gjenkjennelige filmlooker (teal-and-orange neo-noir, kaldt kosmisk blått,
+				varmt ørkengull, digitalt høykontrast-grønt og knuste skygger i stål), pluss
+				tekstur-detaljene som selger et cinematisk stillbilde: filmkorn, vignett, glød og
+				halasjon, anamorfisk letterboxing og et filmstock-stempel.
+			</p>
+			<h2 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">Hvorfor det er privat som standard</h2>
+			<p>
+				Hvert filter, hver korreksjon og hver eksport i Cinematic Photo kjører lokalt på et
+				HTML-lerret inni din egen nettleserfane. Vi tok dette valget bevisst: bildene dine er
+				dine, og et color grading-verktøy har ingen reell grunn til å se dem. Det finnes ingen
+				opplastinger, ingen kontoer og ingen lagring på server. Redigeringen skjer helt og holdent
+				på din egen enhet.
+			</p>
+			<h2 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">Hvem vi bygger for</h2>
+			<p>
+				Fotografer, filmskapere og innholdsskapere i sosiale medier bruker Cinematic Photo til
+				miniatyrbilder, plakater og portefølje-stillbilder. Hvis det høres ut som deg, og du
+				støter på noe som ikke fungerer eller ønsker deg et nytt preset, vil vi gjerne høre om
+				det. Ta kontakt på <a href="/nb/contact-us" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Kontakt oss</a>-siden vår.
+			</p>
+		</div>
+	</main>
+	<Footer />
+</Layout>

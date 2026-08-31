@@ -1,0 +1,170 @@
+---
+// Norwegian (Bokmål) translation of ../SeoContent.astro. The featured FAQ block still pulls
+// from the shared English src/data/faqs.ts, that dataset is not localized yet.
+import { getFeaturedFaqs } from '../../data/faqs';
+
+const faqs = getFeaturedFaqs();
+
+const faqStructuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	mainEntity: faqs.map((f) => ({
+		'@type': 'Question',
+		name: f.q,
+		acceptedAnswer: {
+			'@type': 'Answer',
+			text: f.a,
+		},
+	})),
+};
+---
+
+<section class="border-t border-hairline bg-canvas-soft px-4 py-20 sm:px-6">
+	<div class="mx-auto max-w-3xl">
+		<span class="mb-4 block font-mono text-xs tracking-wide text-mute">HVORFOR CINEMATIC PHOTO</span>
+		<h2 class="max-w-2xl font-sans text-3xl font-semibold tracking-[-0.03em] text-ink sm:text-4xl">
+			En cinematisk fotoeditor for filmklar color grading
+		</h2>
+
+		<div class="mt-8 flex flex-col gap-6 text-base leading-7 text-body">
+			<p>
+				Cinematic Photo er en gratis nettbasert fotoeditor som forvandler et vanlig bilde til et
+				filmklart stillbilde med ett klikk, helt uten forkunnskaper om cinematisk fotoredigering.
+				De fleste fotoeditor-apper gjemmer filmiske looks bak abonnementer, maskeverktøy eller en
+				bratt læringskurve. Cinematic Photo fungerer mer som en fasit fra en fargesetter: velg et
+				preset, juster noen få skyveknapper, eksporter. Ingen veiledning nødvendig. Det er et
+				ekte, enkelt alternativ til Lightroom-cinematic-presets for alle som bare vil ha
+				kinofølelsen uten å installere skrivebordsprogramvare eller jobbe seg gjennom kompliserte
+				panel, og et raskere alternativ enn en generisk iloveimg-fotoeditor-erstatning når looken
+				du er ute etter konkret skal være cinematisk.
+			</p>
+			<p>
+				Som fotoeditor-app holder den seg bevisst smal: i stedet for å prøve å være en
+				generell editor med hundrevis av usammenhengende verktøy, konsentrerer den seg fullt og
+				helt om én oppgave, å få et foto til å se ut og føles som et stillbilde fra en film.
+				Nettopp dette fokuset gjør den rask. Det er ingen leting gjennom menyer etter kinolooken;
+				hver kontroll på skjermen er der for å bringe et foto nærmere et filmklart bilde, slik at
+				veien fra et flatt øyeblikksbilde til en ferdig grade bare tar sekunder i stedet for den
+				flertrinns arbeidsflyten en generell nettbasert fotoeditor med filmfiltre vanligvis
+				krever.
+			</p>
+
+			<h3 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">
+				Hva som utgjør en cinematisk fotoeffekt
+			</h3>
+			<p>
+				En cinematisk fotoeffekt er mer enn et filter med én enkelt skyveknapp, det er
+				kombinasjonen av fargekorreksjon i skygger og lys, filmkorn, en vignett og ofte en
+				bredformat-letterbox-beskjæring, de samme verktøyene en fargesetter og en fotograf griper
+				til på settet. En enkel fargetone alene virker som et Instagram-filter, det er først
+				samspillet mellom disse elementene som får et foto til å ligne et stillbilde fra en film
+				og ikke et redigert øyeblikksbilde. Hvert preset i denne editoren samler en
+				sjangernøyaktig fargekorreksjon med innstillinger for korn, glød og letterbox, slik at du
+				får denne fulle cinematiske fotoeffekten med ett klikk i stedet for å stille inn hvert
+				lag for hånd.
+			</p>
+
+			<h3 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">
+				Filminspirerte color grading-presets
+			</h3>
+			<p>
+				Hvert av de 60 presetene i denne cinematiske editoren er inspirert av en gjenkjennelig
+				film- eller serielook, fordelt på ni sjangre: Thriller & Mystery, Crime, Sci-Fi, Drama,
+				Krig & Historie, Fantasy & Eventyr, Action, Superhelter og TV-serier. Ta i bruk
+				Shawshank-Redemption-presetet for en varm, tilbakeholden 35mm-drama-korreksjon,
+				Pulp-Fiction-fotofilteret for mettede rav-røde Tarantino-toner, eller
+				<a href="/nb/presets/the-dark-knight/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Dark-Knight-color-grading-presetet</a> for
+				knuste svarttoner og en kjølig ståltone. <a href="/nb/presets/interstellar/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Inception- og
+				Interstellar-filmfargefilter-effektene</a> gir Nolans kjennetegnende kjølige
+				stålblå sci-fi-palett, Gladiator-presetet gir bleket, gyllen ørkenvarme, og
+				<a href="/nb/presets/the-matrix/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Matrix-grønntone-fotofilteret</a> gjenskaper filmens
+				kjennetegnende digitale høykontrast-grønne. Hvert alternativ legger et cinematisk filter
+				gratis, umiddelbart og direkte på lerretet over bildet ditt, bla gjennom{' '}
+				<a href="/nb/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">hele listen over alle 60 presetene</a>{' '}
+				og finn nøyaktig filmen bildet ditt trenger.
+			</p>
+
+			<h3 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">
+				Filmtekstur og cinematisk bildekomposisjon
+			</h3>
+			<p>
+				Utover fargen legger Cinematic Photo til de tekstur- og rammedetaljene som utgjør en
+				kinolook. Legg gratis og på nett til filmkorn i et foto med én enkelt skyveknapp, still
+				inn en vignett eller legg til glød og halasjon, slik anamorfiske objektiver blomstrer
+				rundt sterke lyskilder, det nærmeste du kommer{' '}
+				<a href="/nb/guides/cinematic-color-grading/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">cinematisk color grading</a> med en
+				film-LUT uten dedikert grading-programvare. Legg til en cinematisk letterbox i et foto
+				på nett med ett klikk for å beskjære til et cinematisk bildeforhold på 2,39:1, komplett
+				med svarte striper over og under bildet, og stemple et filmstock-merke i hjørnet for et
+				resultat inspirert av{' '}
+				<a href="/nb/looks/vintage-35mm-film/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">vintage 35mm filmlook</a>.
+				For en fullstendig veiledning, se hvordan du{' '}
+				<a href="/nb/guides/how-to-make-photos-look-cinematic/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">får ethvert foto til å se cinematisk ut</a>.
+			</p>
+
+			<h3 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">
+				Privat by design: ingenting forlater noensinne enheten din
+			</h3>
+			<p>
+				Dette er en nettleserbasert cinematisk fotoeditor med en client-side-arkitektur helt fra
+				bunnen av: ingen opplastinger, ingen kontoer, og ingen server ser noensinne bildet ditt.
+				Hvert filter, hver korreksjon og hver eksport rendres lokalt på et HTML-lerret i
+				nettleserfanen din, slik at et raskt filmlook-fotofilter er tilgjengelig selv med
+				treg tilkobling, og bildene dine forblir dine.
+			</p>
+
+			<h3 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">
+				Hvem det er laget for
+			</h3>
+			<p>
+				Fotografer, filmskapere og innholdsskapere i sosiale medier bruker Cinematic Photo som
+				et gratis nettbasert verktøy for den fotografiske looken på miniatyrbilder, plakater og
+				portefølje-stillbilder. Tenk på det som en indiefilm-fotoeffekt-generator for alle som
+				vil bygge et Hollywood-fotofilter inn i arbeidsflyten sin: en nettbasert
+				filmfargekorrigerer som forvandler et flatt foto til et filmklart bilde på tiden det tar
+				å dra en skyveknapp. Se kuraterte presetanbefalinger for{' '}
+				<a href="/nb/for/instagram/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Instagram</a>,{' '}
+				<a href="/nb/for/youtube-thumbnails/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">YouTube-miniatyrbilder</a>,{' '}
+				<a href="/nb/for/travel-photography/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">reisefotografering</a> og{' '}
+				<a href="/nb/for/portraits/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">cinematiske portretter</a>,
+				eller se hvordan det måler seg mot{' '}
+				<a href="/nb/alternatives/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Lightroom-presets, VSCO og andre cinematiske redigeringsverktøy</a>.
+			</p>
+		</div>
+
+		<div class="mt-16 border-t border-hairline pt-10">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">FAQ</span>
+			<div class="flex flex-col divide-y divide-hairline">
+				{
+					faqs.map((faq) => (
+						<details class="group py-5">
+							<summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-sans text-base font-semibold text-ink [&::-webkit-details-marker]:hidden">
+								<span>{faq.q}</span>
+								<svg
+									class="h-4 w-4 flex-shrink-0 text-mute transition-transform duration-200 group-open:rotate-180"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								>
+									<polyline points="6 9 12 15 18 9" />
+								</svg>
+							</summary>
+							<p class="mt-2 text-sm leading-6 text-body">{faq.a}</p>
+						</details>
+					))
+				}
+			</div>
+			<a
+				href="/nb/faq/"
+				class="mt-6 inline-block font-sans text-sm font-medium text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink"
+			>
+				Se alle ofte stilte spørsmål →
+			</a>
+		</div>
+	</div>
+
+	<script type="application/ld+json" set:html={JSON.stringify(faqStructuredData)} />
+</section>

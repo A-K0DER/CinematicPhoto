@@ -1,0 +1,191 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import DropZone from '../../../components/DropZone.astro';
+import BeforeAfter from '../../../components/BeforeAfter.astro';
+import RelatedPresets from '../../../components/RelatedPresets.astro';
+import MovieFaq from '../../../components/MovieFaq.astro';
+import { getPreset } from '../../../lib/presets';
+
+const preset = getPreset('dune');
+const path = '/presets/dune/';
+const url = `https://cinematicphoto.com/nb${path}`;
+
+const title = 'Dune fotofilter og editor | Gratis filmatisk verktøy';
+const description =
+	'Bruk denne gratis Dune-fotofilteret og fotoeditoren til å farge bildet ditt med filmens solbrente ørkengull og overstrålte lys, direkte i nettleseren, ingen konto nødvendig.';
+const keywords =
+	'dune fotofilter, dune fotoeditor, dune editor, dune fargegrad, ørken fotofilter';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	name: title,
+	description,
+	url,
+	isPartOf: { '@type': 'WebSite', name: 'Cinematic Photo', url: 'https://cinematicphoto.com' },
+};
+
+const faqs = [
+	{
+		q: 'Er dette et offisielt Dune-fotofilter?',
+		a: 'Nei. Denne presetten er inspirert av den visuelle estetikken i Dunes filmfotografi, den er ikke et offisielt filter lisensiert av eller tilknyttet studioet eller filmens skapere. Det er en uavhengig fargegrad bygget for å gjenskape looken, ikke en merkevaresamarbeidsprodukt.',
+	},
+	{
+		q: 'Finnes det en egen Dune-fotoeditor?',
+		a: 'Denne siden er nettopp den dedikerte editoren, Dune-graden lastes forhåndsvalgt i dropsonen over, så du kan slippe et bilde og umiddelbart justere glød, vignettering og korn uten å måtte lete gjennom hele 60-preset-biblioteket først.',
+	},
+	{
+		q: 'Fungerer Dune-presetten på bilder som ikke er ørken eller sand?',
+		a: 'Ja. Graden er et farge- og kontrastskifte, varm sepiatone, løftede lys, mild vignettering, så den kan brukes på ethvert bilde. Den leses mest naturlig på scener som allerede har varmt, direkte lys: tørre landskap, gyllen time eller solbelyst arkitektur, men den er ikke begrenset til ørkenmotiver.',
+	},
+	{
+		q: 'Lysene på bildet mitt ser overstrålte ut etter at jeg har brukt Dune-presetten. Er det tilsiktet?',
+		a: 'Stort sett ja. Presetten skrur opp lysstyrke og metning samtidig som den legger til en sterk varm overlay, som bevisst etterligner filmens solbleikte, litt overeksponerte lys-stil. Hvis det er for kraftig for bildet ditt, kan eksponeringen og lysområdene trekkes tilbake etterpå med vignetterings- og glødegliderne i editoren.',
+	},
+	{
+		q: 'Hvordan er Dune-presetten forskjellig fra Gladiator-presetten?',
+		a: 'Begge lener seg varmt og gyllent, men Dune-graden går tyngre inn i sepia og lys-glød med en svært lett vignettering, en åpen, solfylt følelse. Gladiator-presetten holder vignetteringen sterkere og metningen lavere, nærmere en bleket, sandete arena-tone enn Dunes overstrålte, glødende ørkenlys.',
+	},
+	{
+		q: 'Kan jeg bruke Dune-fotoeffekten til portrettfotografi?',
+		a: 'Ja, spesielt motlys- eller gyllen time-portretter. Den varme overlayen og den forhøyede gløden smigrer hudtoner med retningsbestemt sollys, selv om effekten på flate, frontbelyste portretter vil leses mer som en varm fargetone enn en dramatisk ørkengrad.',
+	},
+	{
+		q: 'Hva slags bilder passer best med en Dune-inspirert fargegrad?',
+		a: 'Vide ørken- eller tørrlandskapsbilder, gyllen time-scener med sterkt motlys, og solbelyst arkitektur eller ruiner passer alle godt, siden de allerede har det varme, kontrastrike lyset denne presetten er bygget for å forsterke.',
+	},
+];
+---
+
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Hjem', href: '/nb/' },
+				{ label: 'Alle presets', href: '/nb/presets/' },
+				{ label: 'Dune' },
+			]}
+		/>
+
+		<DropZone presetId={preset.id} showHeading={false} showFooterLinks={false} />
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">FILMINSPIRERT PRESET</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Dune-fotofilteret: solbrent gull og overstrålt ørkenlys.
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				En gratis Dune-fotoeditor og fargegrad-preset inspirert av den visuelle estetikken til Denis
+				Villeneuves Dune, bygget for å gi bilder filmens varme, solbleikte ørkenglød uten å røre et
+				kurvepanel.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">ESTETIKKEN</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Skala, sand og overstrålt lys
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Fotograf Greig Fraser filmet Dune rundt skala og hete: små figurer mot enorme, solflate
+					sanddyner, hvor lysene fikk lov til å overstråle i stedet for å beskyttes slik en
+					konvensjonell eksponering ville gjort. Fargen lener seg både varm og avmettet på samme
+					tid, gull- og sepiatoner dominerer, men uten den kraftige metningen til et typisk
+					"varmfilter", noe som holder paletten nærmere bleket sand enn en postkort-solnedgang.
+				</p>
+				<p>
+					Negativt rom bærer like mye vekt som motivet. Vide komposisjoner med et lite menneskelig
+					element mot et enormt, hardt belyst landskap er filmens kjennetegnende bilde, og det er en
+					look denne graden belønner direkte gjennom kombinasjonen av varm tone og åpne, glødende
+					lys.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">FØR / ETTER</span>
+			<h2 class="mb-6 font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Se graden brukt
+			</h2>
+			<BeforeAfter preset={preset} />
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">FARGEVITENSKAPEN</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Hvordan Dune-fargegraden faktisk fungerer
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Dette er det varmeste basisfilteret av de fem filmgradene her: et sterkt sepia-trykk
+					kombinert med forhøyet metning, kontrast og lysstyrke legger sand-og-gull-fundamentet
+					før noen overlay legges til. En myk gradient-overlay legger deretter dypbrune skygger inn
+					i bleke, nesten hvitgylne lys, ved den høyeste overlay-dekkevnen av alle presets i dette
+					settet, noe som gir graden sin karakteristiske overstrålte, glødende kvalitet.
+				</p>
+				<p>
+					Standard vignettering er bevisst den letteste av de fem: bildet forblir åpent og solfylt
+					i stedet for å lukke seg mot kantene, det motsatte instinktet av en grad som Dark Knight.
+					En sjenerøs glødeinnstilling runder det hele av og lar sterke lys gløde mykt ved kantene.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BESTE BILDER FOR DENNE PRESETTEN</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Hva du bør bruke den på
+			</h2>
+			<ul class="mt-6 flex flex-col gap-4 text-base leading-7 text-body">
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Ørken eller tørre landskap.</span> Åpen sand, stein og horisontlinjer er akkurat det denne gradens varme og glød er tilpasset.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Motlysportretter i gyllen time.</span> Direkte lavtstående sol spiller rett inn i den forhøyede gløden og den varme lys-glansen.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Solbelyst arkitektur eller ruiner.</span> Sterkt retningsbestemt lys på stein- eller sandfargede overflater forsterker sepia-grunntonen.</span>
+				</li>
+			</ul>
+		</section>
+
+		<RelatedPresets
+			heading="Flere filminspirerte grader"
+			items={[
+				{ presetId: 'dark-knight', href: '/nb/presets/the-dark-knight/' },
+				{ presetId: 'blade-runner', href: '/nb/presets/blade-runner-2049/' },
+				{ presetId: 'interstellar', href: '/nb/presets/interstellar/' },
+				{ presetId: 'matrix', href: '/nb/presets/the-matrix/' },
+				{ presetId: 'gladiator', href: '/nb/presets/gladiator/' },
+				{ presetId: 'life-of-pi', href: '/nb/?preset=life-of-pi' },
+			]}
+		/>
+
+		<MovieFaq
+			eyebrow="DUNE FAQ"
+			heading="Vanlige spørsmål om Dune-fotofilteret"
+			faqs={faqs}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 text-center sm:px-6">
+			<p class="text-base leading-7 text-body">
+				Foretrekker du en annen films look? Bla gjennom <a href="/nb/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">hele biblioteket med 60 presets</a>,
+				les hele guiden om hvordan du <a href="/nb/guides/how-to-make-photos-look-cinematic/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">får bilder til å se filmatiske ut</a>,
+				eller gå til <a href="/nb/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">hjemmesiden</a> for å starte med blanke ark.
+			</p>
+		</section>
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../../lib/landing';
+</script>

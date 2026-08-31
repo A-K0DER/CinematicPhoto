@@ -1,0 +1,191 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import DropZone from '../../../components/DropZone.astro';
+import BeforeAfter from '../../../components/BeforeAfter.astro';
+import RelatedPresets from '../../../components/RelatedPresets.astro';
+import MovieFaq from '../../../components/MovieFaq.astro';
+import { getPreset } from '../../../lib/presets';
+
+const preset = getPreset('interstellar');
+const path = '/presets/interstellar/';
+const url = `https://cinematicphoto.com/nb${path}`;
+
+const title = 'Interstellar Color Grading og fotofilter | Gratis filmatisk verktøy';
+const description =
+	'Bruk denne gratis Interstellar-fargegradfilteret og fotoeditoren til å farge bildet ditt med filmens kalde kosmiske blått og dype svarttoner, direkte i nettleseren, ingen konto nødvendig.';
+const keywords =
+	'interstellar color grading, interstellar fotofilter, interstellar fotoeditor, interstellar editor, interstellar fargegrad, inception fotofilter';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	name: title,
+	description,
+	url,
+	isPartOf: { '@type': 'WebSite', name: 'Cinematic Photo', url: 'https://cinematicphoto.com' },
+};
+
+const faqs = [
+	{
+		q: 'Er dette et offisielt Interstellar-fotofilter?',
+		a: 'Nei. Denne presetten er inspirert av den visuelle estetikken i Interstellars filmfotografi, den er ikke et offisielt filter lisensiert av eller tilknyttet studioet eller filmens skapere. Det er en uavhengig fargegrad bygget for å gjenskape looken, ikke et merkevaresamarbeidsprodukt.',
+	},
+	{
+		q: 'Hvorfor virker Interstellar-presetten mindre mettet enn andre presets i dette verktøyet?',
+		a: 'Det er tilsiktet, ikke en feil. Filmen fjerner farge fra bildet mer aggressivt enn en typisk avmetting, rundt to femtedeler av fargen er fjernet her, for å holde paletten kald og klinisk fremfor stemningsfull eller varm. Det er den kraftigste avmettingen av alle de fem filminspirerte presetene.',
+	},
+	{
+		q: 'Finnes det en egen Interstellar-fotoeditor?',
+		a: 'Denne siden er nettopp den dedikerte editoren, Interstellar-graden lastes forhåndsvalgt i dropsonen over, så du kan slippe et bilde og umiddelbart justere korn, vignettering og glød uten å måtte lete gjennom hele 60-preset-biblioteket først.',
+	},
+	{
+		q: 'Fungerer Interstellar-presetten på bilder med mennesker, eller bare landskap?',
+		a: 'Den fungerer på begge deler. Graden er et globalt farge- og kontrastskifte, så portretter og bilder med mennesker fungerer fint, selv om den kalde, avmettede tonen har en tendens til å virke mer dramatisk på vide, minimale komposisjoner enn på nære, varmtonede portretter.',
+	},
+	{
+		q: 'Hvordan er Interstellar forskjellig fra Inception-presetten?',
+		a: 'Begge er kjøligtonede sci-fi-grader fra Christopher Nolan, men Interstellar går betydelig lenger på avmetting og holder kornet svært lavt for et rent, nesten sterilt uttrykk. Inception beholder mer farge og litt mer korn, nærmere en stålblå drømmetilstand enn den kalde verdensrommet.',
+	},
+	{
+		q: 'Hvorfor er standardkornet så lavt på Interstellar-presetten?',
+		a: 'De fleste presets i dette verktøyet har som standard merkbart korn for å selge en filmstock-tekstur. Interstellar er et bevisst unntak, en av de laveste standard kornverdiene av alle 60 presets, fordi looken denne presetten sikter mot er ren og minimal fremfor grovkornet. Du kan alltid legge til mer korn manuelt i editoren hvis du vil ha en tyngre filmfølelse.',
+	},
+	{
+		q: 'Hva slags bilder passer best med en Interstellar-inspirert fargegrad?',
+		a: 'Nattehimmel og astrofotografi, minimalistiske komposisjoner med ett motiv, kjølige interiører, og reflekterende vann eller is passer alle godt til den kalde blå paletten. Scener som allerede er sparsomme eller geometriske har en tendens til å virke mer slående enn travle, fargerike bilder.',
+	},
+];
+---
+
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Hjem', href: '/nb/' },
+				{ label: 'Alle presets', href: '/nb/presets/' },
+				{ label: 'Interstellar' },
+			]}
+		/>
+
+		<DropZone presetId={preset.id} showHeading={false} showFooterLinks={false} />
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">FILMINSPIRERT PRESET</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Interstellar-fotofilteret: kaldt kosmisk blått og dyp verdensrom-svart.
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				En gratis Interstellar-fotoeditor og fargegrad-preset inspirert av den visuelle estetikken
+				til Christopher Nolans Interstellar, bygget for å gi bilder filmens tilbakeholdne, klinisk
+				kalde blåpalett uten å røre et kurvepanel.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">ESTETIKKEN</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Klinisk kaldt, bevisst tilbakeholdent
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Filmet stort sett på 35mm- og 70mm-film, bygde fotograf Hoyte van Hoytema Interstellars
+					palett rundt tilbakeholdenhet. Farge trekkes tilbake i stedet for å forsterkes, slik at
+					kaldt blått og nesten monokromt grått dominerer både filmens romskip-interiører og dens
+					jordiske gårdslandskap-eksteriører, en visuell rød tråd som binder to svært ulike
+					settinger sammen.
+				</p>
+				<p>
+					Det er en look som stoler på negativt rom og skala fremfor farge for å skape stemning:
+					dype svarttoner, sparsomme komposisjoner og en kontrollert, nesten dokumentarisk følelse
+					av lys. Der en film som Dune lener seg mot varme og glød, går Interstellar motsatt vei:
+					kjølig, rent og stille.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">FØR / ETTER</span>
+			<h2 class="mb-6 font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Se graden brukt
+			</h2>
+			<BeforeAfter preset={preset} />
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">FARGEVITENSKAPEN</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Hvordan Interstellar-fargegraden faktisk fungerer
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Denne presetten senker metningen kraftigere enn noen annen filmgrad i dette verktøyet,
+					forbi halvveispunktet, mens kontrast justeres litt opp og lysstyrke senkes litt for å
+					fordype svarttonene. Den basen gjør mesteparten av jobben: et nesten monokromt, lett kjølig
+					utgangspunkt før noen overlay legges til.
+				</p>
+				<p>
+					En mørk marineblå-til-stålblå overlay forsterker deretter den kalde tonen gjennom skygger
+					og mellomtoner. Vignetteringen ligger på den sterkere siden for å holde bildekantene mørke
+					og motivet isolert, mens kornet bevisst holdes lavt, en av de laveste standardverdiene av
+					alle presets her, for et rent, minimalt uttrykk fremfor en grovkornet filmstock-look.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BESTE BILDER FOR DENNE PRESETTEN</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Hva du bør bruke den på
+			</h2>
+			<ul class="mt-6 flex flex-col gap-4 text-base leading-7 text-body">
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Nattehimmel og astrofotografi.</span> Den kalde, lite mettede paletten passer naturlig til stjerner, måneskinn og dyp blå himmel.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Minimalistiske bilder med ett motiv.</span> Sparsomme komposisjoner med rom til å puste passer bedre til gradens tilbakeholdne, stille tone enn travle bilder.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Vann, is og reflekterende overflater.</span> Kjølig reflektert lys forsterker den blå overlayen i stedet for å motarbeide den.</span>
+				</li>
+			</ul>
+		</section>
+
+		<RelatedPresets
+			heading="Flere filminspirerte grader"
+			items={[
+				{ presetId: 'dark-knight', href: '/nb/presets/the-dark-knight/' },
+				{ presetId: 'blade-runner', href: '/nb/presets/blade-runner-2049/' },
+				{ presetId: 'dune', href: '/nb/presets/dune/' },
+				{ presetId: 'matrix', href: '/nb/presets/the-matrix/' },
+				{ presetId: 'inception', href: '/nb/presets/inception/' },
+				{ presetId: 'terminator-2', href: '/nb/?preset=terminator-2' },
+			]}
+		/>
+
+		<MovieFaq
+			eyebrow="INTERSTELLAR FAQ"
+			heading="Vanlige spørsmål om Interstellar-fotofilteret"
+			faqs={faqs}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 text-center sm:px-6">
+			<p class="text-base leading-7 text-body">
+				Foretrekker du en annen films look? Bla gjennom <a href="/nb/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">hele biblioteket med 60 presets</a>,
+				les hele guiden om hvordan du <a href="/nb/guides/how-to-make-photos-look-cinematic/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">får bilder til å se filmatiske ut</a>,
+				eller gå til <a href="/nb/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">hjemmesiden</a> for å starte med blanke ark.
+			</p>
+		</section>
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../../lib/landing';
+</script>

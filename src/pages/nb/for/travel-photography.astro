@@ -1,0 +1,131 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import DropZone from '../../../components/DropZone.astro';
+import MovieFaq from '../../../components/MovieFaq.astro';
+
+const path = '/for/travel-photography/';
+const title = 'Filmatisk reisefotografifilter | Cinematic Photo Editor';
+const description =
+	'Fem filmatiske presets valgt for reise- og landskapsfotografi: varme, breie filmgrader bygget for ørkener, kystlinjer og åpen himmel.';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'CollectionPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com/nb${path}`,
+};
+
+const faqs = [
+	{
+		q: 'Hva gjør en filmatisk preset bra for reise- og landskapsbilder?',
+		a: 'En preset bygget rundt naturlig lys og åpen plass fremfor en tung, jevn fargetone. De fem presetene her, Dune, Gladiator, Life of Pi, Pirates of the Caribbean og The Fellowship of the Ring, graderer alle mot varme sol- og himmeltoner som passer vide, lysfylte bilder i stedet for trange, kunstig belyste.',
+	},
+	{
+		q: 'Hvilken preset fungerer best for ørken- eller tørre landskapsbilder?',
+		a: 'Den varme ørkengull-graden i Dune og de blekede sand- og gyllenarena-tonene i Gladiator er begge bygget spesifikt rundt solbleikte, støvete miljøer, de er den sterkeste matchen for ørken-, canyon- eller tørre slettebilder.',
+	},
+	{
+		q: 'Hvilken preset passer til hav-, kystlinje- eller tropiske reisebilder?',
+		a: 'Den levende havblå- og solnedgang-oransje-graden i Life of Pi er tilpasset åpent vann og himmel, og det høysjø-petroleumsfargede og solbelyste gullet i Pirates of the Caribbean fungerer godt for kyst- eller havnebilder med synlig vann.',
+	},
+	{
+		q: 'Finnes det en filmatisk preset for skoger, fjell eller grønne landskap?',
+		a: 'Den mytiske grønn-og-gull-graden i The Fellowship of the Ring er bygget rundt frodig, naturlig grønt og episk skala, noe som gjør den til en sterk match for skog-, dal- eller fjellandskapsbilder.',
+	},
+	{
+		q: 'Bør jeg bruke en annen preset for gyllen time versus midt på dagen på reisebilder?',
+		a: 'De varme presetene her, spesielt Dune og Gladiator, er naturlig mer overbærende på gyllen time-bilder som allerede har varmt retningsbestemt lys. I flatt middagslys holder en lettere hånd med vignetterings- og korngliderne graden fra å føles for tung over et allerede lyst bilde.',
+	},
+	{
+		q: 'Fungerer disse filmatiske presetene på reiseportretter, ikke bare landskap?',
+		a: 'Det kan de, men sjekk den dedikerte portrettfilter-guiden først, noen av disse gradene legger varme toner bredt over hele bildet, noe som ser bra ut på vide landskapsbilder, men krever en lettere hånd på nærbilder av ansikter.',
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Hjem', href: '/nb/' },
+				{ label: 'For' },
+				{ label: 'Reisefotografi' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">BRUKSOMRÅDE-GUIDE</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Filmatisk reisefotografifilter
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Fem filmatiske presets valgt for åpne landskap: varme, breie filmgrader bygget for ørkener,
+				kystlinjer og episk naturlig lys.
+			</p>
+		</section>
+
+		<DropZone
+			presetIds={['dune', 'gladiator', 'life-of-pi', 'pirates-of-the-caribbean', 'fellowship-of-the-ring']}
+			showHeading={false}
+			showFooterLinks={false}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">HVA DU BØR SE ETTER</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Hva som gjør en preset landskapsklar
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Reise- og landskapsbilder er som regel vide, lysfylte bilder med mye naturlig farge
+					allerede i seg, himmel, sand, vann, løv, så de sterkeste presetene jobber med det
+					eksisterende lyset i stedet for å kjempe mot det. Både det varme ørkengullet i Dune og
+					det levende havblå- og solnedgang-oransje i Life of Pi lener seg mot naturlig lys i
+					stedet for å flate det ut.
+				</p>
+				<p>
+					Skala teller også: disse gradene er bygget for å holde seg over et bredt bilde med mye
+					visuell informasjon, i motsetning til noen trangere, portrettorienterte grader som
+					konsentrerer effekten sin på ett enkelt motiv.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">GÅ DYPERE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Flere måter å forme looken på
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/nb/for/portraits/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Filmatisk portrettfilter</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Hudtone-trygge grader for mennesker i bildet</span>
+				</a>
+				<a href="/nb/for/instagram/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Filmatisk Instagram-filter</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Slående grader bygget for feeden</span>
+				</a>
+				<a href="/nb/guides/how-to-make-photos-look-cinematic/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Slik får du bilder til å se filmatiske ut</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Den komplette steg-for-steg-guiden</span>
+				</a>
+				<a href="/nb/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Se alle 60 presets</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Hver fargegrad, sortert etter sjanger</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Vanlige spørsmål om filmatiske reisefotofiltre" faqs={faqs} />
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../../lib/landing';
+</script>

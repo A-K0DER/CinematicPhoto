@@ -1,0 +1,146 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import DropZone from '../../components/DropZone.astro';
+import SeoContent from '../../components/nb/SeoContent.astro';
+import Footer from '../../components/Footer.astro';
+import AdSlot from '../../components/AdSlot.astro';
+
+const title = 'Cinematic Photo Editor | Gratis nettbasert filmlook-fargekorrigering';
+const description =
+	'Gratis cinematisk fotoredigering på nett, uten opplasting. Forvandle ethvert foto til en filmklar look med ett klikk, med 60 filminspirerte color grading-presets.';
+const keywords =
+	'cinematisk fotoeditor, cinematisk fotoredigering på nett gratis, cinematisk fotoeffekt, cinematiske portretter, cinematisk color grading, movie color grade presets, filmlook fotofilter, tiktok mal, tiktok template, tiktok safe zone, tiktok safe zone mal, tiktok safe zone png, tiktok safe zone overlay, instagram safe zone, instagram safe zone mal, instagram safe zone overlay, instagram reels safe zone, instagram reels safe zone mal, instagram reels safe zone mal png, youtube miniatyrbilde størrelse, youtube thumbnail maker, youtube thumbnail checker, youtube thumbnail grabber, youtube thumbnail viewer';
+---
+
+<Layout title={title} description={description} keywords={keywords} path="/">
+	<Navbar variant="landing" />
+	<main>
+		<DropZone
+			presetIds={[
+				'dark-knight',
+				'blade-runner',
+				'dune',
+				'interstellar',
+				'matrix',
+				'breaking-bad',
+				'stranger-things',
+				'game-of-thrones',
+				'dark',
+				'peaky-blinders',
+			]}
+			heading="Den gratis cinematiske fotoeditoren for filmklare bilder."
+			subheading="Last opp et foto for å bruke legendariske Hollywood-color-grades. Alt kjører direkte i nettleseren din. Ingenting blir noensinne lastet opp."
+		/>
+		<AdSlot />
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">GRATIS VERKTØY</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Sjekk innholdet ditt før du publiserer
+			</h2>
+			<p class="mt-4 max-w-xl text-base leading-7 text-body">
+				Gratis nettleserverktøy som viser hvordan fotoet eller miniatyrbildet ditt faktisk vil se
+				ut når det er live, med plattformens egen brukerflate lagt over, eller et miniatyrbilde
+				forminsket til feed-størrelse.
+			</p>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/nb/tools/youtube-thumbnail-preview/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">YouTube-miniatyrbilde-forhåndsvisning</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Se det i søk, anbefalinger og på mobil</span>
+				</a>
+				<a href="/nb/tiktok-safe-zone/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">TikTok safe zone-sjekker</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Enkeltplattform-versjon, fokusert på TikTok</span>
+				</a>
+				<a href="/nb/instagram-reels-safe-zone/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Instagram Reels safe zone-sjekker</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Enkeltplattform-versjon, fokusert på Reels</span>
+				</a>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">TIKTOK-, INSTAGRAM- &amp; YOUTUBE-VERKTØY</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				En gratis tiktok mal, Instagram safe zone og YouTube-miniatyrbilde-verktøykasse
+			</h2>
+			<div class="mt-6 flex flex-col gap-6 text-base leading-7 text-body">
+				<p>
+					Cinematic Photo startet som en color grading-editor, men å publisere et foto eller en
+					kort video godt krever mer enn en god fargekorreksjon, det krever å sjekke
+					komposisjonen mot plattformens egen brukerflate før noe går live. Ved siden av
+					60-preset-editoren over tilbyr denne siden en liten verktøykasse med gratis
+					nettleserverktøy laget nøyaktig for det steget: en tiktok mal-sjekker, et Instagram
+					safe zone-verktøy som dekker Reels, Story og feed-innlegg, og et
+					YouTube-miniatyrbilde-forhåndsvisningsverktøy. Alle sammen kjører på samme måte som
+					fotoeditoren, helt lokalt i et HTML-lerret, uten at noe noensinne lastes opp til en
+					server, så det trengs verken en konto eller en native app for å bruke noen av dem.
+				</p>
+
+				<h3 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">
+					TikTok mal og safe zone-sjekker
+				</h3>
+				<p>
+					<a href="/nb/tiktok-safe-zone/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">TikTok safe zone-sjekkeren</a> fungerer som en lettvekts
+					tiktok mal-app rett i nettleseren: slipp et foto eller et bilde fra en video på en
+					1080x1920-ramme, og den tegner opp TikToks egen toppfelt, tekst-/brukernavn-/lyd-felt,
+					og lik-kommenter-del-ikonraden oppå, i riktig skala, akkurat der TikToks brukerflate
+					faktisk vil ligge når en video er live. For alle som redigerer i CapCut eller Premiere
+					Pro, bryter den dedikerte siden for <a href="/nb/tiktok-safe-zone-template/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">tiktok safe zone-malen</a> ned den samme
+					tiktok mal-png-en i eksakte piksel- og prosenttall for hver sone, pluss hvordan man gjør
+					den tiktok safe zone-overlayen om til et hjelpelag du sletter før den endelige
+					eksporten. Begge sidene sjekkes jevnlig på nytt mot TikToks gjeldende brukerflate i
+					stedet for å bli liggende som en statisk tiktok safe zone-png hentet én gang og
+					glemt.
+				</p>
+
+				<h3 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">
+					Instagram safe zone-mal for Reels, Story &amp; innlegg
+				</h3>
+				<p>
+					Instagram sprer sitt eget safe zone-problem over tre forskjellige formater, og denne
+					verktøykassen behandler dem som tre separate sjekker i stedet for én instagram safe
+					zone-overlay som gjenbrukes overalt. <a href="/nb/instagram-reels-safe-zone/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Instagram safe zone-sjekkeren</a> bytter
+					mellom Reels, Story og feed-innlegg, slik at et ansikt, en tekst eller en logo kan
+					testes mot akkurat det formatet det faktisk skal publiseres til; instagram reels safe
+					zone tar spesifikt hensyn til teksten, brukernavnet, lydtittelen og
+					engasjement-ikonkolonnen Instagram legger over en 9:16-Reel. Den tilhørende siden for
+					<a href="/nb/instagram-safe-zone-template/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">instagram safe zone-malen</a> gjør de samme tallene, inkludert
+					dimensjonene til instagram reels safe zone-malen i png, om til en referanse enhver
+					redigeringsapp kan importere som et hjelpelag før den endelige eksporten.
+				</p>
+
+				<h3 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">
+					YouTube-miniatyrbilde-størrelse, sjekker &amp; forhåndsvisning
+				</h3>
+				<p>
+					YouTubes egen anbefalte youtube thumbnail-størrelse er 1280x720, men et miniatyrbilde
+					som ser skarpt ut i den størrelsen kan likevel falle sammen når det vises på 168px i en
+					sidepanel eller 112px på en mobil. <a href="/nb/tools/youtube-thumbnail-preview/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">YouTube-miniatyrbilde-forhåndsvisningsverktøyet</a> fungerer
+					både som en youtube thumbnail-sjekker og en youtube thumbnail-viewer for dine egne
+					opplastinger: slipp inn et ferdig miniatyrbilde, fyll ut en tittel og et kanalnavn, og
+					se det rendret i anbefalte videoer, søkeresultater og mobilfeeden, sammen med en egen
+					småformat-sjekk ved tre reelle bredder. Det er ikke en youtube thumbnail-maker som
+					designer selve grafikken, eller en youtube thumbnail-grabber som henter et
+					miniatyrbilde fra en annens eksisterende video, det er steget som kommer etter begge
+					deler, og som bekrefter at et ferdig miniatyrbilde faktisk fungerer før det går live.
+				</p>
+
+				<p>
+					Ingen av disse verktøyene krever de cinematiske presetene over, de er gratis å bruke på
+					egen hånd. Men sammen med color grading-editoren dekker de de to halvdelene av å gjøre
+					et foto eller en klipp klar til publisering: å få det til å se riktig ut, og å bekrefte
+					at det overlever plattformens egen brukerflate når det er live.
+				</p>
+			</div>
+		</section>
+
+		<SeoContent />
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

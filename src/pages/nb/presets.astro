@@ -1,0 +1,108 @@
+---
+// Genre names and the preset dataset itself (src/lib/presets.ts) are shared,
+// English-only data, not localized yet. Only this page's own chrome is translated.
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import { GENRES, PRESETS, getPresetsByGenre, getOverlayBackground } from '../../lib/presets';
+import { MOVIE_PRESET_PAGES } from '../../data/moviePresetPages';
+
+const title = `Alle ${PRESETS.length} film- og serie-presets | Cinematic Photo Editor`;
+const description = `Utforsk alle ${PRESETS.length} film- og serieinspirerte cinematiske color grading-presets fordelt på ${GENRES.length} sjangre, fra Thriller til TV-serier. Velg ett og bruk det i den gratis nettbaserte editoren.`;
+
+const presetListStructuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'ItemList',
+	name: 'Cinematic Photo Editor movie color grading presets',
+	numberOfItems: PRESETS.length,
+	itemListElement: PRESETS.map((preset, index) => ({
+		'@type': 'ListItem',
+		position: index + 1,
+		name: `${preset.name} (${preset.genre}), ${preset.tagline}`,
+	})),
+};
+---
+
+<Layout title={title} description={description} path="/presets/">
+	<Navbar />
+	<main class="mx-auto max-w-5xl px-4 py-20 sm:px-6">
+		<span class="mb-4 block font-mono text-xs tracking-wide text-mute">ALLE PRESETS</span>
+		<h1 class="max-w-2xl font-sans text-3xl font-semibold tracking-[-0.03em] text-ink sm:text-4xl">
+			{PRESETS.length} film- og serieinspirerte fargekorreksjoner, sortert etter sjanger
+		</h1>
+		<p class="mt-4 max-w-xl text-base leading-7 text-body">
+			Velg et preset under for å hoppe rett inn i editoren med det forhåndsvalgt. Last opp eller
+			dra inn et foto der for å se korreksjonen brukt. Presetene er fordelt på {GENRES.length} sjangre: {GENRES.join(', ')}.
+		</p>
+
+		<section class="mt-10 rounded-lg border border-hairline bg-canvas-soft p-5">
+			<span class="mb-3 block font-mono text-[11px] font-medium tracking-wide text-mute uppercase">
+				Eller bla gjennom etter look
+			</span>
+			<div class="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
+				<a href="/nb/looks/dark-and-moody/" class="rounded-md border border-hairline bg-canvas p-3 text-sm font-medium text-ink transition-colors hover:border-hairline-strong">
+					Mørk &amp; Stemningsfull
+				</a>
+				<a href="/nb/looks/vintage-35mm-film/" class="rounded-md border border-hairline bg-canvas p-3 text-sm font-medium text-ink transition-colors hover:border-hairline-strong">
+					Vintage 35mm Film
+				</a>
+				<a href="/nb/for/portraits/" class="rounded-md border border-hairline bg-canvas p-3 text-sm font-medium text-ink transition-colors hover:border-hairline-strong">
+					For portretter
+				</a>
+				<a href="/nb/for/instagram/" class="rounded-md border border-hairline bg-canvas p-3 text-sm font-medium text-ink transition-colors hover:border-hairline-strong">
+					For Instagram
+				</a>
+				<a href="/nb/for/youtube-thumbnails/" class="rounded-md border border-hairline bg-canvas p-3 text-sm font-medium text-ink transition-colors hover:border-hairline-strong">
+					For YouTube-miniatyrbilder
+				</a>
+				<a href="/nb/for/travel-photography/" class="rounded-md border border-hairline bg-canvas p-3 text-sm font-medium text-ink transition-colors hover:border-hairline-strong">
+					For reisefotografering
+				</a>
+				<a href="/nb/guides/how-to-make-photos-look-cinematic/" class="rounded-md border border-hairline bg-canvas p-3 text-sm font-medium text-ink transition-colors hover:border-hairline-strong">
+					Veiledninger
+				</a>
+				<a href="/nb/alternatives/" class="rounded-md border border-hairline bg-canvas p-3 text-sm font-medium text-ink transition-colors hover:border-hairline-strong">
+					Alternativer
+				</a>
+			</div>
+		</section>
+
+		{
+			GENRES.map((genre) => (
+				<section class="mt-14 first:mt-12">
+					<h2 class="mb-4 font-mono text-[11px] font-medium tracking-wide text-mute uppercase">
+						{genre}
+					</h2>
+					<div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+						{getPresetsByGenre(genre).map((preset) => (
+							<a
+								href={MOVIE_PRESET_PAGES[preset.id] ? `/nb/presets/${MOVIE_PRESET_PAGES[preset.id].slug}/` : `/nb/?preset=${preset.id}`}
+								class="group flex flex-col items-start gap-2 rounded-md border border-hairline bg-canvas p-2.5 text-left transition-colors hover:border-hairline-strong"
+							>
+								<span class="relative block h-14 w-full overflow-hidden rounded-sm">
+									<img
+										loading="lazy"
+										decoding="async"
+										alt={preset.name}
+										src={preset.image}
+										style={`filter: ${preset.filter};`}
+										class="absolute inset-0 h-full w-full object-cover"
+									/>
+									<span
+										class="absolute inset-0"
+										style={`background: ${getOverlayBackground(preset.overlay)}; opacity: ${preset.overlay.opacity}; mix-blend-mode: ${preset.overlay.blend};`}
+									/>
+								</span>
+								<span class="font-sans text-xs font-medium text-ink">{preset.name}</span>
+								<span class="font-mono text-[10px] leading-tight text-mute">{preset.tagline}</span>
+							</a>
+						))}
+					</div>
+				</section>
+			))
+		}
+	</main>
+	<Footer />
+
+	<script type="application/ld+json" set:html={JSON.stringify(presetListStructuredData)} />
+</Layout>

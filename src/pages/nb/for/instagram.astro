@@ -1,0 +1,184 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import DropZone from '../../../components/DropZone.astro';
+import MovieFaq from '../../../components/MovieFaq.astro';
+
+const path = '/for/instagram/';
+const title = 'Filmatisk Instagram-fotofilter og editor | Beskjær for feed, Story, Reels';
+const description =
+	'Fem filmatiske presets valgt for Instagram, pluss innebygd beskjæring til 1:1, 4:5 og 9:16 slik at feed-, portrett- og Story/Reel-eksportene dine kommer ut klare til å postes.';
+const keywords =
+	'instagram fotofilter, instagram fotoeditor, instagram beskjæringsstørrelse, instagram bildeforhold, instagram story størrelse, instagram reel størrelse, filmatisk instagram filter';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'CollectionPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com/nb${path}`,
+};
+
+const faqs = [
+	{
+		q: 'Hva gjør en filmatisk preset bra for Instagram?',
+		a: 'En preset som leses tydelig i liten størrelse: nok fargekontrast og metning til å skille seg ut i en scrollende feed, uten at skyggedetaljer knuses så mye at de blir grumsete i en thumbnail. De fem presetene her, Baby Driver, Stranger Things, Blade Runner 2049, Top Gun: Maverick og Euphoria, lener alle mot slående fremfor subtilt.',
+	},
+	{
+		q: 'Bør jeg bruke samme preset for hele Instagram-rutenettet mitt?',
+		a: 'Mange skapere gjør det, én konsekvent preset på tvers av rutenettet gir en helhetlig, gjenkjennelig feed-estetikk. Både de neon-80-tallsaktige tonene i Stranger Things og den lilla-blå disen i Euphoria fungerer godt som en signaturlook gjentatt over flere innlegg.',
+	},
+	{
+		q: 'Fungerer disse presetene for Instagram Story- og Reel-forsider, ikke bare feed-innlegg?',
+		a: 'Ja. Siden Story- og Reel-forsider vises i en lignende eller mindre størrelse enn feed-innlegg, gjelder samme feed-vennlige kriterier, slående farge og tydelig kontrast som leses ved et blikk. Amber-petroleum-splitten i Blade Runner 2049 og det blanke himmelblåe i Top Gun: Maverick er spesielt effektive på video-thumbnails.',
+	},
+	{
+		q: 'Vil et filmatisk filter skade Instagram-engasjementet sammenlignet med et naturlig bilde?',
+		a: 'Det kommer an på nisjen din, men en tydelig, konsekvent visuell stil er generelt forbundet med sterkere feed-gjenkjenning, ikke svakere engasjement. Test én preset mot et naturlig innlegg for å se hva ditt spesifikke publikum responderer på.',
+	},
+	{
+		q: 'Hvordan holder jeg en filmatisk Instagram-look konsekvent på tvers av ulike lysforhold?',
+		a: 'Velg én preset som din signaturgrad, og bruk deretter korn- og vignetteringsgliderne (ikke selve fargen) for å kompensere for lysforskjeller mellom bildene, litt mer korn på flatt belyste bilder, litt mindre vignettering på allerede mørke bilder holder kjernefargeidentiteten konsekvent på tvers av et variert sett kildebilder.',
+	},
+	{
+		q: 'Hvilken preset fungerer best for estetiske, stemningsfulle Instagram-feeder?',
+		a: 'Den lilla-blå neon-disen i Euphoria og amber-petroleum-splitten i Blade Runner 2049 lener seg begge mot en stemningsfull, atmosfærisk estetikk som er populær på Instagram. For en varmere, mykere stemningsfull look, se guiden til det mørke, stemningsfulle fotofilteret i stedet.',
+	},
+	{
+		q: 'Beskjærer editoren bilder til riktig størrelse for Instagram?',
+		a: 'Ja. Editoren har en innebygd bildeforhold-kontroll med Instagram-størrelser med ett klikk: 1:1 for feeden, 4:5 for portrett-innlegg, og 9:16 for Stories og Reels. Velg en størrelse etter at du har brukt en preset, og eksporten blir automatisk midtbeskåret til det forholdet, ikke noe eget beskjæringsverktøy nødvendig.',
+	},
+	{
+		q: 'Hvilket Instagram-bildeforhold bør jeg bruke: 1:1, 4:5 eller 9:16?',
+		a: '4:5 portrett får mest vertikal plass i en scrollende feed, siden Instagram viser det større enn et kvadratisk innlegg. 1:1 kvadrat er det tryggeste valget hvis du også planlegger å gjenbruke samme eksport andre steder, siden det beskjærer mindre aggressivt fra et typisk bilde. 9:16 er bygget for Stories og Reels, ikke feed-innlegg.',
+	},
+	{
+		q: 'Vil beskjæring til et kvadratisk eller portrettformat kutte bort en del av bildet mitt?',
+		a: 'Det kan skje, siden det å tilpasse et rektangulært bilde til et smalere forhold betyr å kutte sidene eller topp og bunn. Beskjæringen i editoren er alltid sentrert, så midten av bildet bevares alltid, det er likevel lurt å la det være litt pusterom rundt motivet i originalbildet før du bruker et trangt forhold som 4:5 eller 9:16.',
+	},
+];
+---
+
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Hjem', href: '/nb/' },
+				{ label: 'For' },
+				{ label: 'Instagram' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">BRUKSOMRÅDE-GUIDE</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Filmatisk Instagram-fotofilter &amp; editor
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Fem filmatiske presets valgt for feeden, og en innebygd Instagram-fotoeditor som beskjærer
+				eksporten din til 1:1, 4:5 eller 9:16 slik at den er riktig formatert før du poster.
+			</p>
+		</section>
+
+		<DropZone
+			presetIds={['baby-driver', 'stranger-things', 'blade-runner', 'top-gun-maverick', 'euphoria']}
+			showHeading={false}
+			showFooterLinks={false}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">HVA DU BØR SE ETTER</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Hva som gjør en preset feed-vennlig
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Instagram komprimerer bilder og krymper dem ned til en rutenett-thumbnail, så subtile
+					grader med lav kontrast har en tendens til å flate ut og miste karakteren sin. Presetene
+					her lener seg bevisst mot slående farge og tydelig kontrast: pop-fargede gater i Baby
+					Driver, neon-80-tallsvarmen i Stranger Things, og amber-petroleum-splitten i Blade Runner
+					2049 beholder alle sin identitet selv i liten størrelse.
+				</p>
+				<p>
+					Konsistens teller også. Å gjenbruke samme preset, eller de samme to eller tre, på tvers
+					av rutenettet bygger en gjenkjennelig estetikk over tid fremfor et usammenhengende sett
+					enkeltredigeringer.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">INNEBYGDE INSTAGRAM-STØRRELSER</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Eksporter i riktig størrelse, uten eget beskjæringsverktøy
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Når en preset er brukt, midtbeskjærer editorens <strong class="font-medium text-ink">bildeforhold</strong>-kontroll
+					bildet til en standard Instagram-størrelse før eksport: <strong class="font-medium text-ink">1:1</strong> for
+					et feed-innlegg, <strong class="font-medium text-ink">4:5</strong> for det høyere portrettformatet
+					Instagram gir mer vertikal plass i en scrollende feed, eller <strong class="font-medium text-ink">9:16</strong> for
+					en Story- eller Reel-forside. Beskjæringen, fargegraden og korn-/vignetterings-/glødejusteringene
+					skjer alle i samme eksport, så det trengs ingen omvei via en egen beskjæringsapp.
+				</p>
+				<p>
+					Beskjæringen er alltid sentrert på originalbildet, og verktøyet skalerer aldri opp, det
+					kutter bare ned til målforholdet ved bildets opprinnelige oppløsning. Å bytte
+					bildeforhold etter at en preset er brukt krever ingen ny redigering av noe annet; korn,
+					vignettering og glød forblir akkurat som innstilt.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BRUK MED FORSIKTIGHET I LITEN STØRRELSE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Presets du bør tenke deg om to ganger med for feed-innlegg
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Svært mørke, sterkt avmettede grader som <a href="/nb/presets/interstellar/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Interstellar</a> eller
+					presetene på siden <a href="/nb/looks/dark-and-moody/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Mørkt, stemningsfullt fotofilter</a> kan
+					miste mesteparten av nyansene sine når Instagram komprimerer og krymper bildet, de leses
+					bedre som et innlegg i full størrelse enn som en scrollende thumbnail. De fungerer
+					fortsatt godt for enkelte featureinnlegg eller karuseller sett i full størrelse.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">GÅ DYPERE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Flere måter å forme looken på
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/nb/for/youtube-thumbnails/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Filmatiske YouTube-thumbnails</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Dristige, kontrastrike presets for skapere</span>
+				</a>
+				<a href="/nb/for/travel-photography/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Filmatisk reisefotografi</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Landskaps- og utendørsvennlige grader</span>
+				</a>
+				<a href="/nb/guides/how-to-make-photos-look-cinematic/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Slik får du bilder til å se filmatiske ut</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Den komplette steg-for-steg-guiden</span>
+				</a>
+				<a href="/nb/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Se alle 60 presets</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Hver fargegrad, sortert etter sjanger</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Vanlige spørsmål om filmatiske Instagram-filtre" faqs={faqs} />
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../../lib/landing';
+</script>

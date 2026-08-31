@@ -1,0 +1,220 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import MovieFaq from '../../../components/MovieFaq.astro';
+
+const path = '/guides/social-media-safe-zones/';
+const title = 'Guide til safe zones for sosiale medier: TikTok, Reels, Stories og Posts | Cinematic Photo';
+const description =
+	'Alle store safe zones for vertikalvideo på ett sted: eksakte mål for TikTok, Instagram Reels, Stories og feed-innlegg, pluss designregler for å holde ansikter, tekst og logoer synlige.';
+const keywords =
+	'social media safe zone, safe zone guide, tiktok safe zone dimensjoner, instagram safe zone dimensjoner, reels safe zone størrelse, stories safe zone størrelse, vertikalvideo safe zone, 9:16 safe zone, instagram safe zone guide';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'Article',
+	headline: 'Guide til safe zones for sosiale medier: TikTok, Reels, Stories og Posts',
+	description,
+	url: `https://cinematicphoto.com/nb${path}`,
+	author: { '@type': 'Organization', name: 'Cinematic Photo' },
+	publisher: { '@type': 'Organization', name: 'Cinematic Photo' },
+	mainEntityOfPage: `https://cinematicphoto.com/nb${path}`,
+};
+
+const platforms = [
+	{
+		name: 'TikTok',
+		frame: '1080×1920 (9:16)',
+		reserved: 'Topplinje, nederste caption-/brukernavn-/lyd-bånd, høyre ikonrad',
+		note: 'Den høyre ikonraden er den skapere ofte glemmer, den tar de siste cirka 14% av bredden.',
+	},
+	{
+		name: 'Instagram Reels',
+		frame: '1080×1920 (9:16)',
+		reserved: 'Topplinje, nederste caption-/brukernavn-/lyd-bånd, høyre ikonrad',
+		note: 'Lignende form som TikToks, men båndene sitter i litt annen dybde, ikke gjenbruk én komposisjon for begge uten å sjekke.',
+	},
+	{
+		name: 'Instagram Stories',
+		frame: '1080×1920 (9:16)',
+		reserved: 'Øverste profil-/tidsstempel-linje, nederste svarfelt-rad',
+		note: 'Ingen sidekolonne med ikoner her, risikoen ligger øverst og nederst, ikke ved kantene.',
+	},
+	{
+		name: 'Instagram Post (feed-rutenett)',
+		frame: '1080×1350 (4:5)',
+		reserved: 'Øverste cirka 10% og nederste cirka 10%, beskåret av den kvadratiske profilrutenett-beskjæringen',
+		note: 'Ingenting tegnes oppå et innlegg, dette er en beskjæringssjekk, ikke en UI-overlappingssjekk.',
+	},
+];
+
+const faqs = [
+	{
+		q: 'Finnes det en safe zone som fungerer for alle plattformer?',
+		a: 'Nei. TikTok, Reels og Stories er alle 9:16, men grensesnittet deres sitter på ulike steder, og et feed-innlegg har et helt annet bildeforhold (4:5) med en beskjæringsrisiko i stedet for en UI-overlappingsrisiko. Å designe for det trangeste felles området på tvers av alle, omtrent den midtre tredjedelen, horisontalt og vertikalt, kommer nærmest en universell safe zone, men å sjekke hver plattform individuelt fanger opp mer enn den snarveien alene.',
+	},
+	{
+		q: 'Endrer disse målene seg noen gang?',
+		a: 'Ja, av og til. TikTok, Instagram og YouTube justerer alle grensesnittet sitt i appen over tid, flytter et caption-bånd noen prosent eller legger til en ny knapp. Tallene her er tette tilnærminger basert på publiserte spesifikasjoner for skapere og annonser, betrakt dem som en komposisjonssjekk fremfor en pikselnøyaktig garanti, og sjekk en mal jevnlig på nytt i stedet for å anta at den forblir nøyaktig for alltid.',
+	},
+	{
+		q: 'Hva er den raskeste måten å sjekke en safe zone på uten å eksportere først?',
+		a: 'Legg bildet rett inn i en safe zone-sjekker og se på overlayen før du eksporterer noe. Cinematic Photo har en dedikert TikTok safe zone-sjekker og en Instagram-sjekker som dekker Reels, Stories og Posts, begge kjører klientsidig, ingenting lastes opp.',
+	},
+	{
+		q: 'Betyr en safe zone like mye for et statisk bilde som for video?',
+		a: 'Ja. Et bildeinnlegg, et Reels-forsidebilde eller et TikTok-bildemodus-bilde sitter alle i samme ramme og får samme UI- eller beskjæringsbehandling som en video ville fått. Om noe betyr det enda mer for et bilde, en video har bevegelse og flere frames å jobbe med, et enkelt stillbilde har bare én komposisjon som må stemme.',
+	},
+	{
+		q: 'Hva bør jeg gjøre hvis et ansikt eller en logo må sitte nær en kant?',
+		a: "Der det er mulig, ramm inn eller beskjær på nytt slik at det viktige elementet havner innenfor den midtre tredjedelen i stedet. Når det ikke er mulig, foretrekk toppen av rammen fremfor bunnen, både TikToks og Reels' tyngste grensesnitt (caption, brukernavn, ikonrad) konsentreres i de nederste to tredjedelene, så plassering øverst har en tendens til å overleve flere plattformer.",
+	},
+	{
+		q: 'Er safe zones forskjellige for annonser versus organiske innlegg?',
+		a: 'I stor grad samme underliggende ramme og grensesnitt, men annonsespesifikasjonene er som regel den mer konservative, bedre dokumenterte kilden, siden en merkevare ikke har råd til en beskåret logo. Det er også derfor denne guiden, og verktøyene lenket under, henter tallene sine fra publiserte spesifikasjoner for skapere og annonser i stedet for å gjette fra skjermbilder.',
+	},
+];
+---
+
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Hjem', href: '/nb/' },
+				{ label: 'Guider' },
+				{ label: 'Safe zones for sosiale medier' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">SAFE ZONE-GUIDE</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Safe zones for sosiale medier, forklart
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				TikTok, Instagram Reels, Stories og feed-innlegg skjuler hver sin del av rammen bak sitt
+				eget grensesnitt eller sin egen beskjæring. Her er hva som er reservert hvor, og hvordan du
+				komponerer rundt det.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">REFERANSEN</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Hva hver plattform reserverer
+			</h2>
+			<div class="mt-6 overflow-x-auto">
+				<table class="w-full min-w-[560px] border-collapse text-left">
+					<thead>
+						<tr class="border-b border-hairline">
+							<th class="py-2.5 pr-4 font-mono text-[11px] font-medium tracking-wide text-mute uppercase">Plattform</th>
+							<th class="py-2.5 pr-4 font-mono text-[11px] font-medium tracking-wide text-mute uppercase">Ramme</th>
+							<th class="py-2.5 pr-4 font-mono text-[11px] font-medium tracking-wide text-mute uppercase">Reservert plass</th>
+						</tr>
+					</thead>
+					<tbody>
+						{
+							platforms.map((p) => (
+								<tr class="border-b border-hairline align-top">
+									<td class="py-3 pr-4 font-sans text-sm font-medium whitespace-nowrap text-ink">{p.name}</td>
+									<td class="py-3 pr-4 font-mono text-xs whitespace-nowrap text-mute">{p.frame}</td>
+									<td class="py-3 pr-4 text-sm leading-6 text-body">
+										{p.reserved}
+										<span class="mt-1 block text-xs text-mute">{p.note}</span>
+									</td>
+								</tr>
+							))
+						}
+					</tbody>
+				</table>
+			</div>
+			<p class="mt-4 text-sm leading-6 text-mute">
+				Dette er tette tilnærminger basert på hver plattforms publiserte spesifikasjoner for skapere
+				og annonser, ikke pikselnøyaktige målinger. Bruk de interaktive sjekkerne lenket under for å
+				legge de eksakte båndene over ditt eget bilde.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">DESIGNREGLER</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Komponer slik at ingenting viktig blir dekket
+			</h2>
+			<div class="mt-6 flex flex-col gap-6 text-base leading-7 text-body">
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Hold motivet i den midtre tredjedelen</h3>
+					<p class="mt-2">
+						På tvers av TikTok, Reels og Stories er det tryggeste området omtrent den midtre
+						tredjedelen av rammen, både horisontalt og vertikalt. Det ligger fritt fra hver
+						topplinje, hvert nederste caption-bånd og hver sidekolonne med ikoner på alle tre
+						plattformene samtidig, noe som gjør det til standardplassen for et ansikt, en
+						undertekst eller et produktdetalj.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Design for den trangeste plattformen, ikke den løseste</h3>
+					<p class="mt-2">
+						Hvis et bilde må fungere på tvers av TikTok, Reels og Stories samtidig, komponer det
+						mot hvilken plattform som reserverer mest plass i den retningen, TikToks nederste bånd
+						og ikonrad er begge litt større enn Reels', så en komposisjon som fungerer for TikTok
+						fungerer også for Reels. Å sjekke den løseste plattformen først er hvordan en caption
+						ender opp klippet et sted du ikke testet.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Et feed-innlegg er et beskjæringsproblem, ikke et UI-problem</h3>
+					<p class="mt-2">
+						Ingenting tegnes oppå et innlegg, så risikoen er ikke et ikon som dekker et ansikt, det
+						er profilrutenettets kvadratiske beskjæring som kutter topp og bunn av et 4:5-bilde.
+						Hold motivet vertikalt sentrert innenfor det midtre kvadratet i stedet for å la det gå
+						helt til topp- eller bunnkanten av hele 4:5-rammen.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Sjekk før eksport, ikke etterpå</h3>
+					<p class="mt-2">
+						Å beskjære et bilde på nytt etter at det allerede er gradert, tekstet eller eksportert
+						er tregere og forringer ofte kvaliteten. Å legge safe zonen over originalbildet først,
+						før noen annen redigering, fanger opp en dårlig komposisjon mens den fortsatt er billig
+						å fikse.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">GÅ DYPERE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Sjekk ditt eget bilde
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/nb/tiktok-safe-zone/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">TikTok safe zone-sjekker</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Legg TikToks grensesnitt over bildet ditt</span>
+				</a>
+				<a href="/nb/tiktok-safe-zone-template/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">TikTok safe zone-mal</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Mål for CapCut og Premiere Pro</span>
+				</a>
+				<a href="/nb/instagram-reels-safe-zone/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Instagram safe zone-sjekker</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Reels, Post og Stories i ett verktøy</span>
+				</a>
+				<a href="/nb/instagram-safe-zone-template/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Instagram safe zone-mal</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Mål for Reels, Story og Post</span>
+				</a>
+				<a href="/nb/for/instagram/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Filmatisk Instagram-editor</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Presets pluss 1:1 / 4:5 / 9:16 eksport-beskjæringer</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Vanlige spørsmål om safe zones for sosiale medier" faqs={faqs} />
+	</main>
+	<Footer />
+</Layout>

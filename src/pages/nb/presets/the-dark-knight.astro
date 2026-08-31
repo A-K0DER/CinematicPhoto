@@ -1,0 +1,193 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import DropZone from '../../../components/DropZone.astro';
+import BeforeAfter from '../../../components/BeforeAfter.astro';
+import RelatedPresets from '../../../components/RelatedPresets.astro';
+import MovieFaq from '../../../components/MovieFaq.astro';
+import { getPreset } from '../../../lib/presets';
+
+const preset = getPreset('dark-knight');
+const path = '/presets/the-dark-knight/';
+const url = `https://cinematicphoto.com/nb${path}`;
+
+const title = 'The Dark Knight fotofilter og editor | Gratis filmatisk verktøy';
+const description =
+	'Bruk denne gratis The Dark Knight-fotofilteret og fotoeditoren til å farge bildet ditt med filmens kalde stål og knuste svarttoner, direkte i nettleseren, ingen konto nødvendig.';
+const keywords =
+	'the dark knight fotofilter, the dark knight fotoeditor, the dark knight editor, the dark knight fargegrad, batman fotofilter';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	name: title,
+	description,
+	url,
+	isPartOf: { '@type': 'WebSite', name: 'Cinematic Photo', url: 'https://cinematicphoto.com' },
+};
+
+const faqs = [
+	{
+		q: 'Er dette et offisielt The Dark Knight-fotofilter?',
+		a: 'Nei. Denne presetten er inspirert av den visuelle estetikken i The Dark Knights filmfotografi, den er ikke et offisielt filter lisensiert av eller tilknyttet Warner Bros., DC eller filmens skapere. Det er en uavhengig fargegrad bygget for å gjenskape looken, ikke et merkevareprodukt.',
+	},
+	{
+		q: 'Finnes det en egen Dark Knight-fotoeditor, eller må jeg lete gjennom en presetliste?',
+		a: 'Denne siden er nettopp den dedikerte editoren, Dark Knight-graden lastes forhåndsvalgt i dropsonen over, så du kan slippe et bilde og umiddelbart justere korn, vignettering, glød og letterbox uten å måtte lete gjennom hele 60-preset-biblioteket først.',
+	},
+	{
+		q: 'Fungerer Dark Knight-presetten på dagbilder, eller bare nattbilder?',
+		a: 'Den fungerer på begge, men er bygget rundt filmens høykontrast, kaldtonede nattscener, så den viser seg best på bilder med noe eksisterende skyggedybde: overskyet himmel, innendørslys eller skumring. På svært lyse, flate dagslysbilder blir kontrastøkningen og vignetteringen fortsatt påført, men leses litt mindre dramatisk.',
+	},
+	{
+		q: 'Hvordan er Dark Knight-presetten forskjellig fra The Batman-presetten?',
+		a: 'Begge er fargegrader fra Batman-universet, men bygget rundt ulike filmers filmfotografi. Dark Knight-presetten lener seg mot kaldt stål og olivenfarget tone, med knust skyggedetalj og et lavere metningstrykk. The Batman-presetten går lenger inn i karmosinrødt-svart noir med en tyngre vignettering og et lavere lysstyrkegulv. Sammenlign dem side om side i editoren for å se hva som passer bildet ditt.',
+	},
+	{
+		q: 'Bildet mitt ser for mørkt ut etter at jeg har brukt Dark Knight-graden. Hvordan fikser jeg det?',
+		a: 'Presetten bruker som standard en sterk vignettering (48) og et lysstyrketrekk for å knuse skyggedetalj, noe som er kjernen i looken, men du kan skru ned vignetteringsglideren i editoren hvis den føles for tung, eller starte med et bilde med lysere omgivelseslys slik at skyggene fortsatt holder på detaljer etter at graden er brukt.',
+	},
+	{
+		q: 'Hva slags bilder passer best med en Dark Knight-inspirert fargegrad?',
+		a: 'Nattlige bybilder, våte gater og bygninger med sterke arkitektoniske linjer pleier å fungere best, siden graden er bygget for å belønne hardt retningsbestemt lys og dype skygger. Stemningsfulle portretter under hardt eller enkeltkildelys holder seg også godt mot den kalde stål-tonen.',
+	},
+	{
+		q: 'Kan jeg bruke Dark Knight-fotoeffekten til en filmplakat eller thumbnail?',
+		a: 'Ja. Presetten, sammen med filmkorn-, vignetterings- og anamorfisk letterbox-kontrollene i editoren, er designet for å ta et flatt bilde nær et plakatklart filmatisk stillbilde med noen få klikk, og hver eksport er din å bruke fritt siden ingenting er vannmerket eller låst bak en konto.',
+	},
+];
+---
+
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Hjem', href: '/nb/' },
+				{ label: 'Alle presets', href: '/nb/presets/' },
+				{ label: 'The Dark Knight' },
+			]}
+		/>
+
+		<DropZone presetId={preset.id} showHeading={false} showFooterLinks={false} />
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">FILMINSPIRERT PRESET</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				The Dark Knight-fotofilteret: knuste svarttoner og kaldt stål, inspirert av Gotham.
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				En gratis The Dark Knight-fotoeditor og fargegrad-preset inspirert av den visuelle estetikken
+				til Christopher Nolans The Dark Knight, bygget for fotografer som vil ha den
+				høykontrast, kaldtonede Gotham-looken uten å røre et kurvepanel.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">ESTETIKKEN</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Gothams kalde stål, filmet for IMAX
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					The Dark Knight bygde sin visuelle identitet på skala og skygge. Fotograf Wally Pfister
+					filmet store deler på IMAX-film og foretrakk hardt, retningsbestemt lys, og lot
+					skyggedetaljer knuses i stedet for å løftes for sikkerhets skyld, slik at Gothams skyline
+					leses som tett, tronende arkitektur i stedet for en belyst kulisse. Fargen forble
+					tilbakeholden: stålblått og avmettet olivengrått dominerer, med varme forbeholdt sjeldne
+					interiør- eller ildlys-scener.
+				</p>
+				<p>
+					Det er en look bygget på kontrast og kontroll fremfor metning. Hudtoner holder seg
+					naturlige selv når resten av bildet går kaldt, noe som er det som skiller denne graden
+					fra et enkelt blått fargefilter: fargeskiftet lever i skyggene og mellomtonene, ikke
+					flatet ut jevnt over hele bildet.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">FØR / ETTER</span>
+			<h2 class="mb-6 font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Se graden brukt
+			</h2>
+			<BeforeAfter preset={preset} />
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">FARGEVITENSKAPEN</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Hvordan Dark Knight-fargegraden faktisk fungerer
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Presetten skrur kontrasten kraftig opp, avmetter moderat, og trekker ned lysstyrken for å
+					knuse skyggedetalj før noen farge legges til, grunnlaget for filmens tette,
+					undereksponerte følelse. Oppå den basen splitter en to-tone overlay bildet: skygger
+					skifter mot et mørkt petroleumssvart, mens lysene lener mot dempet olivenstål. Den
+					splittingen er det som gir graden sitt kalde, metalliske preg uten å farge hele bildet ett
+					flatt blått, slik et enkelt fargefilter ville gjort.
+				</p>
+				<p>
+					Standard vignettering ligger i den høye enden av verktøyets presets, trekker blikket
+					innover og forsterker følelsen av skala og skygge filmen er kjent for. Filmkorn holdes
+					moderat, akkurat nok til å leses som en filmstock i stedet for et rent digitalt trykk.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BESTE BILDER FOR DENNE PRESETTEN</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Hva du bør bruke den på
+			</h2>
+			<ul class="mt-6 flex flex-col gap-4 text-base leading-7 text-body">
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Nattlig byarkitektur.</span> Skylines, broer og bygninger med sterke vertikale linjer belønner den knuste skyggedetaljen og den kalde lystonen.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Stemningsfulle portretter med hardt lys.</span> Én sterk lyskilde, vindulys, en gatelykt, frontlys, spiller godt mot gradens kontrastkurve.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Regnvåte gater.</span> Vått veidekke fanger den kalde lystonen som reflektert lys, og legger til dybde graden alene ikke kan skape.</span>
+				</li>
+			</ul>
+		</section>
+
+		<RelatedPresets
+			heading="Flere filminspirerte grader"
+			items={[
+				{ presetId: 'blade-runner', href: '/nb/presets/blade-runner-2049/' },
+				{ presetId: 'dune', href: '/nb/presets/dune/' },
+				{ presetId: 'interstellar', href: '/nb/presets/interstellar/' },
+				{ presetId: 'matrix', href: '/nb/presets/the-matrix/' },
+				{ presetId: 'the-batman', href: '/nb/presets/the-batman/' },
+				{ presetId: 'watchmen', href: '/nb/?preset=watchmen' },
+			]}
+		/>
+
+		<MovieFaq
+			eyebrow="THE DARK KNIGHT FAQ"
+			heading="Vanlige spørsmål om The Dark Knight-fotofilteret"
+			faqs={faqs}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 text-center sm:px-6">
+			<p class="text-base leading-7 text-body">
+				Foretrekker du en annen films look? Bla gjennom <a href="/nb/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">hele biblioteket med 60 presets</a>,
+				se flere <a href="/nb/looks/dark-and-moody/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">mørke, stemningsfulle presets</a>,
+				eller gå til <a href="/nb/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">hjemmesiden</a> for å starte med blanke ark.
+			</p>
+		</section>
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../../lib/landing';
+</script>

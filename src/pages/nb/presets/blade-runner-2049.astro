@@ -1,0 +1,193 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import DropZone from '../../../components/DropZone.astro';
+import BeforeAfter from '../../../components/BeforeAfter.astro';
+import RelatedPresets from '../../../components/RelatedPresets.astro';
+import MovieFaq from '../../../components/MovieFaq.astro';
+import { getPreset } from '../../../lib/presets';
+
+const preset = getPreset('blade-runner');
+const path = '/presets/blade-runner-2049/';
+const url = `https://cinematicphoto.com/nb${path}`;
+
+const title = 'Blade Runner 2049 fotofilter og editor | Gratis filmatisk verktøy';
+const description =
+	'Bruk denne gratis Blade Runner 2049-fotofilteret og fotoeditoren til å farge bildet ditt med filmens ambernyanse-neon og petroleumsdis, direkte i nettleseren, ingen konto nødvendig.';
+const keywords =
+	'blade runner 2049 fotofilter, blade runner 2049 fotoeditor, blade runner editor, blade runner 2049 fargegrad, sci-fi fotofilter';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	name: title,
+	description,
+	url,
+	isPartOf: { '@type': 'WebSite', name: 'Cinematic Photo', url: 'https://cinematicphoto.com' },
+};
+
+const faqs = [
+	{
+		q: 'Er dette et offisielt Blade Runner 2049-fotofilter?',
+		a: 'Nei. Denne presetten er inspirert av den visuelle estetikken i Blade Runner 2049s filmfotografi, den er ikke et offisielt filter lisensiert av eller tilknyttet studioet eller filmens skapere. Det er en uavhengig fargegrad bygget for å gjenskape looken, ikke et merkevareprodukt.',
+	},
+	{
+		q: 'Finnes det en egen Blade Runner 2049-fotoeditor?',
+		a: 'Denne siden er nettopp den dedikerte editoren, Blade Runner 2049-graden lastes forhåndsvalgt i dropsonen over, så du kan slippe et bilde og umiddelbart justere dis, glød og vignettering uten å måtte lete gjennom hele 60-preset-biblioteket først.',
+	},
+	{
+		q: 'Hva gjør dis-innstillingen i Blade Runner 2049-presetten?',
+		a: 'I motsetning til de fleste presets i dette verktøyet legger Blade Runner 2049-graden et lag med myk ambernyanse-dis over de vanlige farge- og kontrastjusteringene, som simulerer den atmosfæriske tåken og det diffuse lyset filmen bruker hele tiden. Det er dette som gir sterke lyskilder sin myke glød i stedet for et hardt avgrenset skinn.',
+	},
+	{
+		q: 'Hvordan er Blade Runner 2049 forskjellig fra Matrix-presetten med grønnfarge?',
+		a: 'Begge er neon-nære sci-fi-grader, men splitter i motsatte retninger. Blade Runner 2049 splitter skygger mot petroleumsfarge og lys mot ambernyanse, med myk dis og tung glød for en disete, diffus følelse. Matrix-presetten avmetter hele bildet først og fargelegger deretter alt i én flat grønnfarge, en langt mer jevn, mindre retningsbestemt effekt.',
+	},
+	{
+		q: 'Fungerer Blade Runner 2049-presetten på dagbilder eller innendørsbilder?',
+		a: 'Den er bygget rundt neon-, gatelys- og nattscene-fargeseparasjon, så den viser seg best på bilder med synlige kunstige lyskilder. Dagslysbilder får fortsatt amber-petroleum-graden og disen, men effekten leses mer subtilt uten neon eller motlys som kan gløde.',
+	},
+	{
+		q: 'Hvordan får jeg mest ut av neon-glødeeffekten på bildet mitt?',
+		a: 'Presetten leveres med en uvanlig høy standard-glød, den høyeste av alle presets i verktøyet, slik at sterke lyspunkter allerede gløder kraftig. Hvis du vil ha den lavere, kan du skru ned Glow/Halation-glideren i editoren etter at du har brukt presetten.',
+	},
+	{
+		q: 'Hva slags bilder passer best med en Blade Runner 2049-inspirert grad?',
+		a: 'Nattlige bygater, neonskilt, vått reflekterende veidekke og motlys- eller silhuettportretter passer best, siden de gir amber-petroleum-splittingen og disen noe å jobbe med. Den fungerer også godt på tåkete eller overskyede utendørsscener.',
+	},
+];
+---
+
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Hjem', href: '/nb/' },
+				{ label: 'Alle presets', href: '/nb/presets/' },
+				{ label: 'Blade Runner 2049' },
+			]}
+		/>
+
+		<DropZone presetId={preset.id} showHeading={false} showFooterLinks={false} />
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">FILMINSPIRERT PRESET</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Blade Runner 2049-fotofilteret: ambernyanse-neon gjennom petroleumsdis.
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				En gratis Blade Runner 2049-fotoeditor og fargegrad-preset inspirert av den visuelle
+				estetikken til Denis Villeneuves Blade Runner 2049, bygget for å gi nattbilder filmens
+				kjennetegnende disete, neonbelyste splitt mellom varme lys og kalde skygger.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">ESTETIKKEN</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				En disete fremtid i ambernyanse og petroleumsfarge
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Fotograf Roger Deakins bygde Blade Runner 2049s verden rundt volumetrisk lys: tåke, støv
+					og dis som gjør hver neon- eller natriumdampstråle synlig i luften, ikke bare der den
+					treffer. Fargen splitter seg tydelig etter temperatur, sykelig ambernyanse og oransje i
+					filmens støvfylte eksteriører og avhørsromsinteriører, kaldt petroleumsblått i dens
+					regn- og snødekkede eksteriører, i stedet for å smelte sammen til én gjørmete tone.
+				</p>
+				<p>
+					Det er en uvanlig symmetrisk, bevisst bildestil parret med en atmosfære som aldri føles
+					ren. Lyskilder gløder og sprer seg i stedet for å holde seg skarpe, noe som er detaljen
+					denne presetten lener seg hardest mot: et mykt dis-lag ligger oppå selve fargegraden, noe
+					ingen av verktøyets andre presets gjør.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">FØR / ETTER</span>
+			<h2 class="mb-6 font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Se graden brukt
+			</h2>
+			<BeforeAfter preset={preset} />
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">FARGEVITENSKAPEN</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Hvordan Blade Runner 2049-fargegraden faktisk fungerer
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Basisjusteringen skrur opp kontrast og metning sammen, og legger deretter til et snev
+					sepia for å varme opp hele bildet litt, før noen retningsbestemt farge påføres. En
+					to-tone overlay splitter deretter bildet: dyp petroleumsfarge i skyggene, lysende
+					amber-oransje i lysene, akkurat den temperaturkontrasten som umiddelbart leses som denne
+					filmens verden.
+				</p>
+				<p>
+					Det som gjør denne presetten strukturelt forskjellig fra de andre filmgradene i dette
+					verktøyet, er et eget dis-lag stablet oppå: en myk amber-vask med lav dekkevne over hele
+					bildet som simulerer atmosfærisk tåke. Sammen med den høyeste standard-glødet av alle
+					presets her, er det dette som får lyskilder til å gløde og spre seg i stedet for å holde
+					seg skarpe og punktformede.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">BESTE BILDER FOR DENNE PRESETTEN</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Hva du bør bruke den på
+			</h2>
+			<ul class="mt-6 flex flex-col gap-4 text-base leading-7 text-body">
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Nattlige bygater og neonskilt.</span> Synlige lyskilder er akkurat det disen og gløden er bygget for å gløde rundt.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Vått, reflekterende veidekke.</span> Regn og pytter dobler opp amber-petroleum-splittingen som reflektert farge, og fordyper effekten.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Motlys- eller silhuettportretter.</span> En sterk lyskilde bak motivet gir gløde- og dis-lagene noe dramatisk å fange.</span>
+				</li>
+			</ul>
+		</section>
+
+		<RelatedPresets
+			heading="Flere filminspirerte grader"
+			items={[
+				{ presetId: 'dark-knight', href: '/nb/presets/the-dark-knight/' },
+				{ presetId: 'dune', href: '/nb/presets/dune/' },
+				{ presetId: 'interstellar', href: '/nb/presets/interstellar/' },
+				{ presetId: 'matrix', href: '/nb/presets/the-matrix/' },
+				{ presetId: 'v-for-vendetta', href: '/nb/?preset=v-for-vendetta' },
+				{ presetId: 'terminator-2', href: '/nb/?preset=terminator-2' },
+			]}
+		/>
+
+		<MovieFaq
+			eyebrow="BLADE RUNNER 2049 FAQ"
+			heading="Vanlige spørsmål om Blade Runner 2049-fotofilteret"
+			faqs={faqs}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 text-center sm:px-6">
+			<p class="text-base leading-7 text-body">
+				Foretrekker du en annen films look? Bla gjennom <a href="/nb/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">hele biblioteket med 60 presets</a>,
+				lær mer om <a href="/nb/guides/cinematic-color-grading/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">filmatisk fargegrading</a>,
+				eller gå til <a href="/nb/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">hjemmesiden</a> for å starte med blanke ark.
+			</p>
+		</section>
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../../lib/landing';
+</script>

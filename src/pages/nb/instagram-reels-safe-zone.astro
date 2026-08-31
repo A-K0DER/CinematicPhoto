@@ -1,0 +1,239 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import SafeZoneTool from '../../components/SafeZoneTool.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+
+const path = '/instagram-reels-safe-zone/';
+const title = 'Instagram Safe Zone Checker | UI Overlay-verktøy for Reels, Post og Stories';
+const description =
+	"Slipp et bilde inn i Instagrams ramme og se nøyaktig hvor appens egen bildetekst, brukernavn og UI-elementer havner oppå det, for Reels, feed-Posts og Stories.";
+const keywords =
+	'instagram safe zone, instagram safe zone overlay, instagram reels safe zone, instagram reels safe zone mal, instagram reels safe zone mal png, reels safe zone, instagram stories safe zone, instagram post safe zone, reels safe zone mal, instagram ui overlay, reels 1080x1920 safe zone, instagram video safe zone, instagram safe zone app, instagram safe zone 2026, instagram safe zone guide';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebApplication',
+	name: 'Instagram Safe Zone Checker',
+	url: `https://cinematicphoto.com${path}`,
+	description,
+	applicationCategory: 'DesignApplication',
+	operatingSystem: 'Any (runs in browser)',
+	offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+	isAccessibleForFree: true,
+};
+
+const howToStructuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'HowTo',
+	name: 'Slik sjekker du Instagrams Safe Zone på et bilde',
+	description: "Legg UI- og beskjæringsbånd for Reels, Stories eller feed-Post over et bilde før du poster.",
+	step: [
+		{
+			'@type': 'HowToStep',
+			name: 'Velg et format',
+			text: 'Bytt mellom Reels, Post og Stories over forhåndsvisningen, hver bruker sin egen ramme og egne safe-zone-bånd.',
+		},
+		{
+			'@type': 'HowToStep',
+			name: 'Last opp et bilde',
+			text: 'Slipp et bilde eller thumbnail på verktøyet, lim det inn, eller klikk for å laste opp en JPG-, PNG- eller WEBP-fil.',
+		},
+		{
+			'@type': 'HowToStep',
+			name: 'Flytt på det i rammen',
+			text: "Dra inne i rammen for å flytte bildet innenfor eksport-beskjæringen til det valgte formatet.",
+		},
+		{
+			'@type': 'HowToStep',
+			name: 'Sjekk UI-overlayet',
+			text: "Se på de nedtonede båndene som viser det formatets UI- eller grid-beskjærings-safe-zoner, tegnet i skala på bildet.",
+		},
+		{
+			'@type': 'HowToStep',
+			name: 'Lagre et referansebilde',
+			text: 'Juster overlay-gjennomsiktigheten om nødvendig, og lagre deretter det beskårne referansebildet.',
+		},
+	],
+};
+
+const faqs = [
+	{
+		q: "Hva er Instagrams safe zone?",
+		a: "Det er delen av rammen som blir dekket eller beskåret når et bilde faktisk blir postet. Reels og Stories legger sitt eget grensesnitt, bildetekster, brukernavn, et svarfelt, engasjementsikoner, oppå en 9:16-videoramme. Feed-Posts får ikke noe UI-overlay, men et 4:5-innlegg blir senterbeskåret til et kvadrat i profilgriddet, slik at topp- og bunnkanten skjules der. Alt viktig, et ansikt, en undertekst, et produkt, som plasseres i disse sonene blir delvis eller helt skjult avhengig av hvor noen ser det. Reels, Stories og Post reserverer hver sin plass, bruk fanene over for å sjekke den du faktisk poster til.",
+	},
+	{
+		q: 'Er denne safe zone-målingen eksakt?',
+		a: "Det er en tett tilnærming basert på Instagrams publiserte creator- og annonsespesifikasjoner, ikke en pikselnøyaktig måling hentet fra selve appen. Instagram justerer grensesnittet sitt over tid, så behandle dette som en komposisjonssjekk, ikke en garanti.",
+	},
+	{
+		q: 'Laster dette verktøyet opp bildet mitt noe sted?',
+		a: 'Nei. Bildet tegnes direkte inn i et canvas på siden og forlater aldri nettleseren din.',
+	},
+	{
+		q: 'Kan jeg sjekke TikTok også?',
+		a: "Ja, TikTok reserverer lignende, men ikke identisk plass som Reels og Stories. Bruk den dedikerte TikTok safe zone-checkeren for å legge TikToks egne bånd for bildetekst, brukernavn og ikoner over bildet ditt.",
+	},
+	{
+		q: 'Hvor stor er Reels-safe-zonen?',
+		a: "Ved standard 1080x1920-eksport starter det nedre bildetekst-/brukernavn-/lyd-båndet rundt 24% opp fra bunnen (omtrent 461px), og den høyre ikonkolonnen tar rundt de siste 12% av bredden (omtrent 130px). Bytt til Reels-fanen over for å se begge båndene tegnet i skala på ditt eget bilde, pluss de eksakte piksel- og prosenttallene.",
+	},
+	{
+		q: 'Hva er safe zonen for Instagram Reels?',
+		a: "Det er området av en Reel som Instagrams eget grensesnitt legger seg oppå når den er postet: en tynn øvre bjelke for Reels-merket og lyd, et nedre bånd for bildetekst, brukernavn og lydtittel, og en høyre kolonne med lik-, kommentar-, del- og profilikoner. Bytt til Reels-fanen over for å se alle tre tegnet i skala på ditt eget bilde, sammen med den eksakte piksel- og prosentdybden til hver.",
+	},
+	{
+		q: "Hva er Reels' ideelle videostørrelse og sideforhold?",
+		a: "1080x1920 piksler med et sideforhold på 9:16 er Instagrams standard eksportstørrelse for Reels. Reels-fanen i dette verktøyet matcher den samme oppløsningen, slik at safe zone-målene stemmer direkte med det du eksporterer fra kameraet eller editoren din.",
+	},
+	{
+		q: 'Gjelder Reels-safe-zonen også for Reels-omslagsbilder?',
+		a: "Ja. Et Reels-omslagsbilde, stillbildet eller fotoet som vises før noen trykker play, sitter inne i samme 9:16-ramme og får samme bildetekst-, brukernavn-, lyd- og ikon-overlay som selve videoen, så samme safe zone gjelder.",
+	},
+	{
+		q: 'Hva er Instagram Stories-safe-zonen?',
+		a: "Ved standard 1080x1920-eksport reserverer Stories omtrent de øverste 12% (omtrent 230px) til profilbilde, brukernavn, tidsstempel og lukkeknapp, og omtrent de nederste 12% (omtrent 230px) til svarfeltet og delingsraden. Bytt til Stories-fanen over for å se begge båndene tegnet i skala på ditt eget bilde.",
+	},
+	{
+		q: 'Hva er Instagram Story-safe-zonen?',
+		a: "Det er de øvre og nedre båndene Instagram reserverer på en Story for sitt eget grensesnitt, omtrent de øverste 12% til profilbilde, brukernavn, tidsstempel og lukkeknapp, og omtrent de nederste 12% til svarfeltet og delingsraden, slik at bare midten av rammen er garantert fri. I motsetning til Reels er det ingen sidekolonne med ikoner å ta hensyn til. Bytt til Stories-fanen over for å sjekke det mot ditt eget bilde.",
+	},
+	{
+		q: "Hva er Stories' ideelle størrelse og sideforhold?",
+		a: "1080x1920 piksler i 9:16, samme eksportstørrelse som Reels. UI-båndene er derimot forskjellige, Stories har ingen sidekolonne med ikoner, så ikke gjenbruk en komposisjon sjekket for Reels til Stories uten å også sjekke det øvre og nedre båndet.",
+	},
+	{
+		q: 'Gjelder Stories-safe-zonen også for Høydepunkt-omslag?',
+		a: "Delvis. Et Høydepunkt-omslag er en liten sirkulær beskjæring tatt fra midten av Story-bildet ditt, så det forkaster automatisk de øvre og nedre UI-båndene. Å holde motivet sentrert i henhold til Stories-safe-zonen over holder det som regel også innenfor Høydepunkt-omslaget, men tekst nær kanten av det midtre kvadratet kan likevel bli beskåret av den sirkulære masken, så hold all tekst nærmere midten hvis den også skal overleve som Høydepunkt-omslag.",
+	},
+	{
+		q: 'Hva er Instagram Post-safe-zonen?',
+		a: "Et 4:5 feed-Post (1080x1350) blir senterbeskåret til et 1:1-kvadrat i profilgriddet, som kutter omtrent 10% (omtrent 135px) fra toppen og enda 10% fra bunnen. Det legges ikke noe app-grensesnitt oppå et Post slik det gjøres på Reels eller Stories, så dette er egentlig en \"hva overlever grid-beskjæringen\"-sjekk, ikke en UI-overlappingssjekk.",
+	},
+	{
+		q: "Hva er Posts ideelle størrelse og sideforhold?",
+		a: "1080x1350 piksler med et sideforhold på 4:5 er Instagrams anbefalte portrettstørrelse for feed-Posts, det viser mer av bildet i feeden enn en kvadratisk 1:1-beskjæring gjør. Profilgriddet viser likevel et kvadratisk thumbnail, noe Post-safe-zonen over tar hensyn til.",
+	},
+	{
+		q: 'Gjelder Post-safe-zonen også for karusell-innlegg (flere bilder)?',
+		a: "Ja, men bare for det første bildet. Hvert bilde i en karusell eksporteres i samme 4:5-ramme, men Instagram genererer kun profilgrid-thumbnailet fra det senterbeskårne kvadratet til det første bildet. Bilder etter det første ses bare i full 4:5-størrelse når noen sveiper gjennom, så topp- og bunnkanten deres blir aldri beskåret av grid-beskjæringen.",
+	},
+	{
+		q: 'Hvor bør jeg plassere et ansikt, en undertekst eller en logo for å holde det synlig?',
+		a: "For Reels holder den midtre tredjedelen av rammen, omtrent midten av bredden og området mellom øvre bjelke og nedre bildetekst-bånd, seg fri på tvers av enheter. For Stories, hold det sentrert mellom den øvre profilbjelken og den nedre svarraden. For et Post, hold motivet innenfor det midtre kvadratet slik at det fortsatt leses etter at profilgriddet beskjærer topp og bunn.",
+	},
+	{
+		q: 'Finnes det en Instagram safe zone-mal jeg kan bruke som referanse mens jeg redigerer?',
+		a: "Ja, se den dedikerte siden for Instagram safe zone-mal for den eksakte piksel- og prosentfordelingen på tvers av Reels, Stories og Post, pluss hvordan du gjør den om til et hjelpelag mens du redigerer.",
+	},
+];
+---
+
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Hjem', href: '/nb/' },
+				{ label: 'Verktøy' },
+				{ label: 'Instagram Safe Zone' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">GRATIS VERKTØY</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Instagram safe zone checker
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Slipp et bilde inn i Instagrams ramme for å se hvor appens eget UI havner oppå det, før du
+				poster. Bytt mellom Reels, feed-Posts og Stories over forhåndsvisningen.
+			</p>
+		</section>
+
+		<SafeZoneTool platform={['reels', 'post', 'stories']} />
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">HVORFOR DET ER VIKTIG</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Komposisjon som overlever Instagrams eget UI og beskjæringer
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					En ramme som ser perfekt komponert ut i en rå eksport kan fortsatt miste motivet sitt når
+					Instagram legger sitt eget grensesnitt oppå, eller beskjærer det til en annen form. Reels
+					og Stories tegner begge en bildetekst, et brukernavn og en engasjements- eller svar-UI
+					over en 9:16-videoramme; et 4:5 feed-Post blir i stedet senterbeskåret til et kvadrat i
+					profilgriddet. Å sjekke mot riktig safe zone før du poster betyr at et ansikt, en
+					undertekst eller et viktig produktdetalj ikke ender opp skjult eller kuttet.
+				</p>
+				<p>
+					Reels reserverer en tynn øvre bjelke og et nedre bildetekst-/brukernavn-/lyd-bånd pluss en
+					høyre engasjementskolonne; Stories reserverer en øvre profilbjelke og en nedre svarrad; et
+					Post mister omtrent 10% av topp- og bunnkanten i grid-visningen. Dette verktøyet bytter
+					overlayet sitt til å matche hvilket som helst format du sjekker, tegnet rett på bildet
+					ditt slik at du kan se effekten på din faktiske komposisjon.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">ET EKTE OVERLAY, IKKE EN STATISK GRAFIKK</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Et instagram safe zone-overlay tegnet på ditt eget bilde
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Et instagram safe zone-overlay er bare nyttig hvis det faktisk er tilpasset rammen du
+					sjekker, og et flatt referansebilde tilpasset noen andres eksport passer sjelden rent.
+					Dette verktøyet tegner overlayet direkte på ditt eget opplastede bilde i stedet: bytt til
+					Reels-fanen og det blir spesifikt en instagram reels safe zone-checker, med bånd for
+					bildetekst, brukernavn, lydtittel og ikonkolonne skalert til samme 1080x1920-ramme som
+					Reels faktisk eksporterer til.
+				</p>
+				<p>
+					Vil du ha samme instagram reels safe zone-mal som en fast referanse i stedet for en
+					interaktiv, til et hjelpelag i en editor, eller en nedlastbar instagram reels safe
+					zone-mal png? <a href="/nb/instagram-safe-zone-template/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Instagram safe zone-malen</a> har
+					samme tall brutt ned i piksler og prosent.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">GÅ DYPERE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Flere verktøy for kreatører
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/nb/tiktok-safe-zone/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">TikTok safe zone checker</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Samme sjekk, tilpasset TikToks UI</span>
+				</a>
+				<a href="/nb/instagram-safe-zone-template/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Instagram safe zone-mal</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Eksakte mål for Reels, Story og Post</span>
+				</a>
+				<a href="/nb/guides/social-media-safe-zones/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Guide til safe zones for sosiale medier</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Alle plattformers mål, på ett sted</span>
+				</a>
+				<a href="/nb/for/instagram/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Filmatisk Instagram-editor</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Presets pluss 1:1 / 4:5 / 9:16 eksportbeskjæringer</span>
+				</a>
+				<a href="/nb/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Se alle 60 presets</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Hver fargegrad, sortert etter sjanger</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Vanlige spørsmål om Instagrams safe zones" faqs={faqs} />
+
+		<script type="application/ld+json" set:html={JSON.stringify(howToStructuredData)} />
+	</main>
+	<Footer />
+</Layout>
