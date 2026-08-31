@@ -27,7 +27,7 @@ export const locales: LocaleInfo[] = [
 	{ code: 'nl', label: 'Nederlands', ogLocale: 'nl_NL', dir: 'ltr', contentReady: false },
 	{ code: 'it', label: 'Italiano', ogLocale: 'it_IT', dir: 'ltr', contentReady: false },
 	{ code: 'ko', label: '한국어', ogLocale: 'ko_KR', dir: 'ltr', contentReady: false },
-	{ code: 'pt-BR', label: 'Português (Brasil)', ogLocale: 'pt_BR', dir: 'ltr', contentReady: false },
+	{ code: 'pt-BR', label: 'Português (Brasil)', ogLocale: 'pt_BR', dir: 'ltr', contentReady: true },
 	{ code: 'pt-PT', label: 'Português (Portugal)', ogLocale: 'pt_PT', dir: 'ltr', contentReady: false },
 	{ code: 'sv', label: 'Svenska', ogLocale: 'sv_SE', dir: 'ltr', contentReady: false },
 	{ code: 'da', label: 'Dansk', ogLocale: 'da_DK', dir: 'ltr', contentReady: false },

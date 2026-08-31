@@ -1,0 +1,194 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import DropZone from '../../../components/DropZone.astro';
+import BeforeAfter from '../../../components/BeforeAfter.astro';
+import RelatedPresets from '../../../components/RelatedPresets.astro';
+import MovieFaq from '../../../components/MovieFaq.astro';
+import { getPreset } from '../../../lib/presets';
+
+const preset = getPreset('dune');
+const path = '/presets/dune/';
+const url = `https://cinematicphoto.com/pt-BR${path}`;
+
+const title = 'Filtro de Foto e Editor de Dune | Ferramenta Cinematográfica Gratuita';
+const description =
+	'Use este filtro de foto e editor de fotos gratuito de Dune para aplicar na sua foto o dourado desértico e as luzes estouradas do filme, direto no seu navegador, sem necessidade de conta.';
+const keywords =
+	'filtro de foto dune, editor de foto dune, editor dune, color grade dune, filtro de foto deserto';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	name: title,
+	description,
+	url,
+	isPartOf: { '@type': 'WebSite', name: 'Cinematic Photo', url: 'https://cinematicphoto.com' },
+};
+
+const faqs = [
+	{
+		q: 'Este é um filtro de foto oficial de Dune?',
+		a: 'Não. Este Preset é inspirado na estética visual da fotografia de Dune, ele não é um filtro oficial licenciado pelo estúdio ou pelos criadores do filme, nem afiliado a eles. É uma correção de cor independente feita para recriar o look, não um produto de parceria oficial.',
+	},
+	{
+		q: 'Existe um editor de fotos dedicado a Dune?',
+		a: 'Esta página é justamente esse editor dedicado, a correção de Dune já carrega pré-selecionada na área de soltar arquivos acima, então você pode soltar uma foto e ajustar na hora o glow, a vinheta e o grão sem precisar procurar em toda a biblioteca de 60 presets primeiro.',
+	},
+	{
+		q: 'O Preset de Dune funciona em fotos que não são de deserto ou areia?',
+		a: 'Sim. A correção é uma mudança de cor e contraste, tom sépia quente, luzes elevadas, vinheta suave, então se aplica a qualquer foto. Ela funciona de forma mais natural em cenas que já têm luz quente e direta: paisagens secas, golden hour ou arquitetura ensolarada, mas não se limita a fotos de deserto.',
+	},
+	{
+		q: 'As luzes da minha foto ficaram estouradas depois de aplicar o Preset de Dune. Isso é intencional?',
+		a: 'Basicamente, sim. O Preset aumenta o brilho e a saturação enquanto adiciona um overlay quente forte, imitando de propósito o estilo de luzes estouradas e levemente superexpostas do filme, desbotadas pelo sol. Se for forte demais para sua foto, a exposição e as áreas de luz podem ser recuadas depois com os controles de vinheta e glow no editor.',
+	},
+	{
+		q: 'Qual a diferença entre o Preset de Dune e o Preset de Gladiator?',
+		a: 'Os dois tendem para o quente e dourado, mas a correção de Dune vai mais pesada no sépia e no estouro de luz com uma vinheta bem leve, uma sensação aberta e ensolarada. O Preset de Gladiator mantém a vinheta mais forte e a saturação mais baixa, mais perto de um tom de arena desbotado e arenoso do que a luz de deserto estourada e brilhante de Dune.',
+	},
+	{
+		q: 'Posso usar o efeito de foto de Dune para fotografia de retrato?',
+		a: 'Sim, especialmente retratos em contraluz ou no golden hour. O overlay quente e o glow elevado favorecem tons de pele com luz solar direcional, embora em retratos planos e iluminados de frente o efeito leia mais como um tom de cor quente do que uma correção dramática de deserto.',
+	},
+	{
+		q: 'Que tipo de foto combina melhor com uma correção de cor estilo Dune?',
+		a: 'Fotos amplas de deserto ou paisagens secas, cenas de golden hour com forte contraluz, e arquitetura ou ruínas ensolaradas combinam bem, já que já têm a luz quente e de alto contraste que este Preset foi feito para amplificar.',
+	},
+];
+---
+
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Início', href: '/pt-BR/' },
+				{ label: 'Todos os Presets', href: '/pt-BR/presets/' },
+				{ label: 'Dune' },
+			]}
+		/>
+
+		<DropZone presetId={preset.id} showHeading={false} showFooterLinks={false} />
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">PRESET INSPIRADO EM FILME</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				O filtro de foto de Dune: dourado queimado de sol e luz de deserto estourada.
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Um editor de fotos e Preset de color grading gratuito de Dune, inspirado na estética
+				visual do Dune de Denis Villeneuve, feito para dar às fotos o brilho quente e desbotado de
+				deserto do filme sem tocar em um painel de curvas.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">A ESTÉTICA</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Escala, areia e luz estourada
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					O diretor de fotografia Greig Fraser filmou Dune em torno de escala e calor: figuras
+					pequenas contra dunas imensas e achatadas pelo sol, com as luzes deixadas estourar em
+					vez de protegidas como uma exposição convencional faria. A cor tende ao mesmo tempo
+					quente e dessaturada, tons de dourado e sépia dominam, mas sem a saturação forte de um
+					"filtro quente" típico, mantendo a paleta mais perto de areia desbotada do que de um
+					pôr do sol de cartão postal.
+				</p>
+				<p>
+					O espaço negativo carrega tanto peso quanto o sujeito. Composições amplas com um
+					pequeno elemento humano contra uma paisagem enorme e duramente iluminada são o plano
+					característico do filme, e é um look que esta correção recompensa diretamente através
+					da combinação de tom quente e luzes abertas e brilhantes.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">ANTES / DEPOIS</span>
+			<h2 class="mb-6 font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Veja a correção aplicada
+			</h2>
+			<BeforeAfter preset={preset} />
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">A CIÊNCIA DA COR</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Como a correção de cor de Dune funciona de verdade
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Este é o filtro base mais quente das cinco correções de filme daqui: um forte impulso
+					de sépia combinado com saturação, contraste e brilho elevados monta a base de areia e
+					ouro antes de qualquer overlay ser adicionado. Um gradiente suave então sobrepõe
+					sombras marrom-escuras a luzes pálidas, quase douradas-brancas, na maior opacidade de
+					overlay de qualquer Preset deste conjunto, o que dá à correção sua qualidade estourada
+					e brilhante característica.
+				</p>
+				<p>
+					A vinheta padrão é a mais leve das cinco, de propósito: o quadro permanece aberto e
+					ensolarado em vez de fechar em direção às bordas, o instinto oposto de uma correção
+					como a de Dark Knight. Uma configuração generosa de glow arredonda o resultado, deixando
+					as luzes intensas brilharem suavemente nas bordas.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">MELHORES FOTOS PARA ESTE PRESET</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Em que tipo de foto usar
+			</h2>
+			<ul class="mt-6 flex flex-col gap-4 text-base leading-7 text-body">
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Deserto ou paisagens secas.</span> Areia aberta, rocha e linhas de horizonte são exatamente o que o calor e o glow desta correção foram ajustados para valorizar.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Retratos em contraluz no golden hour.</span> O sol baixo e direto entra em sintonia direta com o glow elevado e o brilho quente das luzes.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Arquitetura ou ruínas ensolaradas.</span> Luz direcional forte sobre superfícies de pedra ou cor de areia amplifica o tom sépia de base.</span>
+				</li>
+			</ul>
+		</section>
+
+		<RelatedPresets
+			heading="Mais correções inspiradas em filmes"
+			items={[
+				{ presetId: 'dark-knight', href: '/pt-BR/presets/the-dark-knight/' },
+				{ presetId: 'blade-runner', href: '/pt-BR/presets/blade-runner-2049/' },
+				{ presetId: 'interstellar', href: '/pt-BR/presets/interstellar/' },
+				{ presetId: 'matrix', href: '/pt-BR/presets/the-matrix/' },
+				{ presetId: 'gladiator', href: '/pt-BR/presets/gladiator/' },
+				{ presetId: 'life-of-pi', href: '/pt-BR/?preset=life-of-pi' },
+			]}
+		/>
+
+		<MovieFaq
+			eyebrow="DUNE FAQ"
+			heading="Perguntas frequentes sobre o filtro de foto de Dune"
+			faqs={faqs}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 text-center sm:px-6">
+			<p class="text-base leading-7 text-body">
+				Prefere o look de outro filme? Veja a <a href="/pt-BR/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">biblioteca completa com 60 presets</a>,
+				leia o guia completo sobre como <a href="/pt-BR/guides/how-to-make-photos-look-cinematic/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">deixar fotos com cara de cinema</a>,
+				ou vá para a <a href="/pt-BR/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">página inicial</a> para começar do zero.
+			</p>
+		</section>
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../../lib/landing';
+</script>

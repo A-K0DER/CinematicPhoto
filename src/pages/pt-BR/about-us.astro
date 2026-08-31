@@ -1,0 +1,52 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+
+const title = 'Sobre Nós | Cinematic Photo Editor';
+const description = 'Conheça o Cinematic Photo, um editor de fotos gratuito e client-side que aplica Color Grading inspirado em filmes, grão de filme e letterboxing direto no seu navegador.';
+---
+
+<Layout title={title} description={description} path="/about-us/">
+	<Navbar />
+	<main class="mx-auto max-w-3xl px-4 py-20 sm:px-6">
+		<span class="mb-4 block font-mono text-xs tracking-wide text-mute">SOBRE NÓS</span>
+		<h1 class="font-sans text-3xl font-semibold tracking-[-0.03em] text-ink sm:text-4xl">
+			Um editor de fotos cinematográfico feito por quem ama cores de filme
+		</h1>
+
+		<div class="mt-8 flex flex-col gap-6 text-base leading-7 text-body">
+			<p>
+				O Cinematic Photo nasceu de uma frustração simples: fazer uma foto parecer uma cena de um
+				filme favorito geralmente exigia ajustar curvas manualmente em um editor de desktop,
+				procurar Presets de origem duvidosa ou pagar por uma assinatura só para experimentar
+				algumas opções de Color Grading. Queríamos algo mais rápido: uma ferramenta que vai direto
+				de uma foto sem graça para um visual de nível cinematográfico com um clique, sem curva de
+				aprendizado no caminho.
+			</p>
+			<p>
+				Então criamos um editor focado, baseado no navegador, ao redor de um pequeno conjunto de
+				opções de Color Grading modeladas a partir de visuais de filme reconhecíveis (neo-noir
+				azul-petróleo e laranja, azul cósmico frio, dourado quente de deserto, verde digital de
+				alto contraste e sombras esmagadas em tom de aço), além dos detalhes de textura que
+				vendem uma imagem cinematográfica: grão de filme, vinheta, brilho e halação, letterboxing
+				anamórfico e um selo de tipo de filme.
+			</p>
+			<h2 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">Por que ele é privado por padrão</h2>
+			<p>
+				Todo filtro, Color Grading e exportação no Cinematic Photo roda localmente em um canvas
+				HTML dentro da sua própria aba do navegador. Fizemos essa escolha de propósito: suas fotos
+				são suas, e uma ferramenta de Color Grading não tem nenhum motivo real para vê-las. Não há
+				uploads, não há contas e não há armazenamento em servidor. A edição acontece inteiramente
+				no seu dispositivo.
+			</p>
+			<h2 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">Para quem construímos</h2>
+			<p>
+				Fotógrafos, cineastas e criadores de conteúdo usam o Cinematic Photo para thumbnails,
+				pôsteres e imagens de portfólio. Se isso parece com você e você encontrar algum problema
+				ou quiser sugerir um novo Preset, adoraríamos ouvir sobre isso. Fale conosco na página <a href="/pt-BR/contact-us" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Contato</a>.
+			</p>
+		</div>
+	</main>
+	<Footer />
+</Layout>

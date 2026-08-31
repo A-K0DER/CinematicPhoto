@@ -1,0 +1,131 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import DropZone from '../../../components/DropZone.astro';
+import MovieFaq from '../../../components/MovieFaq.astro';
+
+const path = '/for/travel-photography/';
+const title = 'Filtro de Fotografia de Viagem Cinematográfico | Cinematic Photo Editor';
+const description =
+	'Cinco Presets cinematográficos escolhidos para fotografia de viagem e paisagem: grades de filme quentes e de quadro amplo, feitos para desertos, litorais e céu aberto.';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'CollectionPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com/pt-BR${path}`,
+};
+
+const faqs = [
+	{
+		q: 'O que faz um Preset cinematográfico bom para fotos de viagem e paisagem?',
+		a: 'Um Preset construído em torno da luz natural e do espaço aberto em vez de um tingimento pesado e uniforme. Os cinco destacados aqui, Dune, Gladiator, Life of Pi, Pirates of the Caribbean e The Fellowship of the Ring, todos aplicam grading em direção a tons quentes de sol e céu que combinam com quadros amplos e cheios de luz, em vez de quadros apertados e iluminados artificialmente.',
+	},
+	{
+		q: 'Qual Preset funciona melhor para fotos de deserto ou paisagens áridas?',
+		a: 'O grade quente dourado de deserto de Dune e os tons de areia clareada e arena dourada de Gladiator são construídos especificamente em torno de ambientes clareados pelo sol e empoeirados, eles são a combinação mais forte para fotos de deserto, cânion ou planície seca aberta.',
+	},
+	{
+		q: 'Qual Preset combina com fotos de viagem de oceano, litoral ou tropicais?',
+		a: 'O grade de azul-oceano vívido e laranja de pôr do sol de Life of Pi é ajustado para água aberta e céu, e o teal de alto-mar e dourado ensolarado de Pirates of the Caribbean funciona bem para fotos de litoral ou porto com água visível.',
+	},
+	{
+		q: 'Existe um Preset cinematográfico para florestas, montanhas ou paisagens verdes?',
+		a: 'O grade mítico verde e dourado de The Fellowship of the Ring é construído em torno de vegetação exuberante e natural e escala épica, o que o torna uma combinação forte para fotos de floresta, vale ou paisagem de montanha.',
+	},
+	{
+		q: 'Devo usar um Preset diferente para golden hour em comparação com fotos de viagem do meio-dia?',
+		a: 'Os Presets quentes daqui, Dune e Gladiator especialmente, são naturalmente mais indulgentes em fotos de golden hour que já têm luz direcional quente. Em luz plana do meio-dia, uma mão mais leve nos sliders de vinheta e grão evita que o grade fique pesado demais sobre um quadro já claro.',
+	},
+	{
+		q: 'Esses Presets cinematográficos funcionam em retratos de viagem, não só em paisagens?',
+		a: 'Podem funcionar, mas confira antes o guia dedicado de filtro para retratos, alguns desses grades aplicam tons quentes de forma ampla por todo o quadro, o que fica bem em fotos de paisagem aberta, mas exige uma mão mais leve em rostos em close.',
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Início', href: '/pt-BR/' },
+				{ label: 'Para' },
+				{ label: 'Fotografia de Viagem' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">GUIA DE USO</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Filtro de fotografia de viagem cinematográfico
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Cinco Presets cinematográficos escolhidos para paisagens abertas: grades de filme quentes e
+				de quadro amplo, feitos para desertos, litorais e luz natural épica.
+			</p>
+		</section>
+
+		<DropZone
+			presetIds={['dune', 'gladiator', 'life-of-pi', 'pirates-of-the-caribbean', 'fellowship-of-the-ring']}
+			showHeading={false}
+			showFooterLinks={false}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">O QUE PROCURAR</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				O que torna um Preset pronto para paisagem
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Fotos de viagem e paisagem costumam ser quadros amplos e cheios de luz com bastante cor
+					natural já presente, céu, areia, água, folhagem, então os Presets mais fortes trabalham
+					com essa luz existente em vez de lutar contra ela. Tanto o dourado quente de deserto de
+					Dune quanto o azul-oceano vívido e laranja de pôr do sol de Life of Pi apostam na luz
+					natural em vez de achatá-la.
+				</p>
+				<p>
+					Escala também importa: esses grades são construídos para se sustentar em um quadro amplo
+					com muita informação visual, diferente de alguns grades mais fechados e orientados a
+					retrato que concentram o efeito em um único assunto.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">APROFUNDE-SE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Mais formas de moldar o visual
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/pt-BR/for/portraits/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Filtro cinematográfico para retratos</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Grades seguros para tons de pele com pessoas no quadro</span>
+				</a>
+				<a href="/pt-BR/for/instagram/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Filtro cinematográfico para Instagram</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Grades marcantes feitos para o feed</span>
+				</a>
+				<a href="/pt-BR/guides/how-to-make-photos-look-cinematic/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Como deixar fotos com cara de cinema</span>
+					<span class="mt-1 block font-mono text-xs text-mute">O guia completo, passo a passo</span>
+				</a>
+				<a href="/pt-BR/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Veja todos os 60 Presets</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Cada color grade, organizado por gênero</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Perguntas comuns sobre filtros cinematográficos de fotos de viagem" faqs={faqs} />
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../../lib/landing';
+</script>

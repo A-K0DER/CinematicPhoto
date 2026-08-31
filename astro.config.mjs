@@ -23,6 +23,7 @@ export default defineConfig({
 		fallback: {
 			de: 'en',
 			nb: 'en',
+			'pt-BR': 'en',
 		},
 	},
 	integrations: [

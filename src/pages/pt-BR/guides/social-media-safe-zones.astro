@@ -1,0 +1,220 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import MovieFaq from '../../../components/MovieFaq.astro';
+
+const path = '/guides/social-media-safe-zones/';
+const title = 'Guia de Safe Zone para Redes Sociais: TikTok, Reels, Stories e Posts | Cinematic Photo';
+const description =
+	'Todas as principais Safe Zones de vídeo vertical em um só lugar: dimensões exatas do TikTok, Instagram Reels, Stories e feed de Posts, além de regras de design para manter rostos, textos e logos visíveis.';
+const keywords =
+	'safe zone redes sociais, guia de safe zone, dimensões safe zone tiktok, dimensões safe zone instagram, tamanho safe zone reels, tamanho safe zone stories, safe zone vídeo vertical, safe zone 9:16, guia de safe zone instagram';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'Article',
+	headline: 'Guia de Safe Zone para Redes Sociais: TikTok, Reels, Stories e Posts',
+	description,
+	url: `https://cinematicphoto.com/pt-BR${path}`,
+	author: { '@type': 'Organization', name: 'Cinematic Photo' },
+	publisher: { '@type': 'Organization', name: 'Cinematic Photo' },
+	mainEntityOfPage: `https://cinematicphoto.com/pt-BR${path}`,
+};
+
+const platforms = [
+	{
+		name: 'TikTok',
+		frame: '1080×1920 (9:16)',
+		reserved: 'Barra superior, faixa inferior de legenda/usuário/som, coluna de ícones à direita',
+		note: 'A coluna de ícones à direita é a que os criadores mais esquecem, ela ocupa os últimos cerca de 14% da largura.',
+	},
+	{
+		name: 'Instagram Reels',
+		frame: '1080×1920 (9:16)',
+		reserved: 'Barra superior, faixa inferior de legenda/usuário/áudio, coluna de ícones à direita',
+		note: 'Formato parecido com o do TikTok, mas as faixas ficam em profundidades um pouco diferentes, não reaproveite uma composição para os dois sem checar.',
+	},
+	{
+		name: 'Instagram Stories',
+		frame: '1080×1920 (9:16)',
+		reserved: 'Barra superior de perfil/horário, linha inferior de resposta',
+		note: 'Não há coluna de ícones lateral aqui, o risco está no topo e na base, não nas bordas.',
+	},
+	{
+		name: 'Instagram Post (grade do feed)',
+		frame: '1080×1350 (4:5)',
+		reserved: 'Cerca de 10% do topo e 10% da base, cortados pelo recorte quadrado da grade do perfil',
+		note: 'Nada é desenhado por cima de um Post, aqui o risco é de corte, não de sobreposição de interface.',
+	},
+];
+
+const faqs = [
+	{
+		q: 'Existe uma Safe Zone que funcione para todas as plataformas?',
+		a: 'Não. TikTok, Reels e Stories são todos em 9:16, mas a interface de cada um fica em um lugar diferente, e um Post do feed tem uma proporção totalmente diferente (4:5) com um risco de corte em vez de sobreposição de interface. Projetar para a área comum mais apertada entre todos eles, mais ou menos o terço central, na horizontal e na vertical, é o que mais se aproxima de uma Safe Zone universal, mas checar cada plataforma individualmente pega mais problemas do que esse atalho sozinho.',
+	},
+	{
+		q: 'Essas dimensões mudam com o tempo?',
+		a: 'Sim, de vez em quando. TikTok, Instagram e YouTube ajustam a interface do aplicativo ao longo do tempo, deslocando uma faixa de legenda alguns pontos percentuais ou adicionando um botão novo. Os números aqui são aproximações próximas baseadas em especificações publicadas para criadores e anúncios, trate-os como uma checagem de composição, não como uma garantia exata em pixels, e reveja um Modelo periodicamente em vez de assumir que ele vai continuar preciso para sempre.',
+	},
+	{
+		q: 'Qual é a forma mais rápida de checar uma Safe Zone sem exportar antes?',
+		a: 'Solte a foto direto em um Checker de Safe Zone e veja o overlay antes de exportar qualquer coisa. O Cinematic Photo tem um Checker de Safe Zone dedicado para o TikTok e um Checker para Instagram cobrindo Reels, Stories e Posts, ambos rodando no navegador, nada é enviado para servidor nenhum.',
+	},
+	{
+		q: 'Uma Safe Zone importa para uma foto estática do mesmo jeito que para um vídeo?',
+		a: 'Sim. Um Post de foto, uma imagem de capa de Reels ou um slide em modo foto do TikTok ficam todos dentro do mesmo enquadramento e recebem o mesmo tratamento de interface ou corte que um vídeo receberia. Se algo muda, é que importa ainda mais para uma foto, um vídeo tem movimento e vários quadros para trabalhar, um único still tem só uma composição para acertar.',
+	},
+	{
+		q: 'O que eu faço se um rosto ou logo precisar ficar perto de uma borda?',
+		a: 'Quando possível, reenquadre ou recorte de novo para que o elemento importante fique dentro do terço central. Quando isso não for possível, prefira o topo do quadro em vez da base, tanto a interface mais pesada do TikTok quanto a do Reels (legenda, usuário, coluna de ícones) se concentra nos dois terços inferiores, então posicionar no topo tende a sobreviver em mais plataformas.',
+	},
+	{
+		q: 'As Safe Zones são diferentes para anúncios versus posts orgânicos?',
+		a: 'No fundo é o mesmo enquadramento e a mesma interface, mas as especificações de anúncios costumam ser a fonte mais conservadora e melhor documentada, já que uma marca não pode se dar ao luxo de um logo cortado. É também por isso que este guia, e as ferramentas linkadas abaixo, tiram seus números de especificações publicadas para criadores e anúncios em vez de chutar a partir de capturas de tela.',
+	},
+];
+---
+
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Início', href: '/pt-BR/' },
+				{ label: 'Guias' },
+				{ label: 'Safe Zones para Redes Sociais' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">GUIA DE SAFE ZONE</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Safe Zones para redes sociais, explicadas
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				TikTok, Instagram Reels, Stories e Posts do feed escondem cada um uma parte diferente do
+				quadro atrás da própria interface ou do próprio corte. Veja o que é reservado onde, e como
+				compor em volta disso.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">A REFERÊNCIA</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				O que cada plataforma reserva
+			</h2>
+			<div class="mt-6 overflow-x-auto">
+				<table class="w-full min-w-[560px] border-collapse text-left">
+					<thead>
+						<tr class="border-b border-hairline">
+							<th class="py-2.5 pr-4 font-mono text-[11px] font-medium tracking-wide text-mute uppercase">Plataforma</th>
+							<th class="py-2.5 pr-4 font-mono text-[11px] font-medium tracking-wide text-mute uppercase">Quadro</th>
+							<th class="py-2.5 pr-4 font-mono text-[11px] font-medium tracking-wide text-mute uppercase">Espaço reservado</th>
+						</tr>
+					</thead>
+					<tbody>
+						{
+							platforms.map((p) => (
+								<tr class="border-b border-hairline align-top">
+									<td class="py-3 pr-4 font-sans text-sm font-medium whitespace-nowrap text-ink">{p.name}</td>
+									<td class="py-3 pr-4 font-mono text-xs whitespace-nowrap text-mute">{p.frame}</td>
+									<td class="py-3 pr-4 text-sm leading-6 text-body">
+										{p.reserved}
+										<span class="mt-1 block text-xs text-mute">{p.note}</span>
+									</td>
+								</tr>
+							))
+						}
+					</tbody>
+				</table>
+			</div>
+			<p class="mt-4 text-sm leading-6 text-mute">
+				Estas são aproximações próximas das especificações publicadas de cada plataforma para
+				criadores e anúncios, não medições exatas em pixels. Use os Checkers interativos linkados
+				abaixo para sobrepor as faixas exatas na sua própria foto.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">REGRAS DE DESIGN</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Compondo para não cobrir nada importante
+			</h2>
+			<div class="mt-6 flex flex-col gap-6 text-base leading-7 text-body">
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Mantenha o assunto no terço central</h3>
+					<p class="mt-2">
+						No TikTok, Reels e Stories, a região mais segura é mais ou menos o terço do meio do
+						quadro, tanto na horizontal quanto na vertical. Ela fica livre de toda barra superior,
+						toda faixa inferior de legenda e toda coluna de ícones lateral nas três plataformas ao
+						mesmo tempo, o que faz dela o lugar padrão para um rosto, uma legenda ou o detalhe de
+						um produto.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Projete para a plataforma mais apertada, não a mais folgada</h3>
+					<p class="mt-2">
+						Se uma foto precisa funcionar no TikTok, Reels e Stories ao mesmo tempo, componha
+						contra a plataforma que reserva mais espaço naquela direção, a faixa inferior e a
+						coluna de ícones do TikTok são um pouco maiores que as do Reels, então uma composição
+						que passa no TikTok também passa no Reels. Checar primeiro a plataforma mais folgada é
+						como uma legenda acaba cortada em algum lugar que você não testou.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Um Post do feed é um problema de corte, não de interface</h3>
+					<p class="mt-2">
+						Nada é desenhado por cima de um Post, então o risco não é um ícone cobrindo um rosto,
+						é o corte quadrado da grade do perfil cortando o topo e a base de uma imagem 4:5.
+						Mantenha o assunto centralizado verticalmente dentro do quadrado central em vez de
+						deixá-lo chegar até a borda superior ou inferior do quadro completo em 4:5.
+					</p>
+				</div>
+				<div>
+					<h3 class="font-sans text-lg font-semibold text-ink">Cheque antes de exportar, não depois</h3>
+					<p class="mt-2">
+						Recortar uma foto de novo depois que ela já foi editada com color grading, legendada ou
+						exportada é mais lento e muitas vezes piora a qualidade. Sobrepor a Safe Zone na foto
+						original primeiro, antes de qualquer outra edição, pega uma composição ruim enquanto
+						ainda é barato consertar.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">APROFUNDE-SE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Cheque a sua própria foto
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/pt-BR/tiktok-safe-zone/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Checker de Safe Zone do TikTok</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Sobreponha a interface do TikTok na sua foto</span>
+				</a>
+				<a href="/pt-BR/tiktok-safe-zone-template/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Modelo de Safe Zone do TikTok</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Dimensões para CapCut e Premiere Pro</span>
+				</a>
+				<a href="/pt-BR/instagram-reels-safe-zone/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Checker de Safe Zone do Instagram</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Reels, Post e Stories em uma só ferramenta</span>
+				</a>
+				<a href="/pt-BR/instagram-safe-zone-template/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Modelo de Safe Zone do Instagram</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Dimensões para Reels, Story e Post</span>
+				</a>
+				<a href="/pt-BR/for/instagram/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Editor cinematográfico para Instagram</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Presets mais recortes de exportação em 1:1 / 4:5 / 9:16</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Perguntas comuns sobre Safe Zones para redes sociais" faqs={faqs} />
+	</main>
+	<Footer />
+</Layout>

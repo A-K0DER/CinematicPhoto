@@ -1,0 +1,196 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import DropZone from '../../../components/DropZone.astro';
+import BeforeAfter from '../../../components/BeforeAfter.astro';
+import RelatedPresets from '../../../components/RelatedPresets.astro';
+import MovieFaq from '../../../components/MovieFaq.astro';
+import { getPreset } from '../../../lib/presets';
+
+const preset = getPreset('dark-knight');
+const path = '/presets/the-dark-knight/';
+const url = `https://cinematicphoto.com/pt-BR${path}`;
+
+const title = 'Filtro de Foto e Editor de The Dark Knight | Ferramenta Cinematográfica Gratuita';
+const description =
+	'Use este filtro de foto e editor de fotos gratuito de The Dark Knight para aplicar na sua foto o aço frio e os pretos esmagados do filme, direto no seu navegador, sem necessidade de conta.';
+const keywords =
+	'filtro de foto the dark knight, editor de foto the dark knight, editor the dark knight, color grade the dark knight, filtro de foto batman';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	name: title,
+	description,
+	url,
+	isPartOf: { '@type': 'WebSite', name: 'Cinematic Photo', url: 'https://cinematicphoto.com' },
+};
+
+const faqs = [
+	{
+		q: 'Este é um filtro de foto oficial de The Dark Knight?',
+		a: 'Não. Este Preset é inspirado na estética visual da fotografia de The Dark Knight, ele não é um filtro oficial licenciado pela Warner Bros., pela DC ou pelos criadores do filme, nem afiliado a eles. É uma correção de cor independente feita para recriar o look, não um produto de marca oficial.',
+	},
+	{
+		q: 'Existe um editor de fotos dedicado a Dark Knight, ou eu tenho que procurar em uma lista de presets?',
+		a: 'Esta página é justamente esse editor dedicado, a correção de Dark Knight já carrega pré-selecionada na área de soltar arquivos acima, então você pode soltar uma foto e ajustar na hora o grão, a vinheta, o glow e o letterbox sem precisar procurar em toda a biblioteca de 60 presets primeiro.',
+	},
+	{
+		q: 'O Preset de Dark Knight funciona em fotos diurnas, ou só em fotos noturnas?',
+		a: 'Funciona nos dois casos, mas é construído em torno das cenas noturnas de alto contraste e tons frios do filme, então se destaca mais em fotos com alguma profundidade de sombra já existente: céu nublado, luz interna ou crepúsculo. Em fotos muito claras e planas de luz do dia, o aumento de contraste e a vinheta ainda são aplicados, mas ficam um pouco menos dramáticos.',
+	},
+	{
+		q: 'Qual a diferença entre o Preset de Dark Knight e o Preset de The Batman?',
+		a: 'Os dois são correções do universo Batman, mas construídos em torno da fotografia de filmes diferentes. O Preset de Dark Knight tende para o aço frio com tom oliva, com detalhes de sombra esmagados e uma saturação mais baixa. O Preset de The Batman vai mais fundo em um noir carmesim-preto com uma vinheta mais pesada e um piso de brilho mais baixo. Compare os dois lado a lado no editor para ver qual combina melhor com sua foto.',
+	},
+	{
+		q: 'Minha foto ficou escura demais depois de aplicar a correção de Dark Knight. Como eu resolvo isso?',
+		a: 'O Preset usa por padrão uma vinheta forte (48) e uma redução de brilho para esmagar o detalhe das sombras, o que é essencial para o look, mas você pode reduzir o controle deslizante de vinheta no editor se sentir que está pesado demais, ou começar com uma foto com luz ambiente mais clara para que as sombras ainda mantenham detalhe depois que a correção for aplicada.',
+	},
+	{
+		q: 'Que tipo de foto combina melhor com uma correção de cor estilo Dark Knight?',
+		a: 'Paisagens urbanas noturnas, ruas molhadas e prédios com linhas arquitetônicas fortes costumam funcionar melhor, já que a correção é feita para valorizar luz direcional dura e sombras profundas. Retratos melancólicos sob luz forte ou de fonte única também combinam bem com o tom de aço frio.',
+	},
+	{
+		q: 'Posso usar o efeito de foto de Dark Knight para um pôster de filme ou thumbnail?',
+		a: 'Sim. O Preset, junto com os controles de grão de filme, vinheta e letterbox anamórfico do editor, foi projetado para deixar uma foto plana bem perto de um still cinematográfico pronto para pôster em poucos cliques, e cada exportação é sua para usar livremente, já que nada é marcado com marca d’água ou fica travado atrás de uma conta.',
+	},
+];
+---
+
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Início', href: '/pt-BR/' },
+				{ label: 'Todos os Presets', href: '/pt-BR/presets/' },
+				{ label: 'The Dark Knight' },
+			]}
+		/>
+
+		<DropZone presetId={preset.id} showHeading={false} showFooterLinks={false} />
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">PRESET INSPIRADO EM FILME</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				O filtro de foto de The Dark Knight: pretos esmagados e aço frio, inspirado em Gotham.
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Um editor de fotos e Preset de color grading gratuito de The Dark Knight, inspirado na
+				estética visual do The Dark Knight de Christopher Nolan, feito para fotógrafos que querem
+				aquele look de Gotham de alto contraste e tom frio sem tocar em um painel de curvas.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">A ESTÉTICA</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				O aço frio de Gotham, filmado para o IMAX
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					The Dark Knight construiu sua identidade visual em torno de escala e sombra. Filmando
+					grandes trechos em película IMAX, o diretor de fotografia Wally Pfister preferiu luz
+					dura e direcional e deixou o detalhe das sombras se esmagar em vez de levantá-lo por
+					segurança, fazendo o horizonte de Gotham parecer uma arquitetura densa e imponente em
+					vez de um cenário iluminado. A cor permaneceu contida: azuis de aço e cinza-oliva
+					dessaturado dominam, com o calor reservado para as raras cenas de interior ou luz de
+					fogo.
+				</p>
+				<p>
+					É um look construído em cima de contraste e controle, não de saturação. Os tons de pele
+					se mantêm naturais mesmo quando o resto do quadro fica frio, o que é o que separa esta
+					correção de um simples filtro de tonalidade azul: a mudança de cor vive nas sombras e
+					nos meios-tons, não achatada uniformemente por toda a imagem.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">ANTES / DEPOIS</span>
+			<h2 class="mb-6 font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Veja a correção aplicada
+			</h2>
+			<BeforeAfter preset={preset} />
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">A CIÊNCIA DA COR</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Como a correção de cor de Dark Knight funciona de verdade
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					O Preset aumenta o contraste com força, dessatura moderadamente, e reduz o brilho para
+					esmagar o detalhe das sombras antes de qualquer cor ser adicionada, a base da sensação
+					densa e subexposta do filme. Sobre essa base, um overlay de dois tons divide o quadro:
+					as sombras se deslocam para um preto-petróleo escuro, enquanto as luzes tendem a um
+					aço-oliva discreto. Essa divisão é o que dá à correção seu efeito frio e metálico sem
+					deixar a foto inteira em um único azul chapado, como faria um filtro de tonalidade
+					básico.
+				</p>
+				<p>
+					A vinheta padrão fica no lado mais forte dos presets da ferramenta, puxando o olhar
+					para dentro e reforçando a sensação de escala e sombra pela qual o filme é conhecido. O
+					grão de filme é mantido moderado, o suficiente para ler como um filmstock, e não como
+					um resultado digital limpo.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">MELHORES FOTOS PARA ESTE PRESET</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Em que tipo de foto usar
+			</h2>
+			<ul class="mt-6 flex flex-col gap-4 text-base leading-7 text-body">
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Arquitetura urbana noturna.</span> Horizontes, pontes e prédios com linhas verticais fortes valorizam o detalhe de sombra esmagado e o tom frio das luzes.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Retratos melancólicos com luz dura.</span> Uma única fonte de luz forte, luz de janela, um poste de rua, faróis, combina bem com a curva de contraste da correção.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Ruas encharcadas de chuva.</span> O pavimento molhado capta o tom frio das luzes como luz refletida, adicionando uma profundidade que a correção sozinha não consegue criar.</span>
+				</li>
+			</ul>
+		</section>
+
+		<RelatedPresets
+			heading="Mais correções inspiradas em filmes"
+			items={[
+				{ presetId: 'blade-runner', href: '/pt-BR/presets/blade-runner-2049/' },
+				{ presetId: 'dune', href: '/pt-BR/presets/dune/' },
+				{ presetId: 'interstellar', href: '/pt-BR/presets/interstellar/' },
+				{ presetId: 'matrix', href: '/pt-BR/presets/the-matrix/' },
+				{ presetId: 'the-batman', href: '/pt-BR/presets/the-batman/' },
+				{ presetId: 'watchmen', href: '/pt-BR/?preset=watchmen' },
+			]}
+		/>
+
+		<MovieFaq
+			eyebrow="THE DARK KNIGHT FAQ"
+			heading="Perguntas frequentes sobre o filtro de foto de The Dark Knight"
+			faqs={faqs}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 text-center sm:px-6">
+			<p class="text-base leading-7 text-body">
+				Prefere o look de outro filme? Veja a <a href="/pt-BR/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">biblioteca completa com 60 presets</a>,
+				veja mais <a href="/pt-BR/looks/dark-and-moody/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">presets sombrios e melancólicos</a>,
+				ou vá para a <a href="/pt-BR/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">página inicial</a> para começar do zero.
+			</p>
+		</section>
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../../lib/landing';
+</script>

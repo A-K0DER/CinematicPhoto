@@ -1,0 +1,153 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import DropZone from '../../../components/DropZone.astro';
+import MovieFaq from '../../../components/MovieFaq.astro';
+
+const path = '/for/portraits/';
+const title = 'Filtro de Foto Cinematográfico para Retratos | Cinematic Photo Editor';
+const description =
+	'Retratos cinematográficos sem risco para o tom de pele: cinco Presets escolhidos para rostos, que adicionam atmosfera sem deixar a pele com uma cor artificial.';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'CollectionPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com/pt-BR${path}`,
+};
+
+const faqs = [
+	{
+		q: 'Quais Presets cinematográficos são mais seguros para tons de pele?',
+		a: 'Os cinco destacados nesta página, Shawshank, The Prestige, Top Gun: Maverick, Life of Pi e Spirited Away, usam todos uma divisão de cor com tendência quente ou equilibrada que mantém a pele parecendo pele em vez de mudar para um tom artificial. Eles foram escolhidos especificamente porque seus overlays não jogam uma única cor lisa por cima do quadro inteiro.',
+	},
+	{
+		q: 'Por que alguns filtros cinematográficos deixam a pele com aparência doentia ou artificial nos rostos?',
+		a: 'Presets construídos em torno de um tingimento de cor forte e liso, como um banho verde ou magenta pesado, aplicam essa cor igualmente em tudo dentro do quadro, incluindo a pele. Em paisagens ou arquitetura isso soa estiloso; em um rosto, muitas vezes soa como um tom estranho e pouco saudável. Presets com uma divisão de cor entre sombras e realces, em vez de um tingimento liso, são muito mais indulgentes com rostos.',
+	},
+	{
+		q: 'Posso usar um Preset escuro e sombrio para um retrato dramático em vez destes cinco?',
+		a: 'Sim, mas precisa da iluminação certa: um grade escuro e sombrio funciona em retratos iluminados por uma única fonte de luz forte e direcional, uma janela, uma luminária, contraluz, onde as sombras já têm forma. Em retratos planos e uniformemente iluminados ele tende só a escurecer o quadro. Veja o guia do filtro de foto Dark & Moody para esse visual específico.',
+	},
+	{
+		q: 'Qual Preset funciona melhor para retratos de casamento ou de família?',
+		a: 'O grade quente e contido em 35mm de Shawshank é o mais versátil para grupos e tons de pele variados, ele é suave o suficiente para não dominar vários rostos diferentes em um mesmo quadro. O azul-céu brilhante e o âmbar de Top Gun: Maverick combinam bem especificamente com fotos de casamento ao ar livre na hora dourada.',
+	},
+	{
+		q: 'Como evito supersaturar os tons de pele ao aplicar um Preset cinematográfico?',
+		a: 'Comece com um dos cinco Presets desta página em vez de um grade carregado de saturação, depois use os sliders de grão, vinheta e glow no editor para adicionar atmosfera sem aumentar ainda mais a intensidade da cor. Se um Preset ainda ficar forte demais, aplicá-lo em uma foto original um pouco mais clara suaviza o efeito.',
+	},
+	{
+		q: 'Fotos em grupo precisam de um Preset diferente dos retratos individuais?',
+		a: 'Não de um Preset diferente, mas preste mais atenção à iluminação uniforme entre todos os presentes na foto, uma foto de grupo com luz desigual vai mostrar de forma irregular o esmagamento de sombra de um grade mais forte entre os rostos. Os grades mais suaves daqui, especialmente Shawshank e The Prestige, são mais indulgentes quando a iluminação varia dentro de um grupo.',
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Início', href: '/pt-BR/' },
+				{ label: 'Para' },
+				{ label: 'Retratos' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">GUIA DE USO</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Filtro de foto cinematográfico para retratos
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Nem todo grade de filme é seguro para rostos. Estes cinco foram escolhidos especificamente
+				para retratos cinematográficos: atmosfera suficiente para parecer um still de filme, sem
+				deixar a pele com uma cor artificial.
+			</p>
+		</section>
+
+		<DropZone
+			presetIds={['shawshank', 'the-prestige', 'top-gun-maverick', 'life-of-pi', 'spirited-away']}
+			showHeading={false}
+			showFooterLinks={false}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">O QUE PROCURAR</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				O que torna um Preset seguro para retratos
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Bons retratos cinematográficos vêm do mesmo truque que coloristas de verdade usam em
+					rostos: a maioria dos grades cinematográficos divide a cor entre sombras e realces em
+					vez de mergulhar o quadro inteiro em um único tom liso, e essa divisão importa mais em
+					rostos. Um tom de realce com tendência quente mantém a pele parecendo pele; um Preset
+					construído em torno de um único banho de cor forte, aplicado igualmente por toda a
+					imagem, pode deslocar a pele para verde, magenta ou outro tom artificial que fica bem em
+					uma paisagem, mas mal em uma pessoa.
+				</p>
+				<p>
+					Contraste e vinheta também importam mais em retratos do que em planos abertos: se
+					forem agressivos demais, o detalhe de sombra em um rosto esmaga para um preto sem
+					nenhum detalhe. Os cinco Presets acima tendem ao quente ou ao equilibrado e mantêm o contraste
+					moderado, e é por isso que estão em destaque aqui em vez dos grades mais duros e
+					dessaturados da ferramenta.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">USE COM CAUTELA EM ROSTOS</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Presets para pensar duas vezes antes de usar em retratos
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					O tingimento verde liso do <a href="/pt-BR/presets/the-matrix/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Preset Matrix</a> é
+					aplicado uniformemente por todo o quadro de propósito, marcante em uma cena urbana, mas
+					vai soar como um tom estranho na pele. Grades com vinheta muito forte e sombra esmagada,
+					como os da página <a href="/pt-BR/looks/dark-and-moody/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">filtro de foto Dark & Moody</a>,
+					podem funcionar especificamente para retratos dramáticos com luz forte, mas tendem a
+					achatar o detalhe em rostos iluminados de forma suave e uniforme.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">APROFUNDE-SE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Mais formas de moldar o visual
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/pt-BR/looks/vintage-35mm-film/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Visual vintage em filme 35mm</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Suave, quente e indulgente com tons de pele</span>
+				</a>
+				<a href="/pt-BR/looks/dark-and-moody/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Filtro cinematográfico Dark & Moody</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Especificamente para retratos dramáticos com luz forte</span>
+				</a>
+				<a href="/pt-BR/guides/how-to-make-photos-look-cinematic/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Como deixar fotos com cara de cinema</span>
+					<span class="mt-1 block font-mono text-xs text-mute">O guia completo, passo a passo</span>
+				</a>
+				<a href="/pt-BR/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Veja todos os 60 Presets</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Cada color grade, organizado por gênero</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Perguntas comuns sobre filtros cinematográficos para retratos" faqs={faqs} />
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../../lib/landing';
+</script>

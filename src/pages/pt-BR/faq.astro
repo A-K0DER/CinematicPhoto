@@ -1,0 +1,36 @@
+---
+// The FAQ entries themselves still come from the shared English src/data/faqs.ts,
+// that dataset is not localized yet. Only the page chrome is translated.
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+import { ALL_FAQS } from '../../data/faqs';
+
+const path = '/faq/';
+const title = `Perguntas Frequentes | Cinematic Photo Editor`;
+const description =
+	'Todas as perguntas sobre o Cinematic Photo respondidas em um só lugar: preço, privacidade, formatos suportados e como conseguir Color Grading de filmes e séries específicos.';
+---
+
+<Layout {title} {description} {path}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs items={[{ label: 'Início', href: '/pt-BR/' }, { label: 'FAQ' }]} />
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">AJUDA</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Perguntas frequentes
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Todas as perguntas sobre preço, privacidade, formatos suportados e Color Grading de filmes
+				ou séries específicos, tudo em um só lugar.
+			</p>
+		</section>
+
+		<MovieFaq eyebrow={`TODAS AS ${ALL_FAQS.length} PERGUNTAS`} heading="Tudo o que você pode querer saber" faqs={ALL_FAQS} />
+	</main>
+	<Footer />
+</Layout>

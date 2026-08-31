@@ -1,0 +1,243 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import SafeZoneTool from '../../components/SafeZoneTool.astro';
+import MovieFaq from '../../components/MovieFaq.astro';
+
+const path = '/instagram-reels-safe-zone/';
+const title = 'Verificador de Safe Zone do Instagram | Ferramenta de Overlay de UI para Reels, Post e Stories';
+const description =
+	"Solte uma foto no quadro do Instagram e veja exatamente onde a legenda, o nome de usuário e os elementos de UI do próprio app vão ficar por cima dela, para Reels, Posts do feed e Stories.";
+const keywords =
+	'safe zone instagram, overlay safe zone instagram, safe zone instagram reels, modelo safe zone instagram reels, modelo safe zone instagram reels png, safe zone reels, safe zone instagram stories, safe zone instagram post, modelo safe zone reels, overlay ui instagram, safe zone reels 1080x1920, safe zone de video instagram, app safe zone instagram, safe zone instagram 2026, guia safe zone instagram';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebApplication',
+	name: 'Instagram Safe Zone Checker',
+	url: `https://cinematicphoto.com${path}`,
+	description,
+	applicationCategory: 'DesignApplication',
+	operatingSystem: 'Any (runs in browser)',
+	offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+	isAccessibleForFree: true,
+};
+
+const howToStructuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'HowTo',
+	name: 'Como verificar a safe zone do Instagram em uma foto',
+	description: "Sobreponha a UI e as faixas de corte do Reels, dos Stories ou de um Post do feed em uma foto antes de publicar.",
+	step: [
+		{
+			'@type': 'HowToStep',
+			name: 'Escolha um formato',
+			text: 'Alterne entre Reels, Post e Stories acima da pré-visualização, cada um usa seu próprio quadro e suas próprias faixas de safe zone.',
+		},
+		{
+			'@type': 'HowToStep',
+			name: 'Envie uma foto',
+			text: 'Solte uma foto ou thumbnail na ferramenta, cole a imagem ou clique para enviar um arquivo JPG, PNG ou WEBP.',
+		},
+		{
+			'@type': 'HowToStep',
+			name: 'Reposicione dentro do quadro',
+			text: "Arraste dentro do quadro para reposicionar a foto dentro do corte de exportação do formato selecionado.",
+		},
+		{
+			'@type': 'HowToStep',
+			name: "Verifique o overlay de UI",
+			text: "Analise as faixas escurecidas que mostram as safe zones de UI ou de corte em grade daquele formato, desenhadas em escala sobre a foto.",
+		},
+		{
+			'@type': 'HowToStep',
+			name: 'Salve uma imagem de referência',
+			text: 'Ajuste a opacidade do overlay se necessário e depois salve a imagem de referência recortada.',
+		},
+	],
+};
+
+const faqs = [
+	{
+		q: "O que é a safe zone do Instagram?",
+		a: "É a parte do quadro que fica coberta ou recortada assim que uma foto é realmente publicada. Reels e Stories colocam sua própria interface, legendas, nomes de usuário, um campo de resposta, ícones de engajamento, por cima de um quadro de vídeo 9:16. Posts do feed não recebem um overlay de UI, mas um post 4:5 é recortado no centro para um quadrado na grade do perfil, então suas bordas superior e inferior ficam escondidas ali. Qualquer coisa importante, um rosto, uma legenda, um produto, colocada nessas zonas fica parcial ou totalmente escondida dependendo de onde alguém vê. Reels, Stories e Post reservam espaços diferentes, use as abas acima para verificar o formato em que você está realmente publicando.",
+	},
+	{
+		q: 'Essa medição de safe zone é exata?',
+		a: "É uma aproximação bem próxima, baseada nas especificações publicadas do Instagram para criadores e anúncios, não uma medição em pixel perfeito extraída do aplicativo ao vivo. O Instagram ajusta sua interface ao longo do tempo, então trate isso como uma checagem de composição, não uma garantia.",
+	},
+	{
+		q: 'Essa ferramenta envia minha foto para algum lugar?',
+		a: 'Não. A imagem é desenhada diretamente em um canvas na página e nunca sai do seu navegador.',
+	},
+	{
+		q: 'Posso verificar o TikTok também?',
+		a: "Sim, o TikTok reserva um espaço parecido, mas não idêntico ao do Reels e dos Stories. Use o verificador de safe zone do TikTok dedicado para sobrepor as faixas de legenda, nome de usuário e ícones do próprio TikTok na sua foto.",
+	},
+	{
+		q: 'Qual é o tamanho da safe zone do Reels?',
+		a: "Na exportação padrão de 1080x1920, a faixa inferior de legenda/nome de usuário/áudio começa a cerca de 24% de altura a partir da base (cerca de 461px), e a coluna direita de ícones ocupa cerca dos últimos 12% da largura (cerca de 130px). Alterne para a aba Reels acima para ver as duas faixas desenhadas em escala na sua própria foto, além dos valores exatos em pixels e porcentagem.",
+	},
+	{
+		q: 'Qual é a safe zone do Instagram Reels?',
+		a: "É a área de um Reel sobre a qual a própria interface do Instagram se posiciona assim que ele é publicado: uma barra superior fina para o rótulo Reels e o áudio, uma faixa inferior para a legenda, nome de usuário e título do áudio, e uma coluna direita com ícones de curtir, comentar, compartilhar e perfil. Alterne para a aba Reels acima para ver os três desenhados em escala na sua própria foto, junto com a profundidade exata em pixels e porcentagem de cada um.",
+	},
+	{
+		q: "Qual é o tamanho e a proporção ideais de vídeo do Reels?",
+		a: "1080x1920 pixels em uma proporção de 9:16 é o tamanho de exportação padrão do Instagram para o Reels. A aba Reels desta ferramenta corresponde a essa resolução, então as medidas de safe zone se alinham diretamente com o que você exporta da sua câmera ou editor.",
+	},
+	{
+		q: 'A safe zone do Reels também se aplica às imagens de capa do Reels?',
+		a: "Sim. Uma imagem de capa do Reels, o quadro estático ou a foto mostrada antes de alguém tocar em play, fica dentro do mesmo quadro 9:16 e recebe o mesmo overlay de legenda, nome de usuário, áudio e ícones que o próprio vídeo, então a mesma safe zone se aplica.",
+	},
+	{
+		q: 'Qual é a safe zone dos Stories do Instagram?',
+		a: "Na exportação padrão de 1080x1920, os Stories reservam aproximadamente os 12% superiores (cerca de 230px) para a foto de perfil, nome de usuário, horário e botão de fechar, e aproximadamente os 12% inferiores (cerca de 230px) para o campo de resposta e a fileira de compartilhamento. Alterne para a aba Stories acima para ver as duas faixas desenhadas em escala na sua própria foto.",
+	},
+	{
+		q: 'Qual é a safe zone de um Story do Instagram?',
+		a: "São as faixas superior e inferior que o Instagram reserva em um Story para sua própria UI, aproximadamente os 12% superiores para a foto de perfil, nome de usuário, horário e botão de fechar, e aproximadamente os 12% inferiores para o campo de resposta e a fileira de compartilhamento, deixando o meio do quadro como a única parte com garantia de ficar livre. Diferente do Reels, não há uma coluna de ícones lateral a considerar. Alterne para a aba Stories acima para verificar isso na sua própria foto.",
+	},
+	{
+		q: "Qual é o tamanho e a proporção ideais dos Stories?",
+		a: "1080x1920 pixels em 9:16, o mesmo tamanho de exportação do Reels. As faixas de UI são diferentes, porém, os Stories não têm coluna de ícones lateral, então não reaproveite uma composição verificada para o Reels nos Stories sem checar também as faixas superior e inferior.",
+	},
+	{
+		q: 'A safe zone dos Stories também se aplica às capas de Destaques?',
+		a: "Parcialmente. Uma capa de Destaque é um recorte circular pequeno tirado do centro da imagem do seu Story, então ela automaticamente descarta as faixas de UI superior e inferior. Manter seu assunto centralizado conforme a safe zone dos Stories acima geralmente também o mantém dentro da capa de Destaque, mas textos perto das bordas desse quadrado central ainda podem ser cortados pela máscara circular, então mantenha qualquer texto mais próximo do centro se ele também precisar sobreviver como capa de Destaque.",
+	},
+	{
+		q: 'Qual é a safe zone de um Post do Instagram?',
+		a: "Um Post 4:5 do feed (1080x1350) é recortado no centro para um quadrado 1:1 na grade do perfil, cortando aproximadamente 10% (cerca de 135px) da parte superior e outros 10% da parte inferior. Não há nenhuma UI do app desenhada por cima de um Post como há no Reels ou nos Stories, então isso é na verdade uma checagem de \"o que sobrevive ao corte da grade\", não uma checagem de sobreposição de UI.",
+	},
+	{
+		q: "Qual é o tamanho e a proporção ideais do Post?",
+		a: "1080x1350 pixels em uma proporção de 4:5 é o tamanho retrato recomendado pelo Instagram para Posts do feed, ele mostra mais da foto no feed do que um corte quadrado 1:1. A grade do perfil ainda exibe uma miniatura quadrada, porém, e é isso que a safe zone do Post acima leva em conta.",
+	},
+	{
+		q: 'A safe zone do Post também se aplica a publicações em carrossel (várias fotos)?',
+		a: "Sim, mas apenas para o primeiro slide. Cada slide de um carrossel é exportado no mesmo quadro 4:5, mas o Instagram só gera a miniatura da grade do perfil a partir do quadrado recortado no centro do primeiro slide. Os slides seguintes só são vistos em tamanho 4:5 completo quando alguém desliza para o lado, então suas bordas superior e inferior nunca são cortadas pelo recorte da grade.",
+	},
+	{
+		q: 'Onde devo colocar um rosto, uma legenda ou uma logo para mantê-los visíveis?',
+		a: "No Reels, o terço central do quadro, aproximadamente o meio da largura e a área entre a barra superior e a faixa inferior de legenda, permanece livre em todos os dispositivos. Nos Stories, mantenha-os centralizados entre a barra superior de perfil e a fileira inferior de resposta. Em um Post, mantenha o assunto dentro do quadrado central para que ainda seja legível depois que a grade do perfil cortar a parte superior e inferior.",
+	},
+	{
+		q: 'Existe um modelo de safe zone do Instagram que eu possa usar como referência ao editar?',
+		a: "Sim, veja a página dedicada ao modelo de safe zone do Instagram para o detalhamento exato em pixels e porcentagem no Reels, nos Stories e no Post, além de como transformá-lo em uma camada guia enquanto você edita.",
+	},
+];
+---
+
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Início', href: '/pt-BR/' },
+				{ label: 'Ferramentas' },
+				{ label: 'Safe Zone do Instagram' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">FERRAMENTA GRATUITA</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Verificador de safe zone do Instagram
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Solte uma foto no quadro do Instagram para ver onde a própria UI do app vai ficar por cima
+				dela, antes de você publicar. Alterne entre Reels, Posts do feed e Stories acima da
+				pré-visualização.
+			</p>
+		</section>
+
+		<SafeZoneTool platform={['reels', 'post', 'stories']} />
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">POR QUE ISSO IMPORTA</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Uma composição que sobrevive à própria UI e aos cortes do Instagram
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Um quadro que parece perfeitamente composto em uma exportação bruta ainda pode perder
+					seu assunto assim que o Instagram coloca sua própria interface por cima, ou recorta a
+					imagem em uma forma diferente. Reels e Stories desenham uma legenda, um nome de usuário
+					e uma UI de engajamento ou resposta sobre um quadro de vídeo 9:16; um Post 4:5 do feed,
+					por sua vez, é recortado no centro para um quadrado na grade do perfil. Verificar a safe
+					zone correta antes de publicar significa que um rosto, uma legenda ou um detalhe
+					importante do produto não acaba escondido ou cortado.
+				</p>
+				<p>
+					O Reels reserva uma barra superior fina e uma faixa inferior de legenda/nome de
+					usuário/áudio, além de uma coluna direita de engajamento; os Stories reservam uma barra
+					de perfil superior e uma fileira de resposta inferior; um Post perde aproximadamente 10%
+					das bordas superior e inferior na visualização em grade. Esta ferramenta troca seu
+					overlay para combinar com o formato que você está verificando, desenhado diretamente na
+					sua foto para que você veja o efeito na sua composição real.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">UM OVERLAY DE VERDADE, NÃO UM GRÁFICO ESTÁTICO</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Um overlay de safe zone instagram desenhado na sua própria foto
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Um overlay de safe zone instagram só é útil se realmente for dimensionado para o quadro
+					que você está verificando, e uma imagem de referência fixa, dimensionada para a
+					exportação de outra pessoa, dificilmente encaixa direito. Esta ferramenta desenha o
+					overlay ao vivo no seu próprio envio: alterne para a aba Reels e ela se torna
+					especificamente um verificador de safe zone instagram reels, com as faixas de legenda,
+					nome de usuário, título de áudio e coluna de ícones ajustadas ao mesmo quadro de
+					1080x1920 que o Reels realmente exporta.
+				</p>
+				<p>
+					Quer o mesmo modelo de safe zone instagram reels como uma referência fixa em vez de uma
+					interativa, para uma camada guia em um editor, ou um modelo de safe zone instagram reels
+					em png para baixar? A página <a href="/pt-BR/instagram-safe-zone-template/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Modelo de safe zone do Instagram</a> tem os
+					mesmos números detalhados em pixels e porcentagem.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">APROFUNDE-SE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Mais ferramentas para criadores
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/pt-BR/tiktok-safe-zone/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Verificador de safe zone do TikTok</span>
+					<span class="mt-1 block font-mono text-xs text-mute">A mesma checagem, ajustada para a UI do TikTok</span>
+				</a>
+				<a href="/pt-BR/instagram-safe-zone-template/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Modelo de safe zone do Instagram</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Dimensões exatas para Reels, Story e Post</span>
+				</a>
+				<a href="/pt-BR/guides/social-media-safe-zones/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Guia de safe zone para redes sociais</span>
+					<span class="mt-1 block font-mono text-xs text-mute">As dimensões de cada plataforma, em uma referência só</span>
+				</a>
+				<a href="/pt-BR/for/instagram/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Editor cinematográfico para Instagram</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Presets mais cortes de exportação 1:1 / 4:5 / 9:16</span>
+				</a>
+				<a href="/pt-BR/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Explore todos os 60 Presets</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Cada Color Grading, organizado por gênero</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Perguntas comuns sobre as safe zones do Instagram" faqs={faqs} />
+
+		<script type="application/ld+json" set:html={JSON.stringify(howToStructuredData)} />
+	</main>
+	<Footer />
+</Layout>

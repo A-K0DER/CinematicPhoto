@@ -1,0 +1,139 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import DropZone from '../../../components/DropZone.astro';
+import MovieFaq from '../../../components/MovieFaq.astro';
+
+const path = '/for/youtube-thumbnails/';
+const title = 'Filtro Cinematográfico para Thumbnail do YouTube | Cinematic Photo Editor';
+const description =
+	'Cinco Presets cinematográficos escolhidos para thumbnails do YouTube: grades de filme ousados e de alto contraste, feitos para se destacar em tamanho pequeno ao lado de outros vídeos.';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'CollectionPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com/pt-BR${path}`,
+};
+
+const faqs = [
+	{
+		q: 'O que faz um Preset cinematográfico bom para uma thumbnail do YouTube?',
+		a: 'Thumbnails competem por atenção em um tamanho minúsculo em um feed lotado, então alto contraste e uma identidade de cor forte e legível importam mais do que sutileza. Os cinco Presets aqui, Joker, The Batman, Mad Max: Fury Road, Deadpool e Kill Bill, todos aumentam bastante o contraste e a saturação para se lerem à primeira vista.',
+	},
+	{
+		q: 'O texto da thumbnail continua legível depois de aplicar um grade cinematográfico?',
+		a: 'Sim, adicione seu texto e gráficos depois de exportar a foto já com o grade aplicado, na sua ferramenta de thumbnail ou design. Presets com vinheta forte, como Joker ou The Batman, escurecem naturalmente as bordas do quadro, que é muitas vezes exatamente onde o texto da thumbnail fica, dando a ele mais contraste contra o fundo.',
+	},
+	{
+		q: 'Qual Preset funciona melhor para thumbnails de ação de alta energia ou de games?',
+		a: 'A divisão agressiva de laranja e teal de Mad Max: Fury Road e o amarelo vibrante e pulp de Kill Bill são ambos construídos para conteúdo de alta energia e alto contraste. O grade vermelho-preto marcante de Deadpool também funciona bem para conteúdo de games irreverente ou cômico.',
+	},
+	{
+		q: 'Qual Preset funciona para conteúdo de thumbnail mais escuro e sério?',
+		a: 'O grade noir carmesim-preto de The Batman e o laranja-verde doentio de Joker combinam bem com conteúdo mais escuro, dramático ou no estilo true crime. Para uma atmosfera ainda mais fria e clínica, veja o guia do filtro de foto Dark & Moody.',
+	},
+	{
+		q: 'Preciso recortar ou redimensionar minha foto de forma diferente para uma thumbnail?',
+		a: 'Aplique o color grade primeiro em resolução total, depois recorte para um quadro 16:9 no seu editor de thumbnail depois disso. Recortar antes de aplicar o grade pode alterar como a vinheta e o overlay de um Preset se posicionam em relação ao seu assunto.',
+	},
+	{
+		q: 'Posso usar esses mesmos Presets para uma capa de vídeo ou arte de canal também?',
+		a: 'Sim, já que arte de canal e capas de vídeo enfrentam o mesmo problema de legibilidade em tamanho pequeno e alta competição que as thumbnails, os mesmos Presets ousados e de alto contraste tendem a funcionar bem ali também.',
+	},
+];
+---
+
+<Layout {title} {description} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Início', href: '/pt-BR/' },
+				{ label: 'Para' },
+				{ label: 'Thumbnails do YouTube' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">GUIA DE USO</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Filtro cinematográfico para thumbnail do YouTube
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Cinco Presets cinematográficos construídos para se destacar: grades de filme ousados e de
+				alto contraste que se sustentam ao lado de uma dúzia de outras thumbnails em um feed.
+			</p>
+		</section>
+
+		<DropZone
+			presetIds={['joker', 'the-batman', 'mad-max-fury-road', 'deadpool', 'kill-bill']}
+			showHeading={false}
+			showFooterLinks={false}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">O QUE PROCURAR</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				O que torna um Preset pronto para thumbnail
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Uma thumbnail precisa vencer a atenção em tamanho pequeno, posicionada ao lado de uma
+					grade de vídeos concorrentes, então sutileza é a inimiga. Os Presets destacados aqui
+					aumentam bastante o contraste e a cor: a divisão de laranja e teal de Mad Max: Fury Road,
+					o laranja-verde doentio de Joker, e o amarelo vibrante e pulp de Kill Bill se leem
+					claramente mesmo reduzidos a uma fração do tamanho original.
+				</p>
+				<p>
+					Vinhetas fortes também ajudam aqui de um jeito que nem sempre ajudam para outros usos:
+					bordas escurecidas dão ao texto e aos gráficos da thumbnail, adicionados depois em uma
+					ferramenta de thumbnail, mais contraste para se apoiar.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">APROFUNDE-SE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Mais formas de moldar o visual
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/pt-BR/tools/youtube-thumbnail-preview/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Ferramenta de pré-visualização de thumbnail do YouTube</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Veja em busca, sugestões e no celular</span>
+				</a>
+				<a href="/pt-BR/guides/youtube-thumbnail-design/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Guia de design de thumbnail do YouTube</span>
+					<span class="mt-1 block font-mono text-xs text-mute">As regras que realmente aumentam a taxa de cliques</span>
+				</a>
+				<a href="/pt-BR/for/instagram/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Filtro cinematográfico para Instagram</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Grades marcantes feitos para o feed</span>
+				</a>
+				<a href="/pt-BR/for/travel-photography/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Fotografia de viagem cinematográfica</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Grades amigáveis para paisagens e ambientes externos</span>
+				</a>
+				<a href="/pt-BR/looks/dark-and-moody/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Filtro cinematográfico Dark & Moody</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Para thumbnails mais escuras e sérias</span>
+				</a>
+				<a href="/pt-BR/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Veja todos os 60 Presets</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Cada color grade, organizado por gênero</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Perguntas comuns sobre filtros cinematográficos para thumbnail do YouTube" faqs={faqs} />
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../../lib/landing';
+</script>

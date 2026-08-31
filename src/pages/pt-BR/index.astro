@@ -1,0 +1,151 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import DropZone from '../../components/DropZone.astro';
+import SeoContent from '../../components/pt-BR/SeoContent.astro';
+import Footer from '../../components/Footer.astro';
+import AdSlot from '../../components/AdSlot.astro';
+
+const title = 'Cinematic Photo Editor | Editor de fotos cinematográfico online grátis';
+const description =
+	'Edição de fotos cinematográfica grátis online, sem uploads. Transforme qualquer foto em uma imagem com cara de cinema com um clique, com 60 presets de color grading inspirados em filmes.';
+const keywords =
+	'editor de fotos cinematográfico, edição de fotos cinematográfica online grátis, efeito de foto cinematográfico, retratos cinematográficos, color grading cinematográfico, presets de color grade de filme, filtro de foto com look de cinema, modelo tiktok, modelo tiktok png, app de modelo tiktok, safe zone tiktok, modelo de safe zone tiktok, png de safe zone tiktok, overlay de safe zone tiktok, safe zone instagram, modelo de safe zone instagram, overlay de safe zone instagram, safe zone instagram reels, modelo de safe zone instagram reels, png do modelo de safe zone instagram reels, tamanho de thumbnail do youtube, criador de thumbnail do youtube, verificador de thumbnail do youtube, extrator de thumbnail do youtube, visualizador de thumbnail do youtube';
+---
+
+<Layout title={title} description={description} keywords={keywords} path="/">
+	<Navbar variant="landing" />
+	<main>
+		<DropZone
+			presetIds={[
+				'dark-knight',
+				'blade-runner',
+				'dune',
+				'interstellar',
+				'matrix',
+				'breaking-bad',
+				'stranger-things',
+				'game-of-thrones',
+				'dark',
+				'peaky-blinders',
+			]}
+			heading="O editor de fotos cinematográfico grátis para imagens com qualidade de cinema."
+			subheading="Solte uma foto para aplicar color grades icônicos de Hollywood. Tudo roda direto no seu navegador. Nada é enviado para servidor nenhum."
+		/>
+		<AdSlot />
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">FERRAMENTAS GRATUITAS</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Confira seu conteúdo antes de publicar
+			</h2>
+			<p class="mt-4 max-w-xl text-base leading-7 text-body">
+				Ferramentas gratuitas no navegador que mostram como sua foto ou thumbnail vai realmente
+				ficar quando estiver no ar, com a própria interface da plataforma sobreposta, ou uma
+				thumbnail reduzida ao tamanho do feed.
+			</p>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/pt-BR/tools/youtube-thumbnail-preview/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Ferramenta de pré-visualização de thumbnail do YouTube</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Veja como fica na busca, nos sugeridos e no mobile</span>
+				</a>
+				<a href="/pt-BR/tiktok-safe-zone/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Verificador de safe zone do TikTok</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Versão de plataforma única, focada no TikTok</span>
+				</a>
+				<a href="/pt-BR/instagram-reels-safe-zone/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Verificador de safe zone do Instagram Reels</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Versão de plataforma única, focada no Reels</span>
+				</a>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">FERRAMENTAS PARA TIKTOK, INSTAGRAM E YOUTUBE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Um kit gratuito de modelo tiktok, safe zone do Instagram e thumbnail do YouTube
+			</h2>
+			<div class="mt-6 flex flex-col gap-6 text-base leading-7 text-body">
+				<p>
+					Cinematic Photo começou como um editor de color grading, mas publicar bem uma foto ou
+					um vídeo curto exige mais do que uma boa correção de cor, exige checar a composição
+					contra a própria interface da plataforma antes de qualquer coisa ir ao ar. Além do
+					editor com 60 presets acima, este site traz um pequeno kit de ferramentas gratuitas no
+					navegador feitas exatamente para essa etapa: um verificador de modelo tiktok, uma
+					ferramenta de safe zone do Instagram cobrindo Reels, Story e posts do feed, e uma
+					ferramenta de pré-visualização de thumbnail do YouTube. Todas elas funcionam do mesmo
+					jeito que o editor de fotos, inteiramente no dispositivo em um canvas HTML, sem nada
+					ser enviado a um servidor, então não é preciso criar conta nem instalar app nativo para
+					usar qualquer uma delas.
+				</p>
+
+				<h3 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">
+					Modelo tiktok e verificador de safe zone
+				</h3>
+				<p>
+					O <a href="/pt-BR/tiktok-safe-zone/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">verificador de safe zone do TikTok</a> funciona
+					como um app leve de modelo tiktok direto no navegador: solte uma foto ou um frame de
+					vídeo em um quadro de 1080x1920 e ele desenha a própria barra superior do TikTok, a
+					faixa de legenda/nome de usuário/áudio, e a coluna de ícones de curtir, comentar e
+					compartilhar por cima, em escala, exatamente onde a interface do TikTok vai ficar
+					quando o vídeo estiver no ar. Para quem edita no CapCut ou no Premiere Pro, a página
+					dedicada do <a href="/pt-BR/tiktok-safe-zone-template/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">modelo de safe zone do tiktok</a> detalha
+					o mesmo modelo tiktok png em números exatos de pixel e porcentagem para cada zona, além
+					de mostrar como transformar esse overlay de safe zone tiktok em uma camada guia que
+					você apaga antes da exportação final. As duas páginas são verificadas periodicamente
+					contra a interface atual do TikTok, em vez de ficarem paradas como um png estático de
+					safe zone tiktok capturado uma vez e esquecido.
+				</p>
+
+				<h3 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">
+					Modelo de safe zone do Instagram para Reels, Story &amp; Post
+				</h3>
+				<p>
+					O Instagram espalha seu próprio problema de safe zone em três formatos diferentes, e
+					este kit trata cada um como uma verificação separada, em vez de um único overlay de
+					safe zone instagram reutilizado em tudo. O <a href="/pt-BR/instagram-reels-safe-zone/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">verificador de safe zone do Instagram</a> alterna
+					entre Reels, Story e post do feed, para que um rosto, uma legenda ou uma logo possam
+					ser testados contra o formato exato para o qual serão publicados; a safe zone do
+					instagram reels leva em conta especificamente a legenda, o nome de usuário, o título do
+					áudio e a coluna de ícones de engajamento que o Instagram coloca sobre um Reel 9:16. A
+					página irmã do <a href="/pt-BR/instagram-safe-zone-template/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">modelo de safe zone do instagram</a> transforma
+					esses mesmos números, incluindo as dimensões do png do modelo de safe zone do instagram
+					reels, em uma referência que qualquer editor pode importar como camada guia antes de
+					exportar o corte final.
+				</p>
+
+				<h3 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">
+					Tamanho, verificador &amp; pré-visualização de thumbnail do YouTube
+				</h3>
+				<p>
+					O próprio tamanho de thumbnail do youtube recomendado é 1280x720, mas uma thumbnail que
+					parece nítida nesse tamanho ainda pode não funcionar quando exibida em 168px em uma
+					barra lateral ou 112px em um celular. A <a href="/pt-BR/tools/youtube-thumbnail-preview/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">ferramenta de pré-visualização de thumbnail do YouTube</a> funciona
+					tanto como um verificador de thumbnail do youtube quanto como um visualizador de
+					thumbnail do youtube para seus próprios uploads: solte uma thumbnail pronta, preencha
+					um título e um nome de canal, e veja como ela fica renderizada em vídeos sugeridos,
+					resultados de busca e no feed mobile, além de uma verificação dedicada em tamanho
+					reduzido em três larguras reais. Não é um criador de thumbnail do youtube que desenha a
+					arte, nem um extrator de thumbnail do youtube que pega a thumbnail de um vídeo alheio já
+					existente, é a etapa que vem depois de qualquer uma dessas, confirmando que uma
+					thumbnail pronta realmente funciona antes de ir ao ar.
+				</p>
+
+				<p>
+					Nenhuma dessas ferramentas exige os Presets cinematográficos acima, elas são gratuitas
+					para usar sozinhas. Mas junto com o editor de color grading, elas cobrem as duas
+					metades de preparar uma foto ou um clipe para publicar: fazer com que fique com a cara
+					certa, e confirmar que sobrevive à interface própria da plataforma quando estiver no
+					ar.
+				</p>
+			</div>
+		</section>
+
+		<SeoContent />
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../lib/landing';
+</script>

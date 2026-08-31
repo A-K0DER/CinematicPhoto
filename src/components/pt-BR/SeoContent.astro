@@ -1,0 +1,171 @@
+---
+// Brazilian Portuguese translation of ../SeoContent.astro. The featured FAQ block still pulls
+// from the shared English src/data/faqs.ts, that dataset is not localized yet.
+import { getFeaturedFaqs } from '../../data/faqs';
+
+const faqs = getFeaturedFaqs();
+
+const faqStructuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	mainEntity: faqs.map((f) => ({
+		'@type': 'Question',
+		name: f.q,
+		acceptedAnswer: {
+			'@type': 'Answer',
+			text: f.a,
+		},
+	})),
+};
+---
+
+<section class="border-t border-hairline bg-canvas-soft px-4 py-20 sm:px-6">
+	<div class="mx-auto max-w-3xl">
+		<span class="mb-4 block font-mono text-xs tracking-wide text-mute">POR QUE CINEMATIC PHOTO</span>
+		<h2 class="max-w-2xl font-sans text-3xl font-semibold tracking-[-0.03em] text-ink sm:text-4xl">
+			Um editor de fotos cinematográfico feito para color grading em nível de cinema
+		</h2>
+
+		<div class="mt-8 flex flex-col gap-6 text-base leading-7 text-body">
+			<p>
+				Cinematic Photo é um editor de fotos online gratuito que transforma uma foto comum em uma
+				imagem com cara de cinema com um clique, sem precisar de experiência prévia em edição
+				cinematográfica. A maioria dos apps de edição de fotos esconde os looks cinematográficos
+				atrás de assinaturas, ferramentas de máscara ou uma curva de aprendizado íngreme. Cinematic
+				Photo funciona mais como um atalho de colorista: escolha um Preset, ajuste alguns controles
+				deslizantes, exporte. Sem tutorial necessário. É uma alternativa genuinamente fácil aos
+				Presets cinematográficos do Lightroom para quem só quer a estética de cinema sem instalar
+				software de desktop ou aprender a mexer em painéis de curvas, e uma opção mais rápida que
+				um editor de fotos genérico tipo iloveimg quando o look que você quer é especificamente
+				cinematográfico.
+			</p>
+			<p>
+				Como app de edição de fotos, ele se mantém propositalmente enxuto: em vez de tentar ser um
+				editor genérico completo com centenas de ferramentas sem relação entre si, ele foca
+				inteiramente em uma tarefa, fazer uma foto parecer e ter a sensação de um frame tirado de
+				um filme. Esse foco é o que o torna rápido. Não é preciso vasculhar menus para achar o look
+				cinematográfico; cada controle na tela existe para aproximar uma foto de uma imagem com
+				qualidade de cinema, então ir de um clique cru até uma imagem já com color grading leva
+				segundos, e não o fluxo de trabalho de várias etapas que um editor de fotos online genérico
+				com filtros de cinema costuma exigir.
+			</p>
+
+			<h3 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">
+				O que conta como um efeito de foto cinematográfico
+			</h3>
+			<p>
+				Um efeito de foto cinematográfico é mais do que um filtro de controle único, é a combinação
+				de uma correção de cor em sombras e luzes, grão de filme, uma vinheta e, muitas vezes, um
+				corte em letterbox widescreen, as mesmas ferramentas que um colorista e um diretor de
+				fotografia usam no set. Um simples tom de cor sozinho parece um filtro do Instagram, é a
+				soma desses elementos que faz uma foto parecer um frame tirado de um filme, e não um clique
+				editado. Cada Preset deste editor reúne uma correção de cor precisa para o gênero com
+				controles de grão, glow e letterbox, para você conseguir esse efeito de foto cinematográfico
+				completo com um clique, em vez de ajustar cada camada manualmente.
+			</p>
+
+			<h3 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">
+				Presets de color grading inspirados em filmes
+			</h3>
+			<p>
+				Cada um dos 60 Presets deste editor cinematográfico é baseado em um look reconhecível de
+				filme ou série, organizados em nove gêneros: Thriller & Mystery, Crime, Sci-Fi, Drama, War &
+				History, Fantasy & Adventure, Action, Superhero e TV Shows. Use o Preset de
+				Shawshank Redemption para uma correção de drama em 35mm quente e contida, o filtro de foto
+				de Pulp Fiction para tons âmbar-vermelhos carregados à la Tarantino, ou o{' '}
+				<a href="/pt-BR/presets/the-dark-knight/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Preset de color grading de Dark Knight</a> para
+				pretos esmagados e um tom de aço frio. Os{' '}
+				<a href="/pt-BR/presets/interstellar/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">efeitos de filtro de cor de Inception e
+				Interstellar</a> entregam a paleta sci-fi azul-aço fria característica de Nolan, o Preset de
+				Gladiator traz o calor dourado e desbotado do deserto, e o{' '}
+				<a href="/pt-BR/presets/the-matrix/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">filtro de foto com tom verde de Matrix</a> recria
+				o verde digital de alto contraste que marcou o filme. Cada opção aplica um filtro
+				cinematográfico em uma foto de graça, instantaneamente, direto no canvas, veja a{' '}
+				<a href="/pt-BR/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">lista completa com todos os 60 presets</a>{' '}
+				e encontre exatamente o filme que sua foto precisa.
+			</p>
+
+			<h3 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">
+				Textura de filme e composição cinematográfica
+			</h3>
+			<p>
+				Além da cor, Cinematic Photo adiciona os detalhes de textura e composição que vendem o
+				look de cinema. Adicione grão de filme a uma foto online de graça com um único controle
+				deslizante, ajuste uma vinheta, ou adicione glow e halation do jeito que lentes anamórficas
+				espalham luz ao redor de fontes de luz intensas, o mais próximo que você chega de um{' '}
+				<a href="/pt-BR/guides/cinematic-color-grading/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">color grading cinematográfico</a> com
+				uma LUT de filme sem precisar de software de grading dedicado. Adicione um letterbox
+				cinematográfico a uma foto online com um clique para cortar em uma proporção cinematográfica
+				de 2,39:1, completo com faixas pretas no topo e na base do quadro, e carimbe uma etiqueta de
+				filmstock no canto para um resultado inspirado no{' '}
+				<a href="/pt-BR/looks/vintage-35mm-film/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">look vintage de filme 35mm</a>.
+				Para um passo a passo completo, veja como{' '}
+				<a href="/pt-BR/guides/how-to-make-photos-look-cinematic/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">deixar qualquer foto com cara de cinema</a>.
+			</p>
+
+			<h3 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">
+				Privado por design: nada nunca sai do seu dispositivo
+			</h3>
+			<p>
+				Este é um editor de fotos cinematográfico baseado no navegador, com arquitetura client
+				side desde o início: sem uploads, sem contas, e nenhum servidor jamais vê sua imagem. Cada
+				filtro, correção e exportação é renderizado localmente em um canvas HTML na aba do seu
+				navegador, então um filtro rápido com look de cinema fica disponível até em uma conexão
+				lenta, e suas fotos continuam sendo suas.
+			</p>
+
+			<h3 class="font-sans text-xl font-semibold tracking-[-0.02em] text-ink">
+				Para quem é
+			</h3>
+			<p>
+				Fotógrafos, cineastas e criadores de conteúdo usam Cinematic Photo como uma ferramenta
+				gratuita de filtro estético de fotos para thumbnails, pôsteres e imagens de portfólio.
+				Pense nele como um gerador de efeito de foto de cinema indie para quem quer incorporar um
+				filtro de foto estilo Hollywood ao seu fluxo de trabalho: um color grader de filme online
+				que transforma uma foto sem graça em uma imagem com qualidade de cinema no tempo que leva
+				para arrastar um controle deslizante. Veja seleções de Presets pensadas para{' '}
+				<a href="/pt-BR/for/instagram/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Instagram</a>,{' '}
+				<a href="/pt-BR/for/youtube-thumbnails/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">thumbnails do YouTube</a>,{' '}
+				<a href="/pt-BR/for/travel-photography/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">fotografia de viagem</a> e{' '}
+				<a href="/pt-BR/for/portraits/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">retratos cinematográficos</a>,
+				ou veja como ele se compara a{' '}
+				<a href="/pt-BR/alternatives/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Presets do Lightroom, VSCO e outras ferramentas de edição cinematográfica</a>.
+			</p>
+		</div>
+
+		<div class="mt-16 border-t border-hairline pt-10">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">FAQ</span>
+			<div class="flex flex-col divide-y divide-hairline">
+				{
+					faqs.map((faq) => (
+						<details class="group py-5">
+							<summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-sans text-base font-semibold text-ink [&::-webkit-details-marker]:hidden">
+								<span>{faq.q}</span>
+								<svg
+									class="h-4 w-4 flex-shrink-0 text-mute transition-transform duration-200 group-open:rotate-180"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								>
+									<polyline points="6 9 12 15 18 9" />
+								</svg>
+							</summary>
+							<p class="mt-2 text-sm leading-6 text-body">{faq.a}</p>
+						</details>
+					))
+				}
+			</div>
+			<a
+				href="/pt-BR/faq/"
+				class="mt-6 inline-block font-sans text-sm font-medium text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink"
+			>
+				Veja todas as perguntas frequentes →
+			</a>
+		</div>
+	</div>
+
+	<script type="application/ld+json" set:html={JSON.stringify(faqStructuredData)} />
+</section>

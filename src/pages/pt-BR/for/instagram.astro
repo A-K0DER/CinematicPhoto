@@ -1,0 +1,186 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import DropZone from '../../../components/DropZone.astro';
+import MovieFaq from '../../../components/MovieFaq.astro';
+
+const path = '/for/instagram/';
+const title = 'Filtro e Editor de Foto Cinematográfico para Instagram | Recorte para Feed, Story, Reels';
+const description =
+	'Cinco Presets cinematográficos escolhidos para o Instagram, além de recorte embutido em 1:1, 4:5 e 9:16 para que suas exportações de feed, retrato e Story/Reel saiam prontas para postar.';
+const keywords =
+	'filtro de foto instagram, editor de foto instagram, tamanho de recorte instagram, proporção instagram, tamanho story instagram, tamanho reel instagram, filtro cinematográfico instagram';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'CollectionPage',
+	name: title,
+	description,
+	url: `https://cinematicphoto.com/pt-BR${path}`,
+};
+
+const faqs = [
+	{
+		q: 'O que faz um Preset cinematográfico bom para o Instagram?',
+		a: 'Um Preset que se lê claramente em tamanhos pequenos: contraste e saturação suficientes para se destacar em um feed rolando, sem detalhe de sombra tão esmagado que fica embaçado em uma miniatura. Os cinco destacados aqui, Baby Driver, Stranger Things, Blade Runner 2049, Top Gun: Maverick e Euphoria, todos apostam em algo mais forte do que sutil.',
+	},
+	{
+		q: 'Devo usar o mesmo Preset em toda a minha grade do Instagram?',
+		a: 'Muitos criadores fazem isso, usar um Preset consistente em toda a grade dá uma estética de feed coesa e reconhecível. Tanto os tons neon anos 80 de Stranger Things quanto a névoa roxo-azulada de Euphoria funcionam bem como um visual assinatura repetido entre os posts.',
+	},
+	{
+		q: 'Esses Presets funcionam para capas de Instagram Stories e Reels, não só para posts do feed?',
+		a: 'Sim. Como as capas de Stories e Reels são exibidas em tamanho parecido ou menor que os posts do feed, os mesmos critérios amigáveis ao feed se aplicam, cor forte e contraste claro que se lê rapidamente. A divisão âmbar e teal de Blade Runner 2049 e o azul-céu brilhante de Top Gun: Maverick são especialmente eficazes em miniaturas de vídeo.',
+	},
+	{
+		q: 'Um filtro cinematográfico prejudica o engajamento no Instagram comparado a uma foto natural?',
+		a: 'Depende do seu nicho, mas um estilo visual distinto e consistente geralmente está associado a um reconhecimento de feed mais forte, não a um engajamento mais fraco. Teste um Preset contra um post natural para ver o que o seu público específico responde melhor.',
+	},
+	{
+		q: 'Como mantenho um visual cinematográfico consistente no Instagram em condições de luz diferentes?',
+		a: 'Escolha um Preset como seu grade assinatura, depois use os sliders de grão e vinheta (não a cor em si) para compensar diferenças de luz entre as fotos, um pouco mais de grão em fotos com luz mais plana, um pouco menos de vinheta em fotos já escuras mantém a identidade de cor central consistente em um conjunto misto de fotos originais.',
+	},
+	{
+		q: 'Qual Preset funciona melhor para feeds do Instagram esteticamente sombrios e envolventes?',
+		a: 'A névoa neon roxo-azulada de Euphoria e a divisão âmbar e teal de Blade Runner 2049 apostam ambas em uma estética sombria e atmosférica popular no Instagram. Para um visual sombrio mais quente e suave, veja o guia do filtro de foto Dark & Moody.',
+	},
+	{
+		q: 'O editor recorta as fotos no tamanho certo para o Instagram?',
+		a: 'Sim. O editor tem um controle de Proporção embutido com tamanhos do Instagram em um clique: 1:1 para o feed, 4:5 para posts em retrato e 9:16 para Stories e Reels. Escolha um tamanho depois de aplicar um Preset e a exportação é recortada automaticamente no centro para essa proporção, sem precisar de uma ferramenta de recorte separada.',
+	},
+	{
+		q: 'Qual proporção do Instagram devo usar: 1:1, 4:5 ou 9:16?',
+		a: 'O retrato 4:5 ganha mais espaço vertical em um feed rolando, já que o Instagram exibe ele maior do que um post quadrado. O quadrado 1:1 é a escolha mais segura se você também pretende reaproveitar a mesma exportação em outro lugar, já que ele recorta de forma menos agressiva a partir de uma foto típica. O 9:16 é feito para Stories e Reels, não para posts do feed.',
+	},
+	{
+		q: 'Recortar para uma proporção quadrada ou retrato vai cortar parte da minha foto?',
+		a: 'Pode acontecer, já que encaixar uma foto retangular em uma proporção mais estreita significa cortar as laterais ou o topo e a base. O recorte do editor é sempre centralizado, então o centro do quadro é sempre preservado, é uma boa ideia deixar um pouco de espaço ao redor do seu assunto na foto original antes de aplicar uma proporção apertada como 4:5 ou 9:16.',
+	},
+];
+---
+
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Início', href: '/pt-BR/' },
+				{ label: 'Para' },
+				{ label: 'Instagram' },
+			]}
+		/>
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">GUIA DE USO</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				Filtro e editor de foto cinematográfico para Instagram
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Cinco Presets cinematográficos escolhidos para o feed, e um editor de foto embutido para
+				Instagram que recorta sua exportação em 1:1, 4:5 ou 9:16 para que já saia no tamanho certo
+				antes de você postar.
+			</p>
+		</section>
+
+		<DropZone
+			presetIds={['baby-driver', 'stranger-things', 'blade-runner', 'top-gun-maverick', 'euphoria']}
+			showHeading={false}
+			showFooterLinks={false}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">O QUE PROCURAR</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				O que torna um Preset amigável para o feed
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					O Instagram comprime as fotos e as encolhe para uma miniatura na grade, então grades
+					sutis com baixo contraste tendem a achatar e perder a personalidade. Os Presets
+					destacados aqui apostam de propósito em cor forte e contraste claro: as ruas com cores
+					vibrantes de Baby Driver, o calor neon dos anos 80 de Stranger Things e a divisão âmbar
+					e teal de Blade Runner 2049 mantêm a identidade mesmo em tamanho pequeno.
+				</p>
+				<p>
+					Consistência também importa. Reaproveitar o mesmo Preset, ou os mesmos dois ou três, em
+					toda a grade constrói uma estética reconhecível com o tempo, em vez de um conjunto
+					desencontrado de edições avulsas.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">TAMANHOS DE INSTAGRAM EMBUTIDOS</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Exporte no tamanho certo, sem ferramenta de recorte separada
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Depois que um Preset é aplicado, o controle de <strong class="font-medium text-ink">Proporção</strong>
+					do editor recorta a foto no centro para um tamanho padrão do Instagram antes de exportar: <strong class="font-medium text-ink">1:1</strong> para
+					um post do feed, <strong class="font-medium text-ink">4:5</strong> para o formato retrato
+					mais alto que o Instagram dá mais espaço vertical em um feed rolando, ou <strong class="font-medium text-ink">9:16</strong> para
+					uma capa de Story ou Reel. O recorte, o color grade e os ajustes de grão/vinheta/glow
+					acontecem todos na mesma exportação, então não há idas e vindas por um app de recorte
+					separado.
+				</p>
+				<p>
+					O recorte é sempre centralizado na foto original, e a ferramenta nunca faz upscale, ela
+					só corta até a proporção alvo mantendo a resolução nativa da foto. Trocar de proporção
+					depois de aplicar um Preset não exige reeditar mais nada; grão, vinheta e glow permanecem
+					exatamente como foram ajustados.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">USE COM CAUTELA EM TAMANHO PEQUENO</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Presets para pensar duas vezes antes de usar em posts do feed
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Grades muito escuros e fortemente dessaturados como <a href="/pt-BR/presets/interstellar/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">Interstellar</a> ou
+					os Presets da página <a href="/pt-BR/looks/dark-and-moody/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">filtro de foto Dark & Moody</a> podem
+					perder boa parte da nuance depois que o Instagram comprime e encolhe a imagem, eles se
+					leem melhor como um post em tamanho real do que como uma miniatura rolando na tela. Ainda
+					funcionam bem para posts em destaque isolados ou carrosséis vistos em tamanho real.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">APROFUNDE-SE</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Mais formas de moldar o visual
+			</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				<a href="/pt-BR/for/youtube-thumbnails/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Thumbnails cinematográficas para YouTube</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Presets ousados e de alto contraste para criadores</span>
+				</a>
+				<a href="/pt-BR/for/travel-photography/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Fotografia de viagem cinematográfica</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Grades amigáveis para paisagens e ambientes externos</span>
+				</a>
+				<a href="/pt-BR/guides/how-to-make-photos-look-cinematic/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Como deixar fotos com cara de cinema</span>
+					<span class="mt-1 block font-mono text-xs text-mute">O guia completo, passo a passo</span>
+				</a>
+				<a href="/pt-BR/presets/" class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+					<span class="block font-sans text-sm font-medium text-ink">Veja todos os 60 Presets</span>
+					<span class="mt-1 block font-mono text-xs text-mute">Cada color grade, organizado por gênero</span>
+				</a>
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading="Perguntas comuns sobre filtros cinematográficos para Instagram" faqs={faqs} />
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../../lib/landing';
+</script>

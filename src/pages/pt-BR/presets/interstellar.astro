@@ -1,0 +1,193 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import DropZone from '../../../components/DropZone.astro';
+import BeforeAfter from '../../../components/BeforeAfter.astro';
+import RelatedPresets from '../../../components/RelatedPresets.astro';
+import MovieFaq from '../../../components/MovieFaq.astro';
+import { getPreset } from '../../../lib/presets';
+
+const preset = getPreset('interstellar');
+const path = '/presets/interstellar/';
+const url = `https://cinematicphoto.com/pt-BR${path}`;
+
+const title = 'Color Grading e Filtro de Foto de Interstellar | Ferramenta Cinematográfica Gratuita';
+const description =
+	'Use este filtro de color grading e editor de fotos gratuito de Interstellar para aplicar na sua foto o azul cósmico frio e os pretos profundos do filme, direto no seu navegador, sem necessidade de conta.';
+const keywords =
+	'color grading interstellar, filtro de foto interstellar, editor de foto interstellar, editor interstellar, color grade interstellar, filtro de foto inception';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	name: title,
+	description,
+	url,
+	isPartOf: { '@type': 'WebSite', name: 'Cinematic Photo', url: 'https://cinematicphoto.com' },
+};
+
+const faqs = [
+	{
+		q: 'Este é um filtro de foto oficial de Interstellar?',
+		a: 'Não. Este Preset é inspirado na estética visual da fotografia de Interstellar, ele não é um filtro oficial licenciado pelo estúdio ou pelos criadores do filme, nem afiliado a eles. É uma correção de cor independente feita para lembrar o look, não um produto de parceria oficial.',
+	},
+	{
+		q: 'Por que o Preset de Interstellar parece menos saturado que outros presets desta ferramenta?',
+		a: 'Isso é intencional, não um erro. O filme remove cor do quadro de forma mais agressiva do que uma dessaturação típica, cerca de dois quintos da cor é removida aqui, para manter a paleta fria e clínica em vez de melancólica ou quente. É a dessaturação mais pesada entre os cinco presets inspirados em filmes.',
+	},
+	{
+		q: 'Existe um editor de fotos dedicado a Interstellar?',
+		a: 'Esta página é justamente esse editor dedicado, a correção de Interstellar já carrega pré-selecionada na área de soltar arquivos acima, então você pode soltar uma foto e ajustar na hora o grão, a vinheta e o glow sem precisar procurar em toda a biblioteca de 60 presets primeiro.',
+	},
+	{
+		q: 'O Preset de Interstellar funciona em fotos com pessoas, ou só em paisagens?',
+		a: 'Funciona nos dois casos. A correção é uma mudança global de cor e contraste, então retratos e fotos com pessoas funcionam bem, embora o tom frio e dessaturado tenda a parecer mais dramático em composições amplas e minimalistas do que em retratos próximos e de tons quentes.',
+	},
+	{
+		q: 'Qual a diferença entre Interstellar e o Preset de Inception?',
+		a: 'Os dois são correções sci-fi de tons frios de Christopher Nolan, mas Interstellar vai consideravelmente mais longe na dessaturação e mantém o grão muito baixo para um acabamento limpo, quase estéril. Inception mantém mais cor e um pouco mais de grão, mais perto de um estado de sonho azul-aço do que do frio do espaço profundo.',
+	},
+	{
+		q: 'Por que o grão padrão é tão baixo no Preset de Interstellar?',
+		a: 'A maioria dos presets desta ferramenta vem com grão perceptível por padrão para vender uma textura de filmstock. Interstellar é uma exceção deliberada, um dos grãos padrão mais baixos entre todos os 60 presets, porque o look que este Preset busca é limpo e minimalista, e não granulado. Você sempre pode adicionar mais grão manualmente no editor se quiser uma sensação de filme mais pesada.',
+	},
+	{
+		q: 'Que tipo de foto combina melhor com uma correção de cor estilo Interstellar?',
+		a: 'Céu noturno e astrofotografia, composições minimalistas de sujeito único, interiores frios, e água ou gelo reflexivos combinam bem com a paleta azul fria. Cenas que já são esparsas ou geométricas tendem a parecer mais marcantes do que cenas movimentadas e coloridas.',
+	},
+];
+---
+
+<Layout {title} {description} {keywords} {path} structuredData={structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs
+			items={[
+				{ label: 'Início', href: '/pt-BR/' },
+				{ label: 'Todos os Presets', href: '/pt-BR/presets/' },
+				{ label: 'Interstellar' },
+			]}
+		/>
+
+		<DropZone presetId={preset.id} showHeading={false} showFooterLinks={false} />
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">PRESET INSPIRADO EM FILME</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">
+				O filtro de foto de Interstellar: azul cósmico frio e preto profundo do espaço.
+			</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">
+				Um editor de fotos e Preset de color grading gratuito de Interstellar, inspirado na
+				estética visual do Interstellar de Christopher Nolan, feito para dar às fotos a paleta
+				azul-fria contida e clínica do filme sem tocar em um painel de curvas.
+			</p>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">A ESTÉTICA</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Frio clínico, contido por design
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Filmando em grande parte em 35mm e 70mm, o diretor de fotografia Hoyte van Hoytema
+					construiu a paleta de Interstellar em torno da contenção. A cor é recuada em vez de
+					impulsionada, deixando azuis frios e cinzas quase monocromáticos dominarem tanto os
+					interiores de naves espaciais do filme quanto seus exteriores terrestres de fazenda, um
+					fio condutor visual que une dois cenários muito diferentes.
+				</p>
+				<p>
+					É um look que confia no espaço negativo e na escala em vez da cor para criar clima:
+					pretos profundos, composições esparsas e uma sensação controlada, quase documental, de
+					luz. Onde um filme como Dune investe em calor e brilho, Interstellar vai na direção
+					oposta: frio, limpo e silencioso.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">ANTES / DEPOIS</span>
+			<h2 class="mb-6 font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Veja a correção aplicada
+			</h2>
+			<BeforeAfter preset={preset} />
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">A CIÊNCIA DA COR</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Como a correção de cor de Interstellar funciona de verdade
+			</h2>
+			<div class="mt-6 flex flex-col gap-5 text-base leading-7 text-body">
+				<p>
+					Este Preset reduz a saturação com mais força do que qualquer outra correção de filme
+					desta ferramenta, passando da metade, enquanto ajusta o contraste levemente para cima
+					e reduz um pouco o brilho para aprofundar os pretos. Essa base faz a maior parte do
+					trabalho: um ponto de partida quase monocromático e levemente frio antes de qualquer
+					overlay ser adicionado.
+				</p>
+				<p>
+					Um overlay escuro, indo do azul-marinho ao azul-aço, então reforça o tom frio em
+					sombras e meios-tons. A vinheta fica no lado mais forte para manter as bordas do quadro
+					escuras e o sujeito isolado, enquanto o grão é mantido deliberadamente baixo, um dos
+					padrões mais baixos entre os presets aqui, para um acabamento limpo e minimalista em
+					vez de um look granulado de filmstock.
+				</p>
+			</div>
+		</section>
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">MELHORES FOTOS PARA ESTE PRESET</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+				Em que tipo de foto usar
+			</h2>
+			<ul class="mt-6 flex flex-col gap-4 text-base leading-7 text-body">
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Céu noturno e astrofotografia.</span> A paleta fria e de baixa saturação combina naturalmente com estrelas, luar e céus azul profundo.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Fotos minimalistas de sujeito único.</span> Composições esparsas com espaço para respirar combinam melhor com o tom contido e silencioso da correção do que quadros movimentados.</span>
+				</li>
+				<li class="flex gap-3">
+					<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-mute"></span>
+					<span><span class="font-medium text-ink">Água, gelo e superfícies reflexivas.</span> A luz refletida fria reforça o overlay azul em vez de competir com ele.</span>
+				</li>
+			</ul>
+		</section>
+
+		<RelatedPresets
+			heading="Mais correções inspiradas em filmes"
+			items={[
+				{ presetId: 'dark-knight', href: '/pt-BR/presets/the-dark-knight/' },
+				{ presetId: 'blade-runner', href: '/pt-BR/presets/blade-runner-2049/' },
+				{ presetId: 'dune', href: '/pt-BR/presets/dune/' },
+				{ presetId: 'matrix', href: '/pt-BR/presets/the-matrix/' },
+				{ presetId: 'inception', href: '/pt-BR/presets/inception/' },
+				{ presetId: 'terminator-2', href: '/pt-BR/?preset=terminator-2' },
+			]}
+		/>
+
+		<MovieFaq
+			eyebrow="INTERSTELLAR FAQ"
+			heading="Perguntas frequentes sobre o filtro de foto de Interstellar"
+			faqs={faqs}
+		/>
+
+		<section class="mx-auto w-full max-w-3xl px-4 py-14 text-center sm:px-6">
+			<p class="text-base leading-7 text-body">
+				Prefere o look de outro filme? Veja a <a href="/pt-BR/presets/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">biblioteca completa com 60 presets</a>,
+				leia o guia completo sobre como <a href="/pt-BR/guides/how-to-make-photos-look-cinematic/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">deixar fotos com cara de cinema</a>,
+				ou vá para a <a href="/pt-BR/" class="text-ink underline decoration-hairline-strong underline-offset-2 hover:decoration-ink">página inicial</a> para começar do zero.
+			</p>
+		</section>
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import '../../../lib/landing';
+</script>
