@@ -10,7 +10,7 @@ export default defineConfig({
 		defaultLocale: 'en',
 		// Keep in sync with `locales` in src/i18n/config.ts. Each non-default
 		// locale gets a src/pages/<locale>/ folder once its pages are translated.
-		locales: ['en', 'de', 'fr', 'es', 'ja', 'nl', 'it', 'ko', 'pt-BR', 'pt-PT', 'sv', 'da', 'nb', 'fi', 'pl'],
+		locales: ['en', 'de', 'fr', 'es', 'ja', 'nl', 'it', 'ko', 'pt-br', 'pt-pt', 'sv', 'da', 'nb', 'fi', 'pl'],
 		routing: {
 			// English stays unprefixed at "/", every other locale gets "/<locale>/".
 			prefixDefaultLocale: false,
@@ -23,7 +23,7 @@ export default defineConfig({
 		fallback: {
 			de: 'en',
 			nb: 'en',
-			'pt-BR': 'en',
+			'pt-br': 'en',
 		},
 	},
 	integrations: [
