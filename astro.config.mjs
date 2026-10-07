@@ -2,6 +2,33 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
+import { readdirSync } from 'node:fs';
+
+const localeCodes = ['de', 'fr', 'es', 'ja', 'nl', 'it', 'ko', 'pt-br', 'pt-pt', 'sv', 'da', 'nb', 'fi', 'pl'];
+// Pages that should never be in the sitemap, in any locale.
+const excluded = new Set(['/404/', '/500/', '/thank-you/', '/editor/', '/video-editor/']);
+
+// Locale-neutral paths that have a real page file under src/pages/<locale>/.
+const translated = new Map(
+	localeCodes.map((code) => {
+		let files = [];
+		try {
+			files = readdirSync(`./src/pages/${code}`, { recursive: true }).map(String);
+		} catch {}
+		const paths = files
+			.filter((f) => f.endsWith('.astro'))
+			.map((f) => ('/' + f.replace(/\.astro$/, '').replace(/(^|\/)index$/, '') + '/').replace(/\/+/g, '/'));
+		return [code, new Set(paths)];
+	})
+);
+
+function includeInSitemap(page) {
+	const path = new URL(page).pathname;
+	const locale = localeCodes.find((c) => path.startsWith(`/${c}/`));
+	const neutral = locale ? path.slice(locale.length + 1) : path;
+	if (excluded.has(neutral)) return false;
+	return !locale || translated.get(locale)?.has(neutral) === true;
+}
 
 // https://astro.build/config
 export default defineConfig({
@@ -28,8 +55,7 @@ export default defineConfig({
 	},
 	integrations: [
 		sitemap({
-			filter: (page) =>
-				page !== 'https://cinematicphoto.com/editor/' && page !== 'https://cinematicphoto.com/video-editor/',
+			filter: includeInSitemap,
 		}),
 	],
 	vite: {

@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import { getRelativeLocaleUrl } from 'astro:i18n';
-import { getHreflangLinks } from '../i18n/utils';
+import { getHreflangLinks, hasLocalePage } from '../i18n/utils';
 import { defaultLocale, localesByCode } from '../i18n/config';
 
 interface Props {
@@ -20,13 +20,16 @@ const {
 	keywords = "cinematic photo editor, cinematic photo editing online free, cinematic photo effect, cinematic portraits, cinematic coloring, cinematic color grading, movie color grade presets, film look photo filter, thriller photo filter, crime movie color grade, sci-fi photo filter, war movie photo effect, fantasy adventure photo filter, action movie color grade, superhero photo filter, The Shawshank Redemption filter, The Dark Knight color grade, Inception photo filter, Fight Club color grade, Pulp Fiction filter, Gladiator color grade, Blade Runner 2049 filter, Oppenheimer photo filter, teal and orange color grade, film grain online, cinematic letterbox, movie LUT online",
 	path = '/',
 	structuredData,
-	noindex = false,
+	noindex: noindexProp = false,
 } = Astro.props;
 
 const siteUrl = 'https://cinematicphoto.com';
 const locale = Astro.currentLocale ?? defaultLocale;
 const localeInfo = localesByCode[locale];
-const canonicalUrl = new URL(getRelativeLocaleUrl(locale, path), siteUrl).toString();
+// Untranslated locale URLs only render the English fallback: keep them out of the index and canonicalize to English.
+const isFallback = !hasLocalePage(locale, path);
+const noindex = noindexProp || isFallback;
+const canonicalUrl = new URL(getRelativeLocaleUrl(isFallback ? defaultLocale : locale, path), siteUrl).toString();
 const ogImageUrl = new URL('/og-image.png', siteUrl).toString();
 const hreflangLinks = getHreflangLinks(path, siteUrl);
 
