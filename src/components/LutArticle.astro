@@ -1,0 +1,93 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from './Navbar.astro';
+import Footer from './Footer.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import MovieFaq from './MovieFaq.astro';
+
+interface Section {
+	eyebrow: string;
+	heading: string;
+	blocks: { heading?: string; body: string }[];
+}
+
+interface Props {
+	path: string;
+	title: string;
+	description: string;
+	keywords: string;
+	headline: string;
+	eyebrow: string;
+	h1: string;
+	intro: string;
+	crumbs: { label: string; href?: string }[];
+	sections: Section[];
+	related: { href: string; label: string; note: string }[];
+	faqs: { q: string; a: string }[];
+	faqHeading: string;
+}
+
+const { path, title, description, keywords, headline, eyebrow, h1, intro, crumbs, sections, related, faqs, faqHeading } =
+	Astro.props;
+
+const url = `https://cinematicphoto.com${path}`;
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'Article',
+	headline,
+	description,
+	url,
+	image: 'https://cinematicphoto.com/og-image.png',
+	author: { '@type': 'Organization', name: 'Cinematic Photo' },
+	publisher: { '@type': 'Organization', name: 'Cinematic Photo' },
+	mainEntityOfPage: url,
+};
+---
+
+<Layout {title} {description} {keywords} {path} {structuredData}>
+	<Navbar variant="landing" />
+	<main>
+		<Breadcrumbs items={crumbs} />
+
+		<section class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-4 text-center sm:px-6">
+			<span class="mb-4 font-mono text-xs tracking-wide text-mute">{eyebrow}</span>
+			<h1 class="font-sans text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">{h1}</h1>
+			<p class="mt-5 max-w-xl text-base leading-7 text-body">{intro}</p>
+		</section>
+
+		{
+			sections.map((s) => (
+				<section class="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6">
+					<span class="mb-4 block font-mono text-xs tracking-wide text-mute">{s.eyebrow}</span>
+					<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">{s.heading}</h2>
+					<div class="mt-6 flex flex-col gap-6 text-base leading-7 text-body">
+						{s.blocks.map((b) => (
+							<div>
+								{b.heading && <h3 class="font-sans text-lg font-semibold text-ink">{b.heading}</h3>}
+								<p class={b.heading ? 'mt-2' : ''} set:html={b.body} />
+							</div>
+						))}
+					</div>
+				</section>
+			))
+		}
+
+		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">KEEP READING</span>
+			<h2 class="font-sans text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">Related LUT resources</h2>
+			<div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+				{
+					related.map((r) => (
+						<a href={r.href} class="rounded-md border border-hairline bg-canvas p-4 transition-colors hover:border-hairline-strong">
+							<span class="block font-sans text-sm font-medium text-ink">{r.label}</span>
+							<span class="mt-1 block font-mono text-xs text-mute">{r.note}</span>
+						</a>
+					))
+				}
+			</div>
+		</section>
+
+		<MovieFaq eyebrow="FAQ" heading={faqHeading} faqs={faqs} />
+	</main>
+	<Footer />
+</Layout>

@@ -1,0 +1,143 @@
+---
+import LutArticle from '../../components/LutArticle.astro';
+
+const path = '/guides/what-is-a-lut/';
+
+const faqs = [
+	{
+		q: 'What is a LUT?',
+		a: 'A LUT (lookup table) is a file that tells software how to turn each input color into a new output color. Apply the same LUT to any photo or video clip and the colors are remapped the same way every time, which is how colorists build and reuse a look.',
+	},
+	{
+		q: 'What does LUT stand for?',
+		a: 'LUT stands for lookup table. It is literally a table: for a given input color value, look up the output color value to use instead.',
+	},
+	{
+		q: 'What is a .cube file?',
+		a: 'A .cube file is the most common LUT format. It stores a 3D lookup table as plain text, and it is read by DaVinci Resolve, Premiere Pro, Final Cut Pro, CapCut, Photoshop, OBS and most other editors.',
+	},
+	{
+		q: 'What is a LUT on a camera?',
+		a: 'On a camera, a LUT is usually a viewing aid. Cinema and mirrorless cameras that record flat Log footage can show a LUT on the screen or on an external monitor so you can judge exposure and color while shooting. In most cases the LUT is not baked into the recording, so you can still change or remove it in editing.',
+	},
+	{
+		q: 'What is the difference between a LUT and a preset?',
+		a: 'A LUT is a pure color transform stored in a portable file that many apps can load. A preset is an app-specific saved set of slider values, and can also change things like grain, sharpening or vignette. Presets are tied to one app, while a .cube LUT works across many.',
+	},
+	{
+		q: 'Can I use LUTs on photos, not only video?',
+		a: 'Yes. Any app that loads a .cube LUT can apply it to a still image, including Photoshop and many mobile editors. For a no-download option, the free Cinematic Photo editor applies movie-style color grades to a photo right in your browser.',
+	},
+	{
+		q: 'Why does my LUT look wrong or washed out?',
+		a: 'Almost always it is a mismatch between the LUT and the footage. A creative LUT built for normal Rec.709 footage looks wrong on flat Log footage, and a conversion LUT built for one camera Log profile looks wrong on another. Match the LUT to the footage, or convert Log to Rec.709 first and then apply the creative look.',
+	},
+	{
+		q: 'Are LUTs free?',
+		a: 'Many are. Camera makers publish free technical LUTs, and there are free and paid creative LUT packs. Quality varies, so always preview a LUT on your own footage before committing to it.',
+	},
+];
+
+const sections = [
+	{
+		eyebrow: 'THE SHORT ANSWER',
+		heading: 'What is a LUT?',
+		blocks: [
+			{
+				body: 'A LUT, short for <strong>lookup table</strong>, is a file that remaps colors. For every color that goes in, it defines exactly which color comes out. Load it onto a photo or a video clip and every pixel is changed by the same rule, so the result is consistent and repeatable.',
+			},
+			{
+				body: 'That is why LUTs are everywhere in film, video and photo work. A colorist builds a look once, saves it as a LUT, and applies it to hundreds of shots in seconds. When people ask "what is a LUT" they usually mean the creative kind: a file that gives footage a movie-style look in one click.',
+			},
+		],
+	},
+	{
+		eyebrow: 'HOW IT WORKS',
+		heading: 'How a LUT changes your colors',
+		blocks: [
+			{
+				heading: '1D and 3D LUTs',
+				body: 'A <strong>1D LUT</strong> adjusts each color channel on its own, like a curve, so it can change brightness and contrast but not shift one color into another. A <strong>3D LUT</strong> looks at red, green and blue together, so it can do real color grading: teal shadows, warm skin, desaturated greens. Almost every creative LUT you will download is a 3D LUT.',
+			},
+			{
+				heading: 'The .cube format',
+				body: 'The most widely supported LUT file is the <strong>.cube</strong> file. It is a plain text grid of color values, typically 17, 33 or 65 points per side. A 33-point cube is the common sweet spot between accuracy and file size, and it loads in DaVinci Resolve, Premiere Pro, Final Cut Pro, CapCut and Photoshop.',
+			},
+			{
+				heading: 'What a LUT cannot do',
+				body: 'A LUT only changes color. It does not add film grain, vignette, glow or sharpening, and it cannot fix a badly exposed shot. Those are separate effects. A good workflow is to correct exposure and white balance first, apply the LUT, then add grain and vignette on top.',
+			},
+		],
+	},
+	{
+		eyebrow: 'TWO KINDS OF LUT',
+		heading: 'Technical LUTs vs. creative LUTs',
+		blocks: [
+			{
+				heading: 'Technical (conversion) LUTs',
+				body: 'These convert footage from one color space to another, most often from a camera Log profile to standard Rec.709. Log footage looks flat and grey on purpose, to preserve dynamic range, and a conversion LUT brings it to normal contrast and color. Camera makers publish these for their own Log profiles. See our <a href="/luts/sony/" class="text-ink underline underline-offset-2">Sony LUT guide</a> for a worked example.',
+			},
+			{
+				heading: 'Creative (look) LUTs',
+				body: 'These apply a style: a teal-and-orange blockbuster look, a cold steel thriller grade, a warm vintage film tone. They are designed to sit on top of normal Rec.709 footage or photos. The <a href="/cinematic-luts/" class="text-ink underline underline-offset-2">Cinematic LUT Pack</a> is this kind, with four movie-inspired .cube looks.',
+			},
+		],
+	},
+	{
+		eyebrow: 'LUT CAMERA',
+		heading: 'LUTs on a camera: what they do and what they do not',
+		blocks: [
+			{
+				body: 'Search for "LUT camera" and you will find two different ideas mixed together. Here is how to tell them apart.',
+			},
+			{
+				heading: 'Monitoring LUTs (the common case)',
+				body: 'When you record flat Log footage, the camera screen looks dull. Many cinema and mirrorless cameras can overlay a LUT on the screen or on the HDMI and SDI output, so you see something close to the final image while the card still records the full Log signal. This is a viewing aid, and you can still choose a different look in editing.',
+			},
+			{
+				heading: 'Baked-in looks',
+				body: 'Some cameras and phones can record a look straight into the file, using a built-in picture profile or a loaded look. That is permanent for that clip, so it gives less room to change your mind later. For most projects, recording Log or a neutral profile and applying a LUT in editing is more flexible.',
+			},
+			{
+				heading: 'Check your own model',
+				body: 'Which cameras can load a custom LUT, and how, varies by brand and model. Check the manual for your camera. Whatever the camera does, the editing-side workflow is the same: match the LUT to the footage profile, then apply it.',
+			},
+		],
+	},
+	{
+		eyebrow: 'USING LUTS',
+		heading: 'Where you can use a LUT',
+		blocks: [
+			{
+				body: 'DaVinci Resolve, Premiere Pro (Lumetri Color), Final Cut Pro (Custom LUT effect), CapCut, Photoshop (Color Lookup adjustment layer) and OBS all load .cube LUTs. Step-by-step instructions are in our guide to <a href="/get-luts/" class="text-ink underline underline-offset-2">getting and installing LUTs</a>. Lightroom does not load .cube files directly.',
+			},
+			{
+				body: 'If you just want a movie-style color grade on a photo without installing anything, the <a href="/" class="text-ink underline underline-offset-2">free Cinematic Photo editor</a> applies 60 film-inspired grades in your browser. Nothing is uploaded, and it behaves like a built-in LUT you do not have to import.',
+			},
+		],
+	},
+];
+
+const related = [
+	{ href: '/get-luts/', label: 'How to get and install LUTs', note: 'Free vs paid, plus setup for every editor' },
+	{ href: '/luts/sony/', label: 'Sony LUTs explained', note: 'S-Log3, S-Cinetone and matching the right LUT' },
+	{ href: '/cinematic-luts/', label: 'Cinematic LUT Pack', note: 'Four movie-inspired .cube looks' },
+	{ href: '/guides/cinematic-color-grading/', label: 'Cinematic color grading, explained', note: 'Teal-and-orange and split-toning' },
+];
+---
+
+<LutArticle
+	{path}
+	title="What Is a LUT? Color Lookup Tables Explained for Photo & Video"
+	description="What is a LUT? A LUT (lookup table) remaps colors to give photos and video a consistent look. Learn how LUTs work, .cube files, camera LUTs and how to use them."
+	keywords="what is lut, what is a lut, luts, lut meaning, what does lut stand for, lut camera, camera lut, cube lut, 3d lut, 1d lut, lookup table color grading, how do luts work, lut vs preset, creative lut, technical lut"
+	headline="What Is a LUT? Color Lookup Tables Explained"
+	eyebrow="LUT GUIDE"
+	h1="What is a LUT?"
+	intro="A LUT is a lookup table that remaps colors, so one file can give any photo or clip the same look. Here is how LUTs work, the difference between camera LUTs and creative LUTs, and how to use them."
+	crumbs={[{ label: 'Home', href: '/' }, { label: 'Guides' }, { label: 'What is a LUT?' }]}
+	{sections}
+	{related}
+	{faqs}
+	faqHeading="Common questions about LUTs"
+/>

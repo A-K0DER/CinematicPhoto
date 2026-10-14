@@ -147,6 +147,15 @@ export const ui = {
 		nb: 'Få bilder til å se filmatiske ut',
 		'pt-br': 'Deixe Fotos com Cara de Cinema',
 	},
+	'nav.guideWhatIsLut': {
+		en: 'What is a LUT?',
+	},
+	'footer.getLuts': {
+		en: 'Get LUTs',
+	},
+	'footer.sonyLuts': {
+		en: 'Sony LUTs',
+	},
 	'nav.guideColorGrading': {
 		en: 'Cinematic Color Grading',
 		de: 'Filmisches Color Grading',

@@ -1,0 +1,119 @@
+---
+import LutArticle from '../../components/LutArticle.astro';
+
+const path = '/luts/sony/';
+
+const faqs = [
+	{
+		q: 'What is a Sony LUT?',
+		a: 'A Sony LUT is a lookup table made for footage from a Sony camera. The most common kind converts Sony Log footage (S-Log2 or S-Log3) to standard Rec.709 so it looks normal on screen. Creative Sony LUTs add a style on top of that.',
+	},
+	{
+		q: 'Where do I get Sony LUTs?',
+		a: 'Sony publishes official LUTs for its Log profiles, and its Creators resources are the best place to start for free, camera-matched files. Independent colorists also sell creative LUT packs made for Sony footage.',
+	},
+	{
+		q: 'What is the difference between S-Log3 and S-Cinetone?',
+		a: 'S-Log3 is a flat Log profile that preserves dynamic range and is meant to be color graded, usually with a LUT. S-Cinetone is a ready-to-use cinematic look built into many Sony cameras, so footage looks finished straight out of camera and does not need a LUT.',
+	},
+	{
+		q: 'Which LUT do I use for S-Log3 footage?',
+		a: 'Use a conversion LUT that matches both the gamma (S-Log3) and the color gamut you recorded in, such as S-Gamut3.Cine or S-Gamut3. The camera setting and the LUT name must agree, otherwise colors look wrong.',
+	},
+	{
+		q: 'Why does my Sony footage look washed out or the colors look wrong with a LUT?',
+		a: 'Washed-out means no conversion is applied, or the wrong LUT is selected. Odd colors usually mean a gamut mismatch, for example an S-Gamut3.Cine LUT on S-Gamut3 footage. Check your camera picture profile, then choose the LUT that matches it.',
+	},
+	{
+		q: 'Can I use cinematic LUTs on Sony footage?',
+		a: 'Yes, in two steps. First convert S-Log footage to Rec.709 with a matching Sony conversion LUT, then apply a creative LUT on top. Creative LUTs such as the Cinematic LUT Pack are built for Rec.709 footage, so do not stack them directly on flat Log.',
+	},
+	{
+		q: 'Do Sony LUTs work for photos?',
+		a: 'Technical Log LUTs are for video. For Sony photos, shoot normal color or RAW and use a creative look. The free Cinematic Photo editor applies movie-style grades to a photo in your browser.',
+	},
+];
+
+const sections = [
+	{
+		eyebrow: 'THE BASICS',
+		heading: 'What a Sony LUT actually does',
+		blocks: [
+			{
+				body: 'Sony cinema and mirrorless cameras can record <strong>S-Log2</strong> or <strong>S-Log3</strong>, flat profiles that keep as much dynamic range as possible. The footage looks dull and grey on purpose. A Sony LUT is the lookup table that turns that flat signal into a normal-looking Rec.709 image. If you are new to the concept, start with <a href="/guides/what-is-a-lut/" class="text-ink underline underline-offset-2">what a LUT is</a>.',
+			},
+			{
+				body: 'There are two kinds of Sony LUT. <strong>Technical</strong> LUTs convert Log to Rec.709 and are matched to a specific profile. <strong>Creative</strong> LUTs add a style on top, such as a teal-and-orange or cold thriller grade.',
+			},
+		],
+	},
+	{
+		eyebrow: 'PICK THE RIGHT ONE',
+		heading: 'Matching the LUT to your Sony settings',
+		blocks: [
+			{
+				heading: 'Match the gamma and the gamut',
+				body: 'Two camera settings decide which LUT you need: the gamma (S-Log2 or S-Log3) and the color gamut (commonly S-Gamut3.Cine or S-Gamut3). The LUT name states both. They must match what you recorded, or contrast and color will be off.',
+			},
+			{
+				heading: 'S-Cinetone needs no LUT',
+				body: 'S-Cinetone is a finished cinematic look built into many Sony cameras. If you shoot it, your footage already has a grade and you can edit it directly, or add a light creative LUT if you want to push the style further.',
+			},
+			{
+				heading: 'Exposure matters',
+				body: 'S-Log3 works best exposed a little brighter than a normal profile. Underexposed Log footage gets noisy once a LUT brightens it, no matter which LUT you choose.',
+			},
+		],
+	},
+	{
+		eyebrow: 'WORKFLOW',
+		heading: 'The two-step Sony LUT workflow',
+		blocks: [
+			{
+				heading: 'Step 1: convert Log to Rec.709',
+				body: 'Apply the Sony conversion LUT that matches your profile, or use your editor\'s color management. Your footage now has normal contrast and color.',
+			},
+			{
+				heading: 'Step 2: add your creative look',
+				body: 'Apply a creative LUT on top, and lower its intensity to roughly 60 to 80 percent for a more natural result. The <a href="/cinematic-luts/" class="text-ink underline underline-offset-2">Cinematic LUT Pack</a> includes four movie-inspired .cube looks made for Rec.709 footage, so it fits at this step. Not sure how to load a file? See <a href="/get-luts/" class="text-ink underline underline-offset-2">how to install LUTs</a>.',
+			},
+			{
+				heading: 'Using a LUT while shooting',
+				body: 'Some Sony cameras can show a LUT on the screen or output while still recording the full Log signal, which helps you judge exposure. Which models support this, and how to set it up, depends on the camera, so check your manual.',
+			},
+		],
+	},
+	{
+		eyebrow: 'PHOTOS',
+		heading: 'Sony photos: skip the Log LUT',
+		blocks: [
+			{
+				body: 'Technical S-Log LUTs are for video. For stills from a Sony camera, shoot RAW or standard color and apply a creative grade instead. The <a href="/" class="text-ink underline underline-offset-2">free Cinematic Photo editor</a> turns any photo into a movie-style still with 60 presets, in your browser with no upload.',
+			},
+		],
+	},
+];
+
+const related = [
+	{ href: '/guides/what-is-a-lut/', label: 'What is a LUT?', note: 'How lookup tables work' },
+	{ href: '/get-luts/', label: 'How to get and install LUTs', note: 'Setup for every editor' },
+	{ href: '/cinematic-luts/', label: 'Cinematic LUT Pack', note: 'Creative looks for Rec.709 footage' },
+	{ href: '/guides/cinematic-color-grading/', label: 'Cinematic color grading, explained', note: 'The theory behind movie looks' },
+];
+---
+
+<LutArticle
+	{path}
+	title="Sony LUTs: S-Log3, S-Cinetone & Cinematic Looks for Sony Cameras"
+	description="How to use a Sony LUT: match S-Log2 and S-Log3 footage to the right conversion LUT, when S-Cinetone needs none, and how to add a cinematic look on top."
+	keywords="sony lut, sony luts, sony s-log3 lut, sony slog3 lut, s-cinetone lut, sony a7s iii lut, sony fx3 lut, sony a7 iv lut, sony camera lut, sony cinematic lut, s-gamut3.cine lut, free sony luts"
+	headline="Sony LUTs: S-Log3, S-Cinetone and Cinematic Looks"
+	eyebrow="SONY LUT GUIDE"
+	h1="Sony LUTs explained"
+	intro="Which LUT to use for S-Log2, S-Log3 and S-Cinetone footage, how to match it to your camera settings, and how to add a cinematic look on top."
+	crumbs={[{ label: 'Home', href: '/' }, { label: 'LUTs', href: '/guides/what-is-a-lut/' }, { label: 'Sony LUTs' }]}
+	{sections}
+	{related}
+	{faqs}
+	faqHeading="Common questions about Sony LUTs"
+/>

@@ -1,0 +1,113 @@
+---
+import LutArticle from '../components/LutArticle.astro';
+
+const path = '/get-luts/';
+
+const faqs = [
+	{
+		q: 'Where can I get LUTs?',
+		a: 'Camera makers publish free technical LUTs for their own Log profiles, editing apps ship with a few built-in looks, and independent creators sell creative LUT packs. For a ready-made cinematic set, see the Cinematic LUT Pack on this site.',
+	},
+	{
+		q: 'How do I download and install a LUT?',
+		a: 'Download the .cube file (usually inside a zip, so unzip it first), then load it from your editor. In Premiere Pro use Lumetri Color > Creative > Look > Browse. In DaVinci Resolve copy the file into the LUT folder and refresh. In Photoshop use a Color Lookup adjustment layer. Full steps are on this page.',
+	},
+	{
+		q: 'Are free LUTs safe to download?',
+		a: 'A .cube file is plain text with a grid of numbers, so the file itself cannot run code. The risk is the download source. Get LUTs from creators and camera makers you trust, and be wary of zip files that contain anything other than .cube, .3dl or readme files.',
+	},
+	{
+		q: 'Which LUT format should I download?',
+		a: 'Choose .cube. It is the most widely supported format and works in DaVinci Resolve, Premiere Pro, Final Cut Pro, CapCut, Photoshop and OBS. Some older tools use .3dl, but .cube is the safe default.',
+	},
+	{
+		q: 'Why does my downloaded LUT look wrong?',
+		a: 'The LUT usually does not match your footage. A creative LUT expects normal Rec.709 footage, so convert Log footage to Rec.709 first. A camera conversion LUT must match your exact Log profile. Also try lowering the LUT intensity to 60 to 80 percent.',
+	},
+	{
+		q: 'Can I get a LUT for photos?',
+		a: 'Yes. Photoshop and many mobile editors load .cube LUTs for stills. Lightroom does not load .cube files directly. If you would rather skip installing anything, the free Cinematic Photo editor applies movie-style color grades to a photo in your browser.',
+	},
+	{
+		q: 'Can I use a downloaded LUT commercially?',
+		a: 'It depends on the license. Always read the terms that come with the LUT. The Cinematic LUT Pack allows use in your own client and personal projects but not resale or sharing of the files.',
+	},
+];
+
+const sections = [
+	{
+		eyebrow: 'WHERE TO GET LUTS',
+		heading: 'The main ways to get a LUT',
+		blocks: [
+			{
+				heading: 'Free technical LUTs from camera makers',
+				body: 'Camera brands publish free conversion LUTs that turn their Log footage into normal Rec.709. If you shoot Sony, see our <a href="/luts/sony/" class="text-ink underline underline-offset-2">Sony LUT guide</a>. These are the right starting point for Log footage because they are matched to the camera.',
+			},
+			{
+				heading: 'Creative LUT packs',
+				body: 'Creative LUTs give footage a style. They range from free bundles of mixed quality to paid packs from independent colorists. Judge a pack by how it looks on your own footage, not on a polished promo image. Our <a href="/cinematic-luts/" class="text-ink underline underline-offset-2">Cinematic LUT Pack</a> has four movie-inspired .cube looks (Dark Knight, Blade Runner, Dune, Matrix) with commercial use for your own projects.',
+			},
+			{
+				heading: 'Built into your editor',
+				body: 'DaVinci Resolve, Premiere Pro and Final Cut Pro all include some built-in looks. They are a fine way to learn what a LUT does before buying anything. New to the idea? Read <a href="/guides/what-is-a-lut/" class="text-ink underline underline-offset-2">what a LUT is</a> first.',
+			},
+			{
+				heading: 'No download at all',
+				body: 'For photos, the <a href="/" class="text-ink underline underline-offset-2">free Cinematic Photo editor</a> gives you movie-style color grades directly in your browser. Nothing to download, nothing uploaded.',
+			},
+		],
+	},
+	{
+		eyebrow: 'BEFORE YOU DOWNLOAD',
+		heading: 'How to pick a LUT that works',
+		blocks: [
+			{
+				heading: 'Choose .cube',
+				body: 'Look for the <strong>.cube</strong> format. It is read by almost every editor. A 33-point cube is the standard.',
+			},
+			{
+				heading: 'Match the LUT to your footage',
+				body: 'Creative LUTs are made for Rec.709 footage. If you shoot in Log, apply a conversion LUT first, then the creative look. Mixing these up is the number one reason a downloaded LUT looks wrong.',
+			},
+			{
+				heading: 'Check the license',
+				body: 'Free does not always mean free for commercial work. Read the terms before using a LUT on client projects.',
+			},
+		],
+	},
+	{
+		eyebrow: 'INSTALL A LUT',
+		heading: 'How to install a downloaded LUT',
+		blocks: [
+			{ heading: 'Premiere Pro', body: 'Open the Lumetri Color panel, go to Creative, open the Look dropdown, choose Browse and select your .cube file.' },
+			{ heading: 'DaVinci Resolve', body: 'Go to Project Settings > Color Management > Open LUT Folder, drop the .cube file in, refresh the list, then right-click a clip in the Color page and choose LUT.' },
+			{ heading: 'Final Cut Pro', body: 'Add the Custom LUT effect to a clip and choose the .cube file from the effect inspector.' },
+			{ heading: 'CapCut', body: 'Open Adjust > LUT > Import, then select the .cube file.' },
+			{ heading: 'Photoshop (photos)', body: 'Choose Layer > New Adjustment Layer > Color Lookup, pick 3DLUT File, then Load 3D LUT and select your .cube file.' },
+		],
+	},
+];
+
+const related = [
+	{ href: '/guides/what-is-a-lut/', label: 'What is a LUT?', note: 'How lookup tables work' },
+	{ href: '/luts/sony/', label: 'Sony LUTs explained', note: 'S-Log3, S-Cinetone and matching the right LUT' },
+	{ href: '/cinematic-luts/', label: 'Cinematic LUT Pack', note: 'Four movie-inspired .cube looks' },
+	{ href: '/presets/', label: 'Browse all 60 presets', note: 'Try a movie grade on your photo for free' },
+];
+---
+
+<LutArticle
+	{path}
+	title="Get LUTs: Where to Download & How to Install Them (.cube)"
+	description="Looking to get a LUT or find a LUT download? Learn where to get free and paid LUTs, which format to choose, and how to install them in Premiere, Resolve, Final Cut, CapCut and Photoshop."
+	keywords="get lut, lut download, download luts, free luts, free lut download, cube lut download, how to install lut, how to add lut premiere, davinci resolve lut, capcut lut, photoshop lut, where to get luts, cinematic luts download"
+	headline="Get LUTs: Where to Download and How to Install Them"
+	eyebrow="LUT DOWNLOAD GUIDE"
+	h1="How to get a LUT"
+	intro="Where to download LUTs, which format to pick, and how to install them in Premiere Pro, DaVinci Resolve, Final Cut Pro, CapCut and Photoshop."
+	crumbs={[{ label: 'Home', href: '/' }, { label: 'Get LUTs' }]}
+	{sections}
+	{related}
+	{faqs}
+	faqHeading="Common questions about downloading LUTs"
+/>

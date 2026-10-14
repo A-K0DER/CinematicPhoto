@@ -65,7 +65,7 @@ export const lutPackCopy: Record<LutLocale, LutPackCopy> = {
 		description:
 			'Four cinematic .cube LUTs inspired by The Dark Knight, Blade Runner 2049, Dune and The Matrix. Works in DaVinci Resolve, Premiere Pro, Final Cut Pro, CapCut and Photoshop. Instant download.',
 		keywords:
-			'cinematic luts, movie luts, cube lut pack, cinematic lut pack, dark knight lut, blade runner lut, dune lut, matrix lut, free cinematic luts, premiere pro luts, davinci resolve luts, capcut luts',
+			'cinematic luts, movie luts, cube lut pack, cinematic lut pack, dark knight lut, blade runner lut, dune lut, matrix lut, free cinematic luts, premiere pro luts, davinci resolve luts, capcut luts, luts, get lut, lut download, sony lut, lut camera',
 		productName: 'Cinematic LUT Pack (.cube)',
 		breadcrumbHome: 'Home',
 		breadcrumbCurrent: 'Cinematic LUT Pack',
