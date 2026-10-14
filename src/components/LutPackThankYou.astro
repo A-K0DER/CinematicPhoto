@@ -1,0 +1,76 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import Layout from '../layouts/Layout.astro';
+import Navbar from './Navbar.astro';
+import Footer from './Footer.astro';
+import { lutPackThankYouCopy, type LutLocale } from '../data/lutPackCopy';
+
+interface Props {
+	locale: LutLocale;
+}
+
+const { locale } = Astro.props;
+const c = lutPackThankYouCopy[locale];
+const path = '/cinematic-luts/thank-you/';
+---
+
+<Layout title={c.title} description={c.description} {path} noindex>
+	<Navbar />
+	<main class="mx-auto flex max-w-2xl flex-col items-center px-4 py-24 text-center sm:px-6">
+		<div id="state-success" class="flex flex-col items-center">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">{c.eyebrow}</span>
+			<h1 class="font-sans text-3xl font-semibold tracking-[-0.03em] text-ink sm:text-4xl">{c.heading}</h1>
+			<p class="mt-4 max-w-md text-base leading-7 text-body">
+				{c.emailBefore}<span id="buyer-email" class="font-medium text-ink">{c.emailFallback}</span>{c.emailAfter}
+			</p>
+
+			<div class="mt-10 w-full rounded-md border border-hairline bg-canvas-soft p-5 text-left">
+				<span class="block font-mono text-xs tracking-wide text-mute">{c.missingEyebrow}</span>
+				<ul class="mt-3 flex flex-col gap-2 text-sm leading-6 text-body">
+					{c.missingItems.map((item) => <li>{item}</li>)}
+				</ul>
+			</div>
+
+			<div class="mt-6 w-full rounded-md border border-hairline p-5 text-left">
+				<span class="block font-mono text-xs tracking-wide text-mute">{c.filesEyebrow}</span>
+				<ol class="mt-3 flex list-decimal flex-col gap-2 pl-5 text-sm leading-6 text-body">
+					{c.filesItems.map((item) => <li>{item}</li>)}
+				</ol>
+			</div>
+		</div>
+
+		<div id="state-problem" class="hidden flex-col items-center">
+			<span class="mb-4 block font-mono text-xs tracking-wide text-mute">{c.problemEyebrow}</span>
+			<h1 class="font-sans text-3xl font-semibold tracking-[-0.03em] text-ink sm:text-4xl">{c.problemHeading}</h1>
+			<p class="mt-4 max-w-md text-base leading-7 text-body">{c.problemBody}</p>
+			<a
+				href={getRelativeLocaleUrl(locale, '/cinematic-luts/')}
+				class="mt-8 rounded-md bg-primary px-4 py-2 font-sans text-sm font-medium text-on-primary transition-opacity hover:opacity-90"
+			>
+				{c.backToPack}
+			</a>
+		</div>
+
+		<div class="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+			<a href={getRelativeLocaleUrl(locale, '/contact-us/')} class="font-sans text-sm text-body underline underline-offset-2 hover:text-ink">{c.contact}</a>
+			<a href={getRelativeLocaleUrl(locale, '/presets/')} class="font-sans text-sm text-body underline underline-offset-2 hover:text-ink">{c.tryEditor}</a>
+		</div>
+	</main>
+	<Footer />
+</Layout>
+
+<script is:inline>
+	(function () {
+		var params = new URLSearchParams(window.location.search);
+		var status = params.get('status');
+		if (status === 'failed' || status === 'expired') {
+			document.getElementById('state-success').classList.add('hidden');
+			var problem = document.getElementById('state-problem');
+			problem.classList.remove('hidden');
+			problem.classList.add('flex');
+			return;
+		}
+		var email = params.get('email');
+		if (email) document.getElementById('buyer-email').textContent = email;
+	})();
+</script>
