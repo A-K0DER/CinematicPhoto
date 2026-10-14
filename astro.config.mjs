@@ -6,7 +6,7 @@ import { readdirSync } from 'node:fs';
 
 const localeCodes = ['de', 'fr', 'es', 'ja', 'nl', 'it', 'ko', 'pt-br', 'pt-pt', 'sv', 'da', 'nb', 'fi', 'pl'];
 // Pages that should never be in the sitemap, in any locale.
-const excluded = new Set(['/404/', '/500/', '/thank-you/', '/editor/', '/video-editor/']);
+const excluded = new Set(['/404/', '/500/', '/thank-you/', '/cinematic-luts/thank-you/', '/editor/', '/video-editor/']);
 
 // Locale-neutral paths that have a real page file under src/pages/<locale>/.
 const translated = new Map(

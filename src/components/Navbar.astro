@@ -118,6 +118,9 @@ const u = (path: string) => getRelativeLocaleUrl(lang, path);
 							</a>
 						</div>
 					</details>
+					<a href={u('/cinematic-luts/')} class="font-mono text-xs text-ink transition-colors hover:text-body">
+						{t('nav.lutPack')}
+					</a>
 					<a href={u('/video-editor/')} class="hidden font-mono text-xs text-body transition-colors hover:text-ink">
 						{t('nav.video')}
 					</a>
@@ -303,6 +306,10 @@ const u = (path: string) => getRelativeLocaleUrl(lang, path);
 						</a>
 					</div>
 				</details>
+
+				<a href={u('/cinematic-luts/')} class="rounded-md px-2 py-2.5 font-mono text-xs text-ink transition-colors hover:text-body">
+					{t('nav.lutPack')}
+				</a>
 			</aside>
 		</>
 	)

@@ -63,6 +63,12 @@ export const ui = {
 		nb: 'Gratis verktøy',
 		'pt-br': 'Ferramentas Gratuitas',
 	},
+	'nav.lutPack': {
+		en: 'LUT Pack',
+		de: 'LUT-Paket',
+		nb: 'LUT-pakke',
+		'pt-br': 'Pacote de LUTs',
+	},
 	'nav.video': {
 		en: 'Video',
 		de: 'Video',
