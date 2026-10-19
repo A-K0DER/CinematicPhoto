@@ -294,6 +294,36 @@ export const ui = {
 		nb: 'Se alle 60 presets →',
 		'pt-br': 'Ver todos os 60 presets →',
 	},
+	'footer.folio': {
+		en: 'Folio for Mac',
+		de: 'Folio für Mac',
+		nb: 'Folio for Mac',
+		'pt-br': 'Folio para Mac',
+	},
+	'folioPromo.eyebrow': {
+		en: 'FROM THE SAME MAKER',
+		de: 'VOM GLEICHEN ENTWICKLER',
+		nb: 'FRA SAMME UTVIKLER',
+		'pt-br': 'DO MESMO CRIADOR',
+	},
+	'folioPromo.heading': {
+		en: 'Tame your photo and LUT folders',
+		de: 'Bring Ordnung in deine Foto- und LUT-Ordner',
+		nb: 'Få orden på bilde- og LUT-mappene dine',
+		'pt-br': 'Organize suas pastas de fotos e LUTs',
+	},
+	'folioPromo.body': {
+		en: 'Folio is a Finder alternative for Mac with tabs, plain-English search, and undo for file operations. One-time payment, no subscription.',
+		de: 'Folio ist eine Finder-Alternative für den Mac mit Tabs, Suche in normaler Sprache und Rückgängig für Dateiaktionen. Einmalzahlung, kein Abo.',
+		nb: 'Folio er et Finder-alternativ for Mac med faner, søk på vanlig språk og angre for filhandlinger. Engangsbetaling, uten abonnement.',
+		'pt-br': 'O Folio é uma alternativa ao Finder para Mac, com abas, busca em linguagem natural e desfazer para operações com arquivos. Pagamento único, sem assinatura.',
+	},
+	'folioPromo.cta': {
+		en: 'See Folio',
+		de: 'Folio ansehen',
+		nb: 'Se Folio',
+		'pt-br': 'Conhecer o Folio',
+	},
 } as const satisfies Record<string, Record<string, string>>;
 
 export type UIKey = keyof typeof ui;

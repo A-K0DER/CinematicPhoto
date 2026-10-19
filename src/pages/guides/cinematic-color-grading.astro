@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
+import FolioPromo from '../../components/FolioPromo.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import DropZone from '../../components/DropZone.astro';
 import MovieFaq from '../../components/MovieFaq.astro';
@@ -187,6 +188,9 @@ const faqs = [
 				</a>
 			</div>
 		</section>
+
+		<FolioPromo placement="guide" />
+
 
 		<MovieFaq eyebrow="FAQ" heading="Common questions about color grading" faqs={faqs} />
 	</main>

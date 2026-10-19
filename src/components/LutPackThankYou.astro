@@ -3,6 +3,7 @@ import { getRelativeLocaleUrl } from 'astro:i18n';
 import Layout from '../layouts/Layout.astro';
 import Navbar from './Navbar.astro';
 import Footer from './Footer.astro';
+import FolioPromo from './FolioPromo.astro';
 import { lutPackThankYouCopy, type LutLocale } from '../data/lutPackCopy';
 
 interface Props {
@@ -37,6 +38,8 @@ const path = '/cinematic-luts/thank-you/';
 					{c.filesItems.map((item) => <li>{item}</li>)}
 				</ol>
 			</div>
+
+			<FolioPromo placement="lut-thank-you" class="mt-2 w-full px-0 sm:px-0" />
 		</div>
 
 		<div id="state-problem" class="hidden flex-col items-center">

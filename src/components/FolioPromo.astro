@@ -1,0 +1,47 @@
+---
+import { useTranslations } from '../i18n/utils';
+import { defaultLocale } from '../i18n/config';
+
+interface Props {
+	/** Where the card is shown, sent as utm_content so each placement can be compared. */
+	placement: string;
+	class?: string;
+}
+
+const { placement, class: className = '' } = Astro.props;
+
+const lang = Astro.currentLocale ?? defaultLocale;
+const t = useTranslations(lang);
+const href = `https://mac-folio.com/?utm_source=cinematicphoto&utm_medium=promo&utm_content=${encodeURIComponent(placement)}`;
+---
+
+<!-- Hidden until the script confirms a Mac, so Windows and phone visitors never see it. -->
+<aside
+	data-folio-promo
+	hidden
+	class:list={['mx-auto w-full max-w-3xl px-4 py-8 sm:px-6', className]}
+>
+	<div class="rounded-md border border-hairline bg-canvas-soft p-5 text-left">
+		<span class="block font-mono text-xs tracking-wide text-mute">{t('folioPromo.eyebrow')}</span>
+		<h2 class="mt-2 font-sans text-lg font-semibold tracking-[-0.01em] text-ink">{t('folioPromo.heading')}</h2>
+		<p class="mt-2 text-sm leading-6 text-body">{t('folioPromo.body')}</p>
+		<a
+			{href}
+			target="_blank"
+			rel="noopener"
+			class="mt-4 inline-block rounded-md bg-primary px-4 py-2 font-sans text-sm font-medium text-on-primary transition-opacity hover:opacity-90"
+		>
+			{t('folioPromo.cta')}
+		</a>
+	</div>
+</aside>
+
+<script>
+	// iPadOS reports a Mac platform, but has touch points; Folio is macOS only.
+	const isMac = /^Mac/.test(navigator.platform) && navigator.maxTouchPoints < 2;
+	if (isMac) {
+		document.querySelectorAll<HTMLElement>('[data-folio-promo]').forEach((el) => {
+			el.hidden = false;
+		});
+	}
+</script>

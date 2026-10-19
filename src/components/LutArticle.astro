@@ -4,6 +4,7 @@ import Navbar from './Navbar.astro';
 import Footer from './Footer.astro';
 import Breadcrumbs from './Breadcrumbs.astro';
 import MovieFaq from './MovieFaq.astro';
+import FolioPromo from './FolioPromo.astro';
 
 interface Section {
 	eyebrow: string;
@@ -86,6 +87,8 @@ const structuredData = {
 				}
 			</div>
 		</section>
+
+		<FolioPromo placement="lut-article" />
 
 		<MovieFaq eyebrow="FAQ" heading={faqHeading} faqs={faqs} />
 	</main>
