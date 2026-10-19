@@ -300,12 +300,6 @@ export const ui = {
 		nb: 'Folio for Mac',
 		'pt-br': 'Folio para Mac',
 	},
-	'folioPromo.eyebrow': {
-		en: 'FROM THE SAME MAKER',
-		de: 'VOM GLEICHEN ENTWICKLER',
-		nb: 'FRA SAMME UTVIKLER',
-		'pt-br': 'DO MESMO CRIADOR',
-	},
 	'folioPromo.heading': {
 		en: 'Tame your photo and LUT folders',
 		de: 'Bring Ordnung in deine Foto- und LUT-Ordner',
