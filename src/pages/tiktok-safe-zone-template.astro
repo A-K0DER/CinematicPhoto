@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PngPackCard from '../components/PngPackCard.astro';
 import MovieFaq from '../components/MovieFaq.astro';
 import { getSafeZonePlatform, getZoneMetric } from '../lib/safeZones';
 
@@ -67,7 +68,7 @@ const faqs = [
 	},
 	{
 		q: 'Is there a downloadable TikTok safe zone template PNG?',
-		a: "A dedicated transparent-overlay PNG pack is in the works and not live yet. In the meantime, the free interactive checker below already draws the exact safe zone to scale on your own photo or frame grab, and lets you export a reference PNG to use as a placement guide while you edit.",
+		a: "Yes. The transparent overlay PNG pack is available now, use the button in the \"Get the transparent PNG overlays\" card above. The free interactive checker below also still lets you export a reference PNG on your own photo or frame grab for free.",
 	},
 	{
 		q: "Has TikTok's safe zone changed for 2026?",
@@ -158,6 +159,12 @@ const faqs = [
 				both organic posts and ads. Close approximations based on TikTok's published specs, not
 				pixel-exact measurements pulled from the live app.
 			</p>
+			<PngPackCard
+				checkerPath="/tiktok-safe-zone/"
+				heading={'Get the transparent PNG overlays'}
+				copy={'Ready-made overlays for TikTok. Import as a guide layer in CapCut, Premiere Pro or DaVinci Resolve.'}
+				cta={'Get PNG templates (transparent overlays) →'}
+			/>
 		</section>
 
 		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">

@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import PngPackCard from '../../components/PngPackCard.astro';
 import MovieFaq from '../../components/MovieFaq.astro';
 import { getSafeZonePlatform, getZoneMetric } from '../../lib/safeZones';
 
@@ -67,7 +68,7 @@ const faqs = [
 	},
 	{
 		q: 'Gibt es ein herunterladbares TikTok-Safe-Zone-Vorlage-PNG?',
-		a: "Ein eigenes transparentes Overlay-PNG-Paket ist in Arbeit und noch nicht verfügbar. In der Zwischenzeit zeichnet der kostenlose interaktive Checker unten die exakte Safe Zone bereits maßstabsgetreu auf dein eigenes Foto oder deinen Frame-Grab und lässt dich ein Referenz-PNG als Platzierungshilfe während des Schnitts exportieren.",
+		a: "Ja. Das transparente Overlay-PNG-Paket ist jetzt verfügbar, nutze den Button in der Karte „Die transparenten PNG-Overlays holen“ oben. Mit dem kostenlosen interaktiven Checker unten kannst du außerdem weiterhin gratis ein Referenz-PNG auf deinem eigenen Foto oder Frame-Grab exportieren.",
 	},
 	{
 		q: "Hat sich TikToks Safe Zone für 2026 geändert?",
@@ -158,6 +159,12 @@ const faqs = [
 				für organische Posts sowie Ads gleichermaßen. Enge Annäherungen basierend auf TikToks
 				veröffentlichten Spezifikationen, keine pixelgenauen Messungen aus der Live-App.
 			</p>
+			<PngPackCard
+				checkerPath="/de/tiktok-safe-zone/"
+				heading={'Die transparenten PNG-Overlays holen'}
+				copy={'Fertige Overlays für TikTok. Importiere sie als Hilfsebene in CapCut, Premiere Pro oder DaVinci Resolve.'}
+				cta={'PNG-Vorlagen holen (transparente Overlays) →'}
+			/>
 		</section>
 
 		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">

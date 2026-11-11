@@ -1,0 +1,28 @@
+---
+interface Props {
+	/** Locale-prefixed path of the matching checker page; buyers return here after payment, same as the checker's own button. */
+	checkerPath: string;
+	heading: string;
+	copy: string;
+	cta: string;
+}
+
+const { checkerPath, heading, copy, cta } = Astro.props;
+
+// Same product and redirect behaviour as the "Get PNG templates" link in SafeZoneTool.astro.
+const DODO_PRODUCT_ID = 'pdt_0Nm93aR1Gx0XNF06QTHVI';
+const checkoutUrl = `https://checkout.dodopayments.com/buy/${DODO_PRODUCT_ID}?redirect_url=${encodeURIComponent(new URL(checkerPath, Astro.site).href)}`;
+---
+
+<div id="png-pack" class="mt-8 rounded-md border border-hairline bg-canvas p-5">
+	<h3 class="font-sans text-lg font-semibold tracking-[-0.01em] text-ink">{heading}</h3>
+	<p class="mt-2 text-sm leading-6 text-body">{copy}</p>
+	<a
+		href={checkoutUrl}
+		target="_blank"
+		rel="noopener noreferrer"
+		class="mt-4 inline-block rounded-md border border-hairline px-3 py-2 text-center font-sans text-sm font-medium text-body transition-colors hover:border-hairline-strong hover:text-ink"
+	>
+		{cta}
+	</a>
+</div>

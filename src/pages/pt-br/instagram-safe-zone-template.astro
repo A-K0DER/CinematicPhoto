@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import PngPackCard from '../../components/PngPackCard.astro';
 import MovieFaq from '../../components/MovieFaq.astro';
 import { getSafeZonePlatform, getZoneMetric } from '../../lib/safeZones';
 
@@ -77,7 +78,7 @@ const faqs = [
 	},
 	{
 		q: 'Existe um modelo de safe zone do Instagram em PNG para baixar?',
-		a: "Um pacote dedicado de overlay PNG transparente está em desenvolvimento e ainda não está disponível. Enquanto isso, o verificador gratuito já desenha a safe zone exata em escala na sua própria foto, e permite exportar um PNG de referência mostrando os limites incorporados na sua composição.",
+		a: "Sim. O pacote de overlays PNG transparentes já está disponível, use o botão no cartão \"Baixe os overlays PNG transparentes\" acima. O verificador gratuito também continua permitindo exportar um PNG de referência na sua própria foto, de graça.",
 	},
 	{
 		q: "A safe zone do Instagram mudou para 2026?",
@@ -182,6 +183,12 @@ const faqs = [
 				criadores e anúncios, não medições em pixel exato extraídas do aplicativo ao vivo. Se
 				aplica tanto a publicações orgânicas quanto a anúncios.
 			</p>
+			<PngPackCard
+				checkerPath="/pt-br/instagram-reels-safe-zone/"
+				heading={'Baixe os overlays PNG transparentes'}
+				copy={'Overlays prontos para Reels, Story e Post. Importe como camada de guia no CapCut, Premiere Pro ou DaVinci Resolve.'}
+				cta={'Baixar modelos PNG (overlays transparentes) →'}
+			/>
 		</section>
 
 		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">

@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import PngPackCard from '../../components/PngPackCard.astro';
 import MovieFaq from '../../components/MovieFaq.astro';
 import { getSafeZonePlatform, getZoneMetric } from '../../lib/safeZones';
 
@@ -67,7 +68,7 @@ const faqs = [
 	},
 	{
 		q: 'Finnes det et nedlastbart TikTok safe zone-mal-PNG?',
-		a: "En egen pakke med transparente overlay-PNG-er er under arbeid og ikke lansert ennå. I mellomtiden tegner den gratis interaktive sjekkeren under allerede den eksakte safe zonen i riktig skala på ditt eget bilde eller frame-grab, og lar deg eksportere et referanse-PNG å bruke som plasseringshjelp mens du redigerer.",
+		a: "Ja. Pakken med transparente overlay-PNG-er er tilgjengelig nå, bruk knappen i kortet «Få de transparente PNG-overleggene» over. Den gratis interaktive sjekkeren under lar deg fortsatt eksportere et referanse-PNG på ditt eget bilde eller frame-grab, gratis.",
 	},
 	{
 		q: 'Har TikToks safe zone endret seg for 2026?',
@@ -152,6 +153,12 @@ const faqs = [
 				gjelder både organiske innlegg og annonser. Tette tilnærminger basert på TikToks
 				publiserte spesifikasjoner, ikke pikselnøyaktige målinger hentet fra selve appen.
 			</p>
+			<PngPackCard
+				checkerPath="/nb/tiktok-safe-zone/"
+				heading={'Få de transparente PNG-overleggene'}
+				copy={'Ferdige overlegg for TikTok. Importer som veiledningslag i CapCut, Premiere Pro eller DaVinci Resolve.'}
+				cta={'Få PNG-maler (transparente overlegg) →'}
+			/>
 		</section>
 
 		<section class="mx-auto w-full max-w-3xl px-4 pb-14 sm:px-6">
