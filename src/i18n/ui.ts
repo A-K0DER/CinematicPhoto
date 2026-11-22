@@ -300,6 +300,12 @@ export const ui = {
 		nb: 'Folio for Mac',
 		'pt-br': 'Folio para Mac',
 	},
+	'footer.anagramGenerator': {
+		en: 'Anagram Generator',
+		de: 'Anagramm-Generator',
+		nb: 'Anagramgenerator',
+		'pt-br': 'Gerador de Anagramas',
+	},
 	'folioPromo.heading': {
 		en: 'Tame your photo and LUT folders',
 		de: 'Bring Ordnung in deine Foto- und LUT-Ordner',
